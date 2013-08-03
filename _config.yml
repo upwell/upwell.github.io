@@ -3,9 +3,9 @@
 # ----------------------- #
 
 url: http://upwell.github.io
-title: My Octopress Blog
-subtitle: A blogging framework for hackers.
-author: Your Name
+title: Ready for Note
+subtitle: 123456
+author: hanh
 simple_search: http://google.com/search
 description:
 
@@ -70,7 +70,7 @@ github_skip_forks: true
 
 # Twitter
 twitter_user:
-twitter_tweet_button: true
+twitter_tweet_button: false
 
 # Google +1
 google_plus_one: false
