@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Ready for Note]]></title>
+  <link href="http://upwell.github.io/atom.xml" rel="self"/>
+  <link href="http://upwell.github.io/"/>
+  <updated>2013-08-07T12:22:02+08:00</updated>
+  <id>http://upwell.github.io/</id>
+  <author>
+    <name><![CDATA[hanh]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Install xrdp on CentOS63]]></title>
+    <link href="http://upwell.github.io/blog/2013/08/07/install-xrdp-on-centos63/"/>
+    <updated>2013-08-07T11:35:00+08:00</updated>
+    <id>http://upwell.github.io/blog/2013/08/07/install-xrdp-on-centos63</id>
+    <content type="html"><![CDATA[<h3 id="toc_0">Install packages</h3>
+
+<p>CentOS 6.3 does not have xrdp package in the official repo.</p>
+
+<ul>
+<li>Install xrdp
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+</span><span class='line'>wget http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6
+</span><span class='line'>rpm --import RPM-GPG-KEY-EPEL-6
+</span><span class='line'>rpm --ivh epel*.rpm
+</span><span class='line'>yum install xrdp</span></code></pre></td></tr></table></div></figure></li>
+</ul>
+
+<h3 id="toc_1">Start service</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/etc/init.d/xrdp start
+</span><span class='line'>chkconfig xrdp on</span></code></pre></td></tr></table></div></figure>
+
+<h3 id="toc_2">Issues</h3>
+
+<ul>
+<li><p>problem connecting 5910
+try start vncserver
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/etc/init.d/vncserver start</span></code></pre></td></tr></table></div></figure></p></li>
+<li><p>vnc no display configured
+edit /etc/sysconfig/vncservers
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>VNCSERVERS=&quot;2:root&quot;
+</span><span class='line'>VNCSERVERARGS[2]=&quot;-geometry 1280x1024 -localhost&quot;</span></code></pre></td></tr></table></div></figure></p></li>
+<li><p>vnc password for user root is not configured
+login as root
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vncpasswd</span></code></pre></td></tr></table></div></figure></p></li>
+<li><p>vnc undefined symbol: pixman_composite_trapezoids
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>yum update pixman pixman-devel</span></code></pre></td></tr></table></div></figure></p></li>
+<li><p>vnc could not open default font &#39;fixed&#39;
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>yum install libXfont</span></code></pre></td></tr></table></div></figure></p></li>
+</ul>
+]]></content>
+  </entry>
+  
+</feed>
