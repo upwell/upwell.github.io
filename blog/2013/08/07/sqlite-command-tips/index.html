@@ -5,13 +5,16 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive - Ready for Note</title>
+  <title>SQLite command tips - Ready for Note</title>
   <meta name="author" content="hanh">
 
   
-  <meta name="description" content=" Blog Archive 2013 SQLite command tips
-Aug 07 2013 Install xrdp on CentOS63
-Aug 07 2013 Recent Posts SQLite Command Tips Install Xrdp on CentOS63 ">
+  <meta name="description" content="Use a database file
+sqlite &lt;database_file&gt; Get table information
+.tables Get schema information
+.schema
+.schema table_name Get help
+.help Write &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +23,7 @@ Aug 07 2013 Recent Posts SQLite Command Tips Install Xrdp on CentOS63 ">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://upwell.github.io/blog/archives">
+  <link rel="canonical" href="http://upwell.github.io/blog/2013/08/07/sqlite-command-tips">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Ready for Note" type="application/atom+xml">
@@ -66,41 +69,113 @@ Aug 07 2013 Recent Posts SQLite Command Tips Install Xrdp on CentOS63 ">
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Blog Archive</h1>
+    
+      <h1 class="entry-title">SQLite Command Tips</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-07T13:26:00+08:00" pubdate data-updated="true">Aug 7<span>th</span>, 2013</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives">
 
 
-
-  
-  <h2>2013</h2>
-
-<article>
-  
-<h1><a href="/blog/2013/08/07/sqlite-command-tips/">SQLite command tips</a></h1>
-<time datetime="2013-08-07T13:26:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>07</span> <span class='year'>2013</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/08/07/install-xrdp-on-centos63/">Install xrdp on CentOS63</a></h1>
-<time datetime="2013-08-07T11:35:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>07</span> <span class='year'>2013</span></time>
-
-
-</article>
-
+<div class="entry-content"><h3 id="toc_3">Use a database file</h3>
+<div class="highlight"><pre><code class="text">sqlite &lt;database_file&gt;
+</code></pre>
 </div>
 
+<h3 id="toc_4">Get table information</h3>
+<div class="highlight"><pre><code class="text">.tables
+</code></pre>
+</div>
+
+<h3 id="toc_5">Get schema information</h3>
+<div class="highlight"><pre><code class="text">.schema
+.schema table_name
+</code></pre>
+</div>
+
+<h3 id="toc_6">Get help</h3>
+<div class="highlight"><pre><code class="text">.help
+</code></pre>
+</div>
+
+<h3 id="toc_7">Write result to a file</h3>
+<div class="highlight"><pre><code class="text">.mode list
+.separator |
+.output result.data
+select * from table_name;
+.exit
+</code></pre>
+</div>
+
+<h3 id="toc_8">Exit</h3>
+<div class="highlight"><pre><code class="text">.exit
+</code></pre>
+</div>
+
+<h3 id="toc_9">More</h3>
+
+<p><a href="http://www.sqlite.org/sqlite.html">sqlite official site help</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">hanh</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-07T13:26:00+08:00" pubdate data-updated="true">Aug 7<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/08/07/install-xrdp-on-centos63/" title="Previous Post: Install xrdp on CentOS63">&laquo; Install xrdp on CentOS63</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>

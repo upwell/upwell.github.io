@@ -9,13 +9,12 @@
   <meta name="author" content="hanh">
 
   
-  <meta name="description" content="Install packages CentOS 6.3 does not have xrdp package in the official repo. Install xrdp
-1
-2
-3
-4
-5
-wget http://dl.fedoraproject.org/pub/epel/6/ &hellip;">
+  <meta name="description" content="Use a database file
+sqlite &lt;database_file&gt; Get table information
+.tables Get schema information
+.schema
+.schema table_name Get help
+.help Write &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,6 +70,79 @@ wget http://dl.fedoraproject.org/pub/epel/6/ &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/07/sqlite-command-tips/">SQLite Command Tips</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-07T13:26:00+08:00" pubdate data-updated="true">Aug 7<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3 id="toc_3">Use a database file</h3>
+<div class="highlight"><pre><code class="text">sqlite &lt;database_file&gt;
+</code></pre>
+</div>
+
+<h3 id="toc_4">Get table information</h3>
+<div class="highlight"><pre><code class="text">.tables
+</code></pre>
+</div>
+
+<h3 id="toc_5">Get schema information</h3>
+<div class="highlight"><pre><code class="text">.schema
+.schema table_name
+</code></pre>
+</div>
+
+<h3 id="toc_6">Get help</h3>
+<div class="highlight"><pre><code class="text">.help
+</code></pre>
+</div>
+
+<h3 id="toc_7">Write result to a file</h3>
+<div class="highlight"><pre><code class="text">.mode list
+.separator |
+.output result.data
+select * from table_name;
+.exit
+</code></pre>
+</div>
+
+<h3 id="toc_8">Exit</h3>
+<div class="highlight"><pre><code class="text">.exit
+</code></pre>
+</div>
+
+<h3 id="toc_9">More</h3>
+
+<p><a href="http://www.sqlite.org/sqlite.html">sqlite official site help</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -167,6 +239,10 @@ login as root
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/08/07/sqlite-command-tips/">SQLite Command Tips</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/08/07/install-xrdp-on-centos63/">Install Xrdp on CentOS63</a>

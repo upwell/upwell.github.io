@@ -4,7 +4,7 @@
   <title><![CDATA[Ready for Note]]></title>
   <link href="http://upwell.github.io/atom.xml" rel="self"/>
   <link href="http://upwell.github.io/"/>
-  <updated>2013-08-07T12:22:02+08:00</updated>
+  <updated>2013-08-07T13:28:05+08:00</updated>
   <id>http://upwell.github.io/</id>
   <author>
     <name><![CDATA[hanh]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SQLite command tips]]></title>
+    <link href="http://upwell.github.io/blog/2013/08/07/sqlite-command-tips/"/>
+    <updated>2013-08-07T13:26:00+08:00</updated>
+    <id>http://upwell.github.io/blog/2013/08/07/sqlite-command-tips</id>
+    <content type="html"><![CDATA[<h3 id="toc_3">Use a database file</h3>
+<div class="highlight"><pre><code class="text">sqlite &lt;database_file&gt;
+</code></pre>
+</div>
+
+<h3 id="toc_4">Get table information</h3>
+<div class="highlight"><pre><code class="text">.tables
+</code></pre>
+</div>
+
+<h3 id="toc_5">Get schema information</h3>
+<div class="highlight"><pre><code class="text">.schema
+.schema table_name
+</code></pre>
+</div>
+
+<h3 id="toc_6">Get help</h3>
+<div class="highlight"><pre><code class="text">.help
+</code></pre>
+</div>
+
+<h3 id="toc_7">Write result to a file</h3>
+<div class="highlight"><pre><code class="text">.mode list
+.separator |
+.output result.data
+select * from table_name;
+.exit
+</code></pre>
+</div>
+
+<h3 id="toc_8">Exit</h3>
+<div class="highlight"><pre><code class="text">.exit
+</code></pre>
+</div>
+
+<h3 id="toc_9">More</h3>
+
+<p><a href="http://www.sqlite.org/sqlite.html">sqlite official site help</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Install xrdp on CentOS63]]></title>
