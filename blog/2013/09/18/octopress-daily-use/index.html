@@ -5,12 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Vim memo - Note Everything</title>
+  <title>octopress daily use - Note Everything</title>
   <meta name="author" content="hanh">
 
   
-  <meta name="description" content="Move faster : EasyMotion EasyMotion provides a much simpler way to use some motions in vim. It takes
-the &lt;number&gt; out of &lt;number&gt;w or &lt &hellip;">
+  <meta name="description" content="Check ruby version
+ruby -v If the version is not 1.9.3, use the following commmand to switch to 1.9.3:
+rvm use 1.9.3 Create a new post
+rake new_post &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +21,7 @@ the &lt;number&gt; out of &lt;number&gt;w or &lt &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://upwell.github.io/blog/2013/08/14/vim-memo">
+  <link rel="canonical" href="http://upwell.github.io/blog/2013/09/18/octopress-daily-use">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Note Everything" type="application/atom+xml">
@@ -81,7 +83,7 @@ the &lt;number&gt; out of &lt;number&gt;w or &lt &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Vim Memo</h1>
+      <h1 class="entry-title">Octopress Daily Use</h1>
     
     
       <p class="meta">
@@ -97,32 +99,53 @@ the &lt;number&gt; out of &lt;number&gt;w or &lt &hellip;">
   
 
 
-<time datetime="2013-08-14T21:54:00+08:00" pubdate data-updated="true">Aug 14<span>th</span>, 2013</time>
+<time datetime="2013-09-18T17:00:00+08:00" pubdate data-updated="true">Sep 18<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2 id="toc_10">Move faster : EasyMotion</h2>
+<div class="entry-content"><h3 id="toc_12">Check ruby version</h3>
+<div class="highlight"><pre><code class="text">ruby -v
+</code></pre>
+</div>
 
-<p>EasyMotion provides a much simpler way to use some motions in vim. It takes<br>
-the <code>&lt;number&gt;</code> out of <code>&lt;number&gt;w</code> or <code>&lt;number&gt;f{char}</code> by highlighting all<br>
-possible choices and allowing you to press one key to jump directly to the<br>
-target.</p>
+<p>If the version is not 1.9.3, use the following commmand to switch to 1.9.3:</p>
+<div class="highlight"><pre><code class="text">rvm use 1.9.3
+</code></pre>
+</div>
 
-<p>The command is triggered by a leader key. The default is <code>&lt;leader&gt;&lt;leader&gt;</code>.</p>
+<h3 id="toc_13">Create a new post</h3>
+<div class="highlight"><pre><code class="text">rake new_post[&#39;octopress daily use&#39;]
+</code></pre>
+</div>
 
-<p><code>&lt;leader&gt;&lt;leader&gt;w</code> would highlight all choices with <code>&lt;a-z&gt;&lt;0-9&gt;</code>.<br>
-<code>&lt;leader&gt;&lt;leader&gt;f</code><br>
-<code>&lt;leader&gt;&lt;leader&gt;f{char}</code></p>
+<p>This would create a new markdown file under <code>source/_posts/</code> folder. Edit the file<br>
+to compose the new post.</p>
 
-<h2 id="toc_11">Repeats</h2>
+<h3 id="toc_14">Preview and generate</h3>
+<div class="highlight"><pre><code class="text">rake generate
+rake preview
+</code></pre>
+</div>
 
-<p>Single repeats</p>
+<p>Visit <code>http://localhost:4000</code> to preview the site.</p>
 
-<p><code>.</code> : used to repeat simple changes<br>
-<code>@:</code> : used to repeat last command-line</p>
+<h3 id="toc_15">Deploy to github page</h3>
+<div class="highlight"><pre><code class="text">rake generate
+rake deploy
+</code></pre>
+</div>
+
+<p>This would deploy the generate file on to github page for display.</p>
+
+<h3 id="toc_16">Submit source to github repo</h3>
+<div class="highlight"><pre><code class="text">git add .
+git commit -m &#39;new post&#39;
+git push origin master
+</code></pre>
+</div>
 </div>
 
 
@@ -145,7 +168,7 @@ target.</p>
   
 
 
-<time datetime="2013-08-14T21:54:00+08:00" pubdate data-updated="true">Aug 14<span>th</span>, 2013</time>
+<time datetime="2013-09-18T17:00:00+08:00" pubdate data-updated="true">Sep 18<span>th</span>, 2013</time>
       
 
 
@@ -160,10 +183,8 @@ target.</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/08/07/sqlite-command-tips/" title="Previous Post: SQLite command tips">&laquo; SQLite command tips</a>
+        <a class="basic-alignment left" href="/blog/2013/08/14/vim-memo/" title="Previous Post: Vim memo">&laquo; Vim memo</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/09/18/octopress-daily-use/" title="Next Post: octopress daily use">octopress daily use &raquo;</a>
       
     </p>
   </footer>

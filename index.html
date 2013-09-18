@@ -9,8 +9,10 @@
   <meta name="author" content="hanh">
 
   
-  <meta name="description" content="EasyMotion - move faster EasyMotion provides a much simpler way to use some motions in vim. It takes
-the &lt;number&gt; out of &lt;number&gt;w or &lt &hellip;">
+  <meta name="description" content="Check ruby version
+ruby -v If the version is not 1.9.3, use the following commmand to switch to 1.9.3:
+rvm use 1.9.3 Create a new post
+rake new_post &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,6 +86,81 @@ the &lt;number&gt; out of &lt;number&gt;w or &lt &hellip;">
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/09/18/octopress-daily-use/">Octopress Daily Use</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-18T17:00:00+08:00" pubdate data-updated="true">Sep 18<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3 id="toc_12">Check ruby version</h3>
+<div class="highlight"><pre><code class="text">ruby -v
+</code></pre>
+</div>
+
+<p>If the version is not 1.9.3, use the following commmand to switch to 1.9.3:</p>
+<div class="highlight"><pre><code class="text">rvm use 1.9.3
+</code></pre>
+</div>
+
+<h3 id="toc_13">Create a new post</h3>
+<div class="highlight"><pre><code class="text">rake new_post[&#39;octopress daily use&#39;]
+</code></pre>
+</div>
+
+<p>This would create a new markdown file under <code>source/_posts/</code> folder. Edit the file<br>
+to compose the new post.</p>
+
+<h3 id="toc_14">Preview and generate</h3>
+<div class="highlight"><pre><code class="text">rake generate
+rake preview
+</code></pre>
+</div>
+
+<p>Visit <code>http://localhost:4000</code> to preview the site.</p>
+
+<h3 id="toc_15">Deploy to github page</h3>
+<div class="highlight"><pre><code class="text">rake generate
+rake deploy
+</code></pre>
+</div>
+
+<p>This would deploy the generate file on to github page for display.</p>
+
+<h3 id="toc_16">Submit source to github repo</h3>
+<div class="highlight"><pre><code class="text">git add .
+git commit -m &#39;new post&#39;
+git push origin master
+</code></pre>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/08/14/vim-memo/">Vim Memo</a></h1>
     
     
@@ -107,7 +184,7 @@ the &lt;number&gt; out of &lt;number&gt;w or &lt &hellip;">
   </header>
 
 
-  <div class="entry-content"><h2 id="toc_10">EasyMotion - move faster</h2>
+  <div class="entry-content"><h2 id="toc_10">Move faster : EasyMotion</h2>
 
 <p>EasyMotion provides a much simpler way to use some motions in vim. It takes<br>
 the <code>&lt;number&gt;</code> out of <code>&lt;number&gt;w</code> or <code>&lt;number&gt;f{char}</code> by highlighting all<br>
@@ -119,6 +196,13 @@ target.</p>
 <p><code>&lt;leader&gt;&lt;leader&gt;w</code> would highlight all choices with <code>&lt;a-z&gt;&lt;0-9&gt;</code>.<br>
 <code>&lt;leader&gt;&lt;leader&gt;f</code><br>
 <code>&lt;leader&gt;&lt;leader&gt;f{char}</code></p>
+
+<h2 id="toc_11">Repeats</h2>
+
+<p>Single repeats</p>
+
+<p><code>.</code> : used to repeat simple changes<br>
+<code>@:</code> : used to repeat last command-line</p>
 </div>
   
   
@@ -294,6 +378,10 @@ login as root
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/09/18/octopress-daily-use/">Octopress Daily Use</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/08/14/vim-memo/">Vim Memo</a>
