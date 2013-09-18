@@ -5,7 +5,7 @@ date: 2013-08-14 21:54
 comments: true
 categories: 
 ---
-## EasyMotion - move faster
+## Move faster : EasyMotion
 
 EasyMotion provides a much simpler way to use some motions in vim. It takes  
 the `<number>` out of `<number>w` or `<number>f{char}` by highlighting all  
@@ -17,4 +17,11 @@ The command is triggered by a leader key. The default is `<leader><leader>`.
 `<leader><leader>w` would highlight all choices with `<a-z><0-9>`.  
 `<leader><leader>f`  
 `<leader><leader>f{char}`
+
+## Repeats
+
+Single repeats
+
+`.` : used to repeat simple changes  
+`@:` : used to repeat last command-line
 
