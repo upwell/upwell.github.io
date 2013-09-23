@@ -38,5 +38,5 @@ This would deploy the generate file on to github page for display.
 
     git add .
     git commit -m 'new post'
-    git push origin master
+    git push origin source
 
