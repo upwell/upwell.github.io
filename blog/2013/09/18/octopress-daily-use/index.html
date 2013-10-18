@@ -9,10 +9,10 @@
   <meta name="author" content="hanh">
 
   
-  <meta name="description" content="Check ruby version
-ruby -v If the version is not 1.9.3, use the following commmand to switch to 1.9.3:
-rvm use 1.9.3 Create a new post
-rake new_post &hellip;">
+  <meta name="description" content="Check ruby version 1
+ruby -v If the version is not 1.9.3, use the following commmand to switch to 1.9.3: 1
+rvm use 1.9.3 Create a new post 1
+rake &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,45 +107,49 @@ rake new_post &hellip;">
 
 
 <div class="entry-content"><h3 id="toc_12">Check ruby version</h3>
-<div class="highlight"><pre><code class="text">ruby -v
-</code></pre>
-</div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ruby -v</span></code></pre></td></tr></table></div></figure>
 
 <p>If the version is not 1.9.3, use the following commmand to switch to 1.9.3:</p>
-<div class="highlight"><pre><code class="text">rvm use 1.9.3
-</code></pre>
-</div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rvm use 1.9.3</span></code></pre></td></tr></table></div></figure>
 
 <h3 id="toc_13">Create a new post</h3>
-<div class="highlight"><pre><code class="text">rake new_post[&#39;octopress daily use&#39;]
-</code></pre>
-</div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake new_post['octopress daily use']</span></code></pre></td></tr></table></div></figure>
 
 <p>This would create a new markdown file under <code>source/_posts/</code> folder. Edit the file<br>
 to compose the new post.</p>
 
 <h3 id="toc_14">Preview and generate</h3>
-<div class="highlight"><pre><code class="text">rake generate
-rake preview
-</code></pre>
-</div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake generate
+</span><span class='line'>rake preview</span></code></pre></td></tr></table></div></figure>
 
 <p>Visit <code>http://localhost:4000</code> to preview the site.</p>
 
 <h3 id="toc_15">Deploy to github page</h3>
-<div class="highlight"><pre><code class="text">rake generate
-rake deploy
-</code></pre>
-</div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake generate
+</span><span class='line'>rake deploy</span></code></pre></td></tr></table></div></figure>
 
 <p>This would deploy the generate file on to github page for display.</p>
 
 <h3 id="toc_16">Submit source to github repo</h3>
-<div class="highlight"><pre><code class="text">git add .
-git commit -m &#39;new post&#39;
-git push origin source
-</code></pre>
-</div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git add .
+</span><span class='line'>git commit -m 'new post'
+</span><span class='line'>git push origin source</span></code></pre></td></tr></table></div></figure>
 </div>
 
 
@@ -201,6 +205,10 @@ git push origin source
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/10/16/c-header-file-include-seq/">C++头文件include的顺序问题</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/10/15/ctags-ignore-files/">Ignore Files When Building Tags</a>
       </li>
     
@@ -214,10 +222,6 @@ git push origin source
     
       <li class="post">
         <a href="/blog/2013/08/14/vim-memo/">Vim Memo</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/08/07/sqlite-command-tips/">SQLite Command Tips</a>
       </li>
     
   </ul>

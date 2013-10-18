@@ -9,12 +9,13 @@
   <meta name="author" content="hanh">
 
   
-  <meta name="description" content="Use a database file
-sqlite &lt;database_file&gt; Get table information
-.tables Get schema information
+  <meta name="description" content="Use a database file 1
+sqlite &lt;database_file&gt; Get table information 1
+.tables Get schema information 1
+2
 .schema
-.schema table_name Get help
-.help Write &hellip;">
+.schema table_name Get help 1
+. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,39 +110,44 @@ sqlite &lt;database_file&gt; Get table information
 
 
 <div class="entry-content"><h3 id="toc_3">Use a database file</h3>
-<div class="highlight"><pre><code class="text">sqlite &lt;database_file&gt;
-</code></pre>
-</div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sqlite &lt;database_file&gt;</span></code></pre></td></tr></table></div></figure>
 
 <h3 id="toc_4">Get table information</h3>
-<div class="highlight"><pre><code class="text">.tables
-</code></pre>
-</div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.tables</span></code></pre></td></tr></table></div></figure>
 
 <h3 id="toc_5">Get schema information</h3>
-<div class="highlight"><pre><code class="text">.schema
-.schema table_name
-</code></pre>
-</div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.schema
+</span><span class='line'>.schema table_name</span></code></pre></td></tr></table></div></figure>
 
 <h3 id="toc_6">Get help</h3>
-<div class="highlight"><pre><code class="text">.help
-</code></pre>
-</div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.help</span></code></pre></td></tr></table></div></figure>
 
 <h3 id="toc_7">Write result to a file</h3>
-<div class="highlight"><pre><code class="text">.mode list
-.separator |
-.output result.data
-select * from table_name;
-.exit
-</code></pre>
-</div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.mode list
+</span><span class='line'>.separator |
+</span><span class='line'>.output result.data
+</span><span class='line'>select * from table_name;
+</span><span class='line'>.exit</span></code></pre></td></tr></table></div></figure>
 
 <h3 id="toc_8">Exit</h3>
-<div class="highlight"><pre><code class="text">.exit
-</code></pre>
-</div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.exit</span></code></pre></td></tr></table></div></figure>
 
 <h3 id="toc_9">More</h3>
 
@@ -201,6 +207,10 @@ select * from table_name;
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/10/16/c-header-file-include-seq/">C++头文件include的顺序问题</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/10/15/ctags-ignore-files/">Ignore Files When Building Tags</a>
       </li>
     
@@ -214,10 +224,6 @@ select * from table_name;
     
       <li class="post">
         <a href="/blog/2013/08/14/vim-memo/">Vim Memo</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/08/07/sqlite-command-tips/">SQLite Command Tips</a>
       </li>
     
   </ul>

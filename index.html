@@ -9,8 +9,9 @@
   <meta name="author" content="hanh">
 
   
-  <meta name="description" content="Use the following commands:
-ctags --exclude=*.html --exclude=*.js --exclude=*.sql -R It&#39;s annoying to enter the long parameters every time. You &hellip;">
+  <meta name="description" content="问题 遇到一个很奇怪的问题，在工程中使用stlport的时候各种编译不过，即使仅仅是声明一个对象都会编译不过。
+std::sstream mystream;
+报的错误也很奇怪，是stlport内部的文件语法错误。 分析过程 在工程外部，编写小程序，使用工程中的stlport来编译，正常编译通过， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,6 +85,73 @@ ctags --exclude=*.html --exclude=*.js --exclude=*.sql -R It&#39;s annoying to en
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/10/16/c-header-file-include-seq/">C++头文件include的顺序问题</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-16T16:48:00+08:00" pubdate data-updated="true">Oct 16<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2 id="toc_17">问题</h2>
+
+<p>遇到一个很奇怪的问题，在工程中使用stlport的时候各种编译不过，即使仅仅是声明一个对象都会编译不过。
+<code>std::sstream mystream;</code>
+报的错误也很奇怪，是stlport内部的文件语法错误。</p>
+
+<h2 id="toc_18">分析过程</h2>
+
+<ol>
+<li>在工程外部，编写小程序，使用工程中的stlport来编译，正常编译通过，运行正常；</li>
+<li>怀疑工程中的Makefile对stlport编译时使用了特殊的选项，检查发现没有特殊的选项；</li>
+<li>怀疑工程中使用的stlport有问题，重新编译了一份stlport还是不行；</li>
+<li>检查stlport的源代码，出错的地方对<code>#define XXX</code>有依赖，同时检查了工程中的代码，发现<code>include</code>std头文件在所有<code>include</code>的最后面。</li>
+</ol>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include "a.h"
+</span><span class='line'>#include "b.h"
+</span><span class='line'>#include &lt;sstream&gt;</span></code></pre></td></tr></table></div></figure>
+
+<ol>
+<li>猜测可能前面的头文件中的<code>#define</code>影响了sstream中的设置，将<code>#include &lt;sstream&gt;</code>放到文件的最前面，问题解决；</li>
+</ol>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include "a.h"
+</span><span class='line'>#include "b.h"
+</span><span class='line'>#include &lt;sstream&gt;</span></code></pre></td></tr></table></div></figure>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/10/15/ctags-ignore-files/">Ignore Files When Building Tags</a></h1>
     
     
@@ -108,24 +176,26 @@ ctags --exclude=*.html --exclude=*.js --exclude=*.sql -R It&#39;s annoying to en
 
 
   <div class="entry-content"><p>Use the following commands:</p>
-<div class="highlight"><pre><code class="text">ctags --exclude=*.html --exclude=*.js --exclude=*.sql -R
-</code></pre>
-</div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctags --exclude=*.html --exclude=*.js --exclude=*.sql -R</span></code></pre></td></tr></table></div></figure>
 
 <p>It&#39;s annoying to enter the long parameters every time. You can configure<br>
 it as the default config.</p>
 
 <p>Edit <code>~/.ctags</code>. Add the following lines:</p>
-<div class="highlight"><pre><code class="text">--exclude=*.html
---exclude=*.js
---exclude=*.sql
-</code></pre>
-</div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>--exclude=*.html
+</span><span class='line'>--exclude=*.js
+</span><span class='line'>--exclude=*.sql</span></code></pre></td></tr></table></div></figure>
 
 <p>Then you only need to type:</p>
-<div class="highlight"><pre><code class="text">ctags -R
-</code></pre>
-</div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ctags -R</span></code></pre></td></tr></table></div></figure>
 </div>
   
   
@@ -233,45 +303,49 @@ it as the default config.</p>
 
 
   <div class="entry-content"><h3 id="toc_12">Check ruby version</h3>
-<div class="highlight"><pre><code class="text">ruby -v
-</code></pre>
-</div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ruby -v</span></code></pre></td></tr></table></div></figure>
 
 <p>If the version is not 1.9.3, use the following commmand to switch to 1.9.3:</p>
-<div class="highlight"><pre><code class="text">rvm use 1.9.3
-</code></pre>
-</div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rvm use 1.9.3</span></code></pre></td></tr></table></div></figure>
 
 <h3 id="toc_13">Create a new post</h3>
-<div class="highlight"><pre><code class="text">rake new_post[&#39;octopress daily use&#39;]
-</code></pre>
-</div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake new_post['octopress daily use']</span></code></pre></td></tr></table></div></figure>
 
 <p>This would create a new markdown file under <code>source/_posts/</code> folder. Edit the file<br>
 to compose the new post.</p>
 
 <h3 id="toc_14">Preview and generate</h3>
-<div class="highlight"><pre><code class="text">rake generate
-rake preview
-</code></pre>
-</div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake generate
+</span><span class='line'>rake preview</span></code></pre></td></tr></table></div></figure>
 
 <p>Visit <code>http://localhost:4000</code> to preview the site.</p>
 
 <h3 id="toc_15">Deploy to github page</h3>
-<div class="highlight"><pre><code class="text">rake generate
-rake deploy
-</code></pre>
-</div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake generate
+</span><span class='line'>rake deploy</span></code></pre></td></tr></table></div></figure>
 
 <p>This would deploy the generate file on to github page for display.</p>
 
 <h3 id="toc_16">Submit source to github repo</h3>
-<div class="highlight"><pre><code class="text">git add .
-git commit -m &#39;new post&#39;
-git push origin source
-</code></pre>
-</div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git add .
+</span><span class='line'>git commit -m 'new post'
+</span><span class='line'>git push origin source</span></code></pre></td></tr></table></div></figure>
 </div>
   
   
@@ -362,39 +436,44 @@ target.</p>
 
 
   <div class="entry-content"><h3 id="toc_3">Use a database file</h3>
-<div class="highlight"><pre><code class="text">sqlite &lt;database_file&gt;
-</code></pre>
-</div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sqlite &lt;database_file&gt;</span></code></pre></td></tr></table></div></figure>
 
 <h3 id="toc_4">Get table information</h3>
-<div class="highlight"><pre><code class="text">.tables
-</code></pre>
-</div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.tables</span></code></pre></td></tr></table></div></figure>
 
 <h3 id="toc_5">Get schema information</h3>
-<div class="highlight"><pre><code class="text">.schema
-.schema table_name
-</code></pre>
-</div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.schema
+</span><span class='line'>.schema table_name</span></code></pre></td></tr></table></div></figure>
 
 <h3 id="toc_6">Get help</h3>
-<div class="highlight"><pre><code class="text">.help
-</code></pre>
-</div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.help</span></code></pre></td></tr></table></div></figure>
 
 <h3 id="toc_7">Write result to a file</h3>
-<div class="highlight"><pre><code class="text">.mode list
-.separator |
-.output result.data
-select * from table_name;
-.exit
-</code></pre>
-</div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.mode list
+</span><span class='line'>.separator |
+</span><span class='line'>.output result.data
+</span><span class='line'>select * from table_name;
+</span><span class='line'>.exit</span></code></pre></td></tr></table></div></figure>
 
 <h3 id="toc_8">Exit</h3>
-<div class="highlight"><pre><code class="text">.exit
-</code></pre>
-</div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.exit</span></code></pre></td></tr></table></div></figure>
 
 <h3 id="toc_9">More</h3>
 
@@ -503,6 +582,10 @@ login as root
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/10/16/c-header-file-include-seq/">C++头文件include的顺序问题</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/10/15/ctags-ignore-files/">Ignore Files When Building Tags</a>
       </li>
     
@@ -516,10 +599,6 @@ login as root
     
       <li class="post">
         <a href="/blog/2013/08/14/vim-memo/">Vim Memo</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/08/07/sqlite-command-tips/">SQLite Command Tips</a>
       </li>
     
   </ul>

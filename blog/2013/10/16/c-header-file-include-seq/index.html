@@ -5,14 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive - Note Everything</title>
+  <title>C++头文件include的顺序问题 - Note Everything</title>
   <meta name="author" content="hanh">
 
   
-  <meta name="description" content="Blog Archive 2013 C++头文件include的顺序问题
-Oct 16 2013 Ignore files when building tags
-Oct 15 2013 abnormal packets in socket
-Sep 18 2013 octopress daily &hellip;">
+  <meta name="description" content="问题 遇到一个很奇怪的问题，在工程中使用stlport的时候各种编译不过，即使仅仅是声明一个对象都会编译不过。
+std::sstream mystream;
+报的错误也很奇怪，是stlport内部的文件语法错误。 分析过程 在工程外部，编写小程序，使用工程中的stlport来编译，正常编译通过， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +20,7 @@ Sep 18 2013 octopress daily &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://upwell.github.io/blog/archives">
+  <link rel="canonical" href="http://upwell.github.io/blog/2013/10/16/c-header-file-include-seq">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Note Everything" type="application/atom+xml">
@@ -79,91 +78,107 @@ Sep 18 2013 octopress daily &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Blog Archive</h1>
+    
+      <h1 class="entry-title">C++头文件include的顺序问题</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-16T16:48:00+08:00" pubdate data-updated="true">Oct 16<span>th</span>, 2013</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives">
 
 
+<div class="entry-content"><h2 id="toc_17">问题</h2>
 
-  
-  <h2>2013</h2>
+<p>遇到一个很奇怪的问题，在工程中使用stlport的时候各种编译不过，即使仅仅是声明一个对象都会编译不过。
+<code>std::sstream mystream;</code>
+报的错误也很奇怪，是stlport内部的文件语法错误。</p>
 
-<article>
-  
-<h1><a href="/blog/2013/10/16/c-header-file-include-seq/">C++头文件include的顺序问题</a></h1>
-<time datetime="2013-10-16T16:48:00+08:00" pubdate><span class='month'>Oct</span> <span class='day'>16</span> <span class='year'>2013</span></time>
+<h2 id="toc_18">分析过程</h2>
 
+<ol>
+<li>在工程外部，编写小程序，使用工程中的stlport来编译，正常编译通过，运行正常；</li>
+<li>怀疑工程中的Makefile对stlport编译时使用了特殊的选项，检查发现没有特殊的选项；</li>
+<li>怀疑工程中使用的stlport有问题，重新编译了一份stlport还是不行；</li>
+<li>检查stlport的源代码，出错的地方对<code>#define XXX</code>有依赖，同时检查了工程中的代码，发现<code>include</code>std头文件在所有<code>include</code>的最后面。</li>
+</ol>
 
-</article>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include "a.h"
+</span><span class='line'>#include "b.h"
+</span><span class='line'>#include &lt;sstream&gt;</span></code></pre></td></tr></table></div></figure>
 
+<ol>
+<li>猜测可能前面的头文件中的<code>#define</code>影响了sstream中的设置，将<code>#include &lt;sstream&gt;</code>放到文件的最前面，问题解决；</li>
+</ol>
 
-
-<article>
-  
-<h1><a href="/blog/2013/10/15/ctags-ignore-files/">Ignore files when building tags</a></h1>
-<time datetime="2013-10-15T17:52:00+08:00" pubdate><span class='month'>Oct</span> <span class='day'>15</span> <span class='year'>2013</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/09/18/abnormal-packets-in-socket/">abnormal packets in socket</a></h1>
-<time datetime="2013-09-18T17:52:00+08:00" pubdate><span class='month'>Sep</span> <span class='day'>18</span> <span class='year'>2013</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/09/18/octopress-daily-use/">octopress daily use</a></h1>
-<time datetime="2013-09-18T17:00:00+08:00" pubdate><span class='month'>Sep</span> <span class='day'>18</span> <span class='year'>2013</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/08/14/vim-memo/">Vim memo</a></h1>
-<time datetime="2013-08-14T21:54:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>14</span> <span class='year'>2013</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/08/07/sqlite-command-tips/">SQLite command tips</a></h1>
-<time datetime="2013-08-07T13:26:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>07</span> <span class='year'>2013</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/08/07/install-xrdp-on-centos63/">Install xrdp on CentOS63</a></h1>
-<time datetime="2013-08-07T11:35:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>07</span> <span class='year'>2013</span></time>
-
-
-</article>
-
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include "a.h"
+</span><span class='line'>#include "b.h"
+</span><span class='line'>#include &lt;sstream&gt;</span></code></pre></td></tr></table></div></figure>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">hanh</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-16T16:48:00+08:00" pubdate data-updated="true">Oct 16<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/10/15/ctags-ignore-files/" title="Previous Post: Ignore files when building tags">&laquo; Ignore files when building tags</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>
