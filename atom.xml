@@ -1,137 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>Note Everything</title>
-  <meta name="author" content="hanh">
-
-  
-  <meta name="description" content="Issue When execute: 1
-# rpm -ivh ~/Downloads/jdk-7u45-linux-i586.rpm There comes error messages:
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-Unpacking JAR files &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://upwell.github.io/">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="Note Everything" type="application/atom+xml">
-  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-43074617-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
-</head>
-
-<body   >
-  <header role="banner"><hgroup>
-  <div id="logo">
-  	<div id="logoLeft">{</div>
-  	<div id="logoText">mob</div>
-  	<div id="logoRight">}</div>
-  	<div class="clear"></div>
-  </div>
-  <h1><a href="/">Note Everything</a></h1>
-  
-    <h2>123456</h2>
-  
-  <div class="clear"></div>
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:upwell.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
+  <title><![CDATA[Note Everything]]></title>
+  <link href="http://upwell.github.io/atom.xml" rel="self"/>
+  <link href="http://upwell.github.io/"/>
+  <updated>2013-10-18T23:42:36+08:00</updated>
+  <id>http://upwell.github.io/</id>
+  <author>
+    <name><![CDATA[hanh]]></name>
     
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2013/10/18/install-oracle-jdk-32bit-on-fedora-64bit/">Install Oracle Jdk 32bit on 64bit Fedora</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
   
-
-
-<time datetime="2013-10-18T22:31:00+08:00" pubdate data-updated="true">Oct 18<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2 id="toc_19">Issue</h2>
+  <entry>
+    <title type="html"><![CDATA[Install oracle jdk 32bit on 64bit Fedora]]></title>
+    <link href="http://upwell.github.io/blog/2013/10/18/install-oracle-jdk-32bit-on-fedora-64bit/"/>
+    <updated>2013-10-18T22:31:00+08:00</updated>
+    <id>http://upwell.github.io/blog/2013/10/18/install-oracle-jdk-32bit-on-fedora-64bit</id>
+    <content type="html"><![CDATA[<h2 id="toc_19">Issue</h2>
 
 <p>When execute:</p>
 
@@ -174,44 +61,15 @@ Unpacking JAR files &hellip;">
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'># rpm -ivh glibc.i686 glibc-devel.i686</span></code></pre></td></tr></table></div></figure>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2013/10/16/c-header-file-include-seq/">C++头文件include的顺序问题</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-16T16:48:00+08:00" pubdate data-updated="true">Oct 16<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2 id="toc_17">问题</h2>
+  <entry>
+    <title type="html"><![CDATA[C++头文件include的顺序问题]]></title>
+    <link href="http://upwell.github.io/blog/2013/10/16/c-header-file-include-seq/"/>
+    <updated>2013-10-16T16:48:00+08:00</updated>
+    <id>http://upwell.github.io/blog/2013/10/16/c-header-file-include-seq</id>
+    <content type="html"><![CDATA[<h2 id="toc_17">问题</h2>
 
 <p>遇到一个很奇怪的问题，在工程中使用stlport的时候各种编译不过，即使仅仅是声明一个对象都会编译不过。
 <code>std::sstream mystream;</code>
@@ -243,44 +101,15 @@ Unpacking JAR files &hellip;">
 </pre></td><td class='code'><pre><code class=''><span class='line'>#include "a.h"
 </span><span class='line'>#include "b.h"
 </span><span class='line'>#include &lt;sstream&gt;</span></code></pre></td></tr></table></div></figure>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2013/10/15/ctags-ignore-files/">Ignore Files When Building Tags</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-15T17:52:00+08:00" pubdate data-updated="true">Oct 15<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Use the following commands:</p>
+  <entry>
+    <title type="html"><![CDATA[Ignore files when building tags]]></title>
+    <link href="http://upwell.github.io/blog/2013/10/15/ctags-ignore-files/"/>
+    <updated>2013-10-15T17:52:00+08:00</updated>
+    <id>http://upwell.github.io/blog/2013/10/15/ctags-ignore-files</id>
+    <content type="html"><![CDATA[<p>Use the following commands:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>ctags --exclude=*.html --exclude=*.js --exclude=*.sql -R</span></code></pre></td></tr></table></div></figure>
@@ -301,44 +130,15 @@ it as the default config.</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>ctags -R</span></code></pre></td></tr></table></div></figure>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2013/09/18/abnormal-packets-in-socket/">Abnormal Packets in Socket</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-18T17:52:00+08:00" pubdate data-updated="true">Sep 18<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>今天遇到一个奇怪的问题，从抓包中发现服务器收到客户端发来的HTTP请求后，<br>
+  <entry>
+    <title type="html"><![CDATA[abnormal packets in socket]]></title>
+    <link href="http://upwell.github.io/blog/2013/09/18/abnormal-packets-in-socket/"/>
+    <updated>2013-09-18T17:52:00+08:00</updated>
+    <id>http://upwell.github.io/blog/2013/09/18/abnormal-packets-in-socket</id>
+    <content type="html"><![CDATA[<p>今天遇到一个奇怪的问题，从抓包中发现服务器收到客户端发来的HTTP请求后，<br>
 会先回复一个乱七八糟的包，然后才会回正常的200 OK，自然的客户端就没办法<br>
 正常工作了。</p>
 
@@ -374,44 +174,15 @@ it as the default config.</p>
 <li>当程序中存在多个线程操作同一个fd时，尤其要注意这样的问题。</li>
 </ul>
 </blockquote>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2013/09/18/octopress-daily-use/">Octopress Daily Use</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-18T17:00:00+08:00" pubdate data-updated="true">Sep 18<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3 id="toc_12">Check ruby version</h3>
+  <entry>
+    <title type="html"><![CDATA[octopress daily use]]></title>
+    <link href="http://upwell.github.io/blog/2013/09/18/octopress-daily-use/"/>
+    <updated>2013-09-18T17:00:00+08:00</updated>
+    <id>http://upwell.github.io/blog/2013/09/18/octopress-daily-use</id>
+    <content type="html"><![CDATA[<h3 id="toc_12">Check ruby version</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>ruby -v</span></code></pre></td></tr></table></div></figure>
@@ -455,44 +226,15 @@ to compose the new post.</p>
 </pre></td><td class='code'><pre><code class=''><span class='line'>git add .
 </span><span class='line'>git commit -m 'new post'
 </span><span class='line'>git push origin source</span></code></pre></td></tr></table></div></figure>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2013/08/14/vim-memo/">Vim Memo</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-14T21:54:00+08:00" pubdate data-updated="true">Aug 14<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2 id="toc_10">Move faster : EasyMotion</h2>
+  <entry>
+    <title type="html"><![CDATA[Vim memo]]></title>
+    <link href="http://upwell.github.io/blog/2013/08/14/vim-memo/"/>
+    <updated>2013-08-14T21:54:00+08:00</updated>
+    <id>http://upwell.github.io/blog/2013/08/14/vim-memo</id>
+    <content type="html"><![CDATA[<h2 id="toc_10">Move faster : EasyMotion</h2>
 
 <p>EasyMotion provides a much simpler way to use some motions in vim. It takes<br>
 the <code>&lt;number&gt;</code> out of <code>&lt;number&gt;w</code> or <code>&lt;number&gt;f{char}</code> by highlighting all<br>
@@ -511,44 +253,15 @@ target.</p>
 
 <p><code>.</code> : used to repeat simple changes<br>
 <code>@:</code> : used to repeat last command-line</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2013/08/07/sqlite-command-tips/">SQLite Command Tips</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-07T13:26:00+08:00" pubdate data-updated="true">Aug 7<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3 id="toc_3">Use a database file</h3>
+  <entry>
+    <title type="html"><![CDATA[SQLite command tips]]></title>
+    <link href="http://upwell.github.io/blog/2013/08/07/sqlite-command-tips/"/>
+    <updated>2013-08-07T13:26:00+08:00</updated>
+    <id>http://upwell.github.io/blog/2013/08/07/sqlite-command-tips</id>
+    <content type="html"><![CDATA[<h3 id="toc_3">Use a database file</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>sqlite &lt;database_file&gt;</span></code></pre></td></tr></table></div></figure>
@@ -591,44 +304,15 @@ target.</p>
 <h3 id="toc_9">More</h3>
 
 <p><a href="http://www.sqlite.org/sqlite.html">sqlite official site help</a></p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2013/08/07/install-xrdp-on-centos63/">Install Xrdp on CentOS63</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-07T11:35:00+08:00" pubdate data-updated="true">Aug 7<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3 id="toc_0">Install packages</h3>
+  <entry>
+    <title type="html"><![CDATA[Install xrdp on CentOS63]]></title>
+    <link href="http://upwell.github.io/blog/2013/08/07/install-xrdp-on-centos63/"/>
+    <updated>2013-08-07T11:35:00+08:00</updated>
+    <id>http://upwell.github.io/blog/2013/08/07/install-xrdp-on-centos63</id>
+    <content type="html"><![CDATA[<h3 id="toc_0">Install packages</h3>
 
 <p>CentOS 6.3 does not have xrdp package in the official repo.</p>
 
@@ -677,74 +361,7 @@ login as root
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>yum install libXfont</span></code></pre></td></tr></table></div></figure></p></li>
 </ul>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2013/10/18/install-oracle-jdk-32bit-on-fedora-64bit/">Install Oracle Jdk 32bit on 64bit Fedora</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/16/c-header-file-include-seq/">C++头文件include的顺序问题</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/15/ctags-ignore-files/">Ignore Files When Building Tags</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/09/18/abnormal-packets-in-socket/">Abnormal Packets in Socket</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/09/18/octopress-daily-use/">Octopress Daily Use</a>
-      </li>
-    
-  </ul>
-</section>
-
-
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - hanh -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
-  
-
-
-
-
-
-
-
-
-
-
-
-</body>
-</html>
+</feed>
