@@ -9,9 +9,10 @@
   <meta name="author" content="hanh">
 
   
-  <meta name="description" content="问题 遇到一个很奇怪的问题，在工程中使用stlport的时候各种编译不过，即使仅仅是声明一个对象都会编译不过。
+  <meta name="description" content="问题 遇到一个很奇怪的问题，在工程中使用 stlport 的时候各种编译不过，即使仅仅是声明一个对象都会编译不过。
+1
 std::sstream mystream;
-报的错误也很奇怪，是stlport内部的文件语法错误。 分析过程 在工程外部，编写小程序，使用工程中的stlport来编译，正常编译通过， &hellip;">
+报的错误也很奇怪，是 stlport 内部的文件语法错误。 分析过程 在工程外部，编写小程序，使用工程中的 stlport 来编译， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -116,28 +117,25 @@ std::sstream mystream;
 
 <div class="entry-content"><h2 id="toc_17">问题</h2>
 
-<p>遇到一个很奇怪的问题，在工程中使用stlport的时候各种编译不过，即使仅仅是声明一个对象都会编译不过。
-<code>std::sstream mystream;</code>
-报的错误也很奇怪，是stlport内部的文件语法错误。</p>
+<p>遇到一个很奇怪的问题，在工程中使用 stlport 的时候各种编译不过，即使仅仅是声明一个对象都会编译不过。
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>std::sstream mystream;</span></code></pre></td></tr></table></div></figure>
+报的错误也很奇怪，是 stlport 内部的文件语法错误。</p>
 
 <h2 id="toc_18">分析过程</h2>
 
 <ol>
-<li>在工程外部，编写小程序，使用工程中的stlport来编译，正常编译通过，运行正常；</li>
-<li>怀疑工程中的Makefile对stlport编译时使用了特殊的选项，检查发现没有特殊的选项；</li>
-<li>怀疑工程中使用的stlport有问题，重新编译了一份stlport还是不行；</li>
-<li>检查stlport的源代码，出错的地方对<code>#define XXX</code>有依赖，同时检查了工程中的代码，发现<code>include</code>std头文件在所有<code>include</code>的最后面。</li>
-</ol>
-
+<li>在工程外部，编写小程序，使用工程中的 stlport 来编译，正常编译通过，运行正常；</li>
+<li>怀疑工程中的 Makefile 对 stlport 编译时使用了特殊的选项，检查发现没有特殊的选项；</li>
+<li>怀疑工程中使用的 stlport 有问题，重新编译了一份 stlport 还是不行；</li>
+<li><p>检查stlport的源代码，出错的地方对 <code>#define XXX</code> 有依赖，同时检查了工程中的代码，发现 <code>include</code> std 头文件在所有 <code>include</code> 的最后面。
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#include "a.h"
-</span><span class='line'>#include "b.h"
-</span><span class='line'>#include &lt;sstream&gt;</span></code></pre></td></tr></table></div></figure>
-
-<ol>
-<li>猜测可能前面的头文件中的<code>#define</code>影响了sstream中的设置，将<code>#include &lt;sstream&gt;</code>放到文件的最前面，问题解决；</li>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &quot;a.h&quot;
+</span><span class='line'>#include &quot;b.h&quot;
+</span><span class='line'>#include &lt;sstream&gt;</span></code></pre></td></tr></table></div></figure></p></li>
+<li><p>猜测可能前面的头文件中的 <code>#define</code> 影响了 sstream 中的设置，将 <code>#include &lt;sstream&gt;</code> 放到文件的最前面，问题解决；</p></li>
 </ol>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
