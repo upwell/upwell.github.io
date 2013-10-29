@@ -9,23 +9,12 @@
   <meta name="author" content="hanh">
 
   
-  <meta name="description" content="Issue When execute: 1
-# rpm -ivh ~/Downloads/jdk-7u45-linux-i586.rpm There comes error messages:
-1
+  <meta name="description" content="Read one line from file each time 1
 2
 3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-Unpacking JAR files &hellip;">
+ifstream in(&quot;a.txt&quot;);
+std::string line;
+std::getline(in, line); Trim space from string original &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,6 +89,156 @@ Unpacking JAR files &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2013/10/29/c-plus-plus-string-practice/">C++ String / File Practice</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-29T15:10:00+08:00" pubdate data-updated="true">Oct 29<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2 id="toc_21">Read one line from file each time</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="n">ifstream</span> <span class="n">in</span><span class="p">(</span><span class="s">&quot;a.txt&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">line</span><span class="p">;</span>
+</span><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="n">in</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<h2 id="toc_22">Trim space from string</h2>
+
+<p><a href="http://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring">original source</a></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="cp">#include &lt;algorithm&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;functional&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;cctype&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;locale&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">static</span> <span class="kr">inline</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">ltrim</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">s</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span>
+</span><span class='line'>                <span class="n">std</span><span class="o">::</span><span class="n">find_if</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
+</span><span class='line'>                    <span class="n">std</span><span class="o">::</span><span class="n">not1</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ptr_fun</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">isspace</span><span class="p">))));</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">static</span> <span class="kr">inline</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">rtrim</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">s</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">find_if</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">rbegin</span><span class="p">(),</span> <span class="n">s</span><span class="p">.</span><span class="n">rend</span><span class="p">(),</span>
+</span><span class='line'>                    <span class="n">std</span><span class="o">::</span><span class="n">not1</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ptr_fun</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">isspace</span><span class="p">))).</span><span class="n">base</span><span class="p">(),</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">static</span> <span class="kr">inline</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">trim</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">ltrim</span><span class="p">(</span><span class="n">rtrim</span><span class="p">(</span><span class="n">s</span><span class="p">));</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<h2 id="toc_23">Merge two vectors</h2>
+
+<p>Merge operation will remove duplicated elements.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">tmp_urls</span><span class="p">;</span>
+</span><span class='line'><span class="n">tmp_urls</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">urls</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">+</span> <span class="n">old_urls</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+</span><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">merge</span><span class="p">(</span><span class="n">old_urls</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">old_urls</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
+</span><span class='line'>        <span class="n">urls</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">urls</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
+</span><span class='line'>        <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">tmp_urls</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<h2 id="toc_24">Append with operations on each element</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">append_arrow</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">str</span> <span class="o">+</span> <span class="s">&quot;-&gt;&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">tmp_urls</span><span class="p">;</span>
+</span><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">content</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">transform</span><span class="p">(</span><span class="n">tmp_urls</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">tmp_urls</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
+</span><span class='line'>        <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">content</span><span class="p">),</span>
+</span><span class='line'>        <span class="n">append_arrow</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<h2 id="toc_25">Write vector to file</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="n">ofstream</span> <span class="n">out</span><span class="p">(</span><span class="s">&quot;a.txt&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">content</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">ostream_iterator</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">output_iter</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">content</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">content</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">output_iter</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -694,6 +833,10 @@ login as root
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/10/29/c-plus-plus-string-practice/">C++ String / File Practice</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/10/18/install-oracle-jdk-32bit-on-fedora-64bit/">Install Oracle Jdk 32bit on 64bit Fedora</a>
       </li>
     
@@ -707,10 +850,6 @@ login as root
     
       <li class="post">
         <a href="/blog/2013/09/18/abnormal-packets-in-socket/">Abnormal Packets in Socket</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/09/18/octopress-daily-use/">Octopress Daily Use</a>
       </li>
     
   </ul>
