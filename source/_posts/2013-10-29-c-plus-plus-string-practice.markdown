@@ -45,17 +45,44 @@ static inline std::string &trim(std::string &s) {
 
 ```
 
+Concatenate two vectors
+-----
+
+``` c++
+std::copy(source.begin(), source.end(), std::back_inserter(destination));
+```
+
 Merge two vectors
 -----
 
-Merge operation will remove duplicated elements.
+`std::merge` conbines the elements in sorted range [first1, last1], [first2, last2], into a new  
+range beginning at _result_ with all its elements sorted.
 
 ``` c++
-std::vector<std::string> tmp_urls;
-tmp_urls.reserve(urls.size() + old_urls.size());
-std::merge(old_urls.begin(), old_urls.end(),
-        urls.begin(), urls.end(),
-        std::back_inserter(tmp_urls));
+std::vector<std::string> v1, v2, tmp;
+tmp.reserve(v1.size() + v2.size());
+
+std::sort(v1.begin(), v1.end());
+std::sort(v2.begin(), v2.end());
+
+std::merge(v1.begin(), v1.end(),
+        v2.begin(), v2.end(),
+        std::back_inserter(tmp));
+```
+
+Concatenate two vectors, and remove duplicate elements
+-----
+
+``` c++
+std::vector<std::string> v1, v2, tmp;
+
+tmp.reserve(v1.size() + v2.size());
+std::sort(v1.begin(), v1.end());
+std::sort(v2.begin(), v2.end());
+
+std::set_union(v1.begin(), v1.end(),
+            v2.begin(), v2.end(),
+            std::back_inserter(tmp));
 ```
 
 Append with operations on each element
