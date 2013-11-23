@@ -9,13 +9,10 @@
   <meta name="author" content="hanh">
 
   
-  <meta name="description" content="Object Literals 1
-2
-3
-4
-5
-6
-var empty_object = {}; var stooge = { &quot;first-name&quot;: &quot;Jerome&quot;, &quot;last-name&quot;: &quot;Howard& &hellip;">
+  <meta name="description" content="Flake8 flake8 : wrapper for python checkers: PyFlakes
+pep8
+Ned Batchelder&#39;s McCabe script Install 1
+# sudo pip install flake8 Vim-flake8 vim- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -97,6 +94,102 @@ var empty_object = {}; var stooge = { &quot;first-name&quot;: &quot;Jerome&quot;
   <header>
     
       <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2013/11/23/configure-vim-for-python-dev/">Configure Vim for Python Dev</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-23T08:42:00+08:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2 id="toc_1328">Flake8</h2>
+
+<p><a href="https://pypi.python.org/pypi/flake8/">flake8</a> :  wrapper for python checkers:</p>
+
+<ul>
+<li>PyFlakes</li>
+<li>pep8</li>
+<li>Ned Batchelder&#39;s McCabe script</li>
+</ul>
+
+<h3 id="toc_1329">Install</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># sudo pip install flake8</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<h2 id="toc_1330">Vim-flake8</h2>
+
+<p><a href="https://github.com/nvie/vim-flake8">vim-flake8</a> : vim wrapper for flake8.</p>
+
+<h3 id="toc_1331">Install</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># git submodule add https://github.com/nvie/vim-flake8.git bundle/vim-flake8</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<h3 id="toc_1332">How to use</h3>
+
+<ol>
+<li>Open a python file</li>
+<li>ress <code>F7</code> to run <code>flake8</code> on it</li>
+</ol>
+
+<h2 id="toc_1333">Syntastic</h2>
+
+<p><a href="https://github.com/scrooloose/syntastic">syntastic</a> : syntax checking plugin that runs file through external syntax<br>
+checker and displays any resulting errors to user.</p>
+
+<h3 id="toc_1334">Install</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># git submodule add https://github.com/scrooloose/syntastic bundle/syntastic</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<p>Start vim, then type <code>:Helptags</code>.</p>
+
+<h3 id="toc_1335">How to use</h3>
+
+<p>Check</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>:SyntasticCheck
+</span></code></pre></td></tr></table></div></figure>
+
+<p>See available external checker:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>:SyntasticInfo
+</span></code></pre></td></tr></table></div></figure>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
         <h1 class="entry-title"><a href="/blog/2013/11/10/object-js-good-part/">Object - Javascript: The Good Part</a></h1>
       
     
@@ -121,7 +214,7 @@ var empty_object = {}; var stooge = { &quot;first-name&quot;: &quot;Jerome&quot;
   </header>
 
 
-  <div class="entry-content"><h3 id="toc_29">Object Literals</h3>
+  <div class="entry-content"><h3 id="toc_1319">Object Literals</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -137,7 +230,7 @@ var empty_object = {}; var stooge = { &quot;first-name&quot;: &quot;Jerome&quot;
 </span><span class='line'><span class="p">};</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h4 id="toc_30">Property Name</h4>
+<h4 id="toc_1320">Property Name</h4>
 
 <ul>
 <li>could be <strong>any</strong> string including empty string;</li>
@@ -175,7 +268,7 @@ name (not a reserved word);</li>
 </span><span class='line'><span class="p">};</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_31">Retrieval</h3>
+<h3 id="toc_1321">Retrieval</h3>
 
 <ul>
 <li>Wrapping a string expression in a [] suffix;</li>
@@ -203,7 +296,7 @@ member:</li>
 </span><span class='line'><span class="nx">flight</span><span class="p">.</span><span class="nx">equipment</span> <span class="o">&amp;&amp;</span> <span class="nx">flight</span><span class="p">.</span><span class="nx">equipment</span><span class="p">.</span><span class="nx">model</span> <span class="c1">// undefined</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_32">Update</h3>
+<h3 id="toc_1322">Update</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -213,7 +306,7 @@ member:</li>
 </span><span class='line'><span class="nx">stoog</span><span class="p">.</span><span class="nx">sex</span> <span class="o">=</span> <span class="s2">&quot;Male&quot;</span><span class="p">;</span>          <span class="c1">// if the property name not exist, the object is augmented;</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_33">Reference</h3>
+<h3 id="toc_1323">Reference</h3>
 
 <p>Object is passed <strong>BY REFERENCE</strong>, never by copied.</p>
 
@@ -229,7 +322,7 @@ member:</li>
 </span><span class='line'>    <span class="c1">// refer to the same empty object</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_34">Prototype</h3>
+<h3 id="toc_1324">Prototype</h3>
 
 <p>Every object is linked to a <strong>prototype object</strong>. All objects created from object literal <code>{}</code><br>
 are linked to <code>Object.prototype</code>.</p>
@@ -246,7 +339,7 @@ that property will immediately be visible in all the objects that are based on t
 </span><span class='line'><span class="nx">another_stooge</span><span class="p">.</span><span class="nx">profession</span> <span class="c1">// &#39;actor&#39;</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_35">Reflection</h3>
+<h3 id="toc_1325">Reflection</h3>
 
 <p>Check if the object has a property:</p>
 
@@ -274,7 +367,7 @@ that property will immediately be visible in all the objects that are based on t
 </span><span class='line'><span class="nx">flight</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;toString&#39;</span><span class="p">)</span>   <span class="c1">// false</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_36">Enumeration</h3>
+<h3 id="toc_1326">Enumeration</h3>
 
 <p>Loop over all the property names in an object.</p>
 
@@ -323,7 +416,7 @@ properties in the prototype chain.)</p>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_37">Delete</h3>
+<h3 id="toc_1327">Delete</h3>
 
 <p>The <code>delete</code> operator can be used to remove a property from a object. It does <strong>NOT</strong> touch<br>
 any object in the prototype linkage.</p>
@@ -364,7 +457,7 @@ any object in the prototype linkage.</p>
   </header>
 
 
-  <div class="entry-content"><h2 id="toc_22">Read one line from file each time</h2>
+  <div class="entry-content"><h2 id="toc_1312">Read one line from file each time</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -374,7 +467,7 @@ any object in the prototype linkage.</p>
 </span><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="n">in</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_23">Trim space from string</h2>
+<h2 id="toc_1313">Trim space from string</h2>
 
 <p><a href="http://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring">original source</a></p>
 
@@ -422,13 +515,13 @@ any object in the prototype linkage.</p>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_24">Concatenate two vectors</h2>
+<h2 id="toc_1314">Concatenate two vectors</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">source</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">source</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">destination</span><span class="p">));</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_25">Merge two vectors</h2>
+<h2 id="toc_1315">Merge two vectors</h2>
 
 <p><code>std::merge</code> conbines the elements in sorted range [first1, last1], [first2, last2], into a new<br>
 range beginning at <em>result</em> with all its elements sorted.</p>
@@ -453,7 +546,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
 </span><span class='line'>        <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">tmp</span><span class="p">));</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_26">Concatenate two vectors, and remove duplicate elements</h2>
+<h2 id="toc_1316">Concatenate two vectors, and remove duplicate elements</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -475,7 +568,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
 </span><span class='line'>            <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">tmp</span><span class="p">));</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_27">Append with operations on each element</h2>
+<h2 id="toc_1317">Append with operations on each element</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -501,7 +594,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
 </span><span class='line'>        <span class="n">append_arrow</span><span class="p">);</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_28">Write vector to file</h2>
+<h2 id="toc_1318">Write vector to file</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -551,7 +644,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
   </header>
 
 
-  <div class="entry-content"><h2 id="toc_20">Issue</h2>
+  <div class="entry-content"><h2 id="toc_1310">Issue</h2>
 
 <p>When execute:</p>
 
@@ -588,7 +681,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
 </span><span class='line'>
 </span><span class='line'>    /usr/java/jdk1.7.0_45/jre/lib/jsse.jar</span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="toc_21">Solution</h2>
+<h2 id="toc_1311">Solution</h2>
 
 <p>Install the 32bit libraries:</p>
 
@@ -631,14 +724,14 @@ range beginning at <em>result</em> with all its elements sorted.</p>
   </header>
 
 
-  <div class="entry-content"><h2 id="toc_18">问题</h2>
+  <div class="entry-content"><h2 id="toc_1308">问题</h2>
 
 <p>遇到一个很奇怪的问题，在工程中使用 stlport 的时候各种编译不过，即使仅仅是声明一个对象都会编译不过。
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>std::sstream mystream;</span></code></pre></td></tr></table></div></figure>
 报的错误也很奇怪，是 stlport 内部的文件语法错误。</p>
 
-<h2 id="toc_19">分析过程</h2>
+<h2 id="toc_1309">分析过程</h2>
 
 <ol>
 <li>在工程外部，编写小程序，使用工程中的 stlport 来编译，正常编译通过，运行正常；</li>
@@ -828,7 +921,7 @@ it as the default config.</p>
   </header>
 
 
-  <div class="entry-content"><h3 id="toc_12">Check ruby version</h3>
+  <div class="entry-content"><h3 id="toc_1302">Check ruby version</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>ruby -v
@@ -840,7 +933,7 @@ it as the default config.</p>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm use 1.9.3
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_13">Create a new post</h3>
+<h3 id="toc_1303">Create a new post</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>rake new_post<span class="o">[</span><span class="s1">&#39;octopress daily use&#39;</span><span class="o">]</span>
@@ -849,7 +942,7 @@ it as the default config.</p>
 <p>This would create a new markdown file under <code>source/_posts/</code> folder. Edit the file<br>
 to compose the new post.</p>
 
-<h3 id="toc_14">Preview and generate</h3>
+<h3 id="toc_1304">Preview and generate</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -859,7 +952,7 @@ to compose the new post.</p>
 
 <p>Visit <code>http://localhost:4000</code> to preview the site.</p>
 
-<h3 id="toc_15">Deploy to github page</h3>
+<h3 id="toc_1305">Deploy to github page</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -869,7 +962,7 @@ to compose the new post.</p>
 
 <p>This would deploy the generate file on to github page for display.</p>
 
-<h3 id="toc_16">Submit source to github repo</h3>
+<h3 id="toc_1306">Submit source to github repo</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -879,7 +972,7 @@ to compose the new post.</p>
 </span><span class='line'>git push origin <span class="nb">source</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_17">Use octopress in two machines</h3>
+<h3 id="toc_1307">Use octopress in two machines</h3>
 
 <p>Before update / add a new post, remember:
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -930,7 +1023,7 @@ to compose the new post.</p>
   </header>
 
 
-  <div class="entry-content"><h2 id="toc_10">Move faster : EasyMotion</h2>
+  <div class="entry-content"><h2 id="toc_1300">Move faster : EasyMotion</h2>
 
 <p>EasyMotion provides a much simpler way to use some motions in vim. It takes<br>
 the <code>&lt;number&gt;</code> out of <code>&lt;number&gt;w</code> or <code>&lt;number&gt;f{char}</code> by highlighting all<br>
@@ -943,7 +1036,7 @@ target.</p>
 <code>&lt;leader&gt;&lt;leader&gt;f</code><br>
 <code>&lt;leader&gt;&lt;leader&gt;f{char}</code></p>
 
-<h2 id="toc_11">Repeats</h2>
+<h2 id="toc_1301">Repeats</h2>
 
 <p>Single repeats</p>
 
@@ -986,29 +1079,29 @@ target.</p>
   </header>
 
 
-  <div class="entry-content"><h3 id="toc_3">Use a database file</h3>
+  <div class="entry-content"><h3 id="toc_1293">Use a database file</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>sqlite &lt;database_file&gt;</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_4">Get table information</h3>
+<h3 id="toc_1294">Get table information</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>.tables</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_5">Get schema information</h3>
+<h3 id="toc_1295">Get schema information</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>.schema
 </span><span class='line'>.schema table_name</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_6">Get help</h3>
+<h3 id="toc_1296">Get help</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>.help</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_7">Write result to a file</h3>
+<h3 id="toc_1297">Write result to a file</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -1021,12 +1114,12 @@ target.</p>
 </span><span class='line'>select * from table_name;
 </span><span class='line'>.exit</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_8">Exit</h3>
+<h3 id="toc_1298">Exit</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>.exit</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_9">More</h3>
+<h3 id="toc_1299">More</h3>
 
 <p><a href="http://www.sqlite.org/sqlite.html">sqlite official site help</a></p>
 </div>
@@ -1036,93 +1129,9 @@ target.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2013/08/07/install-xrdp-on-centos63/">Install Xrdp on CentOS63</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-07T11:35:00+08:00" pubdate data-updated="true">Aug 7<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3 id="toc_0">Install packages</h3>
-
-<p>CentOS 6.3 does not have xrdp package in the official repo.</p>
-
-<ul>
-<li>Install xrdp
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-</span><span class='line'>wget http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6
-</span><span class='line'>rpm --import RPM-GPG-KEY-EPEL-6
-</span><span class='line'>rpm --ivh epel*.rpm
-</span><span class='line'>yum install xrdp</span></code></pre></td></tr></table></div></figure></li>
-</ul>
-
-<h3 id="toc_1">Start service</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>/etc/init.d/xrdp start
-</span><span class='line'>chkconfig xrdp on</span></code></pre></td></tr></table></div></figure>
-
-<h3 id="toc_2">Issues</h3>
-
-<ul>
-<li><p>problem connecting 5910
-try start vncserver
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>/etc/init.d/vncserver start</span></code></pre></td></tr></table></div></figure></p></li>
-<li><p>vnc no display configured
-edit /etc/sysconfig/vncservers
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>VNCSERVERS=&quot;2:root&quot;
-</span><span class='line'>VNCSERVERARGS[2]=&quot;-geometry 1280x1024 -localhost&quot;</span></code></pre></td></tr></table></div></figure></p></li>
-<li><p>vnc password for user root is not configured
-login as root
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vncpasswd</span></code></pre></td></tr></table></div></figure></p></li>
-<li><p>vnc undefined symbol: pixman_composite_trapezoids
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>yum update pixman pixman-devel</span></code></pre></td></tr></table></div></figure></p></li>
-<li><p>vnc could not open default font &#39;fixed&#39;
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>yum install libXfont</span></code></pre></td></tr></table></div></figure></p></li>
-</ul>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -1133,6 +1142,10 @@ login as root
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/11/23/configure-vim-for-python-dev/">Configure Vim for Python Dev</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/11/10/object-js-good-part/">Object - Javascript: The Good Part</a>
@@ -1148,10 +1161,6 @@ login as root
     
       <li class="post">
         <a href="/blog/2013/10/16/c-header-file-include-seq/">C++头文件include的顺序问题</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/15/ctags-ignore-files/">Ignore Files When Building Tags</a>
       </li>
     
   </ul>

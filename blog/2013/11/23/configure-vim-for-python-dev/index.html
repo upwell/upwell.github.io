@@ -5,17 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>SQLite command tips - Note Everything</title>
+  <title>configure vim for python dev - Note Everything</title>
   <meta name="author" content="hanh">
 
   
-  <meta name="description" content="Use a database file 1
-sqlite &lt;database_file&gt; Get table information 1
-.tables Get schema information 1
-2
-.schema
-.schema table_name Get help 1
-. &hellip;">
+  <meta name="description" content="Flake8 flake8 : wrapper for python checkers: PyFlakes
+pep8
+Ned Batchelder&#39;s McCabe script Install 1
+# sudo pip install flake8 Vim-flake8 vim- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -24,7 +21,7 @@ sqlite &lt;database_file&gt; Get table information 1
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://upwell.github.io/blog/2013/08/07/sqlite-command-tips/">
+  <link rel="canonical" href="http://upwell.github.io/blog/2013/11/23/configure-vim-for-python-dev/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -94,7 +91,7 @@ sqlite &lt;database_file&gt; Get table information 1
   <header>
     
       
-        <h1 class="entry-title">SQLite Command Tips</h1>
+        <h1 class="entry-title">Configure Vim for Python Dev</h1>
       
     
     
@@ -111,56 +108,72 @@ sqlite &lt;database_file&gt; Get table information 1
   
 
 
-<time datetime="2013-08-07T13:26:00+08:00" pubdate data-updated="true">Aug 7<span>th</span>, 2013</time>
+<time datetime="2013-11-23T08:42:00+08:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h3 id="toc_1293">Use a database file</h3>
+<div class="entry-content"><h2 id="toc_1328">Flake8</h2>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sqlite &lt;database_file&gt;</span></code></pre></td></tr></table></div></figure>
+<p><a href="https://pypi.python.org/pypi/flake8/">flake8</a> :  wrapper for python checkers:</p>
 
-<h3 id="toc_1294">Get table information</h3>
+<ul>
+<li>PyFlakes</li>
+<li>pep8</li>
+<li>Ned Batchelder&#39;s McCabe script</li>
+</ul>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>.tables</span></code></pre></td></tr></table></div></figure>
+<h3 id="toc_1329">Install</h3>
 
-<h3 id="toc_1295">Get schema information</h3>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># sudo pip install flake8</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>.schema
-</span><span class='line'>.schema table_name</span></code></pre></td></tr></table></div></figure>
+<h2 id="toc_1330">Vim-flake8</h2>
 
-<h3 id="toc_1296">Get help</h3>
+<p><a href="https://github.com/nvie/vim-flake8">vim-flake8</a> : vim wrapper for flake8.</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>.help</span></code></pre></td></tr></table></div></figure>
+<h3 id="toc_1331">Install</h3>
 
-<h3 id="toc_1297">Write result to a file</h3>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># git submodule add https://github.com/nvie/vim-flake8.git bundle/vim-flake8</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>.mode list
-</span><span class='line'>.separator |
-</span><span class='line'>.output result.data
-</span><span class='line'>select * from table_name;
-</span><span class='line'>.exit</span></code></pre></td></tr></table></div></figure>
+<h3 id="toc_1332">How to use</h3>
 
-<h3 id="toc_1298">Exit</h3>
+<ol>
+<li>Open a python file</li>
+<li>ress <code>F7</code> to run <code>flake8</code> on it</li>
+</ol>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>.exit</span></code></pre></td></tr></table></div></figure>
+<h2 id="toc_1333">Syntastic</h2>
 
-<h3 id="toc_1299">More</h3>
+<p><a href="https://github.com/scrooloose/syntastic">syntastic</a> : syntax checking plugin that runs file through external syntax<br>
+checker and displays any resulting errors to user.</p>
 
-<p><a href="http://www.sqlite.org/sqlite.html">sqlite official site help</a></p>
+<h3 id="toc_1334">Install</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># git submodule add https://github.com/scrooloose/syntastic bundle/syntastic</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<p>Start vim, then type <code>:Helptags</code>.</p>
+
+<h3 id="toc_1335">How to use</h3>
+
+<p>Check</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>:SyntasticCheck
+</span></code></pre></td></tr></table></div></figure>
+
+<p>See available external checker:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>:SyntasticInfo
+</span></code></pre></td></tr></table></div></figure>
 </div>
 
 
@@ -183,7 +196,7 @@ sqlite &lt;database_file&gt; Get table information 1
   
 
 
-<time datetime="2013-08-07T13:26:00+08:00" pubdate data-updated="true">Aug 7<span>th</span>, 2013</time>
+<time datetime="2013-11-23T08:42:00+08:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2013</time>
       
 
 
@@ -198,10 +211,8 @@ sqlite &lt;database_file&gt; Get table information 1
     
     <p class="meta">
       
-        <a class="basic-alignment left articlenav" href="/blog/2013/08/07/install-xrdp-on-centos63/" title="Previous Post: Install xrdp on CentOS63">&laquo; Install xrdp on CentOS63</a>
+        <a class="basic-alignment left articlenav" href="/blog/2013/11/10/object-js-good-part/" title="Previous Post: Object - javascript: the good part">&laquo; Object - javascript: the good part</a>
       
-      
-        <a class="basic-alignment right articlenav" href="/blog/2013/08/14/vim-memo/" title="Next Post: Vim memo">Vim memo &raquo;</a>
       
     </p>
   </footer>

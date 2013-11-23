@@ -5,17 +5,17 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>SQLite command tips - Note Everything</title>
+  <title>Note Everything</title>
   <meta name="author" content="hanh">
 
   
-  <meta name="description" content="Use a database file 1
-sqlite &lt;database_file&gt; Get table information 1
-.tables Get schema information 1
+  <meta name="description" content="Install packages CentOS 6.3 does not have xrdp package in the official repo. Install xrdp
+1
 2
-.schema
-.schema table_name Get help 1
-. &hellip;">
+3
+4
+5
+wget http://dl.fedoraproject.org/pub/epel/6/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -24,7 +24,7 @@ sqlite &lt;database_file&gt; Get table information 1
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://upwell.github.io/blog/2013/08/07/sqlite-command-tips/">
+  <link rel="canonical" href="http://upwell.github.io/blog/page/2/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -88,13 +88,16 @@ sqlite &lt;database_file&gt; Get table information 1
 </nav>
   <div id="main">
     <div id="content">
-      <div>
-<article class="hentry" role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
     
-      
-        <h1 class="entry-title">SQLite Command Tips</h1>
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2013/08/07/install-xrdp-on-centos63/">Install Xrdp on CentOS63</a></h1>
       
     
     
@@ -111,104 +114,77 @@ sqlite &lt;database_file&gt; Get table information 1
   
 
 
-<time datetime="2013-08-07T13:26:00+08:00" pubdate data-updated="true">Aug 7<span>th</span>, 2013</time>
+<time datetime="2013-08-07T11:35:00+08:00" pubdate data-updated="true">Aug 7<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h3 id="toc_1293">Use a database file</h3>
+  <div class="entry-content"><h3 id="toc_1290">Install packages</h3>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sqlite &lt;database_file&gt;</span></code></pre></td></tr></table></div></figure>
+<p>CentOS 6.3 does not have xrdp package in the official repo.</p>
 
-<h3 id="toc_1294">Get table information</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>.tables</span></code></pre></td></tr></table></div></figure>
-
-<h3 id="toc_1295">Get schema information</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>.schema
-</span><span class='line'>.schema table_name</span></code></pre></td></tr></table></div></figure>
-
-<h3 id="toc_1296">Get help</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>.help</span></code></pre></td></tr></table></div></figure>
-
-<h3 id="toc_1297">Write result to a file</h3>
-
+<ul>
+<li>Install xrdp
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>.mode list
-</span><span class='line'>.separator |
-</span><span class='line'>.output result.data
-</span><span class='line'>select * from table_name;
-</span><span class='line'>.exit</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+</span><span class='line'>wget http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6
+</span><span class='line'>rpm --import RPM-GPG-KEY-EPEL-6
+</span><span class='line'>rpm --ivh epel*.rpm
+</span><span class='line'>yum install xrdp</span></code></pre></td></tr></table></div></figure></li>
+</ul>
 
-<h3 id="toc_1298">Exit</h3>
+<h3 id="toc_1291">Start service</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>.exit</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/etc/init.d/xrdp start
+</span><span class='line'>chkconfig xrdp on</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_1299">More</h3>
+<h3 id="toc_1292">Issues</h3>
 
-<p><a href="http://www.sqlite.org/sqlite.html">sqlite official site help</a></p>
+<ul>
+<li><p>problem connecting 5910
+try start vncserver
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/etc/init.d/vncserver start</span></code></pre></td></tr></table></div></figure></p></li>
+<li><p>vnc no display configured
+edit /etc/sysconfig/vncservers
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>VNCSERVERS=&quot;2:root&quot;
+</span><span class='line'>VNCSERVERARGS[2]=&quot;-geometry 1280x1024 -localhost&quot;</span></code></pre></td></tr></table></div></figure></p></li>
+<li><p>vnc password for user root is not configured
+login as root
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vncpasswd</span></code></pre></td></tr></table></div></figure></p></li>
+<li><p>vnc undefined symbol: pixman_composite_trapezoids
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>yum update pixman pixman-devel</span></code></pre></td></tr></table></div></figure></p></li>
+<li><p>vnc could not open default font &#39;fixed&#39;
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>yum install libXfont</span></code></pre></td></tr></table></div></figure></p></li>
+</ul>
 </div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">hanh</span></span>
-
-      
-
-
-
-
-
-
-
-
   
 
 
-<time datetime="2013-08-07T13:26:00+08:00" pubdate data-updated="true">Aug 7<span>th</span>, 2013</time>
-      
-
-
-    </p>
+    </article>
+  
+  <div class="pagination">
     
-      <div class="sharing">
-  
-  
-  
-</div>
-
+    <a href="/blog/archives">Blog Archives</a>
     
-    <p class="meta">
-      
-        <a class="basic-alignment left articlenav" href="/blog/2013/08/07/install-xrdp-on-centos63/" title="Previous Post: Install xrdp on CentOS63">&laquo; Install xrdp on CentOS63</a>
-      
-      
-        <a class="basic-alignment right articlenav" href="/blog/2013/08/14/vim-memo/" title="Next Post: Vim memo">Vim memo &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
+    <a class="next" href="/">Newer &rarr;</a>
+    
+  </div>
 </div>
-
 <aside class="sidebar">
   
     <section>
@@ -244,7 +220,6 @@ sqlite &lt;database_file&gt; Get table information 1
 
   
 </aside>
-
 
     </div>
   </div>
