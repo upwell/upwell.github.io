@@ -5,27 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Install oracle jdk 32bit on 64bit Fedora - Note Everything</title>
+  <title>Category: django - Note Everything</title>
   <meta name="author" content="hanh">
 
   
-  <meta name="description" content="Issue When execute: 1
-# rpm -ivh ~/Downloads/jdk-7u45-linux-i586.rpm There comes error messages:
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-Unpacking JAR files &hellip;">
+  <meta name="description" content="Category: django">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -34,7 +18,7 @@ Unpacking JAR files &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://upwell.github.io/blog/2013/10/18/install-oracle-jdk-32bit-on-fedora-64bit">
+  <link rel="canonical" href="http://upwell.github.ioblog/categories/django">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Note Everything" type="application/atom+xml">
@@ -99,120 +83,35 @@ Unpacking JAR files &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">Install Oracle Jdk 32bit on 64bit Fedora</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-18T22:31:00+08:00" pubdate data-updated="true">Oct 18<span>th</span>, 2013</time>
-        
-      </p>
+    <h1 class="entry-title">Category: Django</h1>
     
   </header>
+  
+  <div id="blog-archives" class="category">
 
 
-<div class="entry-content"><h2 id="toc_22">Issue</h2>
 
-<p>When execute:</p>
+  
+  <h2>2014</h2>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># rpm -ivh ~/Downloads/jdk-7u45-linux-i586.rpm</span></code></pre></td></tr></table></div></figure>
+<article>
+  
+<h1><a href="/blog/2014/06/20/two-foreign-keys-to-same-model/">two foreign keys to same model</a></h1>
+<time datetime="2014-06-20T14:35:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>20</span> <span class='year'>2014</span></time>
 
-<p>There comes error messages:
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Unpacking JAR files...
-</span><span class='line'>    rt.jar...
-</span><span class='line'>Error: Could not open input file: /usr/java/jdk1.7.0_45/jre/lib/rt.pack
-</span><span class='line'>Error: unpack could not create JAR file:
-</span><span class='line'>
-</span><span class='line'>    /usr/java/jdk1.7.0_45/jre/lib/rt.jar
-</span><span class='line'>
-</span><span class='line'>Please refer to the Troubleshooting section of the Installation Instructions
-</span><span class='line'>on the download page.
-</span><span class='line'>    jsse.jar...
-</span><span class='line'>Error: Could not open input file: /usr/java/jdk1.7.0_45/jre/lib/jsse.pack
-</span><span class='line'>Error: unpack could not create JAR file:
-</span><span class='line'>
-</span><span class='line'>    /usr/java/jdk1.7.0_45/jre/lib/jsse.jar</span></code></pre></td></tr></table></div></figure></p>
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/django/'>django</a>, <a class='category' href='/blog/categories/python/'>python</a></span>
+</footer>
 
-<h2 id="toc_23">Solution</h2>
 
-<p>Install the 32bit libraries:</p>
+</article>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># rpm -ivh glibc.i686 glibc-devel.i686</span></code></pre></td></tr></table></div></figure>
 </div>
 
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">hanh</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-18T22:31:00+08:00" pubdate data-updated="true">Oct 18<span>th</span>, 2013</time>
-      
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2013/10/16/c-header-file-include-seq/" title="Previous Post: C++头文件include的顺序问题">&laquo; C++头文件include的顺序问题</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2013/10/29/c-plus-plus-string-practice/" title="Next Post: c++ string / file practice">c++ string / file practice &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
 </div>

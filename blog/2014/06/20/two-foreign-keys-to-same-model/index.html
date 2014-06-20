@@ -5,27 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Install oracle jdk 32bit on 64bit Fedora - Note Everything</title>
+  <title>two foreign keys to same model - Note Everything</title>
   <meta name="author" content="hanh">
 
   
-  <meta name="description" content="Issue When execute: 1
-# rpm -ivh ~/Downloads/jdk-7u45-linux-i586.rpm There comes error messages:
-1
+  <meta name="description" content="Use related_name: 1
 2
 3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-Unpacking JAR files &hellip;">
+class Test(models.Model): example1 = models.ForeignKey(Example, related_name=&#39;example1&#39;) example2 = models.ForeignKey &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -34,7 +21,7 @@ Unpacking JAR files &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://upwell.github.io/blog/2013/10/18/install-oracle-jdk-32bit-on-fedora-64bit">
+  <link rel="canonical" href="http://upwell.github.io/blog/2014/06/20/two-foreign-keys-to-same-model">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Note Everything" type="application/atom+xml">
@@ -103,7 +90,7 @@ Unpacking JAR files &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Install Oracle Jdk 32bit on 64bit Fedora</h1>
+      <h1 class="entry-title">Two Foreign Keys to Same Model</h1>
     
     
       <p class="meta">
@@ -119,56 +106,26 @@ Unpacking JAR files &hellip;">
   
 
 
-<time datetime="2013-10-18T22:31:00+08:00" pubdate data-updated="true">Oct 18<span>th</span>, 2013</time>
+<time datetime="2014-06-20T14:35:00+08:00" pubdate data-updated="true">Jun 20<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2 id="toc_22">Issue</h2>
+<div class="entry-content"><p>Use <code>related_name</code>:</p>
 
-<p>When execute:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># rpm -ivh ~/Downloads/jdk-7u45-linux-i586.rpm</span></code></pre></td></tr></table></div></figure>
-
-<p>There comes error messages:
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Unpacking JAR files...
-</span><span class='line'>    rt.jar...
-</span><span class='line'>Error: Could not open input file: /usr/java/jdk1.7.0_45/jre/lib/rt.pack
-</span><span class='line'>Error: unpack could not create JAR file:
-</span><span class='line'>
-</span><span class='line'>    /usr/java/jdk1.7.0_45/jre/lib/rt.jar
-</span><span class='line'>
-</span><span class='line'>Please refer to the Troubleshooting section of the Installation Instructions
-</span><span class='line'>on the download page.
-</span><span class='line'>    jsse.jar...
-</span><span class='line'>Error: Could not open input file: /usr/java/jdk1.7.0_45/jre/lib/jsse.pack
-</span><span class='line'>Error: unpack could not create JAR file:
-</span><span class='line'>
-</span><span class='line'>    /usr/java/jdk1.7.0_45/jre/lib/jsse.jar</span></code></pre></td></tr></table></div></figure></p>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">class</span> <span class="nc">Test</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">example1</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Example</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&#39;example1&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">example2</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Example</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&#39;example2&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_23">Solution</h2>
-
-<p>Install the 32bit libraries:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># rpm -ivh glibc.i686 glibc-devel.i686</span></code></pre></td></tr></table></div></figure>
+<p>Reference:<br>
+<a href="http://stackoverflow.com/questions/543377/how-can-i-have-two-foreign-keys-to-the-same-model-in-django">stackoverflow question</a><br>
+<a href="http://docs.djangoproject.com/en/dev/ref/models/fields/#foreignkey">related_name in django docs</a></p>
 </div>
 
 
@@ -191,8 +148,14 @@ Unpacking JAR files &hellip;">
   
 
 
-<time datetime="2013-10-18T22:31:00+08:00" pubdate data-updated="true">Oct 18<span>th</span>, 2013</time>
+<time datetime="2014-06-20T14:35:00+08:00" pubdate data-updated="true">Jun 20<span>th</span>, 2014</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/django/'>django</a>, <a class='category' href='/blog/categories/python/'>python</a>
+  
+</span>
 
 
     </p>
@@ -206,10 +169,8 @@ Unpacking JAR files &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/10/16/c-header-file-include-seq/" title="Previous Post: C++头文件include的顺序问题">&laquo; C++头文件include的顺序问题</a>
+        <a class="basic-alignment left" href="/blog/2013/12/12/python-long-line-wrap/" title="Previous Post: python long line wrap">&laquo; python long line wrap</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/10/29/c-plus-plus-string-practice/" title="Next Post: c++ string / file practice">c++ string / file practice &raquo;</a>
       
     </p>
   </footer>

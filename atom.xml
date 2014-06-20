@@ -4,7 +4,7 @@
   <title><![CDATA[Note Everything]]></title>
   <link href="http://upwell.github.io/atom.xml" rel="self"/>
   <link href="http://upwell.github.io/"/>
-  <updated>2014-06-20T14:26:13+08:00</updated>
+  <updated>2014-06-20T14:47:22+08:00</updated>
   <id>http://upwell.github.io/</id>
   <author>
     <name><![CDATA[hanh]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[two foreign keys to same model]]></title>
+    <link href="http://upwell.github.io/blog/2014/06/20/two-foreign-keys-to-same-model/"/>
+    <updated>2014-06-20T14:35:00+08:00</updated>
+    <id>http://upwell.github.io/blog/2014/06/20/two-foreign-keys-to-same-model</id>
+    <content type="html"><![CDATA[<p>Use <code>related_name</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">class</span> <span class="nc">Test</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">example1</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Example</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&#39;example1&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">example2</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Example</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&#39;example2&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<p>Reference:<br>
+<a href="http://stackoverflow.com/questions/543377/how-can-i-have-two-foreign-keys-to-the-same-model-in-django">stackoverflow question</a><br>
+<a href="http://docs.djangoproject.com/en/dev/ref/models/fields/#foreignkey">related_name in django docs</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[python long line wrap]]></title>
