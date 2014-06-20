@@ -5,14 +5,18 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>C++头文件include的顺序问题 - Note Everything</title>
+  <title>python long line wrap - Note Everything</title>
   <meta name="author" content="hanh">
 
   
-  <meta name="description" content="问题 遇到一个很奇怪的问题，在工程中使用 stlport 的时候各种编译不过，即使仅仅是声明一个对象都会编译不过。
-1
-std::sstream mystream;
-报的错误也很奇怪，是 stlport 内部的文件语法错误。 分析过程 在工程外部，编写小程序，使用工程中的 stlport 来编译， &hellip;">
+  <meta name="description" content="Long line with chained methods Use additional parenthesis. 1
+2
+3
+4
+5
+6
+7
+subkeyword = ( Session.query(Subkeyword.subkeyword_id, Subkeyword. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +25,7 @@ std::sstream mystream;
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://upwell.github.io/blog/2013/10/16/c-header-file-include-seq/">
+  <link rel="canonical" href="http://upwell.github.io/blog/2013/12/12/python-long-line-wrap/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -91,7 +95,7 @@ std::sstream mystream;
   <header>
     
       
-        <h1 class="entry-title">C++头文件include的顺序问题</h1>
+        <h1 class="entry-title">Python Long Line Wrap</h1>
       
     
     
@@ -108,42 +112,44 @@ std::sstream mystream;
   
 
 
-<time datetime="2013-10-16T16:48:00+08:00" pubdate data-updated="true">Oct 16<span>th</span>, 2013</time>
+<time datetime="2013-12-12T16:12:00+08:00" pubdate data-updated="true">Dec 12<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2 id="toc_20">问题</h2>
+<div class="entry-content"><h2 id="toc_48">Long line with chained methods</h2>
 
-<p>遇到一个很奇怪的问题，在工程中使用 stlport 的时候各种编译不过，即使仅仅是声明一个对象都会编译不过。
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>std::sstream mystream;</span></code></pre></td></tr></table></div></figure>
-报的错误也很奇怪，是 stlport 内部的文件语法错误。</p>
+<p>Use additional <strong>parenthesis</strong>.</p>
 
-<h2 id="toc_21">分析过程</h2>
-
-<ol>
-<li>在工程外部，编写小程序，使用工程中的 stlport 来编译，正常编译通过，运行正常；</li>
-<li>怀疑工程中的 Makefile 对 stlport 编译时使用了特殊的选项，检查发现没有特殊的选项；</li>
-<li>怀疑工程中使用的 stlport 有问题，重新编译了一份 stlport 还是不行；</li>
-<li><p>检查stlport的源代码，出错的地方对 <code>#define XXX</code> 有依赖，同时检查了工程中的代码，发现 <code>include</code> std 头文件在所有 <code>include</code> 的最后面。
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#include &quot;a.h&quot;
-</span><span class='line'>#include &quot;b.h&quot;
-</span><span class='line'>#include &lt;sstream&gt;</span></code></pre></td></tr></table></div></figure></p></li>
-<li><p>猜测可能前面的头文件中的 <code>#define</code> 影响了 sstream 中的设置，将 <code>#include &lt;sstream&gt;</code> 放到文件的最前面，问题解决；</p></li>
-</ol>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">subkeyword</span> <span class="o">=</span> <span class="p">(</span>
+</span><span class='line'>        <span class="n">Session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Subkeyword</span><span class="o">.</span><span class="n">subkeyword_id</span><span class="p">,</span> <span class="n">Subkeyword</span><span class="o">.</span><span class="n">subkeyword_word</span><span class="p">)</span>
+</span><span class='line'>        <span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">subkeyword_company_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">e_company_id</span><span class="p">)</span>
+</span><span class='line'>        <span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">subkeyword_word</span><span class="o">=</span><span class="n">subkeyword_word</span><span class="p">)</span>
+</span><span class='line'>        <span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">subkeyword_active</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</span><span class='line'>        <span class="o">.</span><span class="n">one</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<h2 id="toc_49">Long string</h2>
+
+<p>Python concatenates string literals which appear adjacent to each other.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#include "a.h"
-</span><span class='line'>#include "b.h"
-</span><span class='line'>#include &lt;sstream&gt;</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">fun</span><span class="p">():</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&#39;{0} Here is a really long &#39;</span> \
+</span><span class='line'>          <span class="s">&#39;sentence with {1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
 </div>
 
 
@@ -166,8 +172,14 @@ std::sstream mystream;
   
 
 
-<time datetime="2013-10-16T16:48:00+08:00" pubdate data-updated="true">Oct 16<span>th</span>, 2013</time>
+<time datetime="2013-12-12T16:12:00+08:00" pubdate data-updated="true">Dec 12<span>th</span>, 2013</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/python/'>python</a>
+  
+</span>
 
 
     </p>
@@ -181,10 +193,8 @@ std::sstream mystream;
     
     <p class="meta">
       
-        <a class="basic-alignment left articlenav" href="/blog/2013/10/15/ctags-ignore-files/" title="Previous Post: Ignore files when building tags">&laquo; Ignore files when building tags</a>
+        <a class="basic-alignment left articlenav" href="/blog/2013/11/23/configure-vim-for-python-dev/" title="Previous Post: configure vim for python dev">&laquo; configure vim for python dev</a>
       
-      
-        <a class="basic-alignment right articlenav" href="/blog/2013/10/18/install-oracle-jdk-32bit-on-fedora-64bit/" title="Next Post: Install oracle jdk 32bit on 64bit Fedora">Install oracle jdk 32bit on 64bit Fedora &raquo;</a>
       
     </p>
   </footer>

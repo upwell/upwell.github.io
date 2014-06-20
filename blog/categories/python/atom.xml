@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: python | Note Everything]]></title>
+  <link href="http://upwell.github.io/blog/categories/python/atom.xml" rel="self"/>
+  <link href="http://upwell.github.io/"/>
+  <updated>2014-06-19T10:12:15+08:00</updated>
+  <id>http://upwell.github.io/</id>
+  <author>
+    <name><![CDATA[hanh]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[python long line wrap]]></title>
+    <link href="http://upwell.github.io/blog/2013/12/12/python-long-line-wrap/"/>
+    <updated>2013-12-12T16:12:00+08:00</updated>
+    <id>http://upwell.github.io/blog/2013/12/12/python-long-line-wrap</id>
+    <content type="html"><![CDATA[<h2 id="toc_0">Long line with chained methods</h2>
+
+<p>Use additional <strong>parenthesis</strong>.</p>
+<div class="highlight"><pre><code class="python"><span class="n">subkeyword</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">Session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Subkeyword</span><span class="o">.</span><span class="n">subkeyword_id</span><span class="p">,</span> <span class="n">Subkeyword</span><span class="o">.</span><span class="n">subkeyword_word</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">subkeyword_company_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">e_company_id</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">subkeyword_word</span><span class="o">=</span><span class="n">subkeyword_word</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">subkeyword_active</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">one</span><span class="p">()</span>
+    <span class="p">)</span>
+</code></pre>
+</div>
+
+<h2 id="toc_1">Long string</h2>
+
+<p>Python concatenates string literals which appear adjacent to each other.</p>
+<div class="highlight"><pre><code class="python"><span class="k">def</span> <span class="nf">fun</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">&#39;{0} Here is a really long &#39;</span> \
+          <span class="s">&#39;sentence with {1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</code></pre>
+</div>
+]]></content>
+  </entry>
+  
+</feed>

@@ -9,13 +9,13 @@
   <meta name="author" content="hanh">
 
   
-  <meta name="description" content="Install packages CentOS 6.3 does not have xrdp package in the official repo. Install xrdp
-1
+  <meta name="description" content="Use a database file 1
+sqlite &lt;database_file&gt; Get table information 1
+.tables Get schema information 1
 2
-3
-4
-5
-wget http://dl.fedoraproject.org/pub/epel/6/ &hellip;">
+.schema
+.schema table_name Get help 1
+. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -97,6 +97,86 @@ wget http://dl.fedoraproject.org/pub/epel/6/ &hellip;">
   <header>
     
       <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2013/08/07/sqlite-command-tips/">SQLite Command Tips</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-07T13:26:00+08:00" pubdate data-updated="true">Aug 7<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3 id="toc_5">Use a database file</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sqlite &lt;database_file&gt;</span></code></pre></td></tr></table></div></figure>
+
+<h3 id="toc_6">Get table information</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.tables</span></code></pre></td></tr></table></div></figure>
+
+<h3 id="toc_7">Get schema information</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.schema
+</span><span class='line'>.schema table_name</span></code></pre></td></tr></table></div></figure>
+
+<h3 id="toc_8">Get help</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.help</span></code></pre></td></tr></table></div></figure>
+
+<h3 id="toc_9">Write result to a file</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.mode list
+</span><span class='line'>.separator |
+</span><span class='line'>.output result.data
+</span><span class='line'>select * from table_name;
+</span><span class='line'>.exit</span></code></pre></td></tr></table></div></figure>
+
+<h3 id="toc_10">Exit</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.exit</span></code></pre></td></tr></table></div></figure>
+
+<h3 id="toc_11">More</h3>
+
+<p><a href="http://www.sqlite.org/sqlite.html">sqlite official site help</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
         <h1 class="entry-title"><a href="/blog/2013/08/07/install-xrdp-on-centos63/">Install Xrdp on CentOS63</a></h1>
       
     
@@ -121,7 +201,7 @@ wget http://dl.fedoraproject.org/pub/epel/6/ &hellip;">
   </header>
 
 
-  <div class="entry-content"><h3 id="toc_1290">Install packages</h3>
+  <div class="entry-content"><h3 id="toc_2">Install packages</h3>
 
 <p>CentOS 6.3 does not have xrdp package in the official repo.</p>
 
@@ -139,14 +219,14 @@ wget http://dl.fedoraproject.org/pub/epel/6/ &hellip;">
 </span><span class='line'>yum install xrdp</span></code></pre></td></tr></table></div></figure></li>
 </ul>
 
-<h3 id="toc_1291">Start service</h3>
+<h3 id="toc_3">Start service</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>/etc/init.d/xrdp start
 </span><span class='line'>chkconfig xrdp on</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_1292">Issues</h3>
+<h3 id="toc_4">Issues</h3>
 
 <ul>
 <li><p>problem connecting 5910
@@ -192,6 +272,10 @@ login as root
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/12/12/python-long-line-wrap/">Python Long Line Wrap</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/11/23/configure-vim-for-python-dev/">Configure Vim for Python Dev</a>
       </li>
     
@@ -207,10 +291,6 @@ login as root
         <a href="/blog/2013/10/18/install-oracle-jdk-32bit-on-fedora-64bit/">Install Oracle Jdk 32bit on 64bit Fedora</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/10/16/c-header-file-include-seq/">C++头文件include的顺序问题</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -224,7 +304,7 @@ login as root
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - hanh -
+  Copyright &copy; 2014 - hanh -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

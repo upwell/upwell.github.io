@@ -44,11 +44,15 @@
     </url>
     <url>
         <loc>http://upwell.github.io/blog/2013/11/23/configure-vim-for-python-dev/</loc>
-        <lastmod>2013-11-23T09:49:05+08:00</lastmod>
+        <lastmod>2013-11-23T09:50:46+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://upwell.github.io/blog/2013/12/12/python-long-line-wrap/</loc>
+        <lastmod>2013-12-12T16:22:17+08:00</lastmod>
     </url>
     <url>
         <loc>http://upwell.github.io/blog/archives/</loc>
-        <lastmod>2013-11-23T09:49:05+08:00</lastmod>
+        <lastmod>2013-12-12T16:22:17+08:00</lastmod>
     </url>
     <url>
         <loc>http://upwell.github.io/robots.txt</loc>
@@ -56,6 +60,6 @@
     </url>
     <url>
         <loc>http://upwell.github.io/</loc>
-        <lastmod>2013-11-23T09:49:05+08:00</lastmod>
+        <lastmod>2013-12-12T16:22:17+08:00</lastmod>
     </url>
 </urlset>
