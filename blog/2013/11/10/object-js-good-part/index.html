@@ -118,7 +118,7 @@ var empty_object = {}; var stooge = { &quot;first-name&quot;: &quot;Jerome&quot;
   </header>
 
 
-<div class="entry-content"><h3 id="toc_35">Object Literals</h3>
+<div class="entry-content"><h3 id="toc_43">Object Literals</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -134,7 +134,7 @@ var empty_object = {}; var stooge = { &quot;first-name&quot;: &quot;Jerome&quot;
 </span><span class='line'><span class="p">};</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h4 id="toc_36">Property Name</h4>
+<h4 id="toc_44">Property Name</h4>
 
 <ul>
 <li>could be <strong>any</strong> string including empty string;</li>
@@ -172,7 +172,7 @@ name (not a reserved word);</li>
 </span><span class='line'><span class="p">};</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_37">Retrieval</h3>
+<h3 id="toc_45">Retrieval</h3>
 
 <ul>
 <li>Wrapping a string expression in a [] suffix;</li>
@@ -200,7 +200,7 @@ member:</li>
 </span><span class='line'><span class="nx">flight</span><span class="p">.</span><span class="nx">equipment</span> <span class="o">&amp;&amp;</span> <span class="nx">flight</span><span class="p">.</span><span class="nx">equipment</span><span class="p">.</span><span class="nx">model</span> <span class="c1">// undefined</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_38">Update</h3>
+<h3 id="toc_46">Update</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -210,7 +210,7 @@ member:</li>
 </span><span class='line'><span class="nx">stoog</span><span class="p">.</span><span class="nx">sex</span> <span class="o">=</span> <span class="s2">&quot;Male&quot;</span><span class="p">;</span>          <span class="c1">// if the property name not exist, the object is augmented;</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_39">Reference</h3>
+<h3 id="toc_47">Reference</h3>
 
 <p>Object is passed <strong>BY REFERENCE</strong>, never by copied.</p>
 
@@ -226,7 +226,7 @@ member:</li>
 </span><span class='line'>    <span class="c1">// refer to the same empty object</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_40">Prototype</h3>
+<h3 id="toc_48">Prototype</h3>
 
 <p>Every object is linked to a <strong>prototype object</strong>. All objects created from object literal <code>{}</code><br>
 are linked to <code>Object.prototype</code>.</p>
@@ -243,7 +243,7 @@ that property will immediately be visible in all the objects that are based on t
 </span><span class='line'><span class="nx">another_stooge</span><span class="p">.</span><span class="nx">profession</span> <span class="c1">// &#39;actor&#39;</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_41">Reflection</h3>
+<h3 id="toc_49">Reflection</h3>
 
 <p>Check if the object has a property:</p>
 
@@ -271,7 +271,7 @@ that property will immediately be visible in all the objects that are based on t
 </span><span class='line'><span class="nx">flight</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;toString&#39;</span><span class="p">)</span>   <span class="c1">// false</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_42">Enumeration</h3>
+<h3 id="toc_50">Enumeration</h3>
 
 <p>Loop over all the property names in an object.</p>
 
@@ -320,7 +320,7 @@ properties in the prototype chain.)</p>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_43">Delete</h3>
+<h3 id="toc_51">Delete</h3>
 
 <p>The <code>delete</code> operator can be used to remove a property from a object. It does <strong>NOT</strong> touch<br>
 any object in the prototype linkage.</p>

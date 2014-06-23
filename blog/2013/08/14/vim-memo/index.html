@@ -113,7 +113,7 @@ the &lt;number&gt; out of &lt;number&gt;w or &lt &hellip;">
   </header>
 
 
-<div class="entry-content"><h2 id="toc_16">Move faster : EasyMotion</h2>
+<div class="entry-content"><h2 id="toc_21">Move faster : EasyMotion</h2>
 
 <p>EasyMotion provides a much simpler way to use some motions in vim. It takes<br>
 the <code>&lt;number&gt;</code> out of <code>&lt;number&gt;w</code> or <code>&lt;number&gt;f{char}</code> by highlighting all<br>
@@ -126,12 +126,40 @@ target.</p>
 <code>&lt;leader&gt;&lt;leader&gt;f</code><br>
 <code>&lt;leader&gt;&lt;leader&gt;f{char}</code></p>
 
-<h2 id="toc_17">Repeats</h2>
+<h2 id="toc_22">Repeats</h2>
 
 <p>Single repeats</p>
 
 <p><code>.</code> : used to repeat simple changes<br>
 <code>@:</code> : used to repeat last command-line</p>
+
+<h2 id="toc_23">Surround</h2>
+
+<p>With plugin <a href="https://github.com/tpope/vim-surround">Surround</a>, you can easily handle surround with words.</p>
+
+<h3 id="toc_24">Add surroundings</h3>
+
+<p><code>ys</code> takes an <strong>valid Vim motion</strong> or text object as the first object and wraps it using the second
+argument.
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  Old text                  Command     New text
+</span><span class='line'>  Hello w*orld!             ysiw)       Hello (world)!</span></code></pre></td></tr></table></div></figure></p>
+
+<p>Under <strong>visual mode</strong>, select content and press <code>S</code> with the surrounding wound wrap the selected
+content.</p>
+
+<h3 id="toc_25">Delete surroundings</h3>
+
+<p>Delete surroundings is <code>ds</code> .
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  Old text                  Command     New text ~
+</span><span class='line'>  &quot;Hello <em>world!&quot;           ds&quot;         Hello world!
+</span><span class='line'>  (123+4*56)/2              ds)         123+456/2
+</span><span class='line'>  &lt;div&gt;Yo!</em>&lt;/div&gt;           dst         Yo!</span></code></pre></td></tr></table></div></figure></p>
 </div>
 
 
@@ -156,6 +184,12 @@ target.</p>
 
 <time datetime="2013-08-14T21:54:00+08:00" pubdate data-updated="true">Aug 14<span>th</span>, 2013</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/vim/'>vim</a>
+  
+</span>
 
 
     </p>
