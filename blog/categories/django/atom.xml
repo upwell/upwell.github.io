@@ -4,7 +4,7 @@
   <title><![CDATA[Category: django | Note Everything]]></title>
   <link href="http://upwell.github.io/blog/categories/django/atom.xml" rel="self"/>
   <link href="http://upwell.github.io/"/>
-  <updated>2014-06-23T16:22:09+08:00</updated>
+  <updated>2014-06-28T09:40:13+08:00</updated>
   <id>http://upwell.github.io/</id>
   <author>
     <name><![CDATA[hanh]]></name>
@@ -14,11 +14,24 @@
 
   
   <entry>
+    <title type="html"><![CDATA[django collections]]></title>
+    <link href="http://upwell.github.io/blog/2014/06/28/django-collections/"/>
+    <updated>2014-06-28T09:35:00+08:00</updated>
+    <id>http://upwell.github.io/blog/2014/06/28/django-collections</id>
+    <content type="html"><![CDATA[<h2 id="toc_0">django profiling tools</h2>
+
+<p><a href="https://github.com/mtford90/silk">Silky smooth profiling for Django</a></p>
+
+<p><a href="https://github.com/django-debug-toolbar/django-debug-toolbar">Django Debug toolbar</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[two foreign keys to same model]]></title>
     <link href="http://upwell.github.io/blog/2014/06/20/two-foreign-keys-to-same-model/"/>
     <updated>2014-06-20T14:35:00+08:00</updated>
     <id>http://upwell.github.io/blog/2014/06/20/two-foreign-keys-to-same-model</id>
-    <content type="html"><![CDATA[<h4 id="toc_0">Use <code>related_name</code>:</h4>
+    <content type="html"><![CDATA[<h4 id="toc_1">Use <code>related_name</code>:</h4>
 <div class="highlight"><pre><code class="python"><span class="k">class</span> <span class="nc">Test</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="n">example1</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Example</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&#39;test1&#39;</span><span class="p">)</span>
     <span class="n">example2</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Example</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&#39;test2&#39;</span><span class="p">)</span>
@@ -27,7 +40,7 @@
 
 <p>See <a href="http://stackoverflow.com/questions/543377/how-can-i-have-two-foreign-keys-to-the-same-model-in-django">stackoverflow question</a> and <a href="http://docs.djangoproject.com/en/dev/ref/models/fields/#foreignkey">django doc</a></p>
 
-<h4 id="toc_1">Why <code>related_name</code>:</h4>
+<h4 id="toc_2">Why <code>related_name</code>:</h4>
 
 <p>The <code>related_name</code> attributes specifies the name of reverse relation from <code>Example</code> model<br>
 to your model.</p>

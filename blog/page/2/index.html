@@ -9,8 +9,10 @@
   <meta name="author" content="hanh">
 
   
-  <meta name="description" content="Move faster : EasyMotion EasyMotion provides a much simpler way to use some motions in vim. It takes
-the &lt;number&gt; out of &lt;number&gt;w or &lt &hellip;">
+  <meta name="description" content="Check ruby version 1
+ruby -v If the version is not 1.9.3, use the following commmand to switch to 1.9.3: 1
+rvm use 1.9.3 Create a new post 1
+rake &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -92,6 +94,108 @@ the &lt;number&gt; out of &lt;number&gt;w or &lt &hellip;">
   <header>
     
       <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2013/09/18/octopress-daily-use/">Octopress Daily Use</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-18T17:00:00+08:00" pubdate data-updated="true">Sep 18<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3 id="toc_28">Check ruby version</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>ruby -v
+</span></code></pre></td></tr></table></div></figure>
+
+<p>If the version is not 1.9.3, use the following commmand to switch to 1.9.3:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm use 1.9.3
+</span></code></pre></td></tr></table></div></figure>
+
+<h3 id="toc_29">Create a new post</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake new_post<span class="o">[</span><span class="s1">&#39;octopress daily use&#39;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<p>This would create a new markdown file under <code>source/_posts/</code> folder. Edit the file<br>
+to compose the new post.</p>
+
+<h3 id="toc_30">Preview and generate</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake generate
+</span><span class='line'>rake preview
+</span></code></pre></td></tr></table></div></figure>
+
+<p>Visit <code>http://localhost:4000</code> to preview the site.</p>
+
+<h3 id="toc_31">Deploy to github page</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake generate
+</span><span class='line'>rake deploy
+</span></code></pre></td></tr></table></div></figure>
+
+<p>This would deploy the generate file on to github page for display.</p>
+
+<h3 id="toc_32">Submit source to github repo</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git add .
+</span><span class='line'>git commit -m <span class="s1">&#39;new post&#39;</span>
+</span><span class='line'>git push origin <span class="nb">source</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<h3 id="toc_33">Use octopress in two machines</h3>
+
+<p>Before update / add a new post, remember:
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd source</span>
+</span><span class='line'>git pull origin <span class="nb">source</span>
+</span><span class='line'><span class="nb">cd</span> ../_deploy
+</span><span class='line'>git pull origin master
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>After the update, remember to submit to source and deploy to github</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
         <h1 class="entry-title"><a href="/blog/2013/08/14/vim-memo/">Vim Memo</a></h1>
       
     
@@ -116,7 +220,7 @@ the &lt;number&gt; out of &lt;number&gt;w or &lt &hellip;">
   </header>
 
 
-  <div class="entry-content"><h2 id="toc_21">Move faster : EasyMotion</h2>
+  <div class="entry-content"><h2 id="toc_23">Move faster : EasyMotion</h2>
 
 <p>EasyMotion provides a much simpler way to use some motions in vim. It takes<br>
 the <code>&lt;number&gt;</code> out of <code>&lt;number&gt;w</code> or <code>&lt;number&gt;f{char}</code> by highlighting all<br>
@@ -129,18 +233,18 @@ target.</p>
 <code>&lt;leader&gt;&lt;leader&gt;f</code><br>
 <code>&lt;leader&gt;&lt;leader&gt;f{char}</code></p>
 
-<h2 id="toc_22">Repeats</h2>
+<h2 id="toc_24">Repeats</h2>
 
 <p>Single repeats</p>
 
 <p><code>.</code> : used to repeat simple changes<br>
 <code>@:</code> : used to repeat last command-line</p>
 
-<h2 id="toc_23">Surround</h2>
+<h2 id="toc_25">Surround</h2>
 
 <p>With plugin <a href="https://github.com/tpope/vim-surround">Surround</a>, you can easily handle surround with words.</p>
 
-<h3 id="toc_24">Add surroundings</h3>
+<h3 id="toc_26">Add surroundings</h3>
 
 <p><code>ys</code> takes an <strong>valid Vim motion</strong> or text object as the first object and wraps it using the second
 argument.
@@ -152,7 +256,7 @@ argument.
 <p>Under <strong>visual mode</strong>, select content and press <code>S</code> with the surrounding wound wrap the selected
 content.</p>
 
-<h3 id="toc_25">Delete surroundings</h3>
+<h3 id="toc_27">Delete surroundings</h3>
 
 <p>Delete surroundings is <code>ds</code> .
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -200,29 +304,29 @@ content.</p>
   </header>
 
 
-  <div class="entry-content"><h3 id="toc_14">Use a database file</h3>
+  <div class="entry-content"><h3 id="toc_16">Use a database file</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>sqlite &lt;database_file&gt;</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_15">Get table information</h3>
+<h3 id="toc_17">Get table information</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>.tables</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_16">Get schema information</h3>
+<h3 id="toc_18">Get schema information</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>.schema
 </span><span class='line'>.schema table_name</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_17">Get help</h3>
+<h3 id="toc_19">Get help</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>.help</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_18">Write result to a file</h3>
+<h3 id="toc_20">Write result to a file</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -235,12 +339,12 @@ content.</p>
 </span><span class='line'>select * from table_name;
 </span><span class='line'>.exit</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_19">Exit</h3>
+<h3 id="toc_21">Exit</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>.exit</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_20">More</h3>
+<h3 id="toc_22">More</h3>
 
 <p><a href="http://www.sqlite.org/sqlite.html">sqlite official site help</a></p>
 </div>
@@ -280,7 +384,7 @@ content.</p>
   </header>
 
 
-  <div class="entry-content"><h3 id="toc_11">Install packages</h3>
+  <div class="entry-content"><h3 id="toc_13">Install packages</h3>
 
 <p>CentOS 6.3 does not have xrdp package in the official repo.</p>
 
@@ -298,14 +402,14 @@ content.</p>
 </span><span class='line'>yum install xrdp</span></code></pre></td></tr></table></div></figure></li>
 </ul>
 
-<h3 id="toc_12">Start service</h3>
+<h3 id="toc_14">Start service</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>/etc/init.d/xrdp start
 </span><span class='line'>chkconfig xrdp on</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_13">Issues</h3>
+<h3 id="toc_15">Issues</h3>
 
 <ul>
 <li><p>problem connecting 5910
@@ -351,6 +455,10 @@ login as root
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/06/28/django-collections/">Django Collections</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/20/two-foreign-keys-to-same-model/">Two Foreign Keys to Same Model</a>
       </li>
     
@@ -364,10 +472,6 @@ login as root
     
       <li class="post">
         <a href="/blog/2013/11/10/object-js-good-part/">Object - Javascript: The Good Part</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/29/c-plus-plus-string-practice/">C++ String / File Practice</a>
       </li>
     
   </ul>

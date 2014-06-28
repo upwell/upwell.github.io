@@ -4,7 +4,7 @@
   <title><![CDATA[Note Everything]]></title>
   <link href="http://upwell.github.io/atom.xml" rel="self"/>
   <link href="http://upwell.github.io/"/>
-  <updated>2014-06-23T16:22:09+08:00</updated>
+  <updated>2014-06-28T09:40:13+08:00</updated>
   <id>http://upwell.github.io/</id>
   <author>
     <name><![CDATA[hanh]]></name>
@@ -14,11 +14,24 @@
 
   
   <entry>
+    <title type="html"><![CDATA[django collections]]></title>
+    <link href="http://upwell.github.io/blog/2014/06/28/django-collections/"/>
+    <updated>2014-06-28T09:35:00+08:00</updated>
+    <id>http://upwell.github.io/blog/2014/06/28/django-collections</id>
+    <content type="html"><![CDATA[<h2 id="toc_66">django profiling tools</h2>
+
+<p><a href="https://github.com/mtford90/silk">Silky smooth profiling for Django</a></p>
+
+<p><a href="https://github.com/django-debug-toolbar/django-debug-toolbar">Django Debug toolbar</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[two foreign keys to same model]]></title>
     <link href="http://upwell.github.io/blog/2014/06/20/two-foreign-keys-to-same-model/"/>
     <updated>2014-06-20T14:35:00+08:00</updated>
     <id>http://upwell.github.io/blog/2014/06/20/two-foreign-keys-to-same-model</id>
-    <content type="html"><![CDATA[<h4 id="toc_62">Use <code>related_name</code>:</h4>
+    <content type="html"><![CDATA[<h4 id="toc_64">Use <code>related_name</code>:</h4>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -30,7 +43,7 @@
 
 <p>See <a href="http://stackoverflow.com/questions/543377/how-can-i-have-two-foreign-keys-to-the-same-model-in-django">stackoverflow question</a> and <a href="http://docs.djangoproject.com/en/dev/ref/models/fields/#foreignkey">django doc</a></p>
 
-<h4 id="toc_63">Why <code>related_name</code>:</h4>
+<h4 id="toc_65">Why <code>related_name</code>:</h4>
 
 <p>The <code>related_name</code> attributes specifies the name of reverse relation from <code>Example</code> model<br>
 to your model.</p>
@@ -50,7 +63,7 @@ doesn&#39;t know how to build up the reverse relation.</p>
     <link href="http://upwell.github.io/blog/2013/12/12/python-long-line-wrap/"/>
     <updated>2013-12-12T16:12:00+08:00</updated>
     <id>http://upwell.github.io/blog/2013/12/12/python-long-line-wrap</id>
-    <content type="html"><![CDATA[<h2 id="toc_60">Long line with chained methods</h2>
+    <content type="html"><![CDATA[<h2 id="toc_62">Long line with chained methods</h2>
 
 <p>Use additional <strong>parenthesis</strong>.</p>
 
@@ -70,7 +83,7 @@ doesn&#39;t know how to build up the reverse relation.</p>
 </span><span class='line'>    <span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_61">Long string</h2>
+<h2 id="toc_63">Long string</h2>
 
 <p>Python concatenates string literals which appear adjacent to each other.</p>
 
@@ -89,7 +102,7 @@ doesn&#39;t know how to build up the reverse relation.</p>
     <link href="http://upwell.github.io/blog/2013/11/23/configure-vim-for-python-dev/"/>
     <updated>2013-11-23T08:42:00+08:00</updated>
     <id>http://upwell.github.io/blog/2013/11/23/configure-vim-for-python-dev</id>
-    <content type="html"><![CDATA[<h2 id="toc_52">Flake8</h2>
+    <content type="html"><![CDATA[<h2 id="toc_54">Flake8</h2>
 
 <p><a href="https://pypi.python.org/pypi/flake8/">flake8</a> :  wrapper for python checkers:</p>
 
@@ -99,35 +112,35 @@ doesn&#39;t know how to build up the reverse relation.</p>
 <li>Ned Batchelder&#39;s McCabe script</li>
 </ul>
 
-<h3 id="toc_53">Install</h3>
+<h3 id="toc_55">Install</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># sudo pip install flake8</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_54">Vim-flake8</h2>
+<h2 id="toc_56">Vim-flake8</h2>
 
 <p><a href="https://github.com/nvie/vim-flake8">vim-flake8</a> : vim wrapper for flake8.</p>
 
-<h3 id="toc_55">Install</h3>
+<h3 id="toc_57">Install</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># git submodule add https://github.com/nvie/vim-flake8.git bundle/vim-flake8</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_56">How to use</h3>
+<h3 id="toc_58">How to use</h3>
 
 <ol>
 <li>Open a python file</li>
 <li>ress <code>F7</code> to run <code>flake8</code> on it</li>
 </ol>
 
-<h2 id="toc_57">Syntastic</h2>
+<h2 id="toc_59">Syntastic</h2>
 
 <p><a href="https://github.com/scrooloose/syntastic">syntastic</a> : syntax checking plugin that runs file through external syntax<br>
 checker and displays any resulting errors to user.</p>
 
-<h3 id="toc_58">Install</h3>
+<h3 id="toc_60">Install</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># git submodule add https://github.com/scrooloose/syntastic bundle/syntastic</span>
@@ -135,7 +148,7 @@ checker and displays any resulting errors to user.</p>
 
 <p>Start vim, then type <code>:Helptags</code>.</p>
 
-<h3 id="toc_59">How to use</h3>
+<h3 id="toc_61">How to use</h3>
 
 <p>Check</p>
 
@@ -156,7 +169,7 @@ checker and displays any resulting errors to user.</p>
     <link href="http://upwell.github.io/blog/2013/11/10/object-js-good-part/"/>
     <updated>2013-11-10T10:42:00+08:00</updated>
     <id>http://upwell.github.io/blog/2013/11/10/object-js-good-part</id>
-    <content type="html"><![CDATA[<h3 id="toc_43">Object Literals</h3>
+    <content type="html"><![CDATA[<h3 id="toc_45">Object Literals</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -172,7 +185,7 @@ checker and displays any resulting errors to user.</p>
 </span><span class='line'><span class="p">};</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h4 id="toc_44">Property Name</h4>
+<h4 id="toc_46">Property Name</h4>
 
 <ul>
 <li>could be <strong>any</strong> string including empty string;</li>
@@ -210,7 +223,7 @@ name (not a reserved word);</li>
 </span><span class='line'><span class="p">};</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_45">Retrieval</h3>
+<h3 id="toc_47">Retrieval</h3>
 
 <ul>
 <li>Wrapping a string expression in a [] suffix;</li>
@@ -238,7 +251,7 @@ member:</li>
 </span><span class='line'><span class="nx">flight</span><span class="p">.</span><span class="nx">equipment</span> <span class="o">&amp;&amp;</span> <span class="nx">flight</span><span class="p">.</span><span class="nx">equipment</span><span class="p">.</span><span class="nx">model</span> <span class="c1">// undefined</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_46">Update</h3>
+<h3 id="toc_48">Update</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -248,7 +261,7 @@ member:</li>
 </span><span class='line'><span class="nx">stoog</span><span class="p">.</span><span class="nx">sex</span> <span class="o">=</span> <span class="s2">&quot;Male&quot;</span><span class="p">;</span>          <span class="c1">// if the property name not exist, the object is augmented;</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_47">Reference</h3>
+<h3 id="toc_49">Reference</h3>
 
 <p>Object is passed <strong>BY REFERENCE</strong>, never by copied.</p>
 
@@ -264,7 +277,7 @@ member:</li>
 </span><span class='line'>    <span class="c1">// refer to the same empty object</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_48">Prototype</h3>
+<h3 id="toc_50">Prototype</h3>
 
 <p>Every object is linked to a <strong>prototype object</strong>. All objects created from object literal <code>{}</code><br>
 are linked to <code>Object.prototype</code>.</p>
@@ -281,7 +294,7 @@ that property will immediately be visible in all the objects that are based on t
 </span><span class='line'><span class="nx">another_stooge</span><span class="p">.</span><span class="nx">profession</span> <span class="c1">// &#39;actor&#39;</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_49">Reflection</h3>
+<h3 id="toc_51">Reflection</h3>
 
 <p>Check if the object has a property:</p>
 
@@ -309,7 +322,7 @@ that property will immediately be visible in all the objects that are based on t
 </span><span class='line'><span class="nx">flight</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;toString&#39;</span><span class="p">)</span>   <span class="c1">// false</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_50">Enumeration</h3>
+<h3 id="toc_52">Enumeration</h3>
 
 <p>Loop over all the property names in an object.</p>
 
@@ -358,7 +371,7 @@ properties in the prototype chain.)</p>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_51">Delete</h3>
+<h3 id="toc_53">Delete</h3>
 
 <p>The <code>delete</code> operator can be used to remove a property from a object. It does <strong>NOT</strong> touch<br>
 any object in the prototype linkage.</p>
@@ -370,7 +383,7 @@ any object in the prototype linkage.</p>
     <link href="http://upwell.github.io/blog/2013/10/29/c-plus-plus-string-practice/"/>
     <updated>2013-10-29T15:10:00+08:00</updated>
     <id>http://upwell.github.io/blog/2013/10/29/c-plus-plus-string-practice</id>
-    <content type="html"><![CDATA[<h2 id="toc_36">Read one line from file each time</h2>
+    <content type="html"><![CDATA[<h2 id="toc_38">Read one line from file each time</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -380,7 +393,7 @@ any object in the prototype linkage.</p>
 </span><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="n">in</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_37">Trim space from string</h2>
+<h2 id="toc_39">Trim space from string</h2>
 
 <p><a href="http://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring">original source</a></p>
 
@@ -428,13 +441,13 @@ any object in the prototype linkage.</p>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_38">Concatenate two vectors</h2>
+<h2 id="toc_40">Concatenate two vectors</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">source</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">source</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">destination</span><span class="p">));</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_39">Merge two vectors</h2>
+<h2 id="toc_41">Merge two vectors</h2>
 
 <p><code>std::merge</code> conbines the elements in sorted range [first1, last1], [first2, last2], into a new<br>
 range beginning at <em>result</em> with all its elements sorted.</p>
@@ -459,7 +472,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
 </span><span class='line'>        <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">tmp</span><span class="p">));</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_40">Concatenate two vectors, and remove duplicate elements</h2>
+<h2 id="toc_42">Concatenate two vectors, and remove duplicate elements</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -481,7 +494,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
 </span><span class='line'>            <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">tmp</span><span class="p">));</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_41">Append with operations on each element</h2>
+<h2 id="toc_43">Append with operations on each element</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -507,7 +520,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
 </span><span class='line'>        <span class="n">append_arrow</span><span class="p">);</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_42">Write vector to file</h2>
+<h2 id="toc_44">Write vector to file</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -528,7 +541,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
     <link href="http://upwell.github.io/blog/2013/10/18/install-oracle-jdk-32bit-on-fedora-64bit/"/>
     <updated>2013-10-18T22:31:00+08:00</updated>
     <id>http://upwell.github.io/blog/2013/10/18/install-oracle-jdk-32bit-on-fedora-64bit</id>
-    <content type="html"><![CDATA[<h2 id="toc_34">Issue</h2>
+    <content type="html"><![CDATA[<h2 id="toc_36">Issue</h2>
 
 <p>When execute:</p>
 
@@ -565,7 +578,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
 </span><span class='line'>
 </span><span class='line'>    /usr/java/jdk1.7.0_45/jre/lib/jsse.jar</span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="toc_35">Solution</h2>
+<h2 id="toc_37">Solution</h2>
 
 <p>Install the 32bit libraries:</p>
 
@@ -579,14 +592,14 @@ range beginning at <em>result</em> with all its elements sorted.</p>
     <link href="http://upwell.github.io/blog/2013/10/16/c-header-file-include-seq/"/>
     <updated>2013-10-16T16:48:00+08:00</updated>
     <id>http://upwell.github.io/blog/2013/10/16/c-header-file-include-seq</id>
-    <content type="html"><![CDATA[<h2 id="toc_32">问题</h2>
+    <content type="html"><![CDATA[<h2 id="toc_34">问题</h2>
 
 <p>遇到一个很奇怪的问题，在工程中使用 stlport 的时候各种编译不过，即使仅仅是声明一个对象都会编译不过。
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>std::sstream mystream;</span></code></pre></td></tr></table></div></figure>
 报的错误也很奇怪，是 stlport 内部的文件语法错误。</p>
 
-<h2 id="toc_33">分析过程</h2>
+<h2 id="toc_35">分析过程</h2>
 
 <ol>
 <li>在工程外部，编写小程序，使用工程中的 stlport 来编译，正常编译通过，运行正常；</li>
@@ -689,7 +702,7 @@ it as the default config.</p>
     <link href="http://upwell.github.io/blog/2013/09/18/octopress-daily-use/"/>
     <updated>2013-09-18T17:00:00+08:00</updated>
     <id>http://upwell.github.io/blog/2013/09/18/octopress-daily-use</id>
-    <content type="html"><![CDATA[<h3 id="toc_26">Check ruby version</h3>
+    <content type="html"><![CDATA[<h3 id="toc_28">Check ruby version</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>ruby -v
@@ -701,7 +714,7 @@ it as the default config.</p>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm use 1.9.3
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_27">Create a new post</h3>
+<h3 id="toc_29">Create a new post</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>rake new_post<span class="o">[</span><span class="s1">&#39;octopress daily use&#39;</span><span class="o">]</span>
@@ -710,7 +723,7 @@ it as the default config.</p>
 <p>This would create a new markdown file under <code>source/_posts/</code> folder. Edit the file<br>
 to compose the new post.</p>
 
-<h3 id="toc_28">Preview and generate</h3>
+<h3 id="toc_30">Preview and generate</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -720,7 +733,7 @@ to compose the new post.</p>
 
 <p>Visit <code>http://localhost:4000</code> to preview the site.</p>
 
-<h3 id="toc_29">Deploy to github page</h3>
+<h3 id="toc_31">Deploy to github page</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -730,7 +743,7 @@ to compose the new post.</p>
 
 <p>This would deploy the generate file on to github page for display.</p>
 
-<h3 id="toc_30">Submit source to github repo</h3>
+<h3 id="toc_32">Submit source to github repo</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -740,7 +753,7 @@ to compose the new post.</p>
 </span><span class='line'>git push origin <span class="nb">source</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_31">Use octopress in two machines</h3>
+<h3 id="toc_33">Use octopress in two machines</h3>
 
 <p>Before update / add a new post, remember:
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -762,7 +775,7 @@ to compose the new post.</p>
     <link href="http://upwell.github.io/blog/2013/08/14/vim-memo/"/>
     <updated>2013-08-14T21:54:00+08:00</updated>
     <id>http://upwell.github.io/blog/2013/08/14/vim-memo</id>
-    <content type="html"><![CDATA[<h2 id="toc_21">Move faster : EasyMotion</h2>
+    <content type="html"><![CDATA[<h2 id="toc_23">Move faster : EasyMotion</h2>
 
 <p>EasyMotion provides a much simpler way to use some motions in vim. It takes<br>
 the <code>&lt;number&gt;</code> out of <code>&lt;number&gt;w</code> or <code>&lt;number&gt;f{char}</code> by highlighting all<br>
@@ -775,18 +788,18 @@ target.</p>
 <code>&lt;leader&gt;&lt;leader&gt;f</code><br>
 <code>&lt;leader&gt;&lt;leader&gt;f{char}</code></p>
 
-<h2 id="toc_22">Repeats</h2>
+<h2 id="toc_24">Repeats</h2>
 
 <p>Single repeats</p>
 
 <p><code>.</code> : used to repeat simple changes<br>
 <code>@:</code> : used to repeat last command-line</p>
 
-<h2 id="toc_23">Surround</h2>
+<h2 id="toc_25">Surround</h2>
 
 <p>With plugin <a href="https://github.com/tpope/vim-surround">Surround</a>, you can easily handle surround with words.</p>
 
-<h3 id="toc_24">Add surroundings</h3>
+<h3 id="toc_26">Add surroundings</h3>
 
 <p><code>ys</code> takes an <strong>valid Vim motion</strong> or text object as the first object and wraps it using the second
 argument.
@@ -798,7 +811,7 @@ argument.
 <p>Under <strong>visual mode</strong>, select content and press <code>S</code> with the surrounding wound wrap the selected
 content.</p>
 
-<h3 id="toc_25">Delete surroundings</h3>
+<h3 id="toc_27">Delete surroundings</h3>
 
 <p>Delete surroundings is <code>ds</code> .
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -817,29 +830,29 @@ content.</p>
     <link href="http://upwell.github.io/blog/2013/08/07/sqlite-command-tips/"/>
     <updated>2013-08-07T13:26:00+08:00</updated>
     <id>http://upwell.github.io/blog/2013/08/07/sqlite-command-tips</id>
-    <content type="html"><![CDATA[<h3 id="toc_14">Use a database file</h3>
+    <content type="html"><![CDATA[<h3 id="toc_16">Use a database file</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>sqlite &lt;database_file&gt;</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_15">Get table information</h3>
+<h3 id="toc_17">Get table information</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>.tables</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_16">Get schema information</h3>
+<h3 id="toc_18">Get schema information</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>.schema
 </span><span class='line'>.schema table_name</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_17">Get help</h3>
+<h3 id="toc_19">Get help</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>.help</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_18">Write result to a file</h3>
+<h3 id="toc_20">Write result to a file</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -852,12 +865,12 @@ content.</p>
 </span><span class='line'>select * from table_name;
 </span><span class='line'>.exit</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_19">Exit</h3>
+<h3 id="toc_21">Exit</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>.exit</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_20">More</h3>
+<h3 id="toc_22">More</h3>
 
 <p><a href="http://www.sqlite.org/sqlite.html">sqlite official site help</a></p>
 ]]></content>
@@ -868,7 +881,7 @@ content.</p>
     <link href="http://upwell.github.io/blog/2013/08/07/install-xrdp-on-centos63/"/>
     <updated>2013-08-07T11:35:00+08:00</updated>
     <id>http://upwell.github.io/blog/2013/08/07/install-xrdp-on-centos63</id>
-    <content type="html"><![CDATA[<h3 id="toc_11">Install packages</h3>
+    <content type="html"><![CDATA[<h3 id="toc_13">Install packages</h3>
 
 <p>CentOS 6.3 does not have xrdp package in the official repo.</p>
 
@@ -886,14 +899,14 @@ content.</p>
 </span><span class='line'>yum install xrdp</span></code></pre></td></tr></table></div></figure></li>
 </ul>
 
-<h3 id="toc_12">Start service</h3>
+<h3 id="toc_14">Start service</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>/etc/init.d/xrdp start
 </span><span class='line'>chkconfig xrdp on</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_13">Issues</h3>
+<h3 id="toc_15">Issues</h3>
 
 <ul>
 <li><p>problem connecting 5910

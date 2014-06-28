@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vim | Note Everything]]></title>
   <link href="http://upwell.github.io/blog/categories/vim/atom.xml" rel="self"/>
   <link href="http://upwell.github.io/"/>
-  <updated>2014-06-23T16:22:09+08:00</updated>
+  <updated>2014-06-28T09:40:13+08:00</updated>
   <id>http://upwell.github.io/</id>
   <author>
     <name><![CDATA[hanh]]></name>
@@ -18,7 +18,7 @@
     <link href="http://upwell.github.io/blog/2013/08/14/vim-memo/"/>
     <updated>2013-08-14T21:54:00+08:00</updated>
     <id>http://upwell.github.io/blog/2013/08/14/vim-memo</id>
-    <content type="html"><![CDATA[<h2 id="toc_6">Move faster : EasyMotion</h2>
+    <content type="html"><![CDATA[<h2 id="toc_8">Move faster : EasyMotion</h2>
 
 <p>EasyMotion provides a much simpler way to use some motions in vim. It takes<br>
 the <code>&lt;number&gt;</code> out of <code>&lt;number&gt;w</code> or <code>&lt;number&gt;f{char}</code> by highlighting all<br>
@@ -31,18 +31,18 @@ target.</p>
 <code>&lt;leader&gt;&lt;leader&gt;f</code><br>
 <code>&lt;leader&gt;&lt;leader&gt;f{char}</code></p>
 
-<h2 id="toc_7">Repeats</h2>
+<h2 id="toc_9">Repeats</h2>
 
 <p>Single repeats</p>
 
 <p><code>.</code> : used to repeat simple changes<br>
 <code>@:</code> : used to repeat last command-line</p>
 
-<h2 id="toc_8">Surround</h2>
+<h2 id="toc_10">Surround</h2>
 
 <p>With plugin <a href="https://github.com/tpope/vim-surround">Surround</a>, you can easily handle surround with words.</p>
 
-<h3 id="toc_9">Add surroundings</h3>
+<h3 id="toc_11">Add surroundings</h3>
 
 <p><code>ys</code> takes an <strong>valid Vim motion</strong> or text object as the first object and wraps it using the second
 argument.
@@ -54,7 +54,7 @@ argument.
 <p>Under <strong>visual mode</strong>, select content and press <code>S</code> with the surrounding wound wrap the selected
 content.</p>
 
-<h3 id="toc_10">Delete surroundings</h3>
+<h3 id="toc_12">Delete surroundings</h3>
 
 <p>Delete surroundings is <code>ds</code> .
 <code>
