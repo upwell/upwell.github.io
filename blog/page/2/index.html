@@ -9,10 +9,9 @@
   <meta name="author" content="hanh">
 
   
-  <meta name="description" content="Check ruby version 1
-ruby -v If the version is not 1.9.3, use the following commmand to switch to 1.9.3: 1
-rvm use 1.9.3 Create a new post 1
-rake &hellip;">
+  <meta name="description" content="今天遇到一个奇怪的问题，从抓包中发现服务器收到客户端发来的HTTP请求后，
+会先回复一个乱七八糟的包，然后才会回正常的200 OK，自然的客户端就没办法
+正常工作了。 从代码分析，发现正常的逻辑下面，是不会出现这种情况的。 通过使用netstat观察，发现出问题的连接在建立好了以后，Recv- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +93,79 @@ rake &hellip;">
   <header>
     
       <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2013/09/18/abnormal-packets-in-socket/">Abnormal Packets in Socket</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-18T17:52:00+08:00" pubdate data-updated="true">Sep 18<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>今天遇到一个奇怪的问题，从抓包中发现服务器收到客户端发来的HTTP请求后，<br>
+会先回复一个乱七八糟的包，然后才会回正常的200 OK，自然的客户端就没办法<br>
+正常工作了。</p>
+
+<p>从代码分析，发现正常的逻辑下面，是不会出现这种情况的。</p>
+
+<p>通过使用netstat观察，发现出问题的连接在建立好了以后，Recv-Q里面会有内容，<br>
+应该是客户端发过来的数据，奇怪的是在Recv-Q里面有数据的同时，马上Send-Q里<br>
+面也有数据了，也就是说当上层应用程序还没有调用recv或者read的时候，已经有<br>
+数据被塞到Send-Q中了，但是按照上层应用程序处理的逻辑，只有当数据被recv了以后，<br>
+才会开始写。</p>
+
+<p>因为程序中有重用的机制，于是怀疑是不是前面的连接没有处理完，导致遗留的数据<br>
+被写到新的连接里面。</p>
+
+<p>仔细查看日志和代码后，发现了问题产生的根源。</p>
+
+<blockquote>
+<ul>
+<li>socket的fd会在被完全close之后被系统马上重用到新的连接上；</li>
+<li>应用程序中，accept新连接(listen thread)和处理连接(working thread)是两个线程</li>
+<li>问题在于当working thread把fd关闭以后，后面有一些清理工作还往该fd写了数据，于<br>
+是乎在fd被关闭和写数据之间，有可能listen thread接受了一个新的连接重用了之前的那个fd，<br>
+于是数据就会被写到这个新的连接中。</li>
+</ul>
+</blockquote>
+
+<p>从这个问题可以学习到：</p>
+
+<blockquote>
+<ul>
+<li>管理socket的时候，一定要注意其生命周期，尤其注意在在socket被close以后，不要再有<br>
+额外的操作，比如继续写数据（有些情况可以），重复close。</li>
+<li>当程序中存在多个线程操作同一个fd时，尤其要注意这样的问题。</li>
+</ul>
+</blockquote>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
         <h1 class="entry-title"><a href="/blog/2013/09/18/octopress-daily-use/">Octopress Daily Use</a></h1>
       
     
@@ -118,7 +190,7 @@ rake &hellip;">
   </header>
 
 
-  <div class="entry-content"><h3 id="toc_28">Check ruby version</h3>
+  <div class="entry-content"><h3 id="toc_32">Check ruby version</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>ruby -v
@@ -130,7 +202,7 @@ rake &hellip;">
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm use 1.9.3
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_29">Create a new post</h3>
+<h3 id="toc_33">Create a new post</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>rake new_post<span class="o">[</span><span class="s1">&#39;octopress daily use&#39;</span><span class="o">]</span>
@@ -139,7 +211,7 @@ rake &hellip;">
 <p>This would create a new markdown file under <code>source/_posts/</code> folder. Edit the file<br>
 to compose the new post.</p>
 
-<h3 id="toc_30">Preview and generate</h3>
+<h3 id="toc_34">Preview and generate</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -149,7 +221,7 @@ to compose the new post.</p>
 
 <p>Visit <code>http://localhost:4000</code> to preview the site.</p>
 
-<h3 id="toc_31">Deploy to github page</h3>
+<h3 id="toc_35">Deploy to github page</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -159,7 +231,7 @@ to compose the new post.</p>
 
 <p>This would deploy the generate file on to github page for display.</p>
 
-<h3 id="toc_32">Submit source to github repo</h3>
+<h3 id="toc_36">Submit source to github repo</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -169,7 +241,7 @@ to compose the new post.</p>
 </span><span class='line'>git push origin <span class="nb">source</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_33">Use octopress in two machines</h3>
+<h3 id="toc_37">Use octopress in two machines</h3>
 
 <p>Before update / add a new post, remember:
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -220,7 +292,7 @@ to compose the new post.</p>
   </header>
 
 
-  <div class="entry-content"><h2 id="toc_23">Move faster : EasyMotion</h2>
+  <div class="entry-content"><h2 id="toc_27">Move faster : EasyMotion</h2>
 
 <p>EasyMotion provides a much simpler way to use some motions in vim. It takes<br>
 the <code>&lt;number&gt;</code> out of <code>&lt;number&gt;w</code> or <code>&lt;number&gt;f{char}</code> by highlighting all<br>
@@ -233,18 +305,18 @@ target.</p>
 <code>&lt;leader&gt;&lt;leader&gt;f</code><br>
 <code>&lt;leader&gt;&lt;leader&gt;f{char}</code></p>
 
-<h2 id="toc_24">Repeats</h2>
+<h2 id="toc_28">Repeats</h2>
 
 <p>Single repeats</p>
 
 <p><code>.</code> : used to repeat simple changes<br>
 <code>@:</code> : used to repeat last command-line</p>
 
-<h2 id="toc_25">Surround</h2>
+<h2 id="toc_29">Surround</h2>
 
 <p>With plugin <a href="https://github.com/tpope/vim-surround">Surround</a>, you can easily handle surround with words.</p>
 
-<h3 id="toc_26">Add surroundings</h3>
+<h3 id="toc_30">Add surroundings</h3>
 
 <p><code>ys</code> takes an <strong>valid Vim motion</strong> or text object as the first object and wraps it using the second
 argument.
@@ -256,7 +328,7 @@ argument.
 <p>Under <strong>visual mode</strong>, select content and press <code>S</code> with the surrounding wound wrap the selected
 content.</p>
 
-<h3 id="toc_27">Delete surroundings</h3>
+<h3 id="toc_31">Delete surroundings</h3>
 
 <p>Delete surroundings is <code>ds</code> .
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -304,29 +376,29 @@ content.</p>
   </header>
 
 
-  <div class="entry-content"><h3 id="toc_16">Use a database file</h3>
+  <div class="entry-content"><h3 id="toc_20">Use a database file</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>sqlite &lt;database_file&gt;</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_17">Get table information</h3>
+<h3 id="toc_21">Get table information</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>.tables</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_18">Get schema information</h3>
+<h3 id="toc_22">Get schema information</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>.schema
 </span><span class='line'>.schema table_name</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_19">Get help</h3>
+<h3 id="toc_23">Get help</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>.help</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_20">Write result to a file</h3>
+<h3 id="toc_24">Write result to a file</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -339,12 +411,12 @@ content.</p>
 </span><span class='line'>select * from table_name;
 </span><span class='line'>.exit</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_21">Exit</h3>
+<h3 id="toc_25">Exit</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>.exit</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_22">More</h3>
+<h3 id="toc_26">More</h3>
 
 <p><a href="http://www.sqlite.org/sqlite.html">sqlite official site help</a></p>
 </div>
@@ -384,7 +456,7 @@ content.</p>
   </header>
 
 
-  <div class="entry-content"><h3 id="toc_13">Install packages</h3>
+  <div class="entry-content"><h3 id="toc_17">Install packages</h3>
 
 <p>CentOS 6.3 does not have xrdp package in the official repo.</p>
 
@@ -402,14 +474,14 @@ content.</p>
 </span><span class='line'>yum install xrdp</span></code></pre></td></tr></table></div></figure></li>
 </ul>
 
-<h3 id="toc_14">Start service</h3>
+<h3 id="toc_18">Start service</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>/etc/init.d/xrdp start
 </span><span class='line'>chkconfig xrdp on</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_15">Issues</h3>
+<h3 id="toc_19">Issues</h3>
 
 <ul>
 <li><p>problem connecting 5910
@@ -455,6 +527,10 @@ login as root
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/07/01/dnsmasq-config/">Dnsmasq Config</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/28/django-collections/">Django Collections</a>
       </li>
     
@@ -468,10 +544,6 @@ login as root
     
       <li class="post">
         <a href="/blog/2013/11/23/configure-vim-for-python-dev/">Configure Vim for Python Dev</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/11/10/object-js-good-part/">Object - Javascript: The Good Part</a>
       </li>
     
   </ul>

@@ -9,8 +9,10 @@
   <meta name="author" content="hanh">
 
   
-  <meta name="description" content="django profiling tools Silky smooth profiling for Django Django Debug toolbar
-">
+  <meta name="description" content="Set dns server for dnsmasq Use a separate conf file, the format is the same as resolv.conf.
+1
+resolv-file=/etc/resolv.masq.conf
+Then after dnsmasq is &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -92,6 +94,64 @@
   <header>
     
       <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2014/07/01/dnsmasq-config/">Dnsmasq Config</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-01T19:07:00+08:00" pubdate data-updated="true">Jul 1<span>st</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3 id="toc_71">Set dns server for dnsmasq</h3>
+
+<p>Use a separate conf file, the format is the same as resolv.conf.
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>resolv-file=/etc/resolv.masq.conf</span></code></pre></td></tr></table></div></figure>
+Then after dnsmasq is started, set <code>127.0.0.1</code> in <code>/etc/resolv.conf</code>.</p>
+
+<h3 id="toc_72">listening address with localhost</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>listen-address=127.0.0.1</span></code></pre></td></tr></table></div></figure>
+
+<h3 id="toc_73">Use separate DNS for certain domains</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>server=/www.google.com/8.8.8.8</span></code></pre></td></tr></table></div></figure>
+
+<h3 id="toc_74">Use regular expression for server</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>server=/:.*google.*/8.8.8.8</span></code></pre></td></tr></table></div></figure>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
         <h1 class="entry-title"><a href="/blog/2014/06/28/django-collections/">Django Collections</a></h1>
       
     
@@ -116,7 +176,7 @@
   </header>
 
 
-  <div class="entry-content"><h2 id="toc_66">django profiling tools</h2>
+  <div class="entry-content"><h2 id="toc_70">django profiling tools</h2>
 
 <p><a href="https://github.com/mtford90/silk">Silky smooth profiling for Django</a></p>
 
@@ -158,7 +218,7 @@
   </header>
 
 
-  <div class="entry-content"><h4 id="toc_64">Use <code>related_name</code>:</h4>
+  <div class="entry-content"><h4 id="toc_68">Use <code>related_name</code>:</h4>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -170,7 +230,7 @@
 
 <p>See <a href="http://stackoverflow.com/questions/543377/how-can-i-have-two-foreign-keys-to-the-same-model-in-django">stackoverflow question</a> and <a href="http://docs.djangoproject.com/en/dev/ref/models/fields/#foreignkey">django doc</a></p>
 
-<h4 id="toc_65">Why <code>related_name</code>:</h4>
+<h4 id="toc_69">Why <code>related_name</code>:</h4>
 
 <p>The <code>related_name</code> attributes specifies the name of reverse relation from <code>Example</code> model<br>
 to your model.</p>
@@ -219,7 +279,7 @@ doesn&#39;t know how to build up the reverse relation.</p>
   </header>
 
 
-  <div class="entry-content"><h2 id="toc_62">Long line with chained methods</h2>
+  <div class="entry-content"><h2 id="toc_66">Long line with chained methods</h2>
 
 <p>Use additional <strong>parenthesis</strong>.</p>
 
@@ -239,7 +299,7 @@ doesn&#39;t know how to build up the reverse relation.</p>
 </span><span class='line'>    <span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_63">Long string</h2>
+<h2 id="toc_67">Long string</h2>
 
 <p>Python concatenates string literals which appear adjacent to each other.</p>
 
@@ -287,7 +347,7 @@ doesn&#39;t know how to build up the reverse relation.</p>
   </header>
 
 
-  <div class="entry-content"><h2 id="toc_54">Flake8</h2>
+  <div class="entry-content"><h2 id="toc_58">Flake8</h2>
 
 <p><a href="https://pypi.python.org/pypi/flake8/">flake8</a> :  wrapper for python checkers:</p>
 
@@ -297,35 +357,35 @@ doesn&#39;t know how to build up the reverse relation.</p>
 <li>Ned Batchelder&#39;s McCabe script</li>
 </ul>
 
-<h3 id="toc_55">Install</h3>
+<h3 id="toc_59">Install</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># sudo pip install flake8</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_56">Vim-flake8</h2>
+<h2 id="toc_60">Vim-flake8</h2>
 
 <p><a href="https://github.com/nvie/vim-flake8">vim-flake8</a> : vim wrapper for flake8.</p>
 
-<h3 id="toc_57">Install</h3>
+<h3 id="toc_61">Install</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># git submodule add https://github.com/nvie/vim-flake8.git bundle/vim-flake8</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_58">How to use</h3>
+<h3 id="toc_62">How to use</h3>
 
 <ol>
 <li>Open a python file</li>
 <li>ress <code>F7</code> to run <code>flake8</code> on it</li>
 </ol>
 
-<h2 id="toc_59">Syntastic</h2>
+<h2 id="toc_63">Syntastic</h2>
 
 <p><a href="https://github.com/scrooloose/syntastic">syntastic</a> : syntax checking plugin that runs file through external syntax<br>
 checker and displays any resulting errors to user.</p>
 
-<h3 id="toc_60">Install</h3>
+<h3 id="toc_64">Install</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># git submodule add https://github.com/scrooloose/syntastic bundle/syntastic</span>
@@ -333,7 +393,7 @@ checker and displays any resulting errors to user.</p>
 
 <p>Start vim, then type <code>:Helptags</code>.</p>
 
-<h3 id="toc_61">How to use</h3>
+<h3 id="toc_65">How to use</h3>
 
 <p>Check</p>
 
@@ -383,7 +443,7 @@ checker and displays any resulting errors to user.</p>
   </header>
 
 
-  <div class="entry-content"><h3 id="toc_45">Object Literals</h3>
+  <div class="entry-content"><h3 id="toc_49">Object Literals</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -399,7 +459,7 @@ checker and displays any resulting errors to user.</p>
 </span><span class='line'><span class="p">};</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h4 id="toc_46">Property Name</h4>
+<h4 id="toc_50">Property Name</h4>
 
 <ul>
 <li>could be <strong>any</strong> string including empty string;</li>
@@ -437,7 +497,7 @@ name (not a reserved word);</li>
 </span><span class='line'><span class="p">};</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_47">Retrieval</h3>
+<h3 id="toc_51">Retrieval</h3>
 
 <ul>
 <li>Wrapping a string expression in a [] suffix;</li>
@@ -465,7 +525,7 @@ member:</li>
 </span><span class='line'><span class="nx">flight</span><span class="p">.</span><span class="nx">equipment</span> <span class="o">&amp;&amp;</span> <span class="nx">flight</span><span class="p">.</span><span class="nx">equipment</span><span class="p">.</span><span class="nx">model</span> <span class="c1">// undefined</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_48">Update</h3>
+<h3 id="toc_52">Update</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -475,7 +535,7 @@ member:</li>
 </span><span class='line'><span class="nx">stoog</span><span class="p">.</span><span class="nx">sex</span> <span class="o">=</span> <span class="s2">&quot;Male&quot;</span><span class="p">;</span>          <span class="c1">// if the property name not exist, the object is augmented;</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_49">Reference</h3>
+<h3 id="toc_53">Reference</h3>
 
 <p>Object is passed <strong>BY REFERENCE</strong>, never by copied.</p>
 
@@ -491,7 +551,7 @@ member:</li>
 </span><span class='line'>    <span class="c1">// refer to the same empty object</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_50">Prototype</h3>
+<h3 id="toc_54">Prototype</h3>
 
 <p>Every object is linked to a <strong>prototype object</strong>. All objects created from object literal <code>{}</code><br>
 are linked to <code>Object.prototype</code>.</p>
@@ -508,7 +568,7 @@ that property will immediately be visible in all the objects that are based on t
 </span><span class='line'><span class="nx">another_stooge</span><span class="p">.</span><span class="nx">profession</span> <span class="c1">// &#39;actor&#39;</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_51">Reflection</h3>
+<h3 id="toc_55">Reflection</h3>
 
 <p>Check if the object has a property:</p>
 
@@ -536,7 +596,7 @@ that property will immediately be visible in all the objects that are based on t
 </span><span class='line'><span class="nx">flight</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;toString&#39;</span><span class="p">)</span>   <span class="c1">// false</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_52">Enumeration</h3>
+<h3 id="toc_56">Enumeration</h3>
 
 <p>Loop over all the property names in an object.</p>
 
@@ -585,7 +645,7 @@ properties in the prototype chain.)</p>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_53">Delete</h3>
+<h3 id="toc_57">Delete</h3>
 
 <p>The <code>delete</code> operator can be used to remove a property from a object. It does <strong>NOT</strong> touch<br>
 any object in the prototype linkage.</p>
@@ -626,7 +686,7 @@ any object in the prototype linkage.</p>
   </header>
 
 
-  <div class="entry-content"><h2 id="toc_38">Read one line from file each time</h2>
+  <div class="entry-content"><h2 id="toc_42">Read one line from file each time</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -636,7 +696,7 @@ any object in the prototype linkage.</p>
 </span><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="n">in</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_39">Trim space from string</h2>
+<h2 id="toc_43">Trim space from string</h2>
 
 <p><a href="http://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring">original source</a></p>
 
@@ -684,13 +744,13 @@ any object in the prototype linkage.</p>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_40">Concatenate two vectors</h2>
+<h2 id="toc_44">Concatenate two vectors</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">source</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">source</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">destination</span><span class="p">));</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_41">Merge two vectors</h2>
+<h2 id="toc_45">Merge two vectors</h2>
 
 <p><code>std::merge</code> conbines the elements in sorted range [first1, last1], [first2, last2], into a new<br>
 range beginning at <em>result</em> with all its elements sorted.</p>
@@ -715,7 +775,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
 </span><span class='line'>        <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">tmp</span><span class="p">));</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_42">Concatenate two vectors, and remove duplicate elements</h2>
+<h2 id="toc_46">Concatenate two vectors, and remove duplicate elements</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -737,7 +797,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
 </span><span class='line'>            <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">tmp</span><span class="p">));</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_43">Append with operations on each element</h2>
+<h2 id="toc_47">Append with operations on each element</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -763,7 +823,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
 </span><span class='line'>        <span class="n">append_arrow</span><span class="p">);</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_44">Write vector to file</h2>
+<h2 id="toc_48">Write vector to file</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -813,7 +873,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
   </header>
 
 
-  <div class="entry-content"><h2 id="toc_36">Issue</h2>
+  <div class="entry-content"><h2 id="toc_40">Issue</h2>
 
 <p>When execute:</p>
 
@@ -850,7 +910,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
 </span><span class='line'>
 </span><span class='line'>    /usr/java/jdk1.7.0_45/jre/lib/jsse.jar</span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="toc_37">Solution</h2>
+<h2 id="toc_41">Solution</h2>
 
 <p>Install the 32bit libraries:</p>
 
@@ -893,14 +953,14 @@ range beginning at <em>result</em> with all its elements sorted.</p>
   </header>
 
 
-  <div class="entry-content"><h2 id="toc_34">问题</h2>
+  <div class="entry-content"><h2 id="toc_38">问题</h2>
 
 <p>遇到一个很奇怪的问题，在工程中使用 stlport 的时候各种编译不过，即使仅仅是声明一个对象都会编译不过。
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>std::sstream mystream;</span></code></pre></td></tr></table></div></figure>
 报的错误也很奇怪，是 stlport 内部的文件语法错误。</p>
 
-<h2 id="toc_35">分析过程</h2>
+<h2 id="toc_39">分析过程</h2>
 
 <ol>
 <li>在工程外部，编写小程序，使用工程中的 stlport 来编译，正常编译通过，运行正常；</li>
@@ -987,79 +1047,6 @@ it as the default config.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2013/09/18/abnormal-packets-in-socket/">Abnormal Packets in Socket</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-18T17:52:00+08:00" pubdate data-updated="true">Sep 18<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>今天遇到一个奇怪的问题，从抓包中发现服务器收到客户端发来的HTTP请求后，<br>
-会先回复一个乱七八糟的包，然后才会回正常的200 OK，自然的客户端就没办法<br>
-正常工作了。</p>
-
-<p>从代码分析，发现正常的逻辑下面，是不会出现这种情况的。</p>
-
-<p>通过使用netstat观察，发现出问题的连接在建立好了以后，Recv-Q里面会有内容，<br>
-应该是客户端发过来的数据，奇怪的是在Recv-Q里面有数据的同时，马上Send-Q里<br>
-面也有数据了，也就是说当上层应用程序还没有调用recv或者read的时候，已经有<br>
-数据被塞到Send-Q中了，但是按照上层应用程序处理的逻辑，只有当数据被recv了以后，<br>
-才会开始写。</p>
-
-<p>因为程序中有重用的机制，于是怀疑是不是前面的连接没有处理完，导致遗留的数据<br>
-被写到新的连接里面。</p>
-
-<p>仔细查看日志和代码后，发现了问题产生的根源。</p>
-
-<blockquote>
-<ul>
-<li>socket的fd会在被完全close之后被系统马上重用到新的连接上；</li>
-<li>应用程序中，accept新连接(listen thread)和处理连接(working thread)是两个线程</li>
-<li>问题在于当working thread把fd关闭以后，后面有一些清理工作还往该fd写了数据，于<br>
-是乎在fd被关闭和写数据之间，有可能listen thread接受了一个新的连接重用了之前的那个fd，<br>
-于是数据就会被写到这个新的连接中。</li>
-</ul>
-</blockquote>
-
-<p>从这个问题可以学习到：</p>
-
-<blockquote>
-<ul>
-<li>管理socket的时候，一定要注意其生命周期，尤其注意在在socket被close以后，不要再有<br>
-额外的操作，比如继续写数据（有些情况可以），重复close。</li>
-<li>当程序中存在多个线程操作同一个fd时，尤其要注意这样的问题。</li>
-</ul>
-</blockquote>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1075,6 +1062,10 @@ it as the default config.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/07/01/dnsmasq-config/">Dnsmasq Config</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/28/django-collections/">Django Collections</a>
       </li>
     
@@ -1088,10 +1079,6 @@ it as the default config.</p>
     
       <li class="post">
         <a href="/blog/2013/11/23/configure-vim-for-python-dev/">Configure Vim for Python Dev</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/11/10/object-js-good-part/">Object - Javascript: The Good Part</a>
       </li>
     
   </ul>

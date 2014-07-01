@@ -5,11 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: python - Note Everything</title>
+  <title>dnsmasq config - Note Everything</title>
   <meta name="author" content="hanh">
 
   
-  <meta name="description" content="Category: python">
+  <meta name="description" content="Set dns server for dnsmasq Use a separate conf file, the format is the same as resolv.conf.
+1
+resolv-file=/etc/resolv.masq.conf
+Then after dnsmasq is &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +21,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://upwell.github.ioblog/categories/python/">
+  <link rel="canonical" href="http://upwell.github.io/blog/2014/07/01/dnsmasq-config/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -83,66 +86,104 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Python</h1>
+    
+      
+        <h1 class="entry-title">Dnsmasq Config</h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-01T19:07:00+08:00" pubdate data-updated="true">Jul 1<span>st</span>, 2014</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><h3 id="toc_71">Set dns server for dnsmasq</h3>
 
-  
-  <h2>2014</h2>
+<p>Use a separate conf file, the format is the same as resolv.conf.
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>resolv-file=/etc/resolv.masq.conf</span></code></pre></td></tr></table></div></figure>
+Then after dnsmasq is started, set <code>127.0.0.1</code> in <code>/etc/resolv.conf</code>.</p>
 
-<article>
-  
-<h1><a href="/blog/2014/06/28/django-collections/">django collections</a></h1>
-<time datetime="2014-06-28T09:35:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>28</span> <span class='year'>2014</span></time>
+<h3 id="toc_72">listening address with localhost</h3>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/django/'>django</a>, <a class='category' href='/blog/categories/python/'>python</a></span>
-</footer>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>listen-address=127.0.0.1</span></code></pre></td></tr></table></div></figure>
 
+<h3 id="toc_73">Use separate DNS for certain domains</h3>
 
-</article>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>server=/www.google.com/8.8.8.8</span></code></pre></td></tr></table></div></figure>
 
+<h3 id="toc_74">Use regular expression for server</h3>
 
-
-<article>
-  
-<h1><a href="/blog/2014/06/20/two-foreign-keys-to-same-model/">two foreign keys to same model</a></h1>
-<time datetime="2014-06-20T14:35:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>20</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/django/'>django</a>, <a class='category' href='/blog/categories/python/'>python</a></span>
-</footer>
-
-
-</article>
-
-
-
-  
-  <h2>2013</h2>
-
-<article>
-  
-<h1><a href="/blog/2013/12/12/python-long-line-wrap/">python long line wrap</a></h1>
-<time datetime="2013-12-12T16:12:00+08:00" pubdate><span class='month'>Dec</span> <span class='day'>12</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/python/'>python</a></span>
-</footer>
-
-
-</article>
-
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>server=/:.*google.*/8.8.8.8</span></code></pre></td></tr></table></div></figure>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">hanh</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-01T19:07:00+08:00" pubdate data-updated="true">Jul 1<span>st</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/system/'>system</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left articlenav" href="/blog/2014/06/28/django-collections/" title="Previous Post: django collections">&laquo; django collections</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>

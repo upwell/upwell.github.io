@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: system | Note Everything]]></title>
+  <link href="http://upwell.github.io/blog/categories/system/atom.xml" rel="self"/>
+  <link href="http://upwell.github.io/"/>
+  <updated>2014-07-01T16:19:41+08:00</updated>
+  <id>http://upwell.github.io/</id>
+  <author>
+    <name><![CDATA[hanh]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[dnsmasq config]]></title>
+    <link href="http://upwell.github.io/blog/2014/07/01/dnsmasq-config/"/>
+    <updated>2014-07-01T19:07:00+08:00</updated>
+    <id>http://upwell.github.io/blog/2014/07/01/dnsmasq-config</id>
+    <content type="html"><![CDATA[<h3 id="toc_8">Set dns server for dnsmasq</h3>
+
+<p>Use a separate conf file, the format is the same as resolv.conf.
+<code>
+resolv-file=/etc/resolv.masq.conf
+</code>
+Then after dnsmasq is started, set <code>127.0.0.1</code> in <code>/etc/resolv.conf</code>.</p>
+
+<h3 id="toc_9">listening address with localhost</h3>
+<div class="highlight"><pre><code class="text">listen-address=127.0.0.1
+</code></pre>
+</div>
+
+<h3 id="toc_10">Use separate DNS for certain domains</h3>
+<div class="highlight"><pre><code class="text">server=/www.google.com/8.8.8.8
+</code></pre>
+</div>
+
+<h3 id="toc_11">Use regular expression for server</h3>
+<div class="highlight"><pre><code class="text">server=/:.*google.*/8.8.8.8
+</code></pre>
+</div>
+]]></content>
+  </entry>
+  
+</feed>
