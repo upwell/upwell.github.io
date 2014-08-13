@@ -63,8 +63,12 @@
         <lastmod>2014-07-01T16:19:36+08:00</lastmod>
     </url>
     <url>
+        <loc>http://upwell.github.io/blog/2014/08/13/django-use-silk-for-profiling/</loc>
+        <lastmod>2014-08-13T17:49:27+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://upwell.github.io/blog/archives/</loc>
-        <lastmod>2014-07-01T16:19:36+08:00</lastmod>
+        <lastmod>2014-08-13T17:49:27+08:00</lastmod>
     </url>
     <url>
         <loc>http://upwell.github.io/robots.txt</loc>
@@ -72,6 +76,6 @@
     </url>
     <url>
         <loc>http://upwell.github.io/</loc>
-        <lastmod>2014-07-01T16:19:36+08:00</lastmod>
+        <lastmod>2014-08-13T17:49:27+08:00</lastmod>
     </url>
 </urlset>

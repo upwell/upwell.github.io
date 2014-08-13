@@ -9,10 +9,7 @@
   <meta name="author" content="hanh">
 
   
-  <meta name="description" content="Set dns server for dnsmasq Use a separate conf file, the format is the same as resolv.conf.
-1
-resolv-file=/etc/resolv.masq.conf
-Then after dnsmasq is &hellip;">
+  <meta name="description" content="django-debug-toolbar does not work for ajax requests. Here comes silk which works perfect for the ajax condition. Installation Following the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +91,108 @@ Then after dnsmasq is &hellip;">
   <header>
     
       <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2014/08/13/django-use-silk-for-profiling/">Django - Use Silk for Profiling</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-13T17:41:00+08:00" pubdate data-updated="true">Aug 13<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://github.com/django-debug-toolbar/django-debug-toolbar">django-debug-toolbar</a> does not work for ajax requests. Here comes <a href="https://github.com/mtford90/silk">silk</a> which works perfect for the ajax condition.</p>
+
+<h3 id="toc_81">Installation</h3>
+
+<p>Following the <a href="https://github.com/mtford90/silk">instructions</a> to install and configure for your own projects.</p>
+
+<h3 id="toc_82">Tips</h3>
+
+<h4 id="toc_83">Middleware Settings</h4>
+
+<p>Pay attention to the <strong>middleware</strong> setting, you should not just append the line at the end of existed middle settings.  </p>
+
+<p>This would give you lots of error messages:  </p>
+
+<blockquote>
+<p>AttributeError: &#39;thread._local&#39; object has no attribute &#39;temp_identifier&#39;</p>
+</blockquote>
+
+<p>The solutions is, put it before the csrf middleware, like
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>MIDDLEWARE_CLASSES = (
+</span><span class='line'>    &#39;django.contrib.sessions.middleware.SessionMiddleware&#39;,
+</span><span class='line'>    &#39;django.middleware.common.CommonMiddleware&#39;,
+</span><span class='line'>    &#39;silk.middleware.SilkyMiddleware&#39;,
+</span><span class='line'>    &#39;django.middleware.csrf.CsrfViewMiddleware&#39;,
+</span><span class='line'>    &#39;django.contrib.auth.middleware.AuthenticationMiddleware&#39;,
+</span><span class='line'>    &#39;django.contrib.messages.middleware.MessageMiddleware&#39;,
+</span><span class='line'>    &#39;django.middleware.clickjacking.XFrameOptionsMiddleware&#39;,
+</span><span class='line'>    &#39;django.middleware.locale.LocaleMiddleware&#39;,
+</span><span class='line'>)</span></code></pre></td></tr></table></div></figure></p>
+
+<h4 id="toc_84">Server Error</h4>
+
+<p>The server side may generate error message like:</p>
+
+<blockquote>
+<p>pipe error<br>
+MySQL server has gone away</p>
+</blockquote>
+
+<p>Add <code>SILKY_MAX_RESPONSE_BODY_SIZE = 1024</code> in <code>settings.py</code>.</p>
+
+<h4 id="toc_85">Static file handling</h4>
+
+<p>If you don&#39;t want to run django in debug mode and also haven&#39;t setup the external server (nginx, uwsgi, etc.) for static file serving.</p>
+
+<p>To make <code>silk</code> display as expected, you need to do the following changes:
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># python manage.py collectstatic</span></code></pre></td></tr></table></div></figure>
+This would collect static files to <code>/static/</code> folder.</p>
+
+<p>After that, add a url pattern in <code>urls.py</code>.
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>url(r&#39;<sup>static/(?P&lt;path&gt;.*)$&#39;,</sup> &#39;django.views.static.serve&#39;,
+</span><span class='line'>    {&#39;document_root&#39;: settings.STATIC_ROOT}),</span></code></pre></td></tr></table></div></figure></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
         <h1 class="entry-title"><a href="/blog/2014/07/01/dnsmasq-config/">Dnsmasq Config</a></h1>
       
     
@@ -118,24 +217,24 @@ Then after dnsmasq is &hellip;">
   </header>
 
 
-  <div class="entry-content"><h3 id="toc_71">Set dns server for dnsmasq</h3>
+  <div class="entry-content"><h3 id="toc_77">Set dns server for dnsmasq</h3>
 
 <p>Use a separate conf file, the format is the same as resolv.conf.
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>resolv-file=/etc/resolv.masq.conf</span></code></pre></td></tr></table></div></figure>
 Then after dnsmasq is started, set <code>127.0.0.1</code> in <code>/etc/resolv.conf</code>.</p>
 
-<h3 id="toc_72">listening address with localhost</h3>
+<h3 id="toc_78">listening address with localhost</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>listen-address=127.0.0.1</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_73">Use separate DNS for certain domains</h3>
+<h3 id="toc_79">Use separate DNS for certain domains</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>server=/www.google.com/8.8.8.8</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_74">Use regular expression for server</h3>
+<h3 id="toc_80">Use regular expression for server</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>server=/:.*google.*/8.8.8.8</span></code></pre></td></tr></table></div></figure>
@@ -176,7 +275,7 @@ Then after dnsmasq is started, set <code>127.0.0.1</code> in <code>/etc/resolv.c
   </header>
 
 
-  <div class="entry-content"><h2 id="toc_70">django profiling tools</h2>
+  <div class="entry-content"><h2 id="toc_76">django profiling tools</h2>
 
 <p><a href="https://github.com/mtford90/silk">Silky smooth profiling for Django</a></p>
 
@@ -218,7 +317,7 @@ Then after dnsmasq is started, set <code>127.0.0.1</code> in <code>/etc/resolv.c
   </header>
 
 
-  <div class="entry-content"><h4 id="toc_68">Use <code>related_name</code>:</h4>
+  <div class="entry-content"><h4 id="toc_74">Use <code>related_name</code>:</h4>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -230,7 +329,7 @@ Then after dnsmasq is started, set <code>127.0.0.1</code> in <code>/etc/resolv.c
 
 <p>See <a href="http://stackoverflow.com/questions/543377/how-can-i-have-two-foreign-keys-to-the-same-model-in-django">stackoverflow question</a> and <a href="http://docs.djangoproject.com/en/dev/ref/models/fields/#foreignkey">django doc</a></p>
 
-<h4 id="toc_69">Why <code>related_name</code>:</h4>
+<h4 id="toc_75">Why <code>related_name</code>:</h4>
 
 <p>The <code>related_name</code> attributes specifies the name of reverse relation from <code>Example</code> model<br>
 to your model.</p>
@@ -279,7 +378,7 @@ doesn&#39;t know how to build up the reverse relation.</p>
   </header>
 
 
-  <div class="entry-content"><h2 id="toc_66">Long line with chained methods</h2>
+  <div class="entry-content"><h2 id="toc_72">Long line with chained methods</h2>
 
 <p>Use additional <strong>parenthesis</strong>.</p>
 
@@ -299,7 +398,7 @@ doesn&#39;t know how to build up the reverse relation.</p>
 </span><span class='line'>    <span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_67">Long string</h2>
+<h2 id="toc_73">Long string</h2>
 
 <p>Python concatenates string literals which appear adjacent to each other.</p>
 
@@ -347,7 +446,7 @@ doesn&#39;t know how to build up the reverse relation.</p>
   </header>
 
 
-  <div class="entry-content"><h2 id="toc_58">Flake8</h2>
+  <div class="entry-content"><h2 id="toc_64">Flake8</h2>
 
 <p><a href="https://pypi.python.org/pypi/flake8/">flake8</a> :  wrapper for python checkers:</p>
 
@@ -357,35 +456,35 @@ doesn&#39;t know how to build up the reverse relation.</p>
 <li>Ned Batchelder&#39;s McCabe script</li>
 </ul>
 
-<h3 id="toc_59">Install</h3>
+<h3 id="toc_65">Install</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># sudo pip install flake8</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_60">Vim-flake8</h2>
+<h2 id="toc_66">Vim-flake8</h2>
 
 <p><a href="https://github.com/nvie/vim-flake8">vim-flake8</a> : vim wrapper for flake8.</p>
 
-<h3 id="toc_61">Install</h3>
+<h3 id="toc_67">Install</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># git submodule add https://github.com/nvie/vim-flake8.git bundle/vim-flake8</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_62">How to use</h3>
+<h3 id="toc_68">How to use</h3>
 
 <ol>
 <li>Open a python file</li>
 <li>ress <code>F7</code> to run <code>flake8</code> on it</li>
 </ol>
 
-<h2 id="toc_63">Syntastic</h2>
+<h2 id="toc_69">Syntastic</h2>
 
 <p><a href="https://github.com/scrooloose/syntastic">syntastic</a> : syntax checking plugin that runs file through external syntax<br>
 checker and displays any resulting errors to user.</p>
 
-<h3 id="toc_64">Install</h3>
+<h3 id="toc_70">Install</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># git submodule add https://github.com/scrooloose/syntastic bundle/syntastic</span>
@@ -393,7 +492,7 @@ checker and displays any resulting errors to user.</p>
 
 <p>Start vim, then type <code>:Helptags</code>.</p>
 
-<h3 id="toc_65">How to use</h3>
+<h3 id="toc_71">How to use</h3>
 
 <p>Check</p>
 
@@ -443,7 +542,7 @@ checker and displays any resulting errors to user.</p>
   </header>
 
 
-  <div class="entry-content"><h3 id="toc_49">Object Literals</h3>
+  <div class="entry-content"><h3 id="toc_55">Object Literals</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -459,7 +558,7 @@ checker and displays any resulting errors to user.</p>
 </span><span class='line'><span class="p">};</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h4 id="toc_50">Property Name</h4>
+<h4 id="toc_56">Property Name</h4>
 
 <ul>
 <li>could be <strong>any</strong> string including empty string;</li>
@@ -497,7 +596,7 @@ name (not a reserved word);</li>
 </span><span class='line'><span class="p">};</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_51">Retrieval</h3>
+<h3 id="toc_57">Retrieval</h3>
 
 <ul>
 <li>Wrapping a string expression in a [] suffix;</li>
@@ -525,7 +624,7 @@ member:</li>
 </span><span class='line'><span class="nx">flight</span><span class="p">.</span><span class="nx">equipment</span> <span class="o">&amp;&amp;</span> <span class="nx">flight</span><span class="p">.</span><span class="nx">equipment</span><span class="p">.</span><span class="nx">model</span> <span class="c1">// undefined</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_52">Update</h3>
+<h3 id="toc_58">Update</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -535,7 +634,7 @@ member:</li>
 </span><span class='line'><span class="nx">stoog</span><span class="p">.</span><span class="nx">sex</span> <span class="o">=</span> <span class="s2">&quot;Male&quot;</span><span class="p">;</span>          <span class="c1">// if the property name not exist, the object is augmented;</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_53">Reference</h3>
+<h3 id="toc_59">Reference</h3>
 
 <p>Object is passed <strong>BY REFERENCE</strong>, never by copied.</p>
 
@@ -551,7 +650,7 @@ member:</li>
 </span><span class='line'>    <span class="c1">// refer to the same empty object</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_54">Prototype</h3>
+<h3 id="toc_60">Prototype</h3>
 
 <p>Every object is linked to a <strong>prototype object</strong>. All objects created from object literal <code>{}</code><br>
 are linked to <code>Object.prototype</code>.</p>
@@ -568,7 +667,7 @@ that property will immediately be visible in all the objects that are based on t
 </span><span class='line'><span class="nx">another_stooge</span><span class="p">.</span><span class="nx">profession</span> <span class="c1">// &#39;actor&#39;</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_55">Reflection</h3>
+<h3 id="toc_61">Reflection</h3>
 
 <p>Check if the object has a property:</p>
 
@@ -596,7 +695,7 @@ that property will immediately be visible in all the objects that are based on t
 </span><span class='line'><span class="nx">flight</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;toString&#39;</span><span class="p">)</span>   <span class="c1">// false</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_56">Enumeration</h3>
+<h3 id="toc_62">Enumeration</h3>
 
 <p>Loop over all the property names in an object.</p>
 
@@ -645,7 +744,7 @@ properties in the prototype chain.)</p>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_57">Delete</h3>
+<h3 id="toc_63">Delete</h3>
 
 <p>The <code>delete</code> operator can be used to remove a property from a object. It does <strong>NOT</strong> touch<br>
 any object in the prototype linkage.</p>
@@ -686,7 +785,7 @@ any object in the prototype linkage.</p>
   </header>
 
 
-  <div class="entry-content"><h2 id="toc_42">Read one line from file each time</h2>
+  <div class="entry-content"><h2 id="toc_48">Read one line from file each time</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -696,7 +795,7 @@ any object in the prototype linkage.</p>
 </span><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="n">in</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_43">Trim space from string</h2>
+<h2 id="toc_49">Trim space from string</h2>
 
 <p><a href="http://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring">original source</a></p>
 
@@ -744,13 +843,13 @@ any object in the prototype linkage.</p>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_44">Concatenate two vectors</h2>
+<h2 id="toc_50">Concatenate two vectors</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">source</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">source</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">destination</span><span class="p">));</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_45">Merge two vectors</h2>
+<h2 id="toc_51">Merge two vectors</h2>
 
 <p><code>std::merge</code> conbines the elements in sorted range [first1, last1], [first2, last2], into a new<br>
 range beginning at <em>result</em> with all its elements sorted.</p>
@@ -775,7 +874,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
 </span><span class='line'>        <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">tmp</span><span class="p">));</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_46">Concatenate two vectors, and remove duplicate elements</h2>
+<h2 id="toc_52">Concatenate two vectors, and remove duplicate elements</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -797,7 +896,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
 </span><span class='line'>            <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">tmp</span><span class="p">));</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_47">Append with operations on each element</h2>
+<h2 id="toc_53">Append with operations on each element</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -823,7 +922,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
 </span><span class='line'>        <span class="n">append_arrow</span><span class="p">);</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_48">Write vector to file</h2>
+<h2 id="toc_54">Write vector to file</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -873,7 +972,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
   </header>
 
 
-  <div class="entry-content"><h2 id="toc_40">Issue</h2>
+  <div class="entry-content"><h2 id="toc_46">Issue</h2>
 
 <p>When execute:</p>
 
@@ -910,7 +1009,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
 </span><span class='line'>
 </span><span class='line'>    /usr/java/jdk1.7.0_45/jre/lib/jsse.jar</span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="toc_41">Solution</h2>
+<h2 id="toc_47">Solution</h2>
 
 <p>Install the 32bit libraries:</p>
 
@@ -953,14 +1052,14 @@ range beginning at <em>result</em> with all its elements sorted.</p>
   </header>
 
 
-  <div class="entry-content"><h2 id="toc_38">问题</h2>
+  <div class="entry-content"><h2 id="toc_44">问题</h2>
 
 <p>遇到一个很奇怪的问题，在工程中使用 stlport 的时候各种编译不过，即使仅仅是声明一个对象都会编译不过。
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>std::sstream mystream;</span></code></pre></td></tr></table></div></figure>
 报的错误也很奇怪，是 stlport 内部的文件语法错误。</p>
 
-<h2 id="toc_39">分析过程</h2>
+<h2 id="toc_45">分析过程</h2>
 
 <ol>
 <li>在工程外部，编写小程序，使用工程中的 stlport 来编译，正常编译通过，运行正常；</li>
@@ -989,64 +1088,6 @@ range beginning at <em>result</em> with all its elements sorted.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2013/10/15/ctags-ignore-files/">Ignore Files When Building Tags</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-15T17:52:00+08:00" pubdate data-updated="true">Oct 15<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Use the following commands:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ctags --exclude=*.html --exclude=*.js --exclude=*.sql -R</span></code></pre></td></tr></table></div></figure>
-
-<p>It&#39;s annoying to enter the long parameters every time. You can configure<br>
-it as the default config.</p>
-
-<p>Edit <code>~/.ctags</code>. Add the following lines:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>--exclude=*.html
-</span><span class='line'>--exclude=*.js
-</span><span class='line'>--exclude=*.sql</span></code></pre></td></tr></table></div></figure>
-
-<p>Then you only need to type:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ctags -R</span></code></pre></td></tr></table></div></figure>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1060,6 +1101,10 @@ it as the default config.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/08/13/django-use-silk-for-profiling/">Django - Use Silk for Profiling</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/07/01/dnsmasq-config/">Dnsmasq Config</a>
@@ -1077,10 +1122,6 @@ it as the default config.</p>
         <a href="/blog/2013/12/12/python-long-line-wrap/">Python Long Line Wrap</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/11/23/configure-vim-for-python-dev/">Configure Vim for Python Dev</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -1089,7 +1130,7 @@ it as the default config.</p>
 
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/django'>django (2)</a></li><li><a href='/blog/categories/python'>python (3)</a></li><li><a href='/blog/categories/system'>system (1)</a></li><li><a href='/blog/categories/vim'>vim (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/django'>django (3)</a></li><li><a href='/blog/categories/python'>python (3)</a></li><li><a href='/blog/categories/system'>system (1)</a></li><li><a href='/blog/categories/vim'>vim (1)</a></li></ul>
 </section>
 
   

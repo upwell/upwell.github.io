@@ -5,14 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>octopress daily use - Note Everything</title>
+  <title>django - use silk for profiling - Note Everything</title>
   <meta name="author" content="hanh">
 
   
-  <meta name="description" content="Check ruby version 1
-ruby -v If the version is not 1.9.3, use the following commmand to switch to 1.9.3: 1
-rvm use 1.9.3 Create a new post 1
-rake &hellip;">
+  <meta name="description" content="django-debug-toolbar does not work for ajax requests. Here comes silk which works perfect for the ajax condition. Installation Following the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +18,7 @@ rake &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://upwell.github.io/blog/2013/09/18/octopress-daily-use/">
+  <link rel="canonical" href="http://upwell.github.io/blog/2014/08/13/django-use-silk-for-profiling/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -91,7 +88,7 @@ rake &hellip;">
   <header>
     
       
-        <h1 class="entry-title">Octopress Daily Use</h1>
+        <h1 class="entry-title">Django - Use Silk for Profiling</h1>
       
     
     
@@ -108,78 +105,78 @@ rake &hellip;">
   
 
 
-<time datetime="2013-09-18T17:00:00+08:00" pubdate data-updated="true">Sep 18<span>th</span>, 2013</time>
+<time datetime="2014-08-13T17:41:00+08:00" pubdate data-updated="true">Aug 13<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h3 id="toc_38">Check ruby version</h3>
+<div class="entry-content"><p><a href="https://github.com/django-debug-toolbar/django-debug-toolbar">django-debug-toolbar</a> does not work for ajax requests. Here comes <a href="https://github.com/mtford90/silk">silk</a> which works perfect for the ajax condition.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>ruby -v
-</span></code></pre></td></tr></table></div></figure>
+<h3 id="toc_81">Installation</h3>
 
-<p>If the version is not 1.9.3, use the following commmand to switch to 1.9.3:</p>
+<p>Following the <a href="https://github.com/mtford90/silk">instructions</a> to install and configure for your own projects.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm use 1.9.3
-</span></code></pre></td></tr></table></div></figure>
+<h3 id="toc_82">Tips</h3>
 
-<h3 id="toc_39">Create a new post</h3>
+<h4 id="toc_83">Middleware Settings</h4>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake new_post<span class="o">[</span><span class="s1">&#39;octopress daily use&#39;</span><span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>Pay attention to the <strong>middleware</strong> setting, you should not just append the line at the end of existed middle settings.  </p>
 
-<p>This would create a new markdown file under <code>source/_posts/</code> folder. Edit the file<br>
-to compose the new post.</p>
+<p>This would give you lots of error messages:  </p>
 
-<h3 id="toc_40">Preview and generate</h3>
+<blockquote>
+<p>AttributeError: &#39;thread._local&#39; object has no attribute &#39;temp_identifier&#39;</p>
+</blockquote>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake generate
-</span><span class='line'>rake preview
-</span></code></pre></td></tr></table></div></figure>
-
-<p>Visit <code>http://localhost:4000</code> to preview the site.</p>
-
-<h3 id="toc_41">Deploy to github page</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake generate
-</span><span class='line'>rake deploy
-</span></code></pre></td></tr></table></div></figure>
-
-<p>This would deploy the generate file on to github page for display.</p>
-
-<h3 id="toc_42">Submit source to github repo</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git add .
-</span><span class='line'>git commit -m <span class="s1">&#39;new post&#39;</span>
-</span><span class='line'>git push origin <span class="nb">source</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<h3 id="toc_43">Use octopress in two machines</h3>
-
-<p>Before update / add a new post, remember:
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>The solutions is, put it before the csrf middleware, like
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd source</span>
-</span><span class='line'>git pull origin <span class="nb">source</span>
-</span><span class='line'><span class="nb">cd</span> ../_deploy
-</span><span class='line'>git pull origin master
-</span></code></pre></td></tr></table></div></figure></p>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>MIDDLEWARE_CLASSES = (
+</span><span class='line'>    &#39;django.contrib.sessions.middleware.SessionMiddleware&#39;,
+</span><span class='line'>    &#39;django.middleware.common.CommonMiddleware&#39;,
+</span><span class='line'>    &#39;silk.middleware.SilkyMiddleware&#39;,
+</span><span class='line'>    &#39;django.middleware.csrf.CsrfViewMiddleware&#39;,
+</span><span class='line'>    &#39;django.contrib.auth.middleware.AuthenticationMiddleware&#39;,
+</span><span class='line'>    &#39;django.contrib.messages.middleware.MessageMiddleware&#39;,
+</span><span class='line'>    &#39;django.middleware.clickjacking.XFrameOptionsMiddleware&#39;,
+</span><span class='line'>    &#39;django.middleware.locale.LocaleMiddleware&#39;,
+</span><span class='line'>)</span></code></pre></td></tr></table></div></figure></p>
 
-<p>After the update, remember to submit to source and deploy to github</p>
+<h4 id="toc_84">Server Error</h4>
+
+<p>The server side may generate error message like:</p>
+
+<blockquote>
+<p>pipe error<br>
+MySQL server has gone away</p>
+</blockquote>
+
+<p>Add <code>SILKY_MAX_RESPONSE_BODY_SIZE = 1024</code> in <code>settings.py</code>.</p>
+
+<h4 id="toc_85">Static file handling</h4>
+
+<p>If you don&#39;t want to run django in debug mode and also haven&#39;t setup the external server (nginx, uwsgi, etc.) for static file serving.</p>
+
+<p>To make <code>silk</code> display as expected, you need to do the following changes:
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># python manage.py collectstatic</span></code></pre></td></tr></table></div></figure>
+This would collect static files to <code>/static/</code> folder.</p>
+
+<p>After that, add a url pattern in <code>urls.py</code>.
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>url(r&#39;<sup>static/(?P&lt;path&gt;.*)$&#39;,</sup> &#39;django.views.static.serve&#39;,
+</span><span class='line'>    {&#39;document_root&#39;: settings.STATIC_ROOT}),</span></code></pre></td></tr></table></div></figure></p>
 </div>
 
 
@@ -202,8 +199,14 @@ to compose the new post.</p>
   
 
 
-<time datetime="2013-09-18T17:00:00+08:00" pubdate data-updated="true">Sep 18<span>th</span>, 2013</time>
+<time datetime="2014-08-13T17:41:00+08:00" pubdate data-updated="true">Aug 13<span>th</span>, 2014</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/django/'>django</a>
+  
+</span>
 
 
     </p>
@@ -217,10 +220,8 @@ to compose the new post.</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left articlenav" href="/blog/2013/08/14/vim-memo/" title="Previous Post: Vim memo">&laquo; Vim memo</a>
+        <a class="basic-alignment left articlenav" href="/blog/2014/07/01/dnsmasq-config/" title="Previous Post: dnsmasq config">&laquo; dnsmasq config</a>
       
-      
-        <a class="basic-alignment right articlenav" href="/blog/2013/09/18/abnormal-packets-in-socket/" title="Next Post: abnormal packets in socket">abnormal packets in socket &raquo;</a>
       
     </p>
   </footer>

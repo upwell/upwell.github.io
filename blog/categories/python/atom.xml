@@ -4,7 +4,7 @@
   <title><![CDATA[Category: python | Note Everything]]></title>
   <link href="http://upwell.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://upwell.github.io/"/>
-  <updated>2014-08-13T11:06:18+08:00</updated>
+  <updated>2014-08-13T17:50:33+08:00</updated>
   <id>http://upwell.github.io/</id>
   <author>
     <name><![CDATA[hanh]]></name>
@@ -18,7 +18,7 @@
     <link href="http://upwell.github.io/blog/2014/06/28/django-collections/"/>
     <updated>2014-06-28T09:35:00+08:00</updated>
     <id>http://upwell.github.io/blog/2014/06/28/django-collections</id>
-    <content type="html"><![CDATA[<h2 id="toc_3">django profiling tools</h2>
+    <content type="html"><![CDATA[<h2 id="toc_9">django profiling tools</h2>
 
 <p><a href="https://github.com/mtford90/silk">Silky smooth profiling for Django</a></p>
 
@@ -31,7 +31,7 @@
     <link href="http://upwell.github.io/blog/2014/06/20/two-foreign-keys-to-same-model/"/>
     <updated>2014-06-20T14:35:00+08:00</updated>
     <id>http://upwell.github.io/blog/2014/06/20/two-foreign-keys-to-same-model</id>
-    <content type="html"><![CDATA[<h4 id="toc_4">Use <code>related_name</code>:</h4>
+    <content type="html"><![CDATA[<h4 id="toc_10">Use <code>related_name</code>:</h4>
 <div class="highlight"><pre><code class="python"><span class="k">class</span> <span class="nc">Test</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="n">example1</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Example</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&#39;test1&#39;</span><span class="p">)</span>
     <span class="n">example2</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Example</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&#39;test2&#39;</span><span class="p">)</span>
@@ -40,7 +40,7 @@
 
 <p>See <a href="http://stackoverflow.com/questions/543377/how-can-i-have-two-foreign-keys-to-the-same-model-in-django">stackoverflow question</a> and <a href="http://docs.djangoproject.com/en/dev/ref/models/fields/#foreignkey">django doc</a></p>
 
-<h4 id="toc_5">Why <code>related_name</code>:</h4>
+<h4 id="toc_11">Why <code>related_name</code>:</h4>
 
 <p>The <code>related_name</code> attributes specifies the name of reverse relation from <code>Example</code> model<br>
 to your model.</p>
@@ -60,7 +60,7 @@ doesn&#39;t know how to build up the reverse relation.</p>
     <link href="http://upwell.github.io/blog/2013/12/12/python-long-line-wrap/"/>
     <updated>2013-12-12T16:12:00+08:00</updated>
     <id>http://upwell.github.io/blog/2013/12/12/python-long-line-wrap</id>
-    <content type="html"><![CDATA[<h2 id="toc_6">Long line with chained methods</h2>
+    <content type="html"><![CDATA[<h2 id="toc_12">Long line with chained methods</h2>
 
 <p>Use additional <strong>parenthesis</strong>.</p>
 <div class="highlight"><pre><code class="python"><span class="n">subkeyword</span> <span class="o">=</span> <span class="p">(</span>
@@ -73,7 +73,7 @@ doesn&#39;t know how to build up the reverse relation.</p>
 </code></pre>
 </div>
 
-<h2 id="toc_7">Long string</h2>
+<h2 id="toc_13">Long string</h2>
 
 <p>Python concatenates string literals which appear adjacent to each other.</p>
 <div class="highlight"><pre><code class="python"><span class="k">def</span> <span class="nf">fun</span><span class="p">():</span>
