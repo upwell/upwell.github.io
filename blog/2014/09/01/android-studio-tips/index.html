@@ -5,18 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>python long line wrap - Note Everything</title>
+  <title>android studio tips - Note Everything</title>
   <meta name="author" content="hanh">
 
   
-  <meta name="description" content="Long line with chained methods Use additional parenthesis. 1
-2
-3
-4
-5
-6
-7
-subkeyword = ( Session.query(Subkeyword.subkeyword_id, Subkeyword. &hellip;">
+  <meta name="description" content="Cannot run program aapt &#8211; no such file or directory Install missing 32bit libraries: 1
+yum install libstdc++.i686 zlib.i686 studio running with &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -25,7 +19,7 @@ subkeyword = ( Session.query(Subkeyword.subkeyword_id, Subkeyword. &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://upwell.github.io/blog/2013/12/12/python-long-line-wrap/">
+  <link rel="canonical" href="http://upwell.github.io/blog/2014/09/01/android-studio-tips/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -95,7 +89,7 @@ subkeyword = ( Session.query(Subkeyword.subkeyword_id, Subkeyword. &hellip;">
   <header>
     
       
-        <h1 class="entry-title">Python Long Line Wrap</h1>
+        <h1 class="entry-title">Android Studio Tips</h1>
       
     
     
@@ -112,44 +106,32 @@ subkeyword = ( Session.query(Subkeyword.subkeyword_id, Subkeyword. &hellip;">
   
 
 
-<time datetime="2013-12-12T16:12:00+08:00" pubdate data-updated="true">Dec 12<span>th</span>, 2013</time>
+<time datetime="2014-09-01T15:45:00+08:00" pubdate data-updated="true">Sep 1<span>st</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2 id="toc_74">Long line with chained methods</h2>
+<div class="entry-content"><h2 id="toc_88">Cannot run program aapt &#8211; no such file or directory</h2>
 
-<p>Use additional <strong>parenthesis</strong>.</p>
+<p>Install missing 32bit libraries:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">subkeyword</span> <span class="o">=</span> <span class="p">(</span>
-</span><span class='line'>        <span class="n">Session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Subkeyword</span><span class="o">.</span><span class="n">subkeyword_id</span><span class="p">,</span> <span class="n">Subkeyword</span><span class="o">.</span><span class="n">subkeyword_word</span><span class="p">)</span>
-</span><span class='line'>        <span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">subkeyword_company_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">e_company_id</span><span class="p">)</span>
-</span><span class='line'>        <span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">subkeyword_word</span><span class="o">=</span><span class="n">subkeyword_word</span><span class="p">)</span>
-</span><span class='line'>        <span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">subkeyword_active</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-</span><span class='line'>        <span class="o">.</span><span class="n">one</span><span class="p">()</span>
-</span><span class='line'>    <span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>yum install libstdc++.i686 zlib.i686</span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_75">Long string</h2>
+<h2 id="toc_89">studio running with the openjdk</h2>
 
-<p>Python concatenates string literals which appear adjacent to each other.</p>
+<p>Although I installed the oracle jdk, and export <code>STUDIO_JDK</code> in both zshrc and bashrc, when<br>
+start android studio from desktop application, it still uses the open jdk.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">fun</span><span class="p">():</span>
-</span><span class='line'>    <span class="k">print</span> <span class="s">&#39;{0} Here is a really long &#39;</span> \
-</span><span class='line'>          <span class="s">&#39;sentence with {1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>For desktop application defined under <code>~/.local/share/applications/</code>, you need to<br>
+setup the environment variables in <code>~/.profile</code>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>export STUDIO_JDK=/usr/java/jdk1.8.0_20</span></code></pre></td></tr></table></div></figure>
+
+<p>After that, logout and relogin, start android studio again, it works now.</p>
 </div>
 
 
@@ -172,12 +154,12 @@ subkeyword = ( Session.query(Subkeyword.subkeyword_id, Subkeyword. &hellip;">
   
 
 
-<time datetime="2013-12-12T16:12:00+08:00" pubdate data-updated="true">Dec 12<span>th</span>, 2013</time>
+<time datetime="2014-09-01T15:45:00+08:00" pubdate data-updated="true">Sep 1<span>st</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/python/'>python</a>
+    <a class='category' href='/blog/categories/android/'>android</a>
   
 </span>
 
@@ -193,10 +175,8 @@ subkeyword = ( Session.query(Subkeyword.subkeyword_id, Subkeyword. &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left articlenav" href="/blog/2013/11/23/configure-vim-for-python-dev/" title="Previous Post: configure vim for python dev">&laquo; configure vim for python dev</a>
+        <a class="basic-alignment left articlenav" href="/blog/2014/08/13/django-use-silk-for-profiling/" title="Previous Post: django - use silk for profiling">&laquo; django - use silk for profiling</a>
       
-      
-        <a class="basic-alignment right articlenav" href="/blog/2014/06/20/two-foreign-keys-to-same-model/" title="Next Post: two foreign keys to same model">two foreign keys to same model &raquo;</a>
       
     </p>
   </footer>

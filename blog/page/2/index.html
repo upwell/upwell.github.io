@@ -9,8 +9,10 @@
   <meta name="author" content="hanh">
 
   
-  <meta name="description" content="Use the following commands: 1
-ctags --exclude=*.html --exclude=*.js --exclude=*.sql -R It&#39;s annoying to enter the long parameters every time. You &hellip;">
+  <meta name="description" content="问题 遇到一个很奇怪的问题，在工程中使用 stlport 的时候各种编译不过，即使仅仅是声明一个对象都会编译不过。
+1
+std::sstream mystream;
+报的错误也很奇怪，是 stlport 内部的文件语法错误。 分析过程 在工程外部，编写小程序，使用工程中的 stlport 来编译， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,6 +87,72 @@ ctags --exclude=*.html --exclude=*.js --exclude=*.sql -R It&#39;s annoying to en
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2013/10/16/c-header-file-include-seq/">C++头文件include的顺序问题</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-16T16:48:00+08:00" pubdate data-updated="true">Oct 16<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2 id="toc_46">问题</h2>
+
+<p>遇到一个很奇怪的问题，在工程中使用 stlport 的时候各种编译不过，即使仅仅是声明一个对象都会编译不过。
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>std::sstream mystream;</span></code></pre></td></tr></table></div></figure>
+报的错误也很奇怪，是 stlport 内部的文件语法错误。</p>
+
+<h2 id="toc_47">分析过程</h2>
+
+<ol>
+<li>在工程外部，编写小程序，使用工程中的 stlport 来编译，正常编译通过，运行正常；</li>
+<li>怀疑工程中的 Makefile 对 stlport 编译时使用了特殊的选项，检查发现没有特殊的选项；</li>
+<li>怀疑工程中使用的 stlport 有问题，重新编译了一份 stlport 还是不行；</li>
+<li><p>检查stlport的源代码，出错的地方对 <code>#define XXX</code> 有依赖，同时检查了工程中的代码，发现 <code>include</code> std 头文件在所有 <code>include</code> 的最后面。
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &quot;a.h&quot;
+</span><span class='line'>#include &quot;b.h&quot;
+</span><span class='line'>#include &lt;sstream&gt;</span></code></pre></td></tr></table></div></figure></p></li>
+<li><p>猜测可能前面的头文件中的 <code>#define</code> 影响了 sstream 中的设置，将 <code>#include &lt;sstream&gt;</code> 放到文件的最前面，问题解决；</p></li>
+</ol>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include "a.h"
+</span><span class='line'>#include "b.h"
+</span><span class='line'>#include &lt;sstream&gt;</span></code></pre></td></tr></table></div></figure>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -247,7 +315,7 @@ it as the default config.</p>
   </header>
 
 
-  <div class="entry-content"><h3 id="toc_38">Check ruby version</h3>
+  <div class="entry-content"><h3 id="toc_40">Check ruby version</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>ruby -v
@@ -259,7 +327,7 @@ it as the default config.</p>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm use 1.9.3
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_39">Create a new post</h3>
+<h3 id="toc_41">Create a new post</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>rake new_post<span class="o">[</span><span class="s1">&#39;octopress daily use&#39;</span><span class="o">]</span>
@@ -268,7 +336,7 @@ it as the default config.</p>
 <p>This would create a new markdown file under <code>source/_posts/</code> folder. Edit the file<br>
 to compose the new post.</p>
 
-<h3 id="toc_40">Preview and generate</h3>
+<h3 id="toc_42">Preview and generate</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -278,7 +346,7 @@ to compose the new post.</p>
 
 <p>Visit <code>http://localhost:4000</code> to preview the site.</p>
 
-<h3 id="toc_41">Deploy to github page</h3>
+<h3 id="toc_43">Deploy to github page</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -288,7 +356,7 @@ to compose the new post.</p>
 
 <p>This would deploy the generate file on to github page for display.</p>
 
-<h3 id="toc_42">Submit source to github repo</h3>
+<h3 id="toc_44">Submit source to github repo</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -298,7 +366,7 @@ to compose the new post.</p>
 </span><span class='line'>git push origin <span class="nb">source</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_43">Use octopress in two machines</h3>
+<h3 id="toc_45">Use octopress in two machines</h3>
 
 <p>Before update / add a new post, remember:
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -349,7 +417,7 @@ to compose the new post.</p>
   </header>
 
 
-  <div class="entry-content"><h2 id="toc_33">Move faster : EasyMotion</h2>
+  <div class="entry-content"><h2 id="toc_35">Move faster : EasyMotion</h2>
 
 <p>EasyMotion provides a much simpler way to use some motions in vim. It takes<br>
 the <code>&lt;number&gt;</code> out of <code>&lt;number&gt;w</code> or <code>&lt;number&gt;f{char}</code> by highlighting all<br>
@@ -362,18 +430,18 @@ target.</p>
 <code>&lt;leader&gt;&lt;leader&gt;f</code><br>
 <code>&lt;leader&gt;&lt;leader&gt;f{char}</code></p>
 
-<h2 id="toc_34">Repeats</h2>
+<h2 id="toc_36">Repeats</h2>
 
 <p>Single repeats</p>
 
 <p><code>.</code> : used to repeat simple changes<br>
 <code>@:</code> : used to repeat last command-line</p>
 
-<h2 id="toc_35">Surround</h2>
+<h2 id="toc_37">Surround</h2>
 
 <p>With plugin <a href="https://github.com/tpope/vim-surround">Surround</a>, you can easily handle surround with words.</p>
 
-<h3 id="toc_36">Add surroundings</h3>
+<h3 id="toc_38">Add surroundings</h3>
 
 <p><code>ys</code> takes an <strong>valid Vim motion</strong> or text object as the first object and wraps it using the second
 argument.
@@ -385,7 +453,7 @@ argument.
 <p>Under <strong>visual mode</strong>, select content and press <code>S</code> with the surrounding wound wrap the selected
 content.</p>
 
-<h3 id="toc_37">Delete surroundings</h3>
+<h3 id="toc_39">Delete surroundings</h3>
 
 <p>Delete surroundings is <code>ds</code> .
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -433,29 +501,29 @@ content.</p>
   </header>
 
 
-  <div class="entry-content"><h3 id="toc_26">Use a database file</h3>
+  <div class="entry-content"><h3 id="toc_28">Use a database file</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>sqlite &lt;database_file&gt;</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_27">Get table information</h3>
+<h3 id="toc_29">Get table information</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>.tables</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_28">Get schema information</h3>
+<h3 id="toc_30">Get schema information</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>.schema
 </span><span class='line'>.schema table_name</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_29">Get help</h3>
+<h3 id="toc_31">Get help</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>.help</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_30">Write result to a file</h3>
+<h3 id="toc_32">Write result to a file</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -468,12 +536,12 @@ content.</p>
 </span><span class='line'>select * from table_name;
 </span><span class='line'>.exit</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_31">Exit</h3>
+<h3 id="toc_33">Exit</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>.exit</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_32">More</h3>
+<h3 id="toc_34">More</h3>
 
 <p><a href="http://www.sqlite.org/sqlite.html">sqlite official site help</a></p>
 </div>
@@ -513,7 +581,7 @@ content.</p>
   </header>
 
 
-  <div class="entry-content"><h3 id="toc_23">Install packages</h3>
+  <div class="entry-content"><h3 id="toc_25">Install packages</h3>
 
 <p>CentOS 6.3 does not have xrdp package in the official repo.</p>
 
@@ -531,14 +599,14 @@ content.</p>
 </span><span class='line'>yum install xrdp</span></code></pre></td></tr></table></div></figure></li>
 </ul>
 
-<h3 id="toc_24">Start service</h3>
+<h3 id="toc_26">Start service</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>/etc/init.d/xrdp start
 </span><span class='line'>chkconfig xrdp on</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_25">Issues</h3>
+<h3 id="toc_27">Issues</h3>
 
 <ul>
 <li><p>problem connecting 5910
@@ -584,6 +652,10 @@ login as root
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/09/01/android-studio-tips/">Android Studio Tips</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/08/13/django-use-silk-for-profiling/">Django - Use Silk for Profiling</a>
       </li>
     
@@ -599,10 +671,6 @@ login as root
         <a href="/blog/2014/06/20/two-foreign-keys-to-same-model/">Two Foreign Keys to Same Model</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/12/12/python-long-line-wrap/">Python Long Line Wrap</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -611,7 +679,7 @@ login as root
 
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/django'>django (3)</a></li><li><a href='/blog/categories/python'>python (3)</a></li><li><a href='/blog/categories/system'>system (1)</a></li><li><a href='/blog/categories/vim'>vim (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/android'>android (1)</a></li><li><a href='/blog/categories/django'>django (3)</a></li><li><a href='/blog/categories/python'>python (3)</a></li><li><a href='/blog/categories/system'>system (1)</a></li><li><a href='/blog/categories/vim'>vim (1)</a></li></ul>
 </section>
 
   
