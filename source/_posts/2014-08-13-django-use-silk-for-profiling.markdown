@@ -48,7 +48,7 @@ To make `silk` display as expected, you need to do the following changes:
 ```
 # python manage.py collectstatic
 ```
-This would collect static files to `/static/` folder.
+This would collect static files to `settings.STATIC_ROOT` folder.
 
 After that, add a url pattern in `urls.py`.
 ```
