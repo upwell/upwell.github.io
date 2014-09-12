@@ -4,7 +4,7 @@
   <title><![CDATA[Note Everything]]></title>
   <link href="http://upwell.github.io/atom.xml" rel="self"/>
   <link href="http://upwell.github.io/"/>
-  <updated>2014-09-01T16:00:30+08:00</updated>
+  <updated>2014-09-12T11:08:16+08:00</updated>
   <id>http://upwell.github.io/</id>
   <author>
     <name><![CDATA[hanh]]></name>
@@ -103,7 +103,7 @@ MySQL server has gone away</p>
 <p>To make <code>silk</code> display as expected, you need to do the following changes:
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'># python manage.py collectstatic</span></code></pre></td></tr></table></div></figure>
-This would collect static files to <code>/static/</code> folder.</p>
+This would collect static files to <code>settings.STATIC_ROOT</code> folder.</p>
 
 <p>After that, add a url pattern in <code>urls.py</code>.
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
