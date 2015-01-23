@@ -4,7 +4,7 @@
   <title><![CDATA[Category: django | Note Everything]]></title>
   <link href="http://upwell.github.io/blog/categories/django/atom.xml" rel="self"/>
   <link href="http://upwell.github.io/"/>
-  <updated>2014-09-12T11:08:16+08:00</updated>
+  <updated>2015-01-23T09:35:57+08:00</updated>
   <id>http://upwell.github.io/</id>
   <author>
     <name><![CDATA[hanh]]></name>
@@ -20,13 +20,13 @@
     <id>http://upwell.github.io/blog/2014/08/13/django-use-silk-for-profiling</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/django-debug-toolbar/django-debug-toolbar">django-debug-toolbar</a> does not work for ajax requests. Here comes <a href="https://github.com/mtford90/silk">silk</a> which works perfect for the ajax condition.</p>
 
-<h3 id="toc_0">Installation</h3>
+<h3 id="toc_2">Installation</h3>
 
 <p>Following the <a href="https://github.com/mtford90/silk">instructions</a> to install and configure for your own projects.</p>
 
-<h3 id="toc_1">Tips</h3>
+<h3 id="toc_3">Tips</h3>
 
-<h4 id="toc_2">Middleware Settings</h4>
+<h4 id="toc_4">Middleware Settings</h4>
 
 <p>Pay attention to the <strong>middleware</strong> setting, you should not just append the line at the end of existed middle settings.  </p>
 
@@ -50,7 +50,7 @@ MIDDLEWARE_CLASSES = (
 )
 </code></p>
 
-<h4 id="toc_3">Server Error</h4>
+<h4 id="toc_5">Server Error</h4>
 
 <p>The server side may generate error message like:</p>
 
@@ -61,14 +61,14 @@ MySQL server has gone away</p>
 
 <p>Add <code>SILKY_MAX_RESPONSE_BODY_SIZE = 1024</code> in <code>settings.py</code>.</p>
 
-<h4 id="toc_4">Static file handling</h4>
+<h4 id="toc_6">Static file handling</h4>
 
 <p>If you don&#39;t want to run django in debug mode and also haven&#39;t setup the external server (nginx, uwsgi, etc.) for static file serving.</p>
 
 <p>To make <code>silk</code> display as expected, you need to do the following changes:
 ```</p>
 
-<h1 id="toc_5">python manage.py collectstatic</h1>
+<h1 id="toc_7">python manage.py collectstatic</h1>
 <div class="highlight"><pre><code class="text">This would collect static files to `settings.STATIC_ROOT` folder.
 
 After that, add a url pattern in `urls.py`.
@@ -86,7 +86,7 @@ After that, add a url pattern in `urls.py`.
     <link href="http://upwell.github.io/blog/2014/06/28/django-collections/"/>
     <updated>2014-06-28T09:35:00+08:00</updated>
     <id>http://upwell.github.io/blog/2014/06/28/django-collections</id>
-    <content type="html"><![CDATA[<h2 id="toc_6">django profiling tools</h2>
+    <content type="html"><![CDATA[<h2 id="toc_8">django profiling tools</h2>
 
 <p><a href="https://github.com/mtford90/silk">Silky smooth profiling for Django</a></p>
 
@@ -99,7 +99,7 @@ After that, add a url pattern in `urls.py`.
     <link href="http://upwell.github.io/blog/2014/06/20/two-foreign-keys-to-same-model/"/>
     <updated>2014-06-20T14:35:00+08:00</updated>
     <id>http://upwell.github.io/blog/2014/06/20/two-foreign-keys-to-same-model</id>
-    <content type="html"><![CDATA[<h4 id="toc_7">Use <code>related_name</code>:</h4>
+    <content type="html"><![CDATA[<h4 id="toc_9">Use <code>related_name</code>:</h4>
 <div class="highlight"><pre><code class="python"><span class="k">class</span> <span class="nc">Test</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="n">example1</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Example</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&#39;test1&#39;</span><span class="p">)</span>
     <span class="n">example2</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Example</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&#39;test2&#39;</span><span class="p">)</span>
@@ -108,7 +108,7 @@ After that, add a url pattern in `urls.py`.
 
 <p>See <a href="http://stackoverflow.com/questions/543377/how-can-i-have-two-foreign-keys-to-the-same-model-in-django">stackoverflow question</a> and <a href="http://docs.djangoproject.com/en/dev/ref/models/fields/#foreignkey">django doc</a></p>
 
-<h4 id="toc_8">Why <code>related_name</code>:</h4>
+<h4 id="toc_10">Why <code>related_name</code>:</h4>
 
 <p>The <code>related_name</code> attributes specifies the name of reverse relation from <code>Example</code> model<br>
 to your model.</p>

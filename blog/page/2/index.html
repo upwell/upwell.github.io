@@ -9,10 +9,23 @@
   <meta name="author" content="hanh">
 
   
-  <meta name="description" content="问题 遇到一个很奇怪的问题，在工程中使用 stlport 的时候各种编译不过，即使仅仅是声明一个对象都会编译不过。
+  <meta name="description" content="Issue When execute: 1
+# rpm -ivh ~/Downloads/jdk-7u45-linux-i586.rpm There comes error messages:
 1
-std::sstream mystream;
-报的错误也很奇怪，是 stlport 内部的文件语法错误。 分析过程 在工程外部，编写小程序，使用工程中的 stlport 来编译， &hellip;">
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+Unpacking JAR files &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +107,86 @@ std::sstream mystream;
   <header>
     
       <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2013/10/18/install-oracle-jdk-32bit-on-fedora-64bit/">Install Oracle Jdk 32bit on 64bit Fedora</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-18T22:31:00+08:00" pubdate data-updated="true">Oct 18<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2 id="toc_50">Issue</h2>
+
+<p>When execute:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># rpm -ivh ~/Downloads/jdk-7u45-linux-i586.rpm</span></code></pre></td></tr></table></div></figure>
+
+<p>There comes error messages:
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Unpacking JAR files...
+</span><span class='line'>    rt.jar...
+</span><span class='line'>Error: Could not open input file: /usr/java/jdk1.7.0_45/jre/lib/rt.pack
+</span><span class='line'>Error: unpack could not create JAR file:
+</span><span class='line'>
+</span><span class='line'>    /usr/java/jdk1.7.0_45/jre/lib/rt.jar
+</span><span class='line'>
+</span><span class='line'>Please refer to the Troubleshooting section of the Installation Instructions
+</span><span class='line'>on the download page.
+</span><span class='line'>    jsse.jar...
+</span><span class='line'>Error: Could not open input file: /usr/java/jdk1.7.0_45/jre/lib/jsse.pack
+</span><span class='line'>Error: unpack could not create JAR file:
+</span><span class='line'>
+</span><span class='line'>    /usr/java/jdk1.7.0_45/jre/lib/jsse.jar</span></code></pre></td></tr></table></div></figure></p>
+
+<h2 id="toc_51">Solution</h2>
+
+<p>Install the 32bit libraries:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># rpm -ivh glibc.i686 glibc-devel.i686</span></code></pre></td></tr></table></div></figure>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
         <h1 class="entry-title"><a href="/blog/2013/10/16/c-header-file-include-seq/">C++头文件include的顺序问题</a></h1>
       
     
@@ -118,14 +211,14 @@ std::sstream mystream;
   </header>
 
 
-  <div class="entry-content"><h2 id="toc_46">问题</h2>
+  <div class="entry-content"><h2 id="toc_48">问题</h2>
 
 <p>遇到一个很奇怪的问题，在工程中使用 stlport 的时候各种编译不过，即使仅仅是声明一个对象都会编译不过。
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>std::sstream mystream;</span></code></pre></td></tr></table></div></figure>
 报的错误也很奇怪，是 stlport 内部的文件语法错误。</p>
 
-<h2 id="toc_47">分析过程</h2>
+<h2 id="toc_49">分析过程</h2>
 
 <ol>
 <li>在工程外部，编写小程序，使用工程中的 stlport 来编译，正常编译通过，运行正常；</li>
@@ -315,7 +408,7 @@ it as the default config.</p>
   </header>
 
 
-  <div class="entry-content"><h3 id="toc_40">Check ruby version</h3>
+  <div class="entry-content"><h3 id="toc_42">Check ruby version</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>ruby -v
@@ -327,7 +420,7 @@ it as the default config.</p>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm use 1.9.3
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_41">Create a new post</h3>
+<h3 id="toc_43">Create a new post</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>rake new_post<span class="o">[</span><span class="s1">&#39;octopress daily use&#39;</span><span class="o">]</span>
@@ -336,7 +429,7 @@ it as the default config.</p>
 <p>This would create a new markdown file under <code>source/_posts/</code> folder. Edit the file<br>
 to compose the new post.</p>
 
-<h3 id="toc_42">Preview and generate</h3>
+<h3 id="toc_44">Preview and generate</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -346,7 +439,7 @@ to compose the new post.</p>
 
 <p>Visit <code>http://localhost:4000</code> to preview the site.</p>
 
-<h3 id="toc_43">Deploy to github page</h3>
+<h3 id="toc_45">Deploy to github page</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -356,7 +449,7 @@ to compose the new post.</p>
 
 <p>This would deploy the generate file on to github page for display.</p>
 
-<h3 id="toc_44">Submit source to github repo</h3>
+<h3 id="toc_46">Submit source to github repo</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -366,7 +459,7 @@ to compose the new post.</p>
 </span><span class='line'>git push origin <span class="nb">source</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_45">Use octopress in two machines</h3>
+<h3 id="toc_47">Use octopress in two machines</h3>
 
 <p>Before update / add a new post, remember:
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -417,7 +510,7 @@ to compose the new post.</p>
   </header>
 
 
-  <div class="entry-content"><h2 id="toc_35">Move faster : EasyMotion</h2>
+  <div class="entry-content"><h2 id="toc_37">Move faster : EasyMotion</h2>
 
 <p>EasyMotion provides a much simpler way to use some motions in vim. It takes<br>
 the <code>&lt;number&gt;</code> out of <code>&lt;number&gt;w</code> or <code>&lt;number&gt;f{char}</code> by highlighting all<br>
@@ -430,18 +523,18 @@ target.</p>
 <code>&lt;leader&gt;&lt;leader&gt;f</code><br>
 <code>&lt;leader&gt;&lt;leader&gt;f{char}</code></p>
 
-<h2 id="toc_36">Repeats</h2>
+<h2 id="toc_38">Repeats</h2>
 
 <p>Single repeats</p>
 
 <p><code>.</code> : used to repeat simple changes<br>
 <code>@:</code> : used to repeat last command-line</p>
 
-<h2 id="toc_37">Surround</h2>
+<h2 id="toc_39">Surround</h2>
 
 <p>With plugin <a href="https://github.com/tpope/vim-surround">Surround</a>, you can easily handle surround with words.</p>
 
-<h3 id="toc_38">Add surroundings</h3>
+<h3 id="toc_40">Add surroundings</h3>
 
 <p><code>ys</code> takes an <strong>valid Vim motion</strong> or text object as the first object and wraps it using the second
 argument.
@@ -453,7 +546,7 @@ argument.
 <p>Under <strong>visual mode</strong>, select content and press <code>S</code> with the surrounding wound wrap the selected
 content.</p>
 
-<h3 id="toc_39">Delete surroundings</h3>
+<h3 id="toc_41">Delete surroundings</h3>
 
 <p>Delete surroundings is <code>ds</code> .
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -501,29 +594,29 @@ content.</p>
   </header>
 
 
-  <div class="entry-content"><h3 id="toc_28">Use a database file</h3>
+  <div class="entry-content"><h3 id="toc_30">Use a database file</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>sqlite &lt;database_file&gt;</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_29">Get table information</h3>
+<h3 id="toc_31">Get table information</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>.tables</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_30">Get schema information</h3>
+<h3 id="toc_32">Get schema information</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>.schema
 </span><span class='line'>.schema table_name</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_31">Get help</h3>
+<h3 id="toc_33">Get help</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>.help</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_32">Write result to a file</h3>
+<h3 id="toc_34">Write result to a file</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -536,12 +629,12 @@ content.</p>
 </span><span class='line'>select * from table_name;
 </span><span class='line'>.exit</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_33">Exit</h3>
+<h3 id="toc_35">Exit</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>.exit</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_34">More</h3>
+<h3 id="toc_36">More</h3>
 
 <p><a href="http://www.sqlite.org/sqlite.html">sqlite official site help</a></p>
 </div>
@@ -581,7 +674,7 @@ content.</p>
   </header>
 
 
-  <div class="entry-content"><h3 id="toc_25">Install packages</h3>
+  <div class="entry-content"><h3 id="toc_27">Install packages</h3>
 
 <p>CentOS 6.3 does not have xrdp package in the official repo.</p>
 
@@ -599,14 +692,14 @@ content.</p>
 </span><span class='line'>yum install xrdp</span></code></pre></td></tr></table></div></figure></li>
 </ul>
 
-<h3 id="toc_26">Start service</h3>
+<h3 id="toc_28">Start service</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>/etc/init.d/xrdp start
 </span><span class='line'>chkconfig xrdp on</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_27">Issues</h3>
+<h3 id="toc_29">Issues</h3>
 
 <ul>
 <li><p>problem connecting 5910
@@ -652,6 +745,10 @@ login as root
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/10/15/gimp-quick-use-guide/">Gimp Quick Use Guide</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/09/01/android-studio-tips/">Android Studio Tips</a>
       </li>
     
@@ -667,10 +764,6 @@ login as root
         <a href="/blog/2014/06/28/django-collections/">Django Collections</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/06/20/two-foreign-keys-to-same-model/">Two Foreign Keys to Same Model</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -679,7 +772,7 @@ login as root
 
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/android'>android (1)</a></li><li><a href='/blog/categories/django'>django (3)</a></li><li><a href='/blog/categories/python'>python (3)</a></li><li><a href='/blog/categories/system'>system (1)</a></li><li><a href='/blog/categories/vim'>vim (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/android'>android (1)</a></li><li><a href='/blog/categories/django'>django (3)</a></li><li><a href='/blog/categories/gimp'>gimp (1)</a></li><li><a href='/blog/categories/python'>python (3)</a></li><li><a href='/blog/categories/system'>system (1)</a></li><li><a href='/blog/categories/vim'>vim (1)</a></li></ul>
 </section>
 
   
@@ -688,7 +781,7 @@ login as root
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - hanh -
+  Copyright &copy; 2015 - hanh -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

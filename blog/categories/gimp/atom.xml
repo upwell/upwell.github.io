@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: gimp | Note Everything]]></title>
+  <link href="http://upwell.github.io/blog/categories/gimp/atom.xml" rel="self"/>
+  <link href="http://upwell.github.io/"/>
+  <updated>2015-01-23T09:35:57+08:00</updated>
+  <id>http://upwell.github.io/</id>
+  <author>
+    <name><![CDATA[hanh]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[gimp quick use guide]]></title>
+    <link href="http://upwell.github.io/blog/2014/10/15/gimp-quick-use-guide/"/>
+    <updated>2014-10-15T10:40:00+08:00</updated>
+    <id>http://upwell.github.io/blog/2014/10/15/gimp-quick-use-guide</id>
+    <content type="html"><![CDATA[<h2 id="toc_0">Copy layer to a new image</h2>
+
+<p>Use <code>ctrl+c</code> and <code>ctrl+v</code> to copy and paste a layer.</p>
+
+<h3 id="toc_1">Crop to selection</h3>
+
+<p>Use <code>Crop tool</code> to select the area to crop, and then adjust the params in the toolbox windows, after
+all done, double click the selection.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -9,8 +9,7 @@
   <meta name="author" content="hanh">
 
   
-  <meta name="description" content="Cannot run program aapt &#8211; no such file or directory Install missing 32bit libraries: 1
-yum install libstdc++.i686 zlib.i686 studio running with &hellip;">
+  <meta name="description" content="Copy layer to a new image Use ctrl+c and ctrl+v to copy and paste a layer. Crop to selection Use Crop tool to select the area to crop, and then &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -92,6 +91,51 @@ yum install libstdc++.i686 zlib.i686 studio running with &hellip;">
   <header>
     
       <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2014/10/15/gimp-quick-use-guide/">Gimp Quick Use Guide</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-15T10:40:00+08:00" pubdate data-updated="true">Oct 15<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2 id="toc_92">Copy layer to a new image</h2>
+
+<p>Use <code>ctrl+c</code> and <code>ctrl+v</code> to copy and paste a layer.</p>
+
+<h3 id="toc_93">Crop to selection</h3>
+
+<p>Use <code>Crop tool</code> to select the area to crop, and then adjust the params in the toolbox windows, after
+all done, double click the selection.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
         <h1 class="entry-title"><a href="/blog/2014/09/01/android-studio-tips/">Android Studio Tips</a></h1>
       
     
@@ -116,14 +160,14 @@ yum install libstdc++.i686 zlib.i686 studio running with &hellip;">
   </header>
 
 
-  <div class="entry-content"><h2 id="toc_88">Cannot run program aapt &#8211; no such file or directory</h2>
+  <div class="entry-content"><h2 id="toc_90">Cannot run program aapt &#8211; no such file or directory</h2>
 
 <p>Install missing 32bit libraries:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>yum install libstdc++.i686 zlib.i686</span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_89">studio running with the openjdk</h2>
+<h2 id="toc_91">studio running with the openjdk</h2>
 
 <p>Although I installed the oracle jdk, and export <code>STUDIO_JDK</code> in both zshrc and bashrc, when<br>
 start android studio from desktop application, it still uses the open jdk.</p>
@@ -174,13 +218,13 @@ setup the environment variables in <code>~/.profile</code>.</p>
 
   <div class="entry-content"><p><a href="https://github.com/django-debug-toolbar/django-debug-toolbar">django-debug-toolbar</a> does not work for ajax requests. Here comes <a href="https://github.com/mtford90/silk">silk</a> which works perfect for the ajax condition.</p>
 
-<h3 id="toc_83">Installation</h3>
+<h3 id="toc_85">Installation</h3>
 
 <p>Following the <a href="https://github.com/mtford90/silk">instructions</a> to install and configure for your own projects.</p>
 
-<h3 id="toc_84">Tips</h3>
+<h3 id="toc_86">Tips</h3>
 
-<h4 id="toc_85">Middleware Settings</h4>
+<h4 id="toc_87">Middleware Settings</h4>
 
 <p>Pay attention to the <strong>middleware</strong> setting, you should not just append the line at the end of existed middle settings.  </p>
 
@@ -212,7 +256,7 @@ setup the environment variables in <code>~/.profile</code>.</p>
 </span><span class='line'>    &#39;django.middleware.locale.LocaleMiddleware&#39;,
 </span><span class='line'>)</span></code></pre></td></tr></table></div></figure></p>
 
-<h4 id="toc_86">Server Error</h4>
+<h4 id="toc_88">Server Error</h4>
 
 <p>The server side may generate error message like:</p>
 
@@ -223,7 +267,7 @@ MySQL server has gone away</p>
 
 <p>Add <code>SILKY_MAX_RESPONSE_BODY_SIZE = 1024</code> in <code>settings.py</code>.</p>
 
-<h4 id="toc_87">Static file handling</h4>
+<h4 id="toc_89">Static file handling</h4>
 
 <p>If you don&#39;t want to run django in debug mode and also haven&#39;t setup the external server (nginx, uwsgi, etc.) for static file serving.</p>
 
@@ -274,24 +318,24 @@ This would collect static files to <code>settings.STATIC_ROOT</code> folder.</p>
   </header>
 
 
-  <div class="entry-content"><h3 id="toc_79">Set dns server for dnsmasq</h3>
+  <div class="entry-content"><h3 id="toc_81">Set dns server for dnsmasq</h3>
 
 <p>Use a separate conf file, the format is the same as resolv.conf.
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>resolv-file=/etc/resolv.masq.conf</span></code></pre></td></tr></table></div></figure>
 Then after dnsmasq is started, set <code>127.0.0.1</code> in <code>/etc/resolv.conf</code>.</p>
 
-<h3 id="toc_80">listening address with localhost</h3>
+<h3 id="toc_82">listening address with localhost</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>listen-address=127.0.0.1</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_81">Use separate DNS for certain domains</h3>
+<h3 id="toc_83">Use separate DNS for certain domains</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>server=/www.google.com/8.8.8.8</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_82">Use regular expression for server</h3>
+<h3 id="toc_84">Use regular expression for server</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>server=/:.*google.*/8.8.8.8</span></code></pre></td></tr></table></div></figure>
@@ -332,7 +376,7 @@ Then after dnsmasq is started, set <code>127.0.0.1</code> in <code>/etc/resolv.c
   </header>
 
 
-  <div class="entry-content"><h2 id="toc_78">django profiling tools</h2>
+  <div class="entry-content"><h2 id="toc_80">django profiling tools</h2>
 
 <p><a href="https://github.com/mtford90/silk">Silky smooth profiling for Django</a></p>
 
@@ -374,7 +418,7 @@ Then after dnsmasq is started, set <code>127.0.0.1</code> in <code>/etc/resolv.c
   </header>
 
 
-  <div class="entry-content"><h4 id="toc_76">Use <code>related_name</code>:</h4>
+  <div class="entry-content"><h4 id="toc_78">Use <code>related_name</code>:</h4>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -386,7 +430,7 @@ Then after dnsmasq is started, set <code>127.0.0.1</code> in <code>/etc/resolv.c
 
 <p>See <a href="http://stackoverflow.com/questions/543377/how-can-i-have-two-foreign-keys-to-the-same-model-in-django">stackoverflow question</a> and <a href="http://docs.djangoproject.com/en/dev/ref/models/fields/#foreignkey">django doc</a></p>
 
-<h4 id="toc_77">Why <code>related_name</code>:</h4>
+<h4 id="toc_79">Why <code>related_name</code>:</h4>
 
 <p>The <code>related_name</code> attributes specifies the name of reverse relation from <code>Example</code> model<br>
 to your model.</p>
@@ -435,7 +479,7 @@ doesn&#39;t know how to build up the reverse relation.</p>
   </header>
 
 
-  <div class="entry-content"><h2 id="toc_74">Long line with chained methods</h2>
+  <div class="entry-content"><h2 id="toc_76">Long line with chained methods</h2>
 
 <p>Use additional <strong>parenthesis</strong>.</p>
 
@@ -455,7 +499,7 @@ doesn&#39;t know how to build up the reverse relation.</p>
 </span><span class='line'>    <span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_75">Long string</h2>
+<h2 id="toc_77">Long string</h2>
 
 <p>Python concatenates string literals which appear adjacent to each other.</p>
 
@@ -503,7 +547,7 @@ doesn&#39;t know how to build up the reverse relation.</p>
   </header>
 
 
-  <div class="entry-content"><h2 id="toc_66">Flake8</h2>
+  <div class="entry-content"><h2 id="toc_68">Flake8</h2>
 
 <p><a href="https://pypi.python.org/pypi/flake8/">flake8</a> :  wrapper for python checkers:</p>
 
@@ -513,35 +557,35 @@ doesn&#39;t know how to build up the reverse relation.</p>
 <li>Ned Batchelder&#39;s McCabe script</li>
 </ul>
 
-<h3 id="toc_67">Install</h3>
+<h3 id="toc_69">Install</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># sudo pip install flake8</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_68">Vim-flake8</h2>
+<h2 id="toc_70">Vim-flake8</h2>
 
 <p><a href="https://github.com/nvie/vim-flake8">vim-flake8</a> : vim wrapper for flake8.</p>
 
-<h3 id="toc_69">Install</h3>
+<h3 id="toc_71">Install</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># git submodule add https://github.com/nvie/vim-flake8.git bundle/vim-flake8</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_70">How to use</h3>
+<h3 id="toc_72">How to use</h3>
 
 <ol>
 <li>Open a python file</li>
 <li>ress <code>F7</code> to run <code>flake8</code> on it</li>
 </ol>
 
-<h2 id="toc_71">Syntastic</h2>
+<h2 id="toc_73">Syntastic</h2>
 
 <p><a href="https://github.com/scrooloose/syntastic">syntastic</a> : syntax checking plugin that runs file through external syntax<br>
 checker and displays any resulting errors to user.</p>
 
-<h3 id="toc_72">Install</h3>
+<h3 id="toc_74">Install</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># git submodule add https://github.com/scrooloose/syntastic bundle/syntastic</span>
@@ -549,7 +593,7 @@ checker and displays any resulting errors to user.</p>
 
 <p>Start vim, then type <code>:Helptags</code>.</p>
 
-<h3 id="toc_73">How to use</h3>
+<h3 id="toc_75">How to use</h3>
 
 <p>Check</p>
 
@@ -599,7 +643,7 @@ checker and displays any resulting errors to user.</p>
   </header>
 
 
-  <div class="entry-content"><h3 id="toc_57">Object Literals</h3>
+  <div class="entry-content"><h3 id="toc_59">Object Literals</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -615,7 +659,7 @@ checker and displays any resulting errors to user.</p>
 </span><span class='line'><span class="p">};</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h4 id="toc_58">Property Name</h4>
+<h4 id="toc_60">Property Name</h4>
 
 <ul>
 <li>could be <strong>any</strong> string including empty string;</li>
@@ -653,7 +697,7 @@ name (not a reserved word);</li>
 </span><span class='line'><span class="p">};</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_59">Retrieval</h3>
+<h3 id="toc_61">Retrieval</h3>
 
 <ul>
 <li>Wrapping a string expression in a [] suffix;</li>
@@ -681,7 +725,7 @@ member:</li>
 </span><span class='line'><span class="nx">flight</span><span class="p">.</span><span class="nx">equipment</span> <span class="o">&amp;&amp;</span> <span class="nx">flight</span><span class="p">.</span><span class="nx">equipment</span><span class="p">.</span><span class="nx">model</span> <span class="c1">// undefined</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_60">Update</h3>
+<h3 id="toc_62">Update</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -691,7 +735,7 @@ member:</li>
 </span><span class='line'><span class="nx">stoog</span><span class="p">.</span><span class="nx">sex</span> <span class="o">=</span> <span class="s2">&quot;Male&quot;</span><span class="p">;</span>          <span class="c1">// if the property name not exist, the object is augmented;</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_61">Reference</h3>
+<h3 id="toc_63">Reference</h3>
 
 <p>Object is passed <strong>BY REFERENCE</strong>, never by copied.</p>
 
@@ -707,7 +751,7 @@ member:</li>
 </span><span class='line'>    <span class="c1">// refer to the same empty object</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_62">Prototype</h3>
+<h3 id="toc_64">Prototype</h3>
 
 <p>Every object is linked to a <strong>prototype object</strong>. All objects created from object literal <code>{}</code><br>
 are linked to <code>Object.prototype</code>.</p>
@@ -724,7 +768,7 @@ that property will immediately be visible in all the objects that are based on t
 </span><span class='line'><span class="nx">another_stooge</span><span class="p">.</span><span class="nx">profession</span> <span class="c1">// &#39;actor&#39;</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_63">Reflection</h3>
+<h3 id="toc_65">Reflection</h3>
 
 <p>Check if the object has a property:</p>
 
@@ -752,7 +796,7 @@ that property will immediately be visible in all the objects that are based on t
 </span><span class='line'><span class="nx">flight</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;toString&#39;</span><span class="p">)</span>   <span class="c1">// false</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_64">Enumeration</h3>
+<h3 id="toc_66">Enumeration</h3>
 
 <p>Loop over all the property names in an object.</p>
 
@@ -801,7 +845,7 @@ properties in the prototype chain.)</p>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_65">Delete</h3>
+<h3 id="toc_67">Delete</h3>
 
 <p>The <code>delete</code> operator can be used to remove a property from a object. It does <strong>NOT</strong> touch<br>
 any object in the prototype linkage.</p>
@@ -842,7 +886,7 @@ any object in the prototype linkage.</p>
   </header>
 
 
-  <div class="entry-content"><h2 id="toc_50">Read one line from file each time</h2>
+  <div class="entry-content"><h2 id="toc_52">Read one line from file each time</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -852,7 +896,7 @@ any object in the prototype linkage.</p>
 </span><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="n">in</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_51">Trim space from string</h2>
+<h2 id="toc_53">Trim space from string</h2>
 
 <p><a href="http://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring">original source</a></p>
 
@@ -900,13 +944,13 @@ any object in the prototype linkage.</p>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_52">Concatenate two vectors</h2>
+<h2 id="toc_54">Concatenate two vectors</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">source</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">source</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">destination</span><span class="p">));</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_53">Merge two vectors</h2>
+<h2 id="toc_55">Merge two vectors</h2>
 
 <p><code>std::merge</code> conbines the elements in sorted range [first1, last1], [first2, last2], into a new<br>
 range beginning at <em>result</em> with all its elements sorted.</p>
@@ -931,7 +975,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
 </span><span class='line'>        <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">tmp</span><span class="p">));</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_54">Concatenate two vectors, and remove duplicate elements</h2>
+<h2 id="toc_56">Concatenate two vectors, and remove duplicate elements</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -953,7 +997,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
 </span><span class='line'>            <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">tmp</span><span class="p">));</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_55">Append with operations on each element</h2>
+<h2 id="toc_57">Append with operations on each element</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -979,7 +1023,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
 </span><span class='line'>        <span class="n">append_arrow</span><span class="p">);</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_56">Write vector to file</h2>
+<h2 id="toc_58">Write vector to file</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -992,86 +1036,6 @@ range beginning at <em>result</em> with all its elements sorted.</p>
 </span><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">ostream_iterator</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">output_iter</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
 </span><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">content</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">content</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">output_iter</span><span class="p">);</span>
 </span></code></pre></td></tr></table></div></figure>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2013/10/18/install-oracle-jdk-32bit-on-fedora-64bit/">Install Oracle Jdk 32bit on 64bit Fedora</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-18T22:31:00+08:00" pubdate data-updated="true">Oct 18<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2 id="toc_48">Issue</h2>
-
-<p>When execute:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># rpm -ivh ~/Downloads/jdk-7u45-linux-i586.rpm</span></code></pre></td></tr></table></div></figure>
-
-<p>There comes error messages:
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Unpacking JAR files...
-</span><span class='line'>    rt.jar...
-</span><span class='line'>Error: Could not open input file: /usr/java/jdk1.7.0_45/jre/lib/rt.pack
-</span><span class='line'>Error: unpack could not create JAR file:
-</span><span class='line'>
-</span><span class='line'>    /usr/java/jdk1.7.0_45/jre/lib/rt.jar
-</span><span class='line'>
-</span><span class='line'>Please refer to the Troubleshooting section of the Installation Instructions
-</span><span class='line'>on the download page.
-</span><span class='line'>    jsse.jar...
-</span><span class='line'>Error: Could not open input file: /usr/java/jdk1.7.0_45/jre/lib/jsse.pack
-</span><span class='line'>Error: unpack could not create JAR file:
-</span><span class='line'>
-</span><span class='line'>    /usr/java/jdk1.7.0_45/jre/lib/jsse.jar</span></code></pre></td></tr></table></div></figure></p>
-
-<h2 id="toc_49">Solution</h2>
-
-<p>Install the 32bit libraries:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># rpm -ivh glibc.i686 glibc-devel.i686</span></code></pre></td></tr></table></div></figure>
 </div>
   
   
@@ -1094,6 +1058,10 @@ range beginning at <em>result</em> with all its elements sorted.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/10/15/gimp-quick-use-guide/">Gimp Quick Use Guide</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/09/01/android-studio-tips/">Android Studio Tips</a>
       </li>
     
@@ -1109,10 +1077,6 @@ range beginning at <em>result</em> with all its elements sorted.</p>
         <a href="/blog/2014/06/28/django-collections/">Django Collections</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/06/20/two-foreign-keys-to-same-model/">Two Foreign Keys to Same Model</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -1121,7 +1085,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
 
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/android'>android (1)</a></li><li><a href='/blog/categories/django'>django (3)</a></li><li><a href='/blog/categories/python'>python (3)</a></li><li><a href='/blog/categories/system'>system (1)</a></li><li><a href='/blog/categories/vim'>vim (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/android'>android (1)</a></li><li><a href='/blog/categories/django'>django (3)</a></li><li><a href='/blog/categories/gimp'>gimp (1)</a></li><li><a href='/blog/categories/python'>python (3)</a></li><li><a href='/blog/categories/system'>system (1)</a></li><li><a href='/blog/categories/vim'>vim (1)</a></li></ul>
 </section>
 
   
@@ -1130,7 +1094,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - hanh -
+  Copyright &copy; 2015 - hanh -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
