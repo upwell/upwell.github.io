@@ -3,7 +3,7 @@ layout: post
 title: "octopress daily use"
 date: 2013-09-18 17:00
 comments: true
-categories: 
+categories: octopress
 ---
 ### Check ruby version
 
