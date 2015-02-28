@@ -4,7 +4,7 @@
   <title><![CDATA[Category: android | Note Everything]]></title>
   <link href="http://upwell.github.io/blog/categories/android/atom.xml" rel="self"/>
   <link href="http://upwell.github.io/"/>
-  <updated>2015-01-23T09:35:57+08:00</updated>
+  <updated>2015-02-28T10:14:31+08:00</updated>
   <id>http://upwell.github.io/</id>
   <author>
     <name><![CDATA[hanh]]></name>
@@ -18,14 +18,14 @@
     <link href="http://upwell.github.io/blog/2014/09/01/android-studio-tips/"/>
     <updated>2014-09-01T15:45:00+08:00</updated>
     <id>http://upwell.github.io/blog/2014/09/01/android-studio-tips</id>
-    <content type="html"><![CDATA[<h2 id="toc_25">Cannot run program aapt -- no such file or directory</h2>
+    <content type="html"><![CDATA[<h2 id="toc_41">Cannot run program aapt -- no such file or directory</h2>
 
 <p>Install missing 32bit libraries:</p>
 <div class="highlight"><pre><code class="text">yum install libstdc++.i686 zlib.i686
 </code></pre>
 </div>
 
-<h2 id="toc_26">studio running with the openjdk</h2>
+<h2 id="toc_42">studio running with the openjdk</h2>
 
 <p>Although I installed the oracle jdk, and export <code>STUDIO_JDK</code> in both zshrc and bashrc, when<br>
 start android studio from desktop application, it still uses the open jdk.</p>

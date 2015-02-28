@@ -4,7 +4,7 @@
   <title><![CDATA[Note Everything]]></title>
   <link href="http://upwell.github.io/atom.xml" rel="self"/>
   <link href="http://upwell.github.io/"/>
-  <updated>2015-01-23T09:35:57+08:00</updated>
+  <updated>2015-02-28T10:14:31+08:00</updated>
   <id>http://upwell.github.io/</id>
   <author>
     <name><![CDATA[hanh]]></name>
@@ -14,15 +14,172 @@
 
   
   <entry>
+    <title type="html"><![CDATA[python small tips]]></title>
+    <link href="http://upwell.github.io/blog/2015/02/28/python-small-tips/"/>
+    <updated>2015-02-28T10:09:00+08:00</updated>
+    <id>http://upwell.github.io/blog/2015/02/28/python-small-tips</id>
+    <content type="html"><![CDATA[<h3 id="toc_110">Join two lists</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>a = [1, 2, 3]
+</span><span class='line'>b = [3, 4, 5]
+</span><span class='line'>c = a + b
+</span><span class='line'>[1, 2, 3, 3, 4, 5]</span></code></pre></td></tr></table></div></figure>
+
+<h3 id="toc_111">Join two dicts</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">d1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s">&#39;b&#39;</span><span class="p">}</span>
+</span><span class='line'><span class="n">d2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">:</span> <span class="s">&#39;c&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s">&#39;d&#39;</span><span class="p">}</span>
+</span><span class='line'><span class="n">d1</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span>
+</span><span class='line'><span class="c"># {1: &#39;a&#39;, 2: &#39;b&#39;, 3: &#39;c&#39;, 4: &#39;d&#39;}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<h3 id="toc_112">Check if a list/dictionary/tuple is empty</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">l</span> <span class="o">=</span> <span class="p">[]</span>      <span class="c"># same for {} and ()</span>
+</span><span class='line'><span class="k">if</span> <span class="n">l</span><span class="p">:</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&#39;list is not empty&#39;</span>
+</span><span class='line'><span class="k">else</span><span class="p">:</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&#39;list is empty&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<h3 id="toc_113">Iterate over dictionary</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+</span><span class='line'><span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+</span><span class='line'>    <span class="k">print</span> <span class="n">key</span><span class="p">,</span> <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+</span><span class='line'><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+</span><span class='line'>    <span class="k">print</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<h3 id="toc_114">Access the index while looping a list</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;c&#39;</span><span class="p">,</span> <span class="s">&#39;d&#39;</span><span class="p">]</span>
+</span><span class='line'><span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">print</span> <span class="n">idx</span><span class="p">,</span> <span class="n">value</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<h3 id="toc_115">Reverse range</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</span><span class='line'><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<h3 id="toc_116">Select items from a list randomly</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">random</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+</span><span class='line'><span class="k">print</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>         <span class="c"># select single item</span>
+</span><span class='line'><span class="k">print</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>      <span class="c"># select 3 random items</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<h3 id="toc_117">Split and convert to int</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">c</span> <span class="o">=</span> <span class="s">&#39;1,2,3,4&#39;</span>
+</span><span class='line'><span class="n">c</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;,&#39;</span><span class="p">)</span>                <span class="c"># [&#39;1&#39;,&#39;2&#39;,&#39;3&#39;,&#39;4&#39;]</span>
+</span><span class='line'><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;,&#39;</span><span class="p">))</span>      <span class="c"># [1,2,3,4]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<h3 id="toc_118">Mutable and immutable</h3>
+
+<p><strong>Immutable</strong>:</p>
+
+<ul>
+<li>integers and other numerical types</li>
+<li>string types like str and unicode</li>
+<li>tuples</li>
+</ul>
+
+<p><strong>Mutable</strong>: everything else, like,</p>
+
+<ul>
+<li>lists</li>
+<li>dicts</li>
+<li>class</li>
+<li>class instance</li>
+<li>etc.</li>
+</ul>
+
+<h3 id="toc_119">Double quote VS. single quote</h3>
+
+<ul>
+<li>use double quotes around strings that are used for interpolation or that are natural language messages</li>
+<li>single quotes for small symbol-like strings</li>
+<li>use triple double quotes for docstrings and raw string literals
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">LIGHT_MESSAGES</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="s">&#39;English&#39;</span><span class="p">:</span> <span class="s">&quot;There are </span><span class="si">%(number_of_lights)s</span><span class="s"> lights.&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s">&#39;Pirate&#39;</span><span class="p">:</span>  <span class="s">&quot;Arr! Thar be </span><span class="si">%(number_of_lights)s</span><span class="s"> lights.&quot;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">lights_message</span><span class="p">(</span><span class="n">language</span><span class="p">,</span> <span class="n">number_of_lights</span><span class="p">):</span>
+</span><span class='line'>    <span class="sd">&quot;&quot;&quot;Return a language-appropriate string reporting the light count.&quot;&quot;&quot;</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">LIGHT_MESSAGES</span><span class="p">[</span><span class="n">language</span><span class="p">]</span> <span class="o">%</span> <span class="nb">locals</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">is_pirate</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+</span><span class='line'>    <span class="sd">&quot;&quot;&quot;Return True if the given message sounds piratical.&quot;&quot;&quot;</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s">r&quot;(?i)(arr|avast|yohoho)!&quot;</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>
+</span></code></pre></td></tr></table></div></figure></li>
+</ul>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[gimp quick use guide]]></title>
     <link href="http://upwell.github.io/blog/2014/10/15/gimp-quick-use-guide/"/>
     <updated>2014-10-15T10:40:00+08:00</updated>
     <id>http://upwell.github.io/blog/2014/10/15/gimp-quick-use-guide</id>
-    <content type="html"><![CDATA[<h2 id="toc_92">Copy layer to a new image</h2>
+    <content type="html"><![CDATA[<h2 id="toc_108">Copy layer to a new image</h2>
 
 <p>Use <code>ctrl+c</code> and <code>ctrl+v</code> to copy and paste a layer.</p>
 
-<h3 id="toc_93">Crop to selection</h3>
+<h3 id="toc_109">Crop to selection</h3>
 
 <p>Use <code>Crop tool</code> to select the area to crop, and then adjust the params in the toolbox windows, after
 all done, double click the selection.</p>
@@ -34,14 +191,14 @@ all done, double click the selection.</p>
     <link href="http://upwell.github.io/blog/2014/09/01/android-studio-tips/"/>
     <updated>2014-09-01T15:45:00+08:00</updated>
     <id>http://upwell.github.io/blog/2014/09/01/android-studio-tips</id>
-    <content type="html"><![CDATA[<h2 id="toc_90">Cannot run program aapt &#8211; no such file or directory</h2>
+    <content type="html"><![CDATA[<h2 id="toc_106">Cannot run program aapt &#8211; no such file or directory</h2>
 
 <p>Install missing 32bit libraries:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>yum install libstdc++.i686 zlib.i686</span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_91">studio running with the openjdk</h2>
+<h2 id="toc_107">studio running with the openjdk</h2>
 
 <p>Although I installed the oracle jdk, and export <code>STUDIO_JDK</code> in both zshrc and bashrc, when<br>
 start android studio from desktop application, it still uses the open jdk.</p>
@@ -63,13 +220,13 @@ setup the environment variables in <code>~/.profile</code>.</p>
     <id>http://upwell.github.io/blog/2014/08/13/django-use-silk-for-profiling</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/django-debug-toolbar/django-debug-toolbar">django-debug-toolbar</a> does not work for ajax requests. Here comes <a href="https://github.com/mtford90/silk">silk</a> which works perfect for the ajax condition.</p>
 
-<h3 id="toc_85">Installation</h3>
+<h3 id="toc_101">Installation</h3>
 
 <p>Following the <a href="https://github.com/mtford90/silk">instructions</a> to install and configure for your own projects.</p>
 
-<h3 id="toc_86">Tips</h3>
+<h3 id="toc_102">Tips</h3>
 
-<h4 id="toc_87">Middleware Settings</h4>
+<h4 id="toc_103">Middleware Settings</h4>
 
 <p>Pay attention to the <strong>middleware</strong> setting, you should not just append the line at the end of existed middle settings.  </p>
 
@@ -101,7 +258,7 @@ setup the environment variables in <code>~/.profile</code>.</p>
 </span><span class='line'>    &#39;django.middleware.locale.LocaleMiddleware&#39;,
 </span><span class='line'>)</span></code></pre></td></tr></table></div></figure></p>
 
-<h4 id="toc_88">Server Error</h4>
+<h4 id="toc_104">Server Error</h4>
 
 <p>The server side may generate error message like:</p>
 
@@ -112,7 +269,7 @@ MySQL server has gone away</p>
 
 <p>Add <code>SILKY_MAX_RESPONSE_BODY_SIZE = 1024</code> in <code>settings.py</code>.</p>
 
-<h4 id="toc_89">Static file handling</h4>
+<h4 id="toc_105">Static file handling</h4>
 
 <p>If you don&#39;t want to run django in debug mode and also haven&#39;t setup the external server (nginx, uwsgi, etc.) for static file serving.</p>
 
@@ -134,24 +291,24 @@ This would collect static files to <code>settings.STATIC_ROOT</code> folder.</p>
     <link href="http://upwell.github.io/blog/2014/07/01/dnsmasq-config/"/>
     <updated>2014-07-01T19:07:00+08:00</updated>
     <id>http://upwell.github.io/blog/2014/07/01/dnsmasq-config</id>
-    <content type="html"><![CDATA[<h3 id="toc_81">Set dns server for dnsmasq</h3>
+    <content type="html"><![CDATA[<h3 id="toc_97">Set dns server for dnsmasq</h3>
 
 <p>Use a separate conf file, the format is the same as resolv.conf.
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>resolv-file=/etc/resolv.masq.conf</span></code></pre></td></tr></table></div></figure>
 Then after dnsmasq is started, set <code>127.0.0.1</code> in <code>/etc/resolv.conf</code>.</p>
 
-<h3 id="toc_82">listening address with localhost</h3>
+<h3 id="toc_98">listening address with localhost</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>listen-address=127.0.0.1</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_83">Use separate DNS for certain domains</h3>
+<h3 id="toc_99">Use separate DNS for certain domains</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>server=/www.google.com/8.8.8.8</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_84">Use regular expression for server</h3>
+<h3 id="toc_100">Use regular expression for server</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>server=/:.*google.*/8.8.8.8</span></code></pre></td></tr></table></div></figure>
@@ -163,7 +320,7 @@ Then after dnsmasq is started, set <code>127.0.0.1</code> in <code>/etc/resolv.c
     <link href="http://upwell.github.io/blog/2014/06/28/django-collections/"/>
     <updated>2014-06-28T09:35:00+08:00</updated>
     <id>http://upwell.github.io/blog/2014/06/28/django-collections</id>
-    <content type="html"><![CDATA[<h2 id="toc_80">django profiling tools</h2>
+    <content type="html"><![CDATA[<h2 id="toc_96">django profiling tools</h2>
 
 <p><a href="https://github.com/mtford90/silk">Silky smooth profiling for Django</a></p>
 
@@ -176,7 +333,7 @@ Then after dnsmasq is started, set <code>127.0.0.1</code> in <code>/etc/resolv.c
     <link href="http://upwell.github.io/blog/2014/06/20/two-foreign-keys-to-same-model/"/>
     <updated>2014-06-20T14:35:00+08:00</updated>
     <id>http://upwell.github.io/blog/2014/06/20/two-foreign-keys-to-same-model</id>
-    <content type="html"><![CDATA[<h4 id="toc_78">Use <code>related_name</code>:</h4>
+    <content type="html"><![CDATA[<h4 id="toc_94">Use <code>related_name</code>:</h4>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -188,7 +345,7 @@ Then after dnsmasq is started, set <code>127.0.0.1</code> in <code>/etc/resolv.c
 
 <p>See <a href="http://stackoverflow.com/questions/543377/how-can-i-have-two-foreign-keys-to-the-same-model-in-django">stackoverflow question</a> and <a href="http://docs.djangoproject.com/en/dev/ref/models/fields/#foreignkey">django doc</a></p>
 
-<h4 id="toc_79">Why <code>related_name</code>:</h4>
+<h4 id="toc_95">Why <code>related_name</code>:</h4>
 
 <p>The <code>related_name</code> attributes specifies the name of reverse relation from <code>Example</code> model<br>
 to your model.</p>
@@ -208,7 +365,7 @@ doesn&#39;t know how to build up the reverse relation.</p>
     <link href="http://upwell.github.io/blog/2013/12/12/python-long-line-wrap/"/>
     <updated>2013-12-12T16:12:00+08:00</updated>
     <id>http://upwell.github.io/blog/2013/12/12/python-long-line-wrap</id>
-    <content type="html"><![CDATA[<h2 id="toc_76">Long line with chained methods</h2>
+    <content type="html"><![CDATA[<h2 id="toc_92">Long line with chained methods</h2>
 
 <p>Use additional <strong>parenthesis</strong>.</p>
 
@@ -228,7 +385,7 @@ doesn&#39;t know how to build up the reverse relation.</p>
 </span><span class='line'>    <span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_77">Long string</h2>
+<h2 id="toc_93">Long string</h2>
 
 <p>Python concatenates string literals which appear adjacent to each other.</p>
 
@@ -247,7 +404,7 @@ doesn&#39;t know how to build up the reverse relation.</p>
     <link href="http://upwell.github.io/blog/2013/11/23/configure-vim-for-python-dev/"/>
     <updated>2013-11-23T08:42:00+08:00</updated>
     <id>http://upwell.github.io/blog/2013/11/23/configure-vim-for-python-dev</id>
-    <content type="html"><![CDATA[<h2 id="toc_68">Flake8</h2>
+    <content type="html"><![CDATA[<h2 id="toc_84">Flake8</h2>
 
 <p><a href="https://pypi.python.org/pypi/flake8/">flake8</a> :  wrapper for python checkers:</p>
 
@@ -257,35 +414,35 @@ doesn&#39;t know how to build up the reverse relation.</p>
 <li>Ned Batchelder&#39;s McCabe script</li>
 </ul>
 
-<h3 id="toc_69">Install</h3>
+<h3 id="toc_85">Install</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># sudo pip install flake8</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_70">Vim-flake8</h2>
+<h2 id="toc_86">Vim-flake8</h2>
 
 <p><a href="https://github.com/nvie/vim-flake8">vim-flake8</a> : vim wrapper for flake8.</p>
 
-<h3 id="toc_71">Install</h3>
+<h3 id="toc_87">Install</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># git submodule add https://github.com/nvie/vim-flake8.git bundle/vim-flake8</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_72">How to use</h3>
+<h3 id="toc_88">How to use</h3>
 
 <ol>
 <li>Open a python file</li>
 <li>ress <code>F7</code> to run <code>flake8</code> on it</li>
 </ol>
 
-<h2 id="toc_73">Syntastic</h2>
+<h2 id="toc_89">Syntastic</h2>
 
 <p><a href="https://github.com/scrooloose/syntastic">syntastic</a> : syntax checking plugin that runs file through external syntax<br>
 checker and displays any resulting errors to user.</p>
 
-<h3 id="toc_74">Install</h3>
+<h3 id="toc_90">Install</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># git submodule add https://github.com/scrooloose/syntastic bundle/syntastic</span>
@@ -293,7 +450,7 @@ checker and displays any resulting errors to user.</p>
 
 <p>Start vim, then type <code>:Helptags</code>.</p>
 
-<h3 id="toc_75">How to use</h3>
+<h3 id="toc_91">How to use</h3>
 
 <p>Check</p>
 
@@ -314,7 +471,7 @@ checker and displays any resulting errors to user.</p>
     <link href="http://upwell.github.io/blog/2013/11/10/object-js-good-part/"/>
     <updated>2013-11-10T10:42:00+08:00</updated>
     <id>http://upwell.github.io/blog/2013/11/10/object-js-good-part</id>
-    <content type="html"><![CDATA[<h3 id="toc_59">Object Literals</h3>
+    <content type="html"><![CDATA[<h3 id="toc_75">Object Literals</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -330,7 +487,7 @@ checker and displays any resulting errors to user.</p>
 </span><span class='line'><span class="p">};</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h4 id="toc_60">Property Name</h4>
+<h4 id="toc_76">Property Name</h4>
 
 <ul>
 <li>could be <strong>any</strong> string including empty string;</li>
@@ -368,7 +525,7 @@ name (not a reserved word);</li>
 </span><span class='line'><span class="p">};</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_61">Retrieval</h3>
+<h3 id="toc_77">Retrieval</h3>
 
 <ul>
 <li>Wrapping a string expression in a [] suffix;</li>
@@ -396,7 +553,7 @@ member:</li>
 </span><span class='line'><span class="nx">flight</span><span class="p">.</span><span class="nx">equipment</span> <span class="o">&amp;&amp;</span> <span class="nx">flight</span><span class="p">.</span><span class="nx">equipment</span><span class="p">.</span><span class="nx">model</span> <span class="c1">// undefined</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_62">Update</h3>
+<h3 id="toc_78">Update</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -406,7 +563,7 @@ member:</li>
 </span><span class='line'><span class="nx">stoog</span><span class="p">.</span><span class="nx">sex</span> <span class="o">=</span> <span class="s2">&quot;Male&quot;</span><span class="p">;</span>          <span class="c1">// if the property name not exist, the object is augmented;</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_63">Reference</h3>
+<h3 id="toc_79">Reference</h3>
 
 <p>Object is passed <strong>BY REFERENCE</strong>, never by copied.</p>
 
@@ -422,7 +579,7 @@ member:</li>
 </span><span class='line'>    <span class="c1">// refer to the same empty object</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_64">Prototype</h3>
+<h3 id="toc_80">Prototype</h3>
 
 <p>Every object is linked to a <strong>prototype object</strong>. All objects created from object literal <code>{}</code><br>
 are linked to <code>Object.prototype</code>.</p>
@@ -439,7 +596,7 @@ that property will immediately be visible in all the objects that are based on t
 </span><span class='line'><span class="nx">another_stooge</span><span class="p">.</span><span class="nx">profession</span> <span class="c1">// &#39;actor&#39;</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_65">Reflection</h3>
+<h3 id="toc_81">Reflection</h3>
 
 <p>Check if the object has a property:</p>
 
@@ -467,7 +624,7 @@ that property will immediately be visible in all the objects that are based on t
 </span><span class='line'><span class="nx">flight</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;toString&#39;</span><span class="p">)</span>   <span class="c1">// false</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_66">Enumeration</h3>
+<h3 id="toc_82">Enumeration</h3>
 
 <p>Loop over all the property names in an object.</p>
 
@@ -516,7 +673,7 @@ properties in the prototype chain.)</p>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_67">Delete</h3>
+<h3 id="toc_83">Delete</h3>
 
 <p>The <code>delete</code> operator can be used to remove a property from a object. It does <strong>NOT</strong> touch<br>
 any object in the prototype linkage.</p>
@@ -528,7 +685,7 @@ any object in the prototype linkage.</p>
     <link href="http://upwell.github.io/blog/2013/10/29/c-plus-plus-string-practice/"/>
     <updated>2013-10-29T15:10:00+08:00</updated>
     <id>http://upwell.github.io/blog/2013/10/29/c-plus-plus-string-practice</id>
-    <content type="html"><![CDATA[<h2 id="toc_52">Read one line from file each time</h2>
+    <content type="html"><![CDATA[<h2 id="toc_68">Read one line from file each time</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -538,7 +695,7 @@ any object in the prototype linkage.</p>
 </span><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="n">in</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_53">Trim space from string</h2>
+<h2 id="toc_69">Trim space from string</h2>
 
 <p><a href="http://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring">original source</a></p>
 
@@ -586,13 +743,13 @@ any object in the prototype linkage.</p>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_54">Concatenate two vectors</h2>
+<h2 id="toc_70">Concatenate two vectors</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='c++'><span class='line'><span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">source</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">source</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">destination</span><span class="p">));</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_55">Merge two vectors</h2>
+<h2 id="toc_71">Merge two vectors</h2>
 
 <p><code>std::merge</code> conbines the elements in sorted range [first1, last1], [first2, last2], into a new<br>
 range beginning at <em>result</em> with all its elements sorted.</p>
@@ -617,7 +774,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
 </span><span class='line'>        <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">tmp</span><span class="p">));</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_56">Concatenate two vectors, and remove duplicate elements</h2>
+<h2 id="toc_72">Concatenate two vectors, and remove duplicate elements</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -639,7 +796,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
 </span><span class='line'>            <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">tmp</span><span class="p">));</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_57">Append with operations on each element</h2>
+<h2 id="toc_73">Append with operations on each element</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -665,7 +822,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
 </span><span class='line'>        <span class="n">append_arrow</span><span class="p">);</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h2 id="toc_58">Write vector to file</h2>
+<h2 id="toc_74">Write vector to file</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -686,7 +843,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
     <link href="http://upwell.github.io/blog/2013/10/18/install-oracle-jdk-32bit-on-fedora-64bit/"/>
     <updated>2013-10-18T22:31:00+08:00</updated>
     <id>http://upwell.github.io/blog/2013/10/18/install-oracle-jdk-32bit-on-fedora-64bit</id>
-    <content type="html"><![CDATA[<h2 id="toc_50">Issue</h2>
+    <content type="html"><![CDATA[<h2 id="toc_66">Issue</h2>
 
 <p>When execute:</p>
 
@@ -723,7 +880,7 @@ range beginning at <em>result</em> with all its elements sorted.</p>
 </span><span class='line'>
 </span><span class='line'>    /usr/java/jdk1.7.0_45/jre/lib/jsse.jar</span></code></pre></td></tr></table></div></figure></p>
 
-<h2 id="toc_51">Solution</h2>
+<h2 id="toc_67">Solution</h2>
 
 <p>Install the 32bit libraries:</p>
 
@@ -737,14 +894,14 @@ range beginning at <em>result</em> with all its elements sorted.</p>
     <link href="http://upwell.github.io/blog/2013/10/16/c-header-file-include-seq/"/>
     <updated>2013-10-16T16:48:00+08:00</updated>
     <id>http://upwell.github.io/blog/2013/10/16/c-header-file-include-seq</id>
-    <content type="html"><![CDATA[<h2 id="toc_48">问题</h2>
+    <content type="html"><![CDATA[<h2 id="toc_64">问题</h2>
 
 <p>遇到一个很奇怪的问题，在工程中使用 stlport 的时候各种编译不过，即使仅仅是声明一个对象都会编译不过。
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>std::sstream mystream;</span></code></pre></td></tr></table></div></figure>
 报的错误也很奇怪，是 stlport 内部的文件语法错误。</p>
 
-<h2 id="toc_49">分析过程</h2>
+<h2 id="toc_65">分析过程</h2>
 
 <ol>
 <li>在工程外部，编写小程序，使用工程中的 stlport 来编译，正常编译通过，运行正常；</li>
@@ -847,7 +1004,7 @@ it as the default config.</p>
     <link href="http://upwell.github.io/blog/2013/09/18/octopress-daily-use/"/>
     <updated>2013-09-18T17:00:00+08:00</updated>
     <id>http://upwell.github.io/blog/2013/09/18/octopress-daily-use</id>
-    <content type="html"><![CDATA[<h3 id="toc_42">Check ruby version</h3>
+    <content type="html"><![CDATA[<h3 id="toc_58">Check ruby version</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>ruby -v
@@ -859,7 +1016,7 @@ it as the default config.</p>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>rvm use 1.9.3
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_43">Create a new post</h3>
+<h3 id="toc_59">Create a new post</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>rake new_post<span class="o">[</span><span class="s1">&#39;octopress daily use&#39;</span><span class="o">]</span>
@@ -868,7 +1025,7 @@ it as the default config.</p>
 <p>This would create a new markdown file under <code>source/_posts/</code> folder. Edit the file<br>
 to compose the new post.</p>
 
-<h3 id="toc_44">Preview and generate</h3>
+<h3 id="toc_60">Preview and generate</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -878,7 +1035,7 @@ to compose the new post.</p>
 
 <p>Visit <code>http://localhost:4000</code> to preview the site.</p>
 
-<h3 id="toc_45">Deploy to github page</h3>
+<h3 id="toc_61">Deploy to github page</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -888,7 +1045,7 @@ to compose the new post.</p>
 
 <p>This would deploy the generate file on to github page for display.</p>
 
-<h3 id="toc_46">Submit source to github repo</h3>
+<h3 id="toc_62">Submit source to github repo</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -898,7 +1055,7 @@ to compose the new post.</p>
 </span><span class='line'>git push origin <span class="nb">source</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_47">Use octopress in two machines</h3>
+<h3 id="toc_63">Use octopress in two machines</h3>
 
 <p>Before update / add a new post, remember:
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -920,7 +1077,7 @@ to compose the new post.</p>
     <link href="http://upwell.github.io/blog/2013/08/14/vim-memo/"/>
     <updated>2013-08-14T21:54:00+08:00</updated>
     <id>http://upwell.github.io/blog/2013/08/14/vim-memo</id>
-    <content type="html"><![CDATA[<h2 id="toc_37">Move faster : EasyMotion</h2>
+    <content type="html"><![CDATA[<h2 id="toc_53">Move faster : EasyMotion</h2>
 
 <p>EasyMotion provides a much simpler way to use some motions in vim. It takes<br>
 the <code>&lt;number&gt;</code> out of <code>&lt;number&gt;w</code> or <code>&lt;number&gt;f{char}</code> by highlighting all<br>
@@ -933,18 +1090,18 @@ target.</p>
 <code>&lt;leader&gt;&lt;leader&gt;f</code><br>
 <code>&lt;leader&gt;&lt;leader&gt;f{char}</code></p>
 
-<h2 id="toc_38">Repeats</h2>
+<h2 id="toc_54">Repeats</h2>
 
 <p>Single repeats</p>
 
 <p><code>.</code> : used to repeat simple changes<br>
 <code>@:</code> : used to repeat last command-line</p>
 
-<h2 id="toc_39">Surround</h2>
+<h2 id="toc_55">Surround</h2>
 
 <p>With plugin <a href="https://github.com/tpope/vim-surround">Surround</a>, you can easily handle surround with words.</p>
 
-<h3 id="toc_40">Add surroundings</h3>
+<h3 id="toc_56">Add surroundings</h3>
 
 <p><code>ys</code> takes an <strong>valid Vim motion</strong> or text object as the first object and wraps it using the second
 argument.
@@ -956,7 +1113,7 @@ argument.
 <p>Under <strong>visual mode</strong>, select content and press <code>S</code> with the surrounding wound wrap the selected
 content.</p>
 
-<h3 id="toc_41">Delete surroundings</h3>
+<h3 id="toc_57">Delete surroundings</h3>
 
 <p>Delete surroundings is <code>ds</code> .
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -975,29 +1132,29 @@ content.</p>
     <link href="http://upwell.github.io/blog/2013/08/07/sqlite-command-tips/"/>
     <updated>2013-08-07T13:26:00+08:00</updated>
     <id>http://upwell.github.io/blog/2013/08/07/sqlite-command-tips</id>
-    <content type="html"><![CDATA[<h3 id="toc_30">Use a database file</h3>
+    <content type="html"><![CDATA[<h3 id="toc_46">Use a database file</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>sqlite &lt;database_file&gt;</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_31">Get table information</h3>
+<h3 id="toc_47">Get table information</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>.tables</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_32">Get schema information</h3>
+<h3 id="toc_48">Get schema information</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>.schema
 </span><span class='line'>.schema table_name</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_33">Get help</h3>
+<h3 id="toc_49">Get help</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>.help</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_34">Write result to a file</h3>
+<h3 id="toc_50">Write result to a file</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -1010,12 +1167,12 @@ content.</p>
 </span><span class='line'>select * from table_name;
 </span><span class='line'>.exit</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_35">Exit</h3>
+<h3 id="toc_51">Exit</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>.exit</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_36">More</h3>
+<h3 id="toc_52">More</h3>
 
 <p><a href="http://www.sqlite.org/sqlite.html">sqlite official site help</a></p>
 ]]></content>
@@ -1026,7 +1183,7 @@ content.</p>
     <link href="http://upwell.github.io/blog/2013/08/07/install-xrdp-on-centos63/"/>
     <updated>2013-08-07T11:35:00+08:00</updated>
     <id>http://upwell.github.io/blog/2013/08/07/install-xrdp-on-centos63</id>
-    <content type="html"><![CDATA[<h3 id="toc_27">Install packages</h3>
+    <content type="html"><![CDATA[<h3 id="toc_43">Install packages</h3>
 
 <p>CentOS 6.3 does not have xrdp package in the official repo.</p>
 
@@ -1044,14 +1201,14 @@ content.</p>
 </span><span class='line'>yum install xrdp</span></code></pre></td></tr></table></div></figure></li>
 </ul>
 
-<h3 id="toc_28">Start service</h3>
+<h3 id="toc_44">Start service</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>/etc/init.d/xrdp start
 </span><span class='line'>chkconfig xrdp on</span></code></pre></td></tr></table></div></figure>
 
-<h3 id="toc_29">Issues</h3>
+<h3 id="toc_45">Issues</h3>
 
 <ul>
 <li><p>problem connecting 5910
