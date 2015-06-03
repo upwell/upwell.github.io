@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>django - use silk for profiling - Note Everything</title>
+        <meta charset="utf-8" />
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="http://hehan.net/theme/static/css/style.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link href="http://hehan.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Note Everything Full Atom Feed" />
+        <link href="http://hehan.net/feeds/tech.atom.xml" type="application/atom+xml" rel="alternate" title="Note Everything Categories Atom Feed" />
+    </head>
+
+    <body id="index" class="archive">
+        <div class="container">
+            <div class="header">
+                <ul class="nav nav-pills pull-right">
+                    <li class=""><a href="http://hehan.net">Home</a></li>
+                    <li><a href="http://hehan.net/archives.html">Archives</a></li>
+                </ul>
+                <h3 class="text-muted"><a href="http://hehan.net">Note Everything</a></h3>
+				<h2 class="text-muted"></h2>
+             </div>
+<section id="content" class="article content">
+  <header>
+    <h2 class="entry-title">
+      <a href="http://hehan.net/django-use-silk-for-profiling.html" rel="bookmark"
+         title="Permalink to django - use silk for profiling">django - use silk for profiling</a></h2>
+ 
+  </header>
+  
+     
+  <div class="entry-content">
+    <p><a href="https://github.com/django-debug-toolbar/django-debug-toolbar">django-debug-toolbar</a> does not work for ajax requests. Here comes <a href="https://github.com/mtford90/silk">silk</a> which works perfect for the ajax condition.</p>
+<h3>Installation</h3>
+<p>Following the <a href="https://github.com/mtford90/silk">instructions</a> to install and configure for your own projects.</p>
+<h3>Tips</h3>
+<h4>Middleware Settings</h4>
+<p>Pay attention to the <strong>middleware</strong> setting, you should not just append the line at the end of existed middle settings.  </p>
+<p>This would give you lots of error messages:  </p>
+<blockquote>
+<p>AttributeError: 'thread._local' object has no attribute 'temp_identifier'</p>
+</blockquote>
+<p>The solutions is, put it before the csrf middleware, like</p>
+<div class="highlight"><pre><span class="n">MIDDLEWARE_CLASSES</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="err">&#39;</span><span class="n">django</span><span class="p">.</span><span class="n">contrib</span><span class="p">.</span><span class="n">sessions</span><span class="p">.</span><span class="n">middleware</span><span class="p">.</span><span class="n">SessionMiddleware</span><span class="err">&#39;</span><span class="p">,</span>
+    <span class="err">&#39;</span><span class="n">django</span><span class="p">.</span><span class="n">middleware</span><span class="p">.</span><span class="n">common</span><span class="p">.</span><span class="n">CommonMiddleware</span><span class="err">&#39;</span><span class="p">,</span>
+    <span class="err">&#39;</span><span class="n">silk</span><span class="p">.</span><span class="n">middleware</span><span class="p">.</span><span class="n">SilkyMiddleware</span><span class="err">&#39;</span><span class="p">,</span>
+    <span class="err">&#39;</span><span class="n">django</span><span class="p">.</span><span class="n">middleware</span><span class="p">.</span><span class="n">csrf</span><span class="p">.</span><span class="n">CsrfViewMiddleware</span><span class="err">&#39;</span><span class="p">,</span>
+    <span class="err">&#39;</span><span class="n">django</span><span class="p">.</span><span class="n">contrib</span><span class="p">.</span><span class="n">auth</span><span class="p">.</span><span class="n">middleware</span><span class="p">.</span><span class="n">AuthenticationMiddleware</span><span class="err">&#39;</span><span class="p">,</span>
+    <span class="err">&#39;</span><span class="n">django</span><span class="p">.</span><span class="n">contrib</span><span class="p">.</span><span class="n">messages</span><span class="p">.</span><span class="n">middleware</span><span class="p">.</span><span class="n">MessageMiddleware</span><span class="err">&#39;</span><span class="p">,</span>
+    <span class="err">&#39;</span><span class="n">django</span><span class="p">.</span><span class="n">middleware</span><span class="p">.</span><span class="n">clickjacking</span><span class="p">.</span><span class="n">XFrameOptionsMiddleware</span><span class="err">&#39;</span><span class="p">,</span>
+    <span class="err">&#39;</span><span class="n">django</span><span class="p">.</span><span class="n">middleware</span><span class="p">.</span><span class="n">locale</span><span class="p">.</span><span class="n">LocaleMiddleware</span><span class="err">&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<h4>Server Error</h4>
+<p>The server side may generate error message like:</p>
+<blockquote>
+<p>pipe error<br />
+MySQL server has gone away</p>
+</blockquote>
+<p>Add <code>SILKY_MAX_RESPONSE_BODY_SIZE = 1024</code> in <code>settings.py</code>.</p>
+<h4>Static file handling</h4>
+<p>If you don't want to run django in debug mode and also haven't setup the external server (nginx, uwsgi, etc.) for static file serving.</p>
+<p>To make <code>silk</code> display as expected, you need to do the following changes:</p>
+<div class="highlight"><pre><span class="c"># python manage.py collectstatic</span>
+</pre></div>
+
+
+<p>This would collect static files to <code>settings.STATIC_ROOT</code> folder.</p>
+<p>After that, add a url pattern in <code>urls.py</code>.</p>
+<div class="highlight"><pre><span class="nb">url</span><span class="p">(</span><span class="nb">r</span><span class="s1">&#39;^static/(?P&lt;path&gt;.*)$&#39;</span><span class="p">,</span> <span class="s1">&#39;django.views.static.serve&#39;</span><span class="p">,</span>
+    <span class="p">{</span><span class="s1">&#39;document_root&#39;</span><span class="p">:</span> <span class="nx">settings.STATIC_ROOT</span><span class="p">}),</span>
+</pre></div>
+  </div><!-- /.entry-content -->
+   <footer class="post-info text-muted">
+    Posted on <abbr class="published" title="2014-08-13T17:41:00+08:00">
+      三 13 八月 2014
+    </abbr>
+    <address class="vcard author">
+      by <a class="url fn" href="http://hehan.net/author/han.html">Han</a>
+    </address> in <a href="http://hehan.net/category/tech.html">tech</a> Tagged <a href="http://hehan.net/tag/django.html">django </a><a href="http://hehan.net/tag/python.html">python </a>  </footer><!-- /.post-info -->
+</section>
+            <footer id="contentinfo" class="footer">
+                    <nav class="pull-right bottom-nav">
+                        <a href="http://hehan.net/feeds/all.atom.xml">RSS</a>
+                    </nav>
+                    <address id="about" class="vcard body">
+                    &copy; <a href="http://hehan.net">Note Everything</a> Proudly powered by <a href="http://getpelican.com/">Pelican</a>
+                    </address><!-- /#about -->
+            </footer><!-- /#contentinfo -->
+        </div><!-- container -->
+    </body>
+</html>
