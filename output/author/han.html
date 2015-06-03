@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Articles by Han - Note Everything</title>
+        <meta charset="utf-8" />
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="http://hehan.net/theme/static/css/style.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link href="http://hehan.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Note Everything Full Atom Feed" />
+    </head>
+
+    <body id="index" class="archive">
+        <div class="container">
+            <div class="header">
+                <ul class="nav nav-pills pull-right">
+                    <li class=""><a href="http://hehan.net">Home</a></li>
+                    <li class="active"><a href="http://hehan.net/archives.html">Archives</a></li>
+                </ul>
+                <h3 class="text-muted"><a href="http://hehan.net">Note Everything</a></h3>
+				<h2 class="text-muted"></h2>
+             </div>
+<section id="content" class="content">
+<h2>Articles by Han</h2>
+
+        <article class="hentry">
+                <header> <h2 class="entry-title"><a href="http://hehan.net/python-small-tips.html" rel="bookmark" title="Permalink to python small tips">python small tips</a></h2> </header>
+                <div class="entry-content"> <h3>Join two lists</h3>
+<div class="highlight"><pre><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</pre></div>
+
+
+<h3>Join two dicts</h3>
+<div class="highlight"><pre><span class="n">d1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s">&#39;b&#39;</span><span class="p">}</span>
+<span class="n">d2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">:</span> <span class="s">&#39;c&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s">&#39;d&#39;</span><span class="p">}</span>
+<span class="n">d1</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span>
+<span class="c"># {1: &#39;a&#39;, 2: &#39;b&#39;, 3: &#39;c&#39;, 4: &#39;d&#39;}</span>
+</pre></div>
+
+
+<h3>Check if a list/dictionary/tuple ...</h3> </div><!-- entry-content -->
+        </article>
+        <article class="hentry">
+                <header> <h2 class="entry-title"><a href="http://hehan.net/gimp-quick-use-guide.html" rel="bookmark" title="Permalink to gimp quick use guide">gimp quick use guide</a></h2> </header>
+                <div class="entry-content"> <h2>Copy layer to a new image</h2>
+<p>Use <code>ctrl+c</code> and <code>ctrl+v</code> to copy and paste a layer.</p>
+<h3>Crop to selection</h3>
+<p>Use <code>Crop tool</code> to select the area to crop, and then adjust the params in the toolbox windows, after
+all done, double click the selection.</p> </div><!-- entry-content -->
+        </article>
+        <article class="hentry">
+                <header> <h2 class="entry-title"><a href="http://hehan.net/android-studio-tips.html" rel="bookmark" title="Permalink to android studio tips">android studio tips</a></h2> </header>
+                <div class="entry-content"> <h2>Cannot run program aapt -- no such file or directory</h2>
+<p>Install missing 32bit libraries:</p>
+<div class="highlight"><pre><span class="n">yum</span> <span class="n">install</span> <span class="n">libstdc</span><span class="o">++</span><span class="p">.</span><span class="n">i686</span> <span class="n">zlib</span><span class="p">.</span><span class="n">i686</span>
+</pre></div>
+
+
+<h2>studio running with the openjdk</h2>
+<p>Although I installed the oracle jdk, and export <code>STUDIO_JDK</code> in both zshrc and bashrc, when<br />
+start android studio from desktop application, it still uses the open ...</p> </div><!-- entry-content -->
+        </article>
+        <article class="hentry">
+                <header> <h2 class="entry-title"><a href="http://hehan.net/django-use-silk-for-profiling.html" rel="bookmark" title="Permalink to django - use silk for profiling">django - use silk for profiling</a></h2> </header>
+                <div class="entry-content"> <p><a href="https://github.com/django-debug-toolbar/django-debug-toolbar">django-debug-toolbar</a> does not work for ajax requests. Here comes <a href="https://github.com/mtford90/silk">silk</a> which works perfect for the ajax condition.</p>
+<h3>Installation</h3>
+<p>Following the <a href="https://github.com/mtford90/silk">instructions</a> to install and configure for your own projects.</p>
+<h3>Tips</h3>
+<h4>Middleware Settings</h4>
+<p>Pay attention to the <strong>middleware</strong> setting, you should not just append the line at the end of existed ...</p> </div><!-- entry-content -->
+        </article>
+        <article class="hentry">
+                <header> <h2 class="entry-title"><a href="http://hehan.net/dnsmasq-config.html" rel="bookmark" title="Permalink to dnsmasq config">dnsmasq config</a></h2> </header>
+                <div class="entry-content"> <h3>Set dns server for dnsmasq</h3>
+<p>Use a separate conf file, the format is the same as resolv.conf.</p>
+<div class="highlight"><pre><span class="n">resolv</span><span class="o">-</span><span class="n">file</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">resolv</span><span class="p">.</span><span class="n">masq</span><span class="p">.</span><span class="n">conf</span>
+</pre></div>
+
+
+<p>Then after dnsmasq is started, set <code>127.0.0.1</code> in <code>/etc/resolv.conf</code>.</p>
+<h3>listening address with localhost</h3>
+<div class="highlight"><pre><span class="n">listen</span><span class="o">-</span><span class="n">address</span><span class="o">=</span><span class="mf">127.0.0.1</span>
+</pre></div>
+
+
+<h3>Use separate ...</h3> </div><!-- entry-content -->
+        </article>
+        <article class="hentry">
+                <header> <h2 class="entry-title"><a href="http://hehan.net/django-collections.html" rel="bookmark" title="Permalink to django collections">django collections</a></h2> </header>
+                <div class="entry-content"> <h2>django profiling tools</h2>
+<p><a href="https://github.com/mtford90/silk">Silky smooth profiling for Django</a></p>
+<p><a href="https://github.com/django-debug-toolbar/django-debug-toolbar">Django Debug toolbar</a></p> </div><!-- entry-content -->
+        </article>
+        <article class="hentry">
+                <header> <h2 class="entry-title"><a href="http://hehan.net/two-foreign-keys-to-same-model.html" rel="bookmark" title="Permalink to two foreign keys to same model">two foreign keys to same model</a></h2> </header>
+                <div class="entry-content"> <h4>Use <code>related_name</code>:</h4>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Test</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">example1</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Example</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&#39;test1&#39;</span><span class="p">)</span>
+    <span class="n">example2</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Example</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&#39;test2&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>See <a href="http://stackoverflow.com/questions/543377/how-can-i-have-two-foreign-keys-to-the-same-model-in-django">stackoverflow question</a> and <a href="http://docs.djangoproject.com/en/dev/ref/models/fields/#foreignkey">django doc</a></p>
+<h4>Why <code>related_name</code>:</h4>
+<p>The <code>related_name</code> attributes specifies the name of reverse relation from <code>Example</code> model<br />
+to your model.</p>
+<p>If no <code>related_name</code> is specified, Django creates one using ...</p> </div><!-- entry-content -->
+        </article>
+        <article class="hentry">
+                <header> <h2 class="entry-title"><a href="http://hehan.net/python-long-line-wrap.html" rel="bookmark" title="Permalink to python long line wrap">python long line wrap</a></h2> </header>
+                <div class="entry-content"> <h2>Long line with chained methods</h2>
+<p>Use additional <strong>parenthesis</strong>.</p>
+<div class="highlight"><pre><span class="n">subkeyword</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">Session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Subkeyword</span><span class="o">.</span><span class="n">subkeyword_id</span><span class="p">,</span> <span class="n">Subkeyword</span><span class="o">.</span><span class="n">subkeyword_word</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">subkeyword_company_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">e_company_id</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">subkeyword_word</span><span class="o">=</span><span class="n">subkeyword_word</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">subkeyword_active</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">one</span><span class="p">()</span>
+    <span class="p">)</span>
+</pre></div>
+
+
+<h2>Long string</h2>
+<p>Python concatenates string literals which appear adjacent to each other.</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">fun</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">&#39;{0} Here is a really long &#39;</span> \
+          <span class="s">&#39;sentence with {1 ...</span></pre></div> </div><!-- entry-content -->
+        </article>
+        <article class="hentry">
+                <header> <h2 class="entry-title"><a href="http://hehan.net/configure-vim-for-python-dev.html" rel="bookmark" title="Permalink to configure vim for python dev">configure vim for python dev</a></h2> </header>
+                <div class="entry-content"> <h2>Flake8</h2>
+<p><a href="https://pypi.python.org/pypi/flake8/">flake8</a> :  wrapper for python checkers:</p>
+<ul>
+<li>PyFlakes</li>
+<li>pep8</li>
+<li>Ned Batchelder's McCabe script</li>
+</ul>
+<h3>Install</h3>
+<div class="highlight"><pre><span class="c"># sudo pip install flake8</span>
+</pre></div>
+
+
+<h2>Vim-flake8</h2>
+<p><a href="https://github.com/nvie/vim-flake8">vim-flake8</a> : vim wrapper for flake8.</p>
+<h3>Install</h3>
+<div class="highlight"><pre><span class="c"># git submodule add https://github.com/nvie/vim-flake8.git bundle/vim-flake8</span>
+</pre></div>
+
+
+<h3>How to use</h3>
+<ol>
+<li>Open a python file</li>
+<li>ress <code>F7</code> to run <code>flake8</code> on it ...</li></ol> </div><!-- entry-content -->
+        </article>
+        <article class="hentry">
+                <header> <h2 class="entry-title"><a href="http://hehan.net/object-javascript-the-good-part.html" rel="bookmark" title="Permalink to Object - javascript: the good part">Object - javascript: the good part</a></h2> </header>
+                <div class="entry-content"> <h3>Object Literals</h3>
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">empty_object</span> <span class="o">=</span> <span class="p">{};</span>
+
+<span class="kd">var</span> <span class="nx">stooge</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;first-name&quot;</span><span class="o">:</span> <span class="s2">&quot;Jerome&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;last-name&quot;</span><span class="o">:</span> <span class="s2">&quot;Howard&quot;</span>
+<span class="p">};</span>
+</pre></div>
+
+
+<h4>Property Name</h4>
+<ul>
+<li>could be <strong>any</strong> string including empty string;</li>
+<li><strong>the quote around the name is optional</strong>, if the name is a legal Javascript<br />
+  name (not a reserved word);</li>
+</ul>
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">flight</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">airline</span><span class="o">:</span> <span class="s2">&quot;Ocreanic&quot;</span><span class="p">,</span>
+    <span class="nx">number</span><span class="o">:</span> <span class="mi">815</span><span class="p">,</span>
+    <span class="nx">departure</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">IATA</span><span class="o">:</span> <span class="s2">&quot;SYD&quot;</span><span class="p">,</span>
+        <span class="nx">time</span><span class="o">:</span> <span class="s2">&quot;2012-10-12 12 ...</span></pre></div> </div><!-- entry-content -->
+        </article>
+<div class="pager">
+      <ul>
+                        <li class="previous disabled"><a>← Previous</a></li>
+						<li class="next"><a href="http://hehan.net/author/han2.html">Next →</a></li>
+      </ul>
+    </div>
+</section><!-- content -->
+            <footer id="contentinfo" class="footer">
+                    <nav class="pull-right bottom-nav">
+                        <a href="http://hehan.net/feeds/all.atom.xml">RSS</a>
+                    </nav>
+                    <address id="about" class="vcard body">
+                    &copy; <a href="http://hehan.net">Note Everything</a> Proudly powered by <a href="http://getpelican.com/">Pelican</a>
+                    </address><!-- /#about -->
+            </footer><!-- /#contentinfo -->
+        </div><!-- container -->
+    </body>
+</html>

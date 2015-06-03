@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Articles in ctags tag - Note Everything</title>
+        <meta charset="utf-8" />
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="http://hehan.net/theme/static/css/style.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link href="http://hehan.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Note Everything Full Atom Feed" />
+    </head>
+
+    <body id="index" class="archive">
+        <div class="container">
+            <div class="header">
+                <ul class="nav nav-pills pull-right">
+                    <li class=""><a href="http://hehan.net">Home</a></li>
+                    <li class="active"active><a href="http://hehan.net/archives.html">Archives</a></li>
+                </ul>
+                <h3 class="text-muted"><a href="http://hehan.net">Note Everything</a></h3>
+				<h2 class="text-muted"></h2>
+             </div>
+<section id="content" class="content">
+<h2>Articles with the ctags tag</h2>
+
+        <article class="hentry">
+                <header> <h2 class="entry-title"><a href="http://hehan.net/ignore-files-when-building-tags.html" rel="bookmark" title="Permalink to Ignore files when building tags">Ignore files when building tags</a></h2> </header>
+                <div class="entry-content"> <p>Use the following commands:</p>
+<div class="highlight"><pre>    <span class="n">ctags</span> <span class="o">--</span><span class="n">exclude</span><span class="o">=*</span><span class="p">.</span><span class="n">html</span> <span class="o">--</span><span class="n">exclude</span><span class="o">=*</span><span class="p">.</span><span class="n">js</span> <span class="o">--</span><span class="n">exclude</span><span class="o">=*</span><span class="p">.</span><span class="n">sql</span> <span class="o">-</span><span class="n">R</span>
+</pre></div>
+
+
+<p>It's annoying to enter the long parameters every time. You can configure<br />
+it as the default config.</p>
+<p>Edit <code>~/.ctags</code>. Add the following lines:</p>
+<div class="highlight"><pre>    <span class="o">--</span><span class="n">exclude</span><span class="o">=*</span><span class="p">.</span><span class="n">html</span>
+    <span class="o">--</span><span class="n">exclude</span><span class="o">=*</span><span class="p">.</span><span class="n">js</span>
+    <span class="o">--</span><span class="n">exclude</span><span class="o">=*</span><span class="p">.</span><span class="n">sql</span>
+</pre></div>
+
+
+<p>Then you only need to type:</p>
+<div class="highlight"><pre>    <span class="n">ctags</span> <span class="o">-</span><span class="n">R</span>
+</pre></div> </div><!-- entry-content -->
+        </article>
+<div class="pager">
+      <ul>
+                        <li class="previous disabled"><a>← Previous</a></li>
+                        <li class="next disabled"><a>Next →</a></li>
+      </ul>
+    </div>
+</section><!-- content -->
+            <footer id="contentinfo" class="footer">
+                    <nav class="pull-right bottom-nav">
+                        <a href="http://hehan.net/feeds/all.atom.xml">RSS</a>
+                    </nav>
+                    <address id="about" class="vcard body">
+                    &copy; <a href="http://hehan.net">Note Everything</a> Proudly powered by <a href="http://getpelican.com/">Pelican</a>
+                    </address><!-- /#about -->
+            </footer><!-- /#contentinfo -->
+        </div><!-- container -->
+    </body>
+</html>

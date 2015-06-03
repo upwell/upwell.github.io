@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>configure vim for python dev - Note Everything</title>
+        <meta charset="utf-8" />
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="http://hehan.net/theme/static/css/style.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link href="http://hehan.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Note Everything Full Atom Feed" />
+        <link href="http://hehan.net/feeds/tech.atom.xml" type="application/atom+xml" rel="alternate" title="Note Everything Categories Atom Feed" />
+    </head>
+
+    <body id="index" class="archive">
+        <div class="container">
+            <div class="header">
+                <ul class="nav nav-pills pull-right">
+                    <li class=""><a href="http://hehan.net">Home</a></li>
+                    <li><a href="http://hehan.net/archives.html">Archives</a></li>
+                </ul>
+                <h3 class="text-muted"><a href="http://hehan.net">Note Everything</a></h3>
+				<h2 class="text-muted"></h2>
+             </div>
+<section id="content" class="article content">
+  <header>
+    <h2 class="entry-title">
+      <a href="http://hehan.net/configure-vim-for-python-dev.html" rel="bookmark"
+         title="Permalink to configure vim for python dev">configure vim for python dev</a></h2>
+ 
+  </header>
+  
+     
+  <div class="entry-content">
+    <h2>Flake8</h2>
+<p><a href="https://pypi.python.org/pypi/flake8/">flake8</a> :  wrapper for python checkers:</p>
+<ul>
+<li>PyFlakes</li>
+<li>pep8</li>
+<li>Ned Batchelder's McCabe script</li>
+</ul>
+<h3>Install</h3>
+<div class="highlight"><pre><span class="c"># sudo pip install flake8</span>
+</pre></div>
+
+
+<h2>Vim-flake8</h2>
+<p><a href="https://github.com/nvie/vim-flake8">vim-flake8</a> : vim wrapper for flake8.</p>
+<h3>Install</h3>
+<div class="highlight"><pre><span class="c"># git submodule add https://github.com/nvie/vim-flake8.git bundle/vim-flake8</span>
+</pre></div>
+
+
+<h3>How to use</h3>
+<ol>
+<li>Open a python file</li>
+<li>ress <code>F7</code> to run <code>flake8</code> on it</li>
+</ol>
+<h2>Syntastic</h2>
+<p><a href="https://github.com/scrooloose/syntastic">syntastic</a> : syntax checking plugin that runs file through external syntax<br />
+checker and displays any resulting errors to user.</p>
+<h3>Install</h3>
+<div class="highlight"><pre><span class="c"># git submodule add https://github.com/scrooloose/syntastic bundle/syntastic</span>
+</pre></div>
+
+
+<p>Start vim, then type <code>:Helptags</code>.</p>
+<h3>How to use</h3>
+<p>Check</p>
+<div class="highlight"><pre><span class="o">:</span><span class="n">SyntasticCheck</span>
+</pre></div>
+
+
+<p>See available external checker:</p>
+<div class="highlight"><pre><span class="o">:</span><span class="n">SyntasticInfo</span>
+</pre></div>
+  </div><!-- /.entry-content -->
+   <footer class="post-info text-muted">
+    Posted on <abbr class="published" title="2013-11-23T08:42:00+08:00">
+      六 23 十一月 2013
+    </abbr>
+    <address class="vcard author">
+      by <a class="url fn" href="http://hehan.net/author/han.html">Han</a>
+    </address> in <a href="http://hehan.net/category/tech.html">tech</a> Tagged <a href="http://hehan.net/tag/vim.html">vim </a><a href="http://hehan.net/tag/python.html">python </a>  </footer><!-- /.post-info -->
+</section>
+            <footer id="contentinfo" class="footer">
+                    <nav class="pull-right bottom-nav">
+                        <a href="http://hehan.net/feeds/all.atom.xml">RSS</a>
+                    </nav>
+                    <address id="about" class="vcard body">
+                    &copy; <a href="http://hehan.net">Note Everything</a> Proudly powered by <a href="http://getpelican.com/">Pelican</a>
+                    </address><!-- /#about -->
+            </footer><!-- /#contentinfo -->
+        </div><!-- container -->
+    </body>
+</html>

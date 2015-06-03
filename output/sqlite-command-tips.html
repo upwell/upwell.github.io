@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SQLite command tips - Note Everything</title>
+        <meta charset="utf-8" />
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="http://hehan.net/theme/static/css/style.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link href="http://hehan.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Note Everything Full Atom Feed" />
+        <link href="http://hehan.net/feeds/tech.atom.xml" type="application/atom+xml" rel="alternate" title="Note Everything Categories Atom Feed" />
+    </head>
+
+    <body id="index" class="archive">
+        <div class="container">
+            <div class="header">
+                <ul class="nav nav-pills pull-right">
+                    <li class=""><a href="http://hehan.net">Home</a></li>
+                    <li><a href="http://hehan.net/archives.html">Archives</a></li>
+                </ul>
+                <h3 class="text-muted"><a href="http://hehan.net">Note Everything</a></h3>
+				<h2 class="text-muted"></h2>
+             </div>
+<section id="content" class="article content">
+  <header>
+    <h2 class="entry-title">
+      <a href="http://hehan.net/sqlite-command-tips.html" rel="bookmark"
+         title="Permalink to SQLite command tips">SQLite command tips</a></h2>
+ 
+  </header>
+  
+     
+  <div class="entry-content">
+    <h3>Use a database file</h3>
+<div class="highlight"><pre>    <span class="nx">sqlite</span> <span class="o">&lt;</span><span class="nx">database_file</span><span class="o">&gt;</span>
+</pre></div>
+
+
+<h3>Get table information</h3>
+<div class="highlight"><pre>    <span class="p">.</span><span class="n">tables</span>
+</pre></div>
+
+
+<h3>Get schema information</h3>
+<div class="highlight"><pre>    <span class="p">.</span><span class="n">schema</span>
+    <span class="p">.</span><span class="n">schema</span> <span class="n">table_name</span>
+</pre></div>
+
+
+<h3>Get help</h3>
+<div class="highlight"><pre>    <span class="p">.</span><span class="n">help</span>
+</pre></div>
+
+
+<h3>Write result to a file</h3>
+<div class="highlight"><pre>    <span class="p">.</span><span class="n">mode</span> <span class="n">list</span>
+    <span class="p">.</span><span class="n">separator</span> <span class="o">|</span>
+    <span class="p">.</span><span class="n">output</span> <span class="n">result</span><span class="p">.</span><span class="n">data</span>
+    <span class="n">select</span> <span class="o">*</span> <span class="n">from</span> <span class="n">table_name</span><span class="p">;</span>
+    <span class="p">.</span><span class="n">exit</span>
+</pre></div>
+
+
+<h3>Exit</h3>
+<div class="highlight"><pre>    <span class="p">.</span><span class="n">exit</span>
+</pre></div>
+
+
+<h3>More</h3>
+<p><a href="http://www.sqlite.org/sqlite.html">sqlite official site help</a></p>
+  </div><!-- /.entry-content -->
+   <footer class="post-info text-muted">
+    Posted on <abbr class="published" title="2013-08-07T13:26:00+08:00">
+      三 07 八月 2013
+    </abbr>
+    <address class="vcard author">
+      by <a class="url fn" href="http://hehan.net/author/han.html">Han</a>
+    </address> in <a href="http://hehan.net/category/tech.html">tech</a> Tagged <a href="http://hehan.net/tag/sqlite.html">sqlite </a>  </footer><!-- /.post-info -->
+</section>
+            <footer id="contentinfo" class="footer">
+                    <nav class="pull-right bottom-nav">
+                        <a href="http://hehan.net/feeds/all.atom.xml">RSS</a>
+                    </nav>
+                    <address id="about" class="vcard body">
+                    &copy; <a href="http://hehan.net">Note Everything</a> Proudly powered by <a href="http://getpelican.com/">Pelican</a>
+                    </address><!-- /#about -->
+            </footer><!-- /#contentinfo -->
+        </div><!-- container -->
+    </body>
+</html>
