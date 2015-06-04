@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>android studio tips - Note Everything</title>
+        <title>Use socks5 proxy for pip install - Note Everything</title>
         <meta charset="utf-8" />
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
         <link href="http://hehan.net/theme/static/css/style.css" rel="stylesheet" />
@@ -21,37 +21,37 @@
 <section id="content" class="article content">
   <header>
     <h2 class="entry-title">
-      <a href="http://hehan.net/android-studio-tips.html" rel="bookmark"
-         title="Permalink to android studio tips">android studio tips</a></h2>
+      <a href="http://hehan.net/use-socks5-proxy-for-pip-install.html" rel="bookmark"
+         title="Permalink to Use socks5 proxy for pip install">Use socks5 proxy for pip install</a></h2>
  
   </header>
   
      
   <div class="entry-content">
-    <h2>Cannot run program aapt -- no such file or directory</h2>
-<p>Install missing 32bit libraries:</p>
-<div class="highlight"><pre><span class="n">yum</span> <span class="n">install</span> <span class="n">libstdc</span><span class="o">++</span><span class="p">.</span><span class="n">i686</span> <span class="n">zlib</span><span class="p">.</span><span class="n">i686</span>
+    <h3>Issue</h3>
+<p><code>pip install</code> doesn't provide the native socks5 proxy support.</p>
+<h3>Solution</h3>
+<p>Use a tool named <code>proxychains</code> which chains the connection through proxy.</p>
+<p>On fedora, install via <code>sudo dnf install proxychains</code>.</p>
+<p>To change the default socks5 proxy, modify <code>/etc/proxychains.conf</code>, under <code>[ProxyList]</code> add one line:</p>
+<div class="highlight"><pre><span class="n">socks5</span> <span class="mf">127.0.0.1</span> <span class="mi">1080</span>
 </pre></div>
 
 
-<h2>studio running with the openjdk</h2>
-<p>Although I installed the oracle jdk, and export <code>STUDIO_JDK</code> in both zshrc and bashrc, when<br />
-start android studio from desktop application, it still uses the open jdk.</p>
-<p>For desktop application defined under <code>~/.local/share/applications/</code>, you need to<br />
-setup the environment variables in <code>~/.profile</code>.</p>
-<div class="highlight"><pre><span class="n">export</span> <span class="n">STUDIO_JDK</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">java</span><span class="o">/</span><span class="n">jdk1</span><span class="mf">.8.0</span><span class="n">_20</span>
+<p>How to use:</p>
+<div class="highlight"><pre><span class="n">proxychains</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">requests</span>
 </pre></div>
 
 
-<p>After that, logout and relogin, start android studio again, it works now.</p>
+<p>Done! Happy pip with socks5 proxy.</p>
   </div><!-- /.entry-content -->
    <footer class="post-info text-muted">
-    Posted on <abbr class="published" title="2014-09-01T15:45:00+08:00">
-      一 01 九月 2014
+    Posted on <abbr class="published" title="2015-06-03T17:35:00+08:00">
+      三 03 六月 2015
     </abbr>
     <address class="vcard author">
       by <a class="url fn" href="http://hehan.net/author/han.html">Han</a>
-    </address> in <a href="http://hehan.net/category/tech.html">tech</a> Tagged <a href="http://hehan.net/tag/android.html">android </a>  </footer><!-- /.post-info -->
+    </address> in <a href="http://hehan.net/category/tech.html">tech</a> Tagged <a href="http://hehan.net/tag/pip.html">pip </a>  </footer><!-- /.post-info -->
 </section>
             <footer id="contentinfo" class="footer">
                     <nav class="pull-right bottom-nav">

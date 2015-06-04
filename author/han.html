@@ -6,7 +6,6 @@
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
         <link href="http://hehan.net/theme/static/css/style.css" rel="stylesheet" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link href="http://hehan.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Note Everything Full Atom Feed" />
     </head>
 
     <body id="index" class="archive">
@@ -22,6 +21,16 @@
 <section id="content" class="content">
 <h2>Articles by Han</h2>
 
+        <article class="hentry">
+                <header> <h2 class="entry-title"><a href="http://hehan.net/use-socks5-proxy-for-pip-install.html" rel="bookmark" title="Permalink to Use socks5 proxy for pip install">Use socks5 proxy for pip install</a></h2> </header>
+                <div class="entry-content"> <h3>Issue</h3>
+<p><code>pip install</code> doesn't provide the native socks5 proxy support.</p>
+<h3>Solution</h3>
+<p>Use a tool named <code>proxychains</code> which chains the connection through proxy.</p>
+<p>On fedora, install via <code>sudo dnf install proxychains</code>.</p>
+<p>To change the default socks5 proxy, modify <code>/etc/proxychains.conf</code>, under <code>[ProxyList]</code> add one line:</p>
+<div class="highlight"><pre><span class="n">socks5</span> <span class="mf">127.0.0 ...</span></pre></div> </div><!-- entry-content -->
+        </article>
         <article class="hentry">
                 <header> <h2 class="entry-title"><a href="http://hehan.net/python-small-tips.html" rel="bookmark" title="Permalink to python small tips">python small tips</a></h2> </header>
                 <div class="entry-content"> <h3>Join two lists</h3>
@@ -44,7 +53,7 @@
         </article>
         <article class="hentry">
                 <header> <h2 class="entry-title"><a href="http://hehan.net/gimp-quick-use-guide.html" rel="bookmark" title="Permalink to gimp quick use guide">gimp quick use guide</a></h2> </header>
-                <div class="entry-content"> <h2>Copy layer to a new image</h2>
+                <div class="entry-content"> <h3>Copy layer to a new image</h3>
 <p>Use <code>ctrl+c</code> and <code>ctrl+v</code> to copy and paste a layer.</p>
 <h3>Crop to selection</h3>
 <p>Use <code>Crop tool</code> to select the area to crop, and then adjust the params in the toolbox windows, after
@@ -154,31 +163,6 @@ to your model.</p>
 <li>Open a python file</li>
 <li>ress <code>F7</code> to run <code>flake8</code> on it ...</li></ol> </div><!-- entry-content -->
         </article>
-        <article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://hehan.net/object-javascript-the-good-part.html" rel="bookmark" title="Permalink to Object - javascript: the good part">Object - javascript: the good part</a></h2> </header>
-                <div class="entry-content"> <h3>Object Literals</h3>
-<div class="highlight"><pre><span class="kd">var</span> <span class="nx">empty_object</span> <span class="o">=</span> <span class="p">{};</span>
-
-<span class="kd">var</span> <span class="nx">stooge</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;first-name&quot;</span><span class="o">:</span> <span class="s2">&quot;Jerome&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;last-name&quot;</span><span class="o">:</span> <span class="s2">&quot;Howard&quot;</span>
-<span class="p">};</span>
-</pre></div>
-
-
-<h4>Property Name</h4>
-<ul>
-<li>could be <strong>any</strong> string including empty string;</li>
-<li><strong>the quote around the name is optional</strong>, if the name is a legal Javascript<br />
-  name (not a reserved word);</li>
-</ul>
-<div class="highlight"><pre><span class="kd">var</span> <span class="nx">flight</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">airline</span><span class="o">:</span> <span class="s2">&quot;Ocreanic&quot;</span><span class="p">,</span>
-    <span class="nx">number</span><span class="o">:</span> <span class="mi">815</span><span class="p">,</span>
-    <span class="nx">departure</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">IATA</span><span class="o">:</span> <span class="s2">&quot;SYD&quot;</span><span class="p">,</span>
-        <span class="nx">time</span><span class="o">:</span> <span class="s2">&quot;2012-10-12 12 ...</span></pre></div> </div><!-- entry-content -->
-        </article>
 <div class="pager">
       <ul>
                         <li class="previous disabled"><a>← Previous</a></li>
@@ -188,7 +172,7 @@ to your model.</p>
 </section><!-- content -->
             <footer id="contentinfo" class="footer">
                     <nav class="pull-right bottom-nav">
-                        <a href="http://hehan.net/feeds/all.atom.xml">RSS</a>
+                        <a href="http://hehan.net/None">RSS</a>
                     </nav>
                     <address id="about" class="vcard body">
                     &copy; <a href="http://hehan.net">Note Everything</a> Proudly powered by <a href="http://getpelican.com/">Pelican</a>
