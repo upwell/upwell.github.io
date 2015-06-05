@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title> Articles in pip tag - Note Everything</title>
+        <title> Articles by Han - Note Everything</title>
         <meta charset="utf-8" />
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
         <link href="http://hehan.net/theme/static/css/style.css" rel="stylesheet" />
@@ -14,27 +14,30 @@
             <div class="header">
                 <ul class="nav nav-pills pull-right">
                     <li class=""><a href="http://hehan.net">Home</a></li>
-                    <li class="active"active><a href="http://hehan.net/archives.html">Archives</a></li>
+                    <li class="active"><a href="http://hehan.net/archives.html">Archives</a></li>
                 </ul>
                 <h3 class="text-muted"><a href="http://hehan.net">Note Everything</a></h3>
 				<h2 class="text-muted"></h2>
              </div>
 <section id="content" class="content">
-<h2>Articles with the pip tag</h2>
+<h2>Articles by Han</h2>
 
         <article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://hehan.net/use-socks5-proxy-for-pip-install.html" rel="bookmark" title="Permalink to Use socks5 proxy for pip install">Use socks5 proxy for pip install</a></h2> </header>
-                <div class="entry-content"> <h3>Issue</h3>
-<p><code>pip install</code> doesn't provide the native socks5 proxy support.</p>
-<h3>Solution</h3>
-<p>Use a tool named <code>proxychains</code> which chains the connection through proxy.</p>
-<p>On Fedora, install via <code>sudo dnf install proxychains</code>.</p>
-<p>To change the default socks5 proxy, modify <code>/etc/proxychains.conf</code>, under <code>[ProxyList]</code> add one line:</p>
-<div class="highlight"><pre><span class="n">socks5</span> <span class="mf">127.0.0 ...</span></pre></div> </div><!-- entry-content -->
+                <header> <h2 class="entry-title"><a href="http://hehan.net/install-xrdp-on-centos63.html" rel="bookmark" title="Permalink to Install xrdp on CentOS63">Install xrdp on CentOS63</a></h2> </header>
+                <div class="entry-content"> <h3>Install packages</h3>
+<p>CentOS 6.3 does not have xrdp package in the official repo.</p>
+<ul>
+<li>Install xrdp</li>
+</ul>
+<div class="highlight"><pre><span class="n">wget</span> <span class="n">http</span><span class="o">:</span><span class="c1">//dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm</span>
+<span class="n">wget</span> <span class="n">http</span><span class="o">:</span><span class="c1">//dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6</span>
+<span class="n">rpm</span> <span class="o">--</span><span class="n">import</span> <span class="n">RPM</span><span class="o">-</span><span class="n">GPG</span><span class="o">-</span><span class="n">KEY</span><span class="o">-</span><span class="n">EPEL</span><span class="o">-</span><span class="mi">6</span>
+<span class="n">rpm</span> <span class="o">--</span><span class="n">ivh</span> <span class="n">epel</span><span class="o">*</span><span class="p">.</span><span class="n">rpm</span>
+<span class="n">yum</span> <span class="n">install</span> <span class="n">xrdp ...</span></pre></div> </div><!-- entry-content -->
         </article>
 <div class="pager">
       <ul>
-                        <li class="previous disabled"><a>← Previous</a></li>
+						<li class="previous"><a href="http://hehan.net/author/han2.html">← Previous</a></li>
                         <li class="next disabled"><a>Next →</a></li>
       </ul>
     </div>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Note Everything</title><link href="http://hehan.net/" rel="alternate"></link><link href="http://hehan.net/feeds/tool.atom.xml" rel="self"></link><id>http://hehan.net/</id><updated>2014-10-15T10:40:00+08:00</updated><entry><title>gimp quick use guide</title><link href="http://hehan.net/gimp-quick-use-guide.html" rel="alternate"></link><updated>2014-10-15T10:40:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2014-10-15:gimp-quick-use-guide.html</id><summary type="html">&lt;h3&gt;Copy layer to a new image&lt;/h3&gt;
+&lt;p&gt;Use &lt;code&gt;ctrl+c&lt;/code&gt; and &lt;code&gt;ctrl+v&lt;/code&gt; to copy and paste a layer.&lt;/p&gt;
+&lt;h3&gt;Crop to selection&lt;/h3&gt;
+&lt;p&gt;Use &lt;code&gt;Crop tool&lt;/code&gt; to select the area to crop, and then adjust the params in the toolbox windows, after
+all done, double click the selection.&lt;/p&gt;</summary><category term="gimp"></category></entry></feed>

@@ -6,6 +6,7 @@
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
         <link href="http://hehan.net/theme/static/css/style.css" rel="stylesheet" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link href="http://hehan.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Note Everything Full Atom Feed" />
     </head>
 
     <body id="index" class="archive">
@@ -21,6 +22,32 @@
 <section id="content" class="content">
 <h2>Articles by Han</h2>
 
+        <article class="hentry">
+                <header> <h2 class="entry-title"><a href="http://hehan.net/configure-vim-for-python-dev.html" rel="bookmark" title="Permalink to configure vim for python dev">configure vim for python dev</a></h2> </header>
+                <div class="entry-content"> <h2>Flake8</h2>
+<p><a href="https://pypi.python.org/pypi/flake8/">flake8</a> :  wrapper for python checkers:</p>
+<ul>
+<li>PyFlakes</li>
+<li>pep8</li>
+<li>Ned Batchelder's McCabe script</li>
+</ul>
+<h3>Install</h3>
+<div class="highlight"><pre><span class="c"># sudo pip install flake8</span>
+</pre></div>
+
+
+<h2>Vim-flake8</h2>
+<p><a href="https://github.com/nvie/vim-flake8">vim-flake8</a> : vim wrapper for flake8.</p>
+<h3>Install</h3>
+<div class="highlight"><pre><span class="c"># git submodule add https://github.com/nvie/vim-flake8.git bundle/vim-flake8</span>
+</pre></div>
+
+
+<h3>How to use</h3>
+<ol>
+<li>Open a python file</li>
+<li>ress <code>F7</code> to run <code>flake8</code> on it ...</li></ol> </div><!-- entry-content -->
+        </article>
         <article class="hentry">
                 <header> <h2 class="entry-title"><a href="http://hehan.net/object-javascript-the-good-part.html" rel="bookmark" title="Permalink to Object - javascript: the good part">Object - javascript: the good part</a></h2> </header>
                 <div class="entry-content"> <h3>Object Literals</h3>
@@ -217,29 +244,16 @@ target.</p>
 <h3>More</h3>
 <p><a href="http://www.sqlite.org/sqlite.html">sqlite official site help</a></p> </div><!-- entry-content -->
         </article>
-        <article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://hehan.net/install-xrdp-on-centos63.html" rel="bookmark" title="Permalink to Install xrdp on CentOS63">Install xrdp on CentOS63</a></h2> </header>
-                <div class="entry-content"> <h3>Install packages</h3>
-<p>CentOS 6.3 does not have xrdp package in the official repo.</p>
-<ul>
-<li>Install xrdp</li>
-</ul>
-<div class="highlight"><pre><span class="n">wget</span> <span class="n">http</span><span class="o">:</span><span class="c1">//dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm</span>
-<span class="n">wget</span> <span class="n">http</span><span class="o">:</span><span class="c1">//dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6</span>
-<span class="n">rpm</span> <span class="o">--</span><span class="n">import</span> <span class="n">RPM</span><span class="o">-</span><span class="n">GPG</span><span class="o">-</span><span class="n">KEY</span><span class="o">-</span><span class="n">EPEL</span><span class="o">-</span><span class="mi">6</span>
-<span class="n">rpm</span> <span class="o">--</span><span class="n">ivh</span> <span class="n">epel</span><span class="o">*</span><span class="p">.</span><span class="n">rpm</span>
-<span class="n">yum</span> <span class="n">install</span> <span class="n">xrdp ...</span></pre></div> </div><!-- entry-content -->
-        </article>
 <div class="pager">
       <ul>
 						<li class="previous"><a href="http://hehan.net/author/han.html">← Previous</a></li>
-                        <li class="next disabled"><a>Next →</a></li>
+						<li class="next"><a href="http://hehan.net/author/han3.html">Next →</a></li>
       </ul>
     </div>
 </section><!-- content -->
             <footer id="contentinfo" class="footer">
                     <nav class="pull-right bottom-nav">
-                        <a href="http://hehan.net/None">RSS</a>
+                        <a href="http://hehan.net/feeds/all.atom.xml">RSS</a>
                     </nav>
                     <address id="about" class="vcard body">
                     &copy; <a href="http://hehan.net">Note Everything</a> Proudly powered by <a href="http://getpelican.com/">Pelican</a>

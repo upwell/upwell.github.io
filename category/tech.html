@@ -6,6 +6,8 @@
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
         <link href="http://hehan.net/theme/static/css/style.css" rel="stylesheet" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link href="http://hehan.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Note Everything Full Atom Feed" />
+        <link href="http://hehan.net/feeds/tech.atom.xml" type="application/atom+xml" rel="alternate" title="Note Everything Categories Atom Feed" />
     </head>
 
     <body id="index" class="archive">
@@ -21,6 +23,17 @@
 <section id="content" class="content">
 <h2>Articles in the tech category</h2>
 
+        <article class="hentry">
+                <header> <h2 class="entry-title"><a href="http://hehan.net/reload-module-when-using-django-shell.html" rel="bookmark" title="Permalink to Reload module when using Django shell">Reload module when using Django shell</a></h2> </header>
+                <div class="entry-content"> <h3>Issue</h3>
+<p>The annoying part of using django shell is that:</p>
+<blockquote>
+<p>Once you changed the source code, you need restart the shell and enter the code again.</p>
+</blockquote>
+<h3>Solution</h3>
+<p>Use <code>django-extensions</code> in the project and with <code>shell_plus</code>, there is a better expirence using django shell, although
+it's not the best, anyway ...</p> </div><!-- entry-content -->
+        </article>
         <article class="hentry">
                 <header> <h2 class="entry-title"><a href="http://hehan.net/use-socks5-proxy-for-pip-install.html" rel="bookmark" title="Permalink to Use socks5 proxy for pip install">Use socks5 proxy for pip install</a></h2> </header>
                 <div class="entry-content"> <h3>Issue</h3>
@@ -160,26 +173,6 @@ to your model.</p>
         <span class="nx">IATA</span><span class="o">:</span> <span class="s2">&quot;SYD&quot;</span><span class="p">,</span>
         <span class="nx">time</span><span class="o">:</span> <span class="s2">&quot;2012-10-12 12 ...</span></pre></div> </div><!-- entry-content -->
         </article>
-        <article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://hehan.net/c-string-file-practice.html" rel="bookmark" title="Permalink to c++ string / file practice">c++ string / file practice</a></h2> </header>
-                <div class="entry-content"> <h2>Read one line from file each time</h2>
-<div class="highlight"><pre><span class="n">ifstream</span> <span class="nf">in</span><span class="p">(</span><span class="s">&quot;a.txt&quot;</span><span class="p">);</span>
-<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">line</span><span class="p">;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="n">in</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span>
-</pre></div>
-
-
-<h2>Trim space from string</h2>
-<p><a href="http://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring">original source</a></p>
-<div class="highlight"><pre><span class="cp">#include &lt;algorithm&gt;</span>
-<span class="cp">#include &lt;functional&gt;</span>
-<span class="cp">#include &lt;cctype&gt;</span>
-<span class="cp">#include &lt;locale&gt;</span>
-
-<span class="k">static</span> <span class="kr">inline</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">ltrim</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">s</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span>
-                <span class="n">std</span><span class="o">::</span><span class="n">find_if</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">s</span><span class="p">.</span><span class="n">end ...</span></pre></div> </div><!-- entry-content -->
-        </article>
 <div class="pager">
       <ul>
                         <li class="previous disabled"><a>← Previous</a></li>
@@ -189,7 +182,7 @@ to your model.</p>
 </section><!-- content -->
             <footer id="contentinfo" class="footer">
                     <nav class="pull-right bottom-nav">
-                        <a href="http://hehan.net/None">RSS</a>
+                        <a href="http://hehan.net/feeds/all.atom.xml">RSS</a>
                     </nav>
                     <address id="about" class="vcard body">
                     &copy; <a href="http://hehan.net">Note Everything</a> Proudly powered by <a href="http://getpelican.com/">Pelican</a>
