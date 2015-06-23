@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Note Everything</title><link href="http://hehan.net/" rel="alternate"></link><link href="http://hehan.net/feeds/all.atom.xml" rel="self"></link><id>http://hehan.net/</id><updated>2015-06-05T10:57:00+08:00</updated><entry><title>Reload module when using Django shell</title><link href="http://hehan.net/reload-module-when-using-django-shell.html" rel="alternate"></link><updated>2015-06-05T10:57:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2015-06-05:reload-module-when-using-django-shell.html</id><summary type="html">&lt;h3&gt;Issue&lt;/h3&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Note Everything</title><link href="http://hehan.net/" rel="alternate"></link><link href="http://hehan.net/feeds/all.atom.xml" rel="self"></link><id>http://hehan.net/</id><updated>2015-06-19T17:06:00+08:00</updated><entry><title>Weired directory permission issue</title><link href="http://hehan.net/weired-directory-permission-issue.html" rel="alternate"></link><updated>2015-06-19T17:06:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2015-06-19:weired-directory-permission-issue.html</id><summary type="html">&lt;h3&gt;Issue&lt;/h3&gt;
+&lt;p&gt;While I was deploying a php project for apache on my &lt;code&gt;HOME&lt;/code&gt; directory, although I used &lt;code&gt;chmod&lt;/code&gt; and &lt;code&gt;usemod&lt;/code&gt; to grant user &lt;code&gt;apache&lt;/code&gt;  &lt;br /&gt;
+the permissions, apache still failed to access the &lt;code&gt;HOME&lt;/code&gt; directory.&lt;/p&gt;
+&lt;h3&gt;Solution&lt;/h3&gt;
+&lt;p&gt;After a little dig, occationally I found the &lt;code&gt;HOME&lt;/code&gt; directory has a special permission symbol.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;drwxr&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;xr&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;93&lt;/span&gt; &lt;span class="n"&gt;han&lt;/span&gt;      &lt;span class="n"&gt;han&lt;/span&gt;      &lt;span class="mf"&gt;4.0&lt;/span&gt;&lt;span class="n"&gt;K&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="err"&gt;月&lt;/span&gt;  &lt;span class="mi"&gt;23&lt;/span&gt; &lt;span class="mi"&gt;11&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt; &lt;span class="n"&gt;han&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;There is a &lt;code&gt;+&lt;/code&gt; at the end of permission field. What does this means?&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://serverfault.com/questions/227852/what-does-a-mean-at-the-end-of-the-permissions-from-ls-l"&gt;This&lt;/a&gt; gives an explanation of this special &lt;code&gt;+&lt;/code&gt; sign.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;HOME&lt;/code&gt; directory has extended permissions. The output of &lt;code&gt;getfacl&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# file: han&lt;/span&gt;
+&lt;span class="s-Atom"&gt;#&lt;/span&gt; &lt;span class="nn"&gt;owner&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s-Atom"&gt;han&lt;/span&gt;
+&lt;span class="s-Atom"&gt;#&lt;/span&gt; &lt;span class="nn"&gt;group&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s-Atom"&gt;han&lt;/span&gt;
+&lt;span class="nn"&gt;user&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s-Atom"&gt;:rwx&lt;/span&gt;
+&lt;span class="nn"&gt;user&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nn"&gt;qemu&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s-Atom"&gt;--x&lt;/span&gt;
+&lt;span class="nn"&gt;group&lt;/span&gt;&lt;span class="p"&gt;::-&lt;/span&gt;&lt;span class="s-Atom"&gt;--&lt;/span&gt;
+&lt;span class="nn"&gt;mask&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s-Atom"&gt;:r&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="s-Atom"&gt;x&lt;/span&gt;
+&lt;span class="nn"&gt;other&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s-Atom"&gt;:r&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="s-Atom"&gt;x&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The following command grants the group &lt;code&gt;r+x&lt;/code&gt; permissions.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# setfacl -m &amp;#39;g:han:rx&amp;#39; han&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term=""></category></entry><entry><title>Reload module when using Django shell</title><link href="http://hehan.net/reload-module-when-using-django-shell.html" rel="alternate"></link><updated>2015-06-05T10:57:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2015-06-05:reload-module-when-using-django-shell.html</id><summary type="html">&lt;h3&gt;Issue&lt;/h3&gt;
 &lt;p&gt;The annoying part of using django shell is that:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Once you changed the source code, you need restart the shell and enter the code again.&lt;/p&gt;

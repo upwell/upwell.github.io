@@ -23,6 +23,26 @@
 <h2>Articles by Han</h2>
 
         <article class="hentry">
+                <header> <h2 class="entry-title"><a href="http://hehan.net/python-long-line-wrap.html" rel="bookmark" title="Permalink to python long line wrap">python long line wrap</a></h2> </header>
+                <div class="entry-content"> <h2>Long line with chained methods</h2>
+<p>Use additional <strong>parenthesis</strong>.</p>
+<div class="highlight"><pre><span class="n">subkeyword</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">Session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Subkeyword</span><span class="o">.</span><span class="n">subkeyword_id</span><span class="p">,</span> <span class="n">Subkeyword</span><span class="o">.</span><span class="n">subkeyword_word</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">subkeyword_company_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">e_company_id</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">subkeyword_word</span><span class="o">=</span><span class="n">subkeyword_word</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">subkeyword_active</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">one</span><span class="p">()</span>
+    <span class="p">)</span>
+</pre></div>
+
+
+<h2>Long string</h2>
+<p>Python concatenates string literals which appear adjacent to each other.</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">fun</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">&#39;{0} Here is a really long &#39;</span> \
+          <span class="s">&#39;sentence with {1 ...</span></pre></div> </div><!-- entry-content -->
+        </article>
+        <article class="hentry">
                 <header> <h2 class="entry-title"><a href="http://hehan.net/configure-vim-for-python-dev.html" rel="bookmark" title="Permalink to configure vim for python dev">configure vim for python dev</a></h2> </header>
                 <div class="entry-content"> <h2>Flake8</h2>
 <p><a href="https://pypi.python.org/pypi/flake8/">flake8</a> :  wrapper for python checkers:</p>
@@ -203,46 +223,6 @@ the <code>&lt;number&gt;</code> out of <code>&lt;number&gt;w</code> or <code>&lt
 possible choices and allowing you to press one key to jump directly to the<br />
 target.</p>
 <p>The command is triggered by ...</p> </div><!-- entry-content -->
-        </article>
-        <article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://hehan.net/sqlite-command-tips.html" rel="bookmark" title="Permalink to SQLite command tips">SQLite command tips</a></h2> </header>
-                <div class="entry-content"> <h3>Use a database file</h3>
-<div class="highlight"><pre>    <span class="nx">sqlite</span> <span class="o">&lt;</span><span class="nx">database_file</span><span class="o">&gt;</span>
-</pre></div>
-
-
-<h3>Get table information</h3>
-<div class="highlight"><pre>    <span class="p">.</span><span class="n">tables</span>
-</pre></div>
-
-
-<h3>Get schema information</h3>
-<div class="highlight"><pre>    <span class="p">.</span><span class="n">schema</span>
-    <span class="p">.</span><span class="n">schema</span> <span class="n">table_name</span>
-</pre></div>
-
-
-<h3>Get help</h3>
-<div class="highlight"><pre>    <span class="p">.</span><span class="n">help</span>
-</pre></div>
-
-
-<h3>Write result to a file</h3>
-<div class="highlight"><pre>    <span class="p">.</span><span class="n">mode</span> <span class="n">list</span>
-    <span class="p">.</span><span class="n">separator</span> <span class="o">|</span>
-    <span class="p">.</span><span class="n">output</span> <span class="n">result</span><span class="p">.</span><span class="n">data</span>
-    <span class="n">select</span> <span class="o">*</span> <span class="n">from</span> <span class="n">table_name</span><span class="p">;</span>
-    <span class="p">.</span><span class="n">exit</span>
-</pre></div>
-
-
-<h3>Exit</h3>
-<div class="highlight"><pre>    <span class="p">.</span><span class="n">exit</span>
-</pre></div>
-
-
-<h3>More</h3>
-<p><a href="http://www.sqlite.org/sqlite.html">sqlite official site help</a></p> </div><!-- entry-content -->
         </article>
 <div class="pager">
       <ul>

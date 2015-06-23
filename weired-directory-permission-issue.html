@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Weired directory permission issue - Note Everything</title>
+        <meta charset="utf-8" />
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="http://hehan.net/theme/static/css/style.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link href="http://hehan.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Note Everything Full Atom Feed" />
+        <link href="http://hehan.net/feeds/tech.atom.xml" type="application/atom+xml" rel="alternate" title="Note Everything Categories Atom Feed" />
+    </head>
+
+    <body id="index" class="archive">
+        <div class="container">
+            <div class="header">
+                <ul class="nav nav-pills pull-right">
+                    <li class=""><a href="http://hehan.net">Home</a></li>
+                    <li><a href="http://hehan.net/archives.html">Archives</a></li>
+                </ul>
+                <h3 class="text-muted"><a href="http://hehan.net">Note Everything</a></h3>
+				<h2 class="text-muted"></h2>
+             </div>
+<section id="content" class="article content">
+  <header>
+    <h2 class="entry-title">
+      <a href="http://hehan.net/weired-directory-permission-issue.html" rel="bookmark"
+         title="Permalink to Weired directory permission issue">Weired directory permission issue</a></h2>
+ 
+  </header>
+  
+     
+  <div class="entry-content">
+    <h3>Issue</h3>
+<p>While I was deploying a php project for apache on my <code>HOME</code> directory, although I used <code>chmod</code> and <code>usemod</code> to grant user <code>apache</code>  <br />
+the permissions, apache still failed to access the <code>HOME</code> directory.</p>
+<h3>Solution</h3>
+<p>After a little dig, occationally I found the <code>HOME</code> directory has a special permission symbol.</p>
+<div class="highlight"><pre><span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span><span class="o">+</span> <span class="mi">93</span> <span class="n">han</span>      <span class="n">han</span>      <span class="mf">4.0</span><span class="n">K</span> <span class="mi">6</span><span class="err">月</span>  <span class="mi">23</span> <span class="mi">11</span><span class="o">:</span><span class="mi">30</span> <span class="n">han</span>
+</pre></div>
+
+
+<p>There is a <code>+</code> at the end of permission field. What does this means?</p>
+<p><a href="http://serverfault.com/questions/227852/what-does-a-mean-at-the-end-of-the-permissions-from-ls-l">This</a> gives an explanation of this special <code>+</code> sign.</p>
+<p>The <code>HOME</code> directory has extended permissions. The output of <code>getfacl</code>:</p>
+<div class="highlight"><pre><span class="c1"># file: han</span>
+<span class="s-Atom">#</span> <span class="nn">owner</span><span class="p">:</span> <span class="s-Atom">han</span>
+<span class="s-Atom">#</span> <span class="nn">group</span><span class="p">:</span> <span class="s-Atom">han</span>
+<span class="nn">user</span><span class="p">:</span><span class="s-Atom">:rwx</span>
+<span class="nn">user</span><span class="p">:</span><span class="nn">qemu</span><span class="p">:</span><span class="s-Atom">--x</span>
+<span class="nn">group</span><span class="p">::-</span><span class="s-Atom">--</span>
+<span class="nn">mask</span><span class="p">:</span><span class="s-Atom">:r</span><span class="o">-</span><span class="s-Atom">x</span>
+<span class="nn">other</span><span class="p">:</span><span class="s-Atom">:r</span><span class="o">-</span><span class="s-Atom">x</span>
+</pre></div>
+
+
+<p>The following command grants the group <code>r+x</code> permissions.</p>
+<div class="highlight"><pre><span class="c"># setfacl -m &#39;g:han:rx&#39; han</span>
+</pre></div>
+  </div><!-- /.entry-content -->
+   <footer class="post-info text-muted">
+    Posted on <abbr class="published" title="2015-06-19T17:06:00+08:00">
+      五 19 六月 2015
+    </abbr>
+    <address class="vcard author">
+      by <a class="url fn" href="http://hehan.net/author/han.html">Han</a>
+    </address> in <a href="http://hehan.net/category/tech.html">tech</a> Tagged <a href="http://hehan.net/tag/.html"> </a>  </footer><!-- /.post-info -->
+</section>
+            <footer id="contentinfo" class="footer">
+                    <nav class="pull-right bottom-nav">
+                        <a href="http://hehan.net/feeds/all.atom.xml">RSS</a>
+                    </nav>
+                    <address id="about" class="vcard body">
+                    &copy; <a href="http://hehan.net">Note Everything</a> Proudly powered by <a href="http://getpelican.com/">Pelican</a>
+                    </address><!-- /#about -->
+            </footer><!-- /#contentinfo -->
+        </div><!-- container -->
+    </body>
+</html>
