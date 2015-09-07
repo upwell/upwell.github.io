@@ -36,22 +36,24 @@ it's not the best, anyway ...</p> </div><!-- entry-content -->
         <article class="hentry">
                 <header> <h2 class="entry-title"><a href="http://hehan.net/python-small-tips.html" rel="bookmark" title="Permalink to python small tips">python small tips</a></h2> </header>
                 <div class="entry-content"> <h3>Join two lists</h3>
-<div class="highlight"><pre><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
-<span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<div class="highlight"><pre>a = [1, 2, 3]
+b = [3, 4, 5]
+c = a + b
+[1, 2, 3, 3, 4, 5]
+</pre></div>
+
+
+<h3>Extend a list</h3>
+<div class="highlight"><pre>a = [1, 2, 3]
+b = [3, 4, 5]
+a.extend(b)
+[1, 2, 3, 3, 4, 5]
 </pre></div>
 
 
 <h3>Join two dicts</h3>
 <div class="highlight"><pre><span class="n">d1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s">&#39;b&#39;</span><span class="p">}</span>
-<span class="n">d2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">:</span> <span class="s">&#39;c&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s">&#39;d&#39;</span><span class="p">}</span>
-<span class="n">d1</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span>
-<span class="c"># {1: &#39;a&#39;, 2: &#39;b&#39;, 3: &#39;c&#39;, 4: &#39;d&#39;}</span>
-</pre></div>
-
-
-<h3>Check if a list/dictionary/tuple ...</h3> </div><!-- entry-content -->
+<span class="n">d2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3 ...</span></pre></div> </div><!-- entry-content -->
         </article>
         <article class="hentry">
                 <header> <h2 class="entry-title"><a href="http://hehan.net/django-use-silk-for-profiling.html" rel="bookmark" title="Permalink to django - use silk for profiling">django - use silk for profiling</a></h2> </header>

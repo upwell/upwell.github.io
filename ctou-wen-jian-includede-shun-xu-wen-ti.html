@@ -32,7 +32,7 @@
   <div class="entry-content">
     <h2>问题</h2>
 <p>遇到一个很奇怪的问题，在工程中使用 stlport 的时候各种编译不过，即使仅仅是声明一个对象都会编译不过。</p>
-<div class="highlight"><pre><span class="n">std</span><span class="o">::</span><span class="n">sstream</span> <span class="n">mystream</span><span class="p">;</span>
+<div class="highlight"><pre><span class="nt">std</span><span class="o">:</span><span class="nd">:sstream</span> <span class="nt">mystream</span><span class="o">;</span>
 </pre></div>
 
 
@@ -44,18 +44,18 @@
 <li>怀疑工程中使用的 stlport 有问题，重新编译了一份 stlport 还是不行；</li>
 <li>检查stlport的源代码，出错的地方对 <code>#define XXX</code> 有依赖，同时检查了工程中的代码，发现 <code>include</code> std 头文件在所有 <code>include</code> 的最后面。</li>
 </ol>
-<div class="highlight"><pre>    <span class="c">#include &quot;a.h&quot;</span>
-    <span class="c">#include &quot;b.h&quot;</span>
-    <span class="c">#include &lt;sstream&gt;</span>
+<div class="highlight"><pre>    <span class="cp">#include &quot;a.h&quot;</span>
+    <span class="cp">#include &quot;b.h&quot;</span>
+    <span class="cp">#include &lt;sstream&gt;</span>
 </pre></div>
 
 
 <ol>
 <li>猜测可能前面的头文件中的 <code>#define</code> 影响了 sstream 中的设置，将 <code>#include &lt;sstream&gt;</code> 放到文件的最前面，问题解决；</li>
 </ol>
-<div class="highlight"><pre>    <span class="c">#include &quot;a.h&quot;</span>
-    <span class="c">#include &quot;b.h&quot;</span>
-    <span class="c">#include &lt;sstream&gt;</span>
+<div class="highlight"><pre>    <span class="cp">#include &quot;a.h&quot;</span>
+    <span class="cp">#include &quot;b.h&quot;</span>
+    <span class="cp">#include &lt;sstream&gt;</span>
 </pre></div>
   </div><!-- /.entry-content -->
    <footer class="post-info text-muted">

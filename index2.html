@@ -116,23 +116,25 @@
                 <header> <h2 class="entry-title"><a href="http://hehan.net/install-oracle-jdk-32bit-on-64bit-fedora.html" rel="bookmark" title="Permalink to Install oracle jdk 32bit on 64bit Fedora">Install oracle jdk 32bit on 64bit Fedora</a></h2> </header>
                 <div class="entry-content"> <h2>Issue</h2>
 <p>When execute:</p>
-<div class="highlight"><pre><span class="c"># rpm -ivh ~/Downloads/jdk-7u45-linux-i586.rpm</span>
+<div class="highlight"><pre># rpm -ivh ~/Downloads/jdk-7u45-linux-i586.rpm
 </pre></div>
 
 
 <p>There comes error messages:</p>
-<div class="highlight"><pre><span class="n">Unpacking</span> <span class="n">JAR</span> <span class="n">files</span><span class="p">...</span>
-    <span class="n">rt</span><span class="p">.</span><span class="n">jar</span><span class="p">...</span>
-<span class="nl">Error:</span> <span class="n">Could</span> <span class="n">not</span> <span class="n">open</span> <span class="n">input</span> <span class="n">file</span><span class="o">:</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">java</span><span class="o">/</span><span class="n">jdk1</span><span class="mf">.7.0</span><span class="n">_45</span><span class="o">/</span><span class="n">jre</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">rt</span><span class="p">.</span><span class="n">pack</span>
-<span class="nl">Error:</span> <span class="n">unpack</span> <span class="n">could</span> <span class="n">not</span> <span class="n">create</span> <span class="n">JAR</span> <span class="n">file</span><span class="o">:</span>
+<div class="highlight"><pre>Unpacking JAR files...
+    rt.jar...
+Error: Could not open input file: /usr/java/jdk1.7.0_45/jre/lib/rt.pack
+Error: unpack could not create JAR file:
 
-    <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">java</span><span class="o">/</span><span class="n">jdk1</span><span class="mf">.7.0</span><span class="n">_45</span><span class="o">/</span><span class="n">jre</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">rt</span><span class="p">.</span><span class="n">jar ...</span></pre></div> </div><!-- entry-content -->
+    /usr/java/jdk1.7.0_45/jre/lib/rt.jar
+
+Please refer ...</pre></div> </div><!-- entry-content -->
         </article>
         <article class="hentry">
                 <header> <h2 class="entry-title"><a href="http://hehan.net/ctou-wen-jian-includede-shun-xu-wen-ti.html" rel="bookmark" title="Permalink to C++头文件include的顺序问题">C++头文件include的顺序问题</a></h2> </header>
                 <div class="entry-content"> <h2>问题</h2>
 <p>遇到一个很奇怪的问题，在工程中使用 stlport 的时候各种编译不过，即使仅仅是声明一个对象都会编译不过。</p>
-<div class="highlight"><pre><span class="n">std</span><span class="o">::</span><span class="n">sstream</span> <span class="n">mystream</span><span class="p">;</span>
+<div class="highlight"><pre><span class="nt">std</span><span class="o">:</span><span class="nd">:sstream</span> <span class="nt">mystream</span><span class="o">;</span>
 </pre></div>
 
 
@@ -144,27 +146,27 @@
 <li>怀疑工程中使用的 stlport 有问题，重新编译了一份 stlport 还是不行；</li>
 <li>检查stlport的源代码，出错的地方对 <code>#define XXX</code> 有依赖，同时检查了工程中的代码，发现 <code>include</code> std 头文件在所有 <code>include</code> 的最后面。</li>
 </ol>
-<div class="highlight"><pre>    <span class="c">#include &quot;a.h&quot;</span>
-    <span class="c">#include &quot;b ...</span></pre></div> </div><!-- entry-content -->
+<div class="highlight"><pre>    <span class="cp">#include &quot;a.h&quot;</span>
+    <span class="cp">#include &quot;b ...</span></pre></div> </div><!-- entry-content -->
         </article>
         <article class="hentry">
                 <header> <h2 class="entry-title"><a href="http://hehan.net/ignore-files-when-building-tags.html" rel="bookmark" title="Permalink to Ignore files when building tags">Ignore files when building tags</a></h2> </header>
                 <div class="entry-content"> <p>Use the following commands:</p>
-<div class="highlight"><pre>    <span class="n">ctags</span> <span class="o">--</span><span class="n">exclude</span><span class="o">=*</span><span class="p">.</span><span class="n">html</span> <span class="o">--</span><span class="n">exclude</span><span class="o">=*</span><span class="p">.</span><span class="n">js</span> <span class="o">--</span><span class="n">exclude</span><span class="o">=*</span><span class="p">.</span><span class="n">sql</span> <span class="o">-</span><span class="n">R</span>
+<div class="highlight"><pre>    ctags --exclude=*.html --exclude=*.js --exclude=*.sql -R
 </pre></div>
 
 
 <p>It's annoying to enter the long parameters every time. You can configure<br />
 it as the default config.</p>
 <p>Edit <code>~/.ctags</code>. Add the following lines:</p>
-<div class="highlight"><pre>    <span class="o">--</span><span class="n">exclude</span><span class="o">=*</span><span class="p">.</span><span class="n">html</span>
-    <span class="o">--</span><span class="n">exclude</span><span class="o">=*</span><span class="p">.</span><span class="n">js</span>
-    <span class="o">--</span><span class="n">exclude</span><span class="o">=*</span><span class="p">.</span><span class="n">sql</span>
+<div class="highlight"><pre>    --exclude=*.html
+    --exclude=*.js
+    --exclude=*.sql
 </pre></div>
 
 
 <p>Then you only need to type:</p>
-<div class="highlight"><pre>    <span class="n">ctags</span> <span class="o">-</span><span class="n">R</span>
+<div class="highlight"><pre>    ctags -R
 </pre></div> </div><!-- entry-content -->
         </article>
         <article class="hentry">

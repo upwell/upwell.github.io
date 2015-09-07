@@ -31,21 +31,21 @@
      
   <div class="entry-content">
     <p>Use the following commands:</p>
-<div class="highlight"><pre>    <span class="n">ctags</span> <span class="o">--</span><span class="n">exclude</span><span class="o">=*</span><span class="p">.</span><span class="n">html</span> <span class="o">--</span><span class="n">exclude</span><span class="o">=*</span><span class="p">.</span><span class="n">js</span> <span class="o">--</span><span class="n">exclude</span><span class="o">=*</span><span class="p">.</span><span class="n">sql</span> <span class="o">-</span><span class="n">R</span>
+<div class="highlight"><pre>    ctags --exclude=*.html --exclude=*.js --exclude=*.sql -R
 </pre></div>
 
 
 <p>It's annoying to enter the long parameters every time. You can configure<br />
 it as the default config.</p>
 <p>Edit <code>~/.ctags</code>. Add the following lines:</p>
-<div class="highlight"><pre>    <span class="o">--</span><span class="n">exclude</span><span class="o">=*</span><span class="p">.</span><span class="n">html</span>
-    <span class="o">--</span><span class="n">exclude</span><span class="o">=*</span><span class="p">.</span><span class="n">js</span>
-    <span class="o">--</span><span class="n">exclude</span><span class="o">=*</span><span class="p">.</span><span class="n">sql</span>
+<div class="highlight"><pre>    --exclude=*.html
+    --exclude=*.js
+    --exclude=*.sql
 </pre></div>
 
 
 <p>Then you only need to type:</p>
-<div class="highlight"><pre>    <span class="n">ctags</span> <span class="o">-</span><span class="n">R</span>
+<div class="highlight"><pre>    ctags -R
 </pre></div>
   </div><!-- /.entry-content -->
    <footer class="post-info text-muted">

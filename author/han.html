@@ -49,27 +49,29 @@ it's not the best, anyway ...</p> </div><!-- entry-content -->
 <p>Use a tool named <code>proxychains</code> which chains the connection through proxy.</p>
 <p>On Fedora, install via <code>sudo dnf install proxychains</code>.</p>
 <p>To change the default socks5 proxy, modify <code>/etc/proxychains.conf</code>, under <code>[ProxyList]</code> add one line:</p>
-<div class="highlight"><pre><span class="n">socks5</span> <span class="mf">127.0.0 ...</span></pre></div> </div><!-- entry-content -->
+<div class="highlight"><pre>socks5 127.0.0 ...</pre></div> </div><!-- entry-content -->
         </article>
         <article class="hentry">
                 <header> <h2 class="entry-title"><a href="http://hehan.net/python-small-tips.html" rel="bookmark" title="Permalink to python small tips">python small tips</a></h2> </header>
                 <div class="entry-content"> <h3>Join two lists</h3>
-<div class="highlight"><pre><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
-<span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<div class="highlight"><pre>a = [1, 2, 3]
+b = [3, 4, 5]
+c = a + b
+[1, 2, 3, 3, 4, 5]
+</pre></div>
+
+
+<h3>Extend a list</h3>
+<div class="highlight"><pre>a = [1, 2, 3]
+b = [3, 4, 5]
+a.extend(b)
+[1, 2, 3, 3, 4, 5]
 </pre></div>
 
 
 <h3>Join two dicts</h3>
 <div class="highlight"><pre><span class="n">d1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s">&#39;b&#39;</span><span class="p">}</span>
-<span class="n">d2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">:</span> <span class="s">&#39;c&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s">&#39;d&#39;</span><span class="p">}</span>
-<span class="n">d1</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span>
-<span class="c"># {1: &#39;a&#39;, 2: &#39;b&#39;, 3: &#39;c&#39;, 4: &#39;d&#39;}</span>
-</pre></div>
-
-
-<h3>Check if a list/dictionary/tuple ...</h3> </div><!-- entry-content -->
+<span class="n">d2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3 ...</span></pre></div> </div><!-- entry-content -->
         </article>
         <article class="hentry">
                 <header> <h2 class="entry-title"><a href="http://hehan.net/gimp-quick-use-guide.html" rel="bookmark" title="Permalink to gimp quick use guide">gimp quick use guide</a></h2> </header>
@@ -83,7 +85,7 @@ all done, double click the selection.</p> </div><!-- entry-content -->
                 <header> <h2 class="entry-title"><a href="http://hehan.net/android-studio-tips.html" rel="bookmark" title="Permalink to android studio tips">android studio tips</a></h2> </header>
                 <div class="entry-content"> <h2>Cannot run program aapt -- no such file or directory</h2>
 <p>Install missing 32bit libraries:</p>
-<div class="highlight"><pre><span class="n">yum</span> <span class="n">install</span> <span class="n">libstdc</span><span class="o">++</span><span class="p">.</span><span class="n">i686</span> <span class="n">zlib</span><span class="p">.</span><span class="n">i686</span>
+<div class="highlight"><pre>yum install libstdc++.i686 zlib.i686
 </pre></div>
 
 
@@ -104,17 +106,17 @@ start android studio from desktop application, it still uses the open ...</p> </
                 <header> <h2 class="entry-title"><a href="http://hehan.net/dnsmasq-config.html" rel="bookmark" title="Permalink to dnsmasq config">dnsmasq config</a></h2> </header>
                 <div class="entry-content"> <h3>Set dns server for dnsmasq</h3>
 <p>Use a separate conf file, the format is the same as resolv.conf.</p>
-<div class="highlight"><pre><span class="n">resolv</span><span class="o">-</span><span class="n">file</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">resolv</span><span class="p">.</span><span class="n">masq</span><span class="p">.</span><span class="n">conf</span>
+<div class="highlight"><pre>resolv-file=/etc/resolv.masq.conf
 </pre></div>
 
 
 <p>Then after dnsmasq is started, set <code>127.0.0.1</code> in <code>/etc/resolv.conf</code>.</p>
 <h3>listening address with localhost</h3>
-<div class="highlight"><pre><span class="n">listen</span><span class="o">-</span><span class="n">address</span><span class="o">=</span><span class="mf">127.0.0.1</span>
+<div class="highlight"><pre>listen-address=127.0.0.1
 </pre></div>
 
 
-<h3>Use separate ...</h3> </div><!-- entry-content -->
+<h3>Use separate DNS for ...</h3> </div><!-- entry-content -->
         </article>
         <article class="hentry">
                 <header> <h2 class="entry-title"><a href="http://hehan.net/django-collections.html" rel="bookmark" title="Permalink to django collections">django collections</a></h2> </header>

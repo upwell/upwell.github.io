@@ -25,37 +25,37 @@
         <article class="hentry">
                 <header> <h2 class="entry-title"><a href="http://hehan.net/sqlite-command-tips.html" rel="bookmark" title="Permalink to SQLite command tips">SQLite command tips</a></h2> </header>
                 <div class="entry-content"> <h3>Use a database file</h3>
-<div class="highlight"><pre>    <span class="nx">sqlite</span> <span class="o">&lt;</span><span class="nx">database_file</span><span class="o">&gt;</span>
+<div class="highlight"><pre>    sqlite &lt;database_file&gt;
 </pre></div>
 
 
 <h3>Get table information</h3>
-<div class="highlight"><pre>    <span class="p">.</span><span class="n">tables</span>
+<div class="highlight"><pre>    .tables
 </pre></div>
 
 
 <h3>Get schema information</h3>
-<div class="highlight"><pre>    <span class="p">.</span><span class="n">schema</span>
-    <span class="p">.</span><span class="n">schema</span> <span class="n">table_name</span>
+<div class="highlight"><pre>    .schema
+    .schema table_name
 </pre></div>
 
 
 <h3>Get help</h3>
-<div class="highlight"><pre>    <span class="p">.</span><span class="n">help</span>
+<div class="highlight"><pre>    .help
 </pre></div>
 
 
 <h3>Write result to a file</h3>
-<div class="highlight"><pre>    <span class="p">.</span><span class="n">mode</span> <span class="n">list</span>
-    <span class="p">.</span><span class="n">separator</span> <span class="o">|</span>
-    <span class="p">.</span><span class="n">output</span> <span class="n">result</span><span class="p">.</span><span class="n">data</span>
-    <span class="n">select</span> <span class="o">*</span> <span class="n">from</span> <span class="n">table_name</span><span class="p">;</span>
-    <span class="p">.</span><span class="n">exit</span>
+<div class="highlight"><pre>    .mode list
+    .separator |
+    .output result.data
+    select * from table_name;
+    .exit
 </pre></div>
 
 
 <h3>Exit</h3>
-<div class="highlight"><pre>    <span class="p">.</span><span class="n">exit</span>
+<div class="highlight"><pre>    .exit
 </pre></div>
 
 
@@ -69,11 +69,9 @@
 <ul>
 <li>Install xrdp</li>
 </ul>
-<div class="highlight"><pre><span class="n">wget</span> <span class="n">http</span><span class="o">:</span><span class="c1">//dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm</span>
-<span class="n">wget</span> <span class="n">http</span><span class="o">:</span><span class="c1">//dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6</span>
-<span class="n">rpm</span> <span class="o">--</span><span class="n">import</span> <span class="n">RPM</span><span class="o">-</span><span class="n">GPG</span><span class="o">-</span><span class="n">KEY</span><span class="o">-</span><span class="n">EPEL</span><span class="o">-</span><span class="mi">6</span>
-<span class="n">rpm</span> <span class="o">--</span><span class="n">ivh</span> <span class="n">epel</span><span class="o">*</span><span class="p">.</span><span class="n">rpm</span>
-<span class="n">yum</span> <span class="n">install</span> <span class="n">xrdp ...</span></pre></div> </div><!-- entry-content -->
+<div class="highlight"><pre><span class="n">wget</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">dl</span><span class="o">.</span><span class="n">fedoraproject</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">epel</span><span class="o">/</span><span class="mi">6</span><span class="o">/</span><span class="n">x86_64</span><span class="o">/</span><span class="n">epel</span><span class="o">-</span><span class="n">release</span><span class="o">-</span><span class="mi">6</span><span class="o">-</span><span class="mf">8.</span><span class="n">noarch</span><span class="o">.</span><span class="n">rpm</span>
+<span class="n">wget</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">dl</span><span class="o">.</span><span class="n">fedoraproject</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">epel</span><span class="o">/</span><span class="n">RPM</span><span class="o">-</span><span class="n">GPG</span><span class="o">-</span><span class="n">KEY</span><span class="o">-</span><span class="n">EPEL</span><span class="o">-</span><span class="mi">6</span>
+<span class="n">rpm</span> <span class="o">--</span><span class="kn">import</span> <span class="nn">RPM</span><span class="o">-</span><span class="n">GPG</span><span class="o">-</span><span class="n">KEY</span><span class="o">-</span><span class="n">EPEL</span><span class="o">-</span><span class="mi">6 ...</span></pre></div> </div><!-- entry-content -->
         </article>
 <div class="pager">
       <ul>

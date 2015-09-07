@@ -35,17 +35,17 @@
 <ul>
 <li>Install xrdp</li>
 </ul>
-<div class="highlight"><pre><span class="n">wget</span> <span class="n">http</span><span class="o">:</span><span class="c1">//dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm</span>
-<span class="n">wget</span> <span class="n">http</span><span class="o">:</span><span class="c1">//dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6</span>
-<span class="n">rpm</span> <span class="o">--</span><span class="n">import</span> <span class="n">RPM</span><span class="o">-</span><span class="n">GPG</span><span class="o">-</span><span class="n">KEY</span><span class="o">-</span><span class="n">EPEL</span><span class="o">-</span><span class="mi">6</span>
-<span class="n">rpm</span> <span class="o">--</span><span class="n">ivh</span> <span class="n">epel</span><span class="o">*</span><span class="p">.</span><span class="n">rpm</span>
+<div class="highlight"><pre><span class="n">wget</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">dl</span><span class="o">.</span><span class="n">fedoraproject</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">epel</span><span class="o">/</span><span class="mi">6</span><span class="o">/</span><span class="n">x86_64</span><span class="o">/</span><span class="n">epel</span><span class="o">-</span><span class="n">release</span><span class="o">-</span><span class="mi">6</span><span class="o">-</span><span class="mf">8.</span><span class="n">noarch</span><span class="o">.</span><span class="n">rpm</span>
+<span class="n">wget</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">dl</span><span class="o">.</span><span class="n">fedoraproject</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">epel</span><span class="o">/</span><span class="n">RPM</span><span class="o">-</span><span class="n">GPG</span><span class="o">-</span><span class="n">KEY</span><span class="o">-</span><span class="n">EPEL</span><span class="o">-</span><span class="mi">6</span>
+<span class="n">rpm</span> <span class="o">--</span><span class="kn">import</span> <span class="nn">RPM</span><span class="o">-</span><span class="n">GPG</span><span class="o">-</span><span class="n">KEY</span><span class="o">-</span><span class="n">EPEL</span><span class="o">-</span><span class="mi">6</span>
+<span class="n">rpm</span> <span class="o">--</span><span class="n">ivh</span> <span class="n">epel</span><span class="o">*.</span><span class="n">rpm</span>
 <span class="n">yum</span> <span class="n">install</span> <span class="n">xrdp</span>
 </pre></div>
 
 
 <h3>Start service</h3>
-<div class="highlight"><pre><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">xrdp</span> <span class="n">start</span>
-<span class="n">chkconfig</span> <span class="n">xrdp</span> <span class="n">on</span>
+<div class="highlight"><pre>/etc/init.d/xrdp start
+chkconfig xrdp on
 </pre></div>
 
 
@@ -54,7 +54,7 @@
 <li>problem connecting 5910
 try start vncserver</li>
 </ul>
-<div class="highlight"><pre><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">vncserver</span> <span class="n">start</span>
+<div class="highlight"><pre>/etc/init.d/vncserver start
 </pre></div>
 
 
@@ -62,8 +62,8 @@ try start vncserver</li>
 <li>vnc no display configured
 edit /etc/sysconfig/vncservers</li>
 </ul>
-<div class="highlight"><pre><span class="n">VNCSERVERS</span><span class="o">=</span><span class="s">&quot;2:root&quot;</span>
-<span class="n">VNCSERVERARGS</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;-geometry 1280x1024 -localhost&quot;</span>
+<div class="highlight"><pre>VNCSERVERS=&quot;2:root&quot;
+VNCSERVERARGS[2]=&quot;-geometry 1280x1024 -localhost&quot;
 </pre></div>
 
 
@@ -71,21 +71,21 @@ edit /etc/sysconfig/vncservers</li>
 <li>vnc password for user root is not configured
 login as root</li>
 </ul>
-<div class="highlight"><pre><span class="n">vncpasswd</span>
+<div class="highlight"><pre>vncpasswd
 </pre></div>
 
 
 <ul>
 <li>vnc undefined symbol: pixman_composite_trapezoids</li>
 </ul>
-<div class="highlight"><pre><span class="n">yum</span> <span class="n">update</span> <span class="n">pixman</span> <span class="n">pixman</span><span class="o">-</span><span class="n">devel</span>
+<div class="highlight"><pre>yum update pixman pixman-devel
 </pre></div>
 
 
 <ul>
 <li>vnc could not open default font 'fixed'</li>
 </ul>
-<div class="highlight"><pre><span class="n">yum</span> <span class="n">install</span> <span class="n">libXfont</span>
+<div class="highlight"><pre>yum install libXfont
 </pre></div>
   </div><!-- /.entry-content -->
    <footer class="post-info text-muted">

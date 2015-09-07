@@ -32,23 +32,23 @@
   <div class="entry-content">
     <h3>Set dns server for dnsmasq</h3>
 <p>Use a separate conf file, the format is the same as resolv.conf.</p>
-<div class="highlight"><pre><span class="n">resolv</span><span class="o">-</span><span class="n">file</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">resolv</span><span class="p">.</span><span class="n">masq</span><span class="p">.</span><span class="n">conf</span>
+<div class="highlight"><pre>resolv-file=/etc/resolv.masq.conf
 </pre></div>
 
 
 <p>Then after dnsmasq is started, set <code>127.0.0.1</code> in <code>/etc/resolv.conf</code>.</p>
 <h3>listening address with localhost</h3>
-<div class="highlight"><pre><span class="n">listen</span><span class="o">-</span><span class="n">address</span><span class="o">=</span><span class="mf">127.0.0.1</span>
+<div class="highlight"><pre>listen-address=127.0.0.1
 </pre></div>
 
 
 <h3>Use separate DNS for certain domains</h3>
-<div class="highlight"><pre><span class="n">server</span><span class="o">=/</span><span class="n">www</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="mf">8.8.8.8</span>
+<div class="highlight"><pre>server=/www.google.com/8.8.8.8
 </pre></div>
 
 
 <h3>Use regular expression for server</h3>
-<div class="highlight"><pre><span class="n">server</span><span class="o">=/:</span><span class="p">.</span><span class="o">*</span><span class="n">google</span><span class="p">.</span><span class="err">*/</span><span class="mf">8.8.8.8</span>
+<div class="highlight"><pre>server=/:.*google.*/8.8.8.8
 </pre></div>
   </div><!-- /.entry-content -->
    <footer class="post-info text-muted">

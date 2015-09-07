@@ -48,8 +48,8 @@ target.</p>
 <h3>Add surroundings</h3>
 <p><code>ys</code> takes an <strong>valid Vim motion</strong> or text object as the first object and wraps it using the second
 argument.</p>
-<div class="highlight"><pre>  <span class="n">Old</span> <span class="n">text</span>                  <span class="n">Command</span>     <span class="n">New</span> <span class="n">text</span>
-  <span class="n">Hello</span> <span class="n">w</span><span class="o">*</span><span class="n">orld</span><span class="o">!</span>             <span class="n">ysiw</span><span class="p">)</span>       <span class="n">Hello</span> <span class="p">(</span><span class="n">world</span><span class="p">)</span><span class="o">!</span>
+<div class="highlight"><pre>  Old text                  Command     New text
+  Hello w*orld!             ysiw)       Hello (world)!
 </pre></div>
 
 
@@ -57,10 +57,10 @@ argument.</p>
 content.</p>
 <h3>Delete surroundings</h3>
 <p>Delete surroundings is <code>ds</code> .</p>
-<div class="highlight"><pre>  <span class="nx">Old</span> <span class="nx">text</span>                  <span class="nb">Command</span>     <span class="nb">New</span> <span class="nx">text</span> <span class="err">~</span>
-  <span class="s2">&quot;Hello *world!&quot;</span>           <span class="nx">ds</span><span class="s2">&quot;         Hello world!</span>
-<span class="s2">  (123+4*56)/2              ds)         123+456/2</span>
-<span class="s2">  &lt;div&gt;Yo!*&lt;/div&gt;           dst         Yo!</span>
+<div class="highlight"><pre>  Old text                  Command     New text ~
+  &quot;Hello *world!&quot;           ds&quot;         Hello world!
+  (123+4*56)/2              ds)         123+456/2
+  <span class="nt">&lt;div&gt;</span>Yo!*<span class="nt">&lt;/div&gt;</span>           dst         Yo!
 </pre></div>
   </div><!-- /.entry-content -->
    <footer class="post-info text-muted">

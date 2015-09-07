@@ -35,7 +35,7 @@
 the permissions, apache still failed to access the <code>HOME</code> directory.</p>
 <h3>Solution</h3>
 <p>After a little dig, occationally I found the <code>HOME</code> directory has a special permission symbol.</p>
-<div class="highlight"><pre><span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span><span class="o">+</span> <span class="mi">93</span> <span class="n">han</span>      <span class="n">han</span>      <span class="mf">4.0</span><span class="n">K</span> <span class="mi">6</span><span class="err">月</span>  <span class="mi">23</span> <span class="mi">11</span><span class="o">:</span><span class="mi">30</span> <span class="n">han</span>
+<div class="highlight"><pre>drwxr-xr-x+ 93 han      han      4.0K 6月  23 11:30 han
 </pre></div>
 
 
@@ -43,8 +43,8 @@ the permissions, apache still failed to access the <code>HOME</code> directory.<
 <p><a href="http://serverfault.com/questions/227852/what-does-a-mean-at-the-end-of-the-permissions-from-ls-l">This</a> gives an explanation of this special <code>+</code> sign.</p>
 <p>The <code>HOME</code> directory has extended permissions. The output of <code>getfacl</code>:</p>
 <div class="highlight"><pre><span class="c1"># file: han</span>
-<span class="s-Atom">#</span> <span class="nn">owner</span><span class="p">:</span> <span class="s-Atom">han</span>
-<span class="s-Atom">#</span> <span class="nn">group</span><span class="p">:</span> <span class="s-Atom">han</span>
+<span class="c1"># owner: han</span>
+<span class="c1"># group: han</span>
 <span class="nn">user</span><span class="p">:</span><span class="s-Atom">:rwx</span>
 <span class="nn">user</span><span class="p">:</span><span class="nn">qemu</span><span class="p">:</span><span class="s-Atom">--x</span>
 <span class="nn">group</span><span class="p">::-</span><span class="s-Atom">--</span>
@@ -54,7 +54,7 @@ the permissions, apache still failed to access the <code>HOME</code> directory.<
 
 
 <p>The following command grants the group <code>r+x</code> permissions.</p>
-<div class="highlight"><pre><span class="c"># setfacl -m &#39;g:han:rx&#39; han</span>
+<div class="highlight"><pre># setfacl -m &#39;g:han:rx&#39; han
 </pre></div>
   </div><!-- /.entry-content -->
    <footer class="post-info text-muted">
@@ -63,7 +63,7 @@ the permissions, apache still failed to access the <code>HOME</code> directory.<
     </abbr>
     <address class="vcard author">
       by <a class="url fn" href="http://hehan.net/author/han.html">Han</a>
-    </address> in <a href="http://hehan.net/category/tech.html">tech</a> Tagged <a href="http://hehan.net/tag/.html"> </a>  </footer><!-- /.post-info -->
+    </address> in <a href="http://hehan.net/category/tech.html">tech</a> Tagged   </footer><!-- /.post-info -->
 </section>
             <footer id="contentinfo" class="footer">
                     <nav class="pull-right bottom-nav">

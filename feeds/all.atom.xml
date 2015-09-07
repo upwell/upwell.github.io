@@ -4,7 +4,7 @@
 the permissions, apache still failed to access the &lt;code&gt;HOME&lt;/code&gt; directory.&lt;/p&gt;
 &lt;h3&gt;Solution&lt;/h3&gt;
 &lt;p&gt;After a little dig, occationally I found the &lt;code&gt;HOME&lt;/code&gt; directory has a special permission symbol.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;drwxr&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;xr&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;93&lt;/span&gt; &lt;span class="n"&gt;han&lt;/span&gt;      &lt;span class="n"&gt;han&lt;/span&gt;      &lt;span class="mf"&gt;4.0&lt;/span&gt;&lt;span class="n"&gt;K&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="err"&gt;月&lt;/span&gt;  &lt;span class="mi"&gt;23&lt;/span&gt; &lt;span class="mi"&gt;11&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt; &lt;span class="n"&gt;han&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;drwxr-xr-x+ 93 han      han      4.0K 6月  23 11:30 han
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -12,8 +12,8 @@ the permissions, apache still failed to access the &lt;code&gt;HOME&lt;/code&gt;
 &lt;p&gt;&lt;a href="http://serverfault.com/questions/227852/what-does-a-mean-at-the-end-of-the-permissions-from-ls-l"&gt;This&lt;/a&gt; gives an explanation of this special &lt;code&gt;+&lt;/code&gt; sign.&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;HOME&lt;/code&gt; directory has extended permissions. The output of &lt;code&gt;getfacl&lt;/code&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# file: han&lt;/span&gt;
-&lt;span class="s-Atom"&gt;#&lt;/span&gt; &lt;span class="nn"&gt;owner&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s-Atom"&gt;han&lt;/span&gt;
-&lt;span class="s-Atom"&gt;#&lt;/span&gt; &lt;span class="nn"&gt;group&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s-Atom"&gt;han&lt;/span&gt;
+&lt;span class="c1"&gt;# owner: han&lt;/span&gt;
+&lt;span class="c1"&gt;# group: han&lt;/span&gt;
 &lt;span class="nn"&gt;user&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s-Atom"&gt;:rwx&lt;/span&gt;
 &lt;span class="nn"&gt;user&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nn"&gt;qemu&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s-Atom"&gt;--x&lt;/span&gt;
 &lt;span class="nn"&gt;group&lt;/span&gt;&lt;span class="p"&gt;::-&lt;/span&gt;&lt;span class="s-Atom"&gt;--&lt;/span&gt;
@@ -23,8 +23,8 @@ the permissions, apache still failed to access the &lt;code&gt;HOME&lt;/code&gt;
 
 
 &lt;p&gt;The following command grants the group &lt;code&gt;r+x&lt;/code&gt; permissions.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# setfacl -m &amp;#39;g:han:rx&amp;#39; han&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term=""></category></entry><entry><title>Reload module when using Django shell</title><link href="http://hehan.net/reload-module-when-using-django-shell.html" rel="alternate"></link><updated>2015-06-05T10:57:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2015-06-05:reload-module-when-using-django-shell.html</id><summary type="html">&lt;h3&gt;Issue&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;# setfacl -m &amp;#39;g:han:rx&amp;#39; han
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Reload module when using Django shell</title><link href="http://hehan.net/reload-module-when-using-django-shell.html" rel="alternate"></link><updated>2015-06-05T10:57:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2015-06-05:reload-module-when-using-django-shell.html</id><summary type="html">&lt;h3&gt;Issue&lt;/h3&gt;
 &lt;p&gt;The annoying part of using django shell is that:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Once you changed the source code, you need restart the shell and enter the code again.&lt;/p&gt;
@@ -32,7 +32,7 @@ the permissions, apache still failed to access the &lt;code&gt;HOME&lt;/code&gt;
 &lt;h3&gt;Solution&lt;/h3&gt;
 &lt;p&gt;Use &lt;code&gt;django-extensions&lt;/code&gt; in the project and with &lt;code&gt;shell_plus&lt;/code&gt;, there is a better expirence using django shell, although
 it's not the best, anyway it's much better.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# python manage.py shell_plus --notebook&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;# python manage.py shell_plus --notebook
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -44,20 +44,28 @@ When you changed your module, just click &lt;code&gt;Kernel &amp;gt; Restart&lt;
 &lt;p&gt;Use a tool named &lt;code&gt;proxychains&lt;/code&gt; which chains the connection through proxy.&lt;/p&gt;
 &lt;p&gt;On Fedora, install via &lt;code&gt;sudo dnf install proxychains&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;To change the default socks5 proxy, modify &lt;code&gt;/etc/proxychains.conf&lt;/code&gt;, under &lt;code&gt;[ProxyList]&lt;/code&gt; add one line:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;socks5&lt;/span&gt; &lt;span class="mf"&gt;127.0.0.1&lt;/span&gt; &lt;span class="mi"&gt;1080&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;socks5 127.0.0.1 1080
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;How to use:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;proxychains&lt;/span&gt; &lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;proxychains pip install requests
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Done! Happy pip with socks5 proxy.&lt;/p&gt;</summary><category term="pip"></category></entry><entry><title>python small tips</title><link href="http://hehan.net/python-small-tips.html" rel="alternate"></link><updated>2015-02-28T10:09:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2015-02-28:python-small-tips.html</id><summary type="html">&lt;h3&gt;Join two lists&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;
-&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;a = [1, 2, 3]
+b = [3, 4, 5]
+c = a + b
+[1, 2, 3, 3, 4, 5]
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Extend a list&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;a = [1, 2, 3]
+b = [3, 4, 5]
+a.extend(b)
+[1, 2, 3, 3, 4, 5]
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -70,37 +78,37 @@ When you changed your module, just click &lt;code&gt;Kernel &amp;gt; Restart&lt;
 
 
 &lt;h3&gt;Check if a list/dictionary/tuple is empty&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;      &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="n"&gt;same&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
-&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
-    &lt;span class="n"&gt;print&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;not&lt;/span&gt; &lt;span class="n"&gt;empty&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;
-&lt;span class="nl"&gt;else:&lt;/span&gt;
-    &lt;span class="n"&gt;print&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;empty&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;l = []      # same for {} and ()
+if l:
+    print &amp;#39;list is not empty&amp;#39;
+else:
+    print &amp;#39;list is empty&amp;#39;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Iterate over dictionary&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="sc"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="sc"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
-    &lt;span class="n"&gt;print&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;d = {&amp;#39;a&amp;#39;: 1, &amp;#39;b&amp;#39;: 2}
+for key in d:
+    print key, d[key]
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="sc"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="sc"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iteritems&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
-    &lt;span class="n"&gt;print&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;d = {&amp;#39;a&amp;#39;: 1, &amp;#39;b&amp;#39;: 2}
+for key, value in d.iteritems():
+    print key, value
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Access the index while looping a list&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="sc"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="sc"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="sc"&gt;&amp;#39;c&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="sc"&gt;&amp;#39;d&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;idx&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;enumerate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
-    &lt;span class="n"&gt;print&lt;/span&gt; &lt;span class="n"&gt;idx&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;l = [&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;c&amp;#39;, &amp;#39;d&amp;#39;]
+for idx, value in enumerate(l):
+    print idx, value
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Reverse range&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;reversed&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; reversed(range(3))
+[2, 1, 0]
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -141,25 +149,25 @@ When you changed your module, just click &lt;code&gt;Kernel &amp;gt; Restart&lt;
 &lt;li&gt;single quotes for small symbol-like strings&lt;/li&gt;
 &lt;li&gt;use triple double quotes for docstrings and raw string literals&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;LIGHT_MESSAGES&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;English&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;There are %(number_of_lights)s lights.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;Pirate&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;  &lt;span class="s"&gt;&amp;quot;Arr! Thar be %(number_of_lights)s lights.&amp;quot;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;LIGHT_MESSAGES = {
+    &amp;#39;English&amp;#39;: &amp;quot;There are %(number_of_lights)s lights.&amp;quot;,
+    &amp;#39;Pirate&amp;#39;:  &amp;quot;Arr! Thar be %(number_of_lights)s lights.&amp;quot;
+}
 
-&lt;span class="n"&gt;def&lt;/span&gt; &lt;span class="n"&gt;lights_message&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;language&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;number_of_lights&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
-    &lt;span class="s"&gt;&amp;quot;&amp;quot;&amp;quot;Return a language-appropriate string reporting the light count.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;LIGHT_MESSAGES&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;language&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;locals&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+def lights_message(language, number_of_lights):
+    &amp;quot;&amp;quot;&amp;quot;Return a language-appropriate string reporting the light count.&amp;quot;&amp;quot;&amp;quot;
+    return LIGHT_MESSAGES[language] % locals()
 
-&lt;span class="n"&gt;def&lt;/span&gt; &lt;span class="n"&gt;is_pirate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
-    &lt;span class="s"&gt;&amp;quot;&amp;quot;&amp;quot;Return True if the given message sounds piratical.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;search&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;(?i)(arr|avast|yohoho)!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;not&lt;/span&gt; &lt;span class="n"&gt;None&lt;/span&gt;
+def is_pirate(message):
+    &amp;quot;&amp;quot;&amp;quot;Return True if the given message sounds piratical.&amp;quot;&amp;quot;&amp;quot;
+    return re.search(r&amp;quot;(?i)(arr|avast|yohoho)!&amp;quot;, message) is not None
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="python"></category></entry><entry><title>gimp quick use guide</title><link href="http://hehan.net/gimp-quick-use-guide.html" rel="alternate"></link><updated>2014-10-15T10:40:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2014-10-15:gimp-quick-use-guide.html</id><summary type="html">&lt;h3&gt;Copy layer to a new image&lt;/h3&gt;
 &lt;p&gt;Use &lt;code&gt;ctrl+c&lt;/code&gt; and &lt;code&gt;ctrl+v&lt;/code&gt; to copy and paste a layer.&lt;/p&gt;
 &lt;h3&gt;Crop to selection&lt;/h3&gt;
 &lt;p&gt;Use &lt;code&gt;Crop tool&lt;/code&gt; to select the area to crop, and then adjust the params in the toolbox windows, after
 all done, double click the selection.&lt;/p&gt;</summary><category term="gimp"></category></entry><entry><title>android studio tips</title><link href="http://hehan.net/android-studio-tips.html" rel="alternate"></link><updated>2014-09-01T15:45:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2014-09-01:android-studio-tips.html</id><summary type="html">&lt;h2&gt;Cannot run program aapt -- no such file or directory&lt;/h2&gt;
 &lt;p&gt;Install missing 32bit libraries:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;libstdc&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;i686&lt;/span&gt; &lt;span class="n"&gt;zlib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;i686&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;yum install libstdc++.i686 zlib.i686
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -168,7 +176,7 @@ all done, double click the selection.&lt;/p&gt;</summary><category term="gimp"><
 start android studio from desktop application, it still uses the open jdk.&lt;/p&gt;
 &lt;p&gt;For desktop application defined under &lt;code&gt;~/.local/share/applications/&lt;/code&gt;, you need to&lt;br /&gt;
 setup the environment variables in &lt;code&gt;~/.profile&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;export&lt;/span&gt; &lt;span class="n"&gt;STUDIO_JDK&lt;/span&gt;&lt;span class="o"&gt;=/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;java&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;jdk1&lt;/span&gt;&lt;span class="mf"&gt;.8.0&lt;/span&gt;&lt;span class="n"&gt;_20&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;export STUDIO_JDK=/usr/java/jdk1.8.0_20
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -183,16 +191,16 @@ setup the environment variables in &lt;code&gt;~/.profile&lt;/code&gt;.&lt;/p&gt
 &lt;p&gt;AttributeError: 'thread._local' object has no attribute 'temp_identifier'&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;The solutions is, put it before the csrf middleware, like&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;MIDDLEWARE_CLASSES&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
-    &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;django&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;contrib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sessions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;middleware&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SessionMiddleware&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;django&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;middleware&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;common&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CommonMiddleware&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;silk&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;middleware&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SilkyMiddleware&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;django&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;middleware&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;csrf&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CsrfViewMiddleware&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;django&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;contrib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;auth&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;middleware&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AuthenticationMiddleware&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;django&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;contrib&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;messages&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;middleware&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;MessageMiddleware&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;django&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;middleware&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;clickjacking&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;XFrameOptionsMiddleware&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;django&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;middleware&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;locale&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;LocaleMiddleware&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;MIDDLEWARE_CLASSES = (
+    &amp;#39;django.contrib.sessions.middleware.SessionMiddleware&amp;#39;,
+    &amp;#39;django.middleware.common.CommonMiddleware&amp;#39;,
+    &amp;#39;silk.middleware.SilkyMiddleware&amp;#39;,
+    &amp;#39;django.middleware.csrf.CsrfViewMiddleware&amp;#39;,
+    &amp;#39;django.contrib.auth.middleware.AuthenticationMiddleware&amp;#39;,
+    &amp;#39;django.contrib.messages.middleware.MessageMiddleware&amp;#39;,
+    &amp;#39;django.middleware.clickjacking.XFrameOptionsMiddleware&amp;#39;,
+    &amp;#39;django.middleware.locale.LocaleMiddleware&amp;#39;,
+)
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -206,33 +214,33 @@ MySQL server has gone away&lt;/p&gt;
 &lt;h4&gt;Static file handling&lt;/h4&gt;
 &lt;p&gt;If you don't want to run django in debug mode and also haven't setup the external server (nginx, uwsgi, etc.) for static file serving.&lt;/p&gt;
 &lt;p&gt;To make &lt;code&gt;silk&lt;/code&gt; display as expected, you need to do the following changes:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# python manage.py collectstatic&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;# python manage.py collectstatic
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;This would collect static files to &lt;code&gt;settings.STATIC_ROOT&lt;/code&gt; folder.&lt;/p&gt;
 &lt;p&gt;After that, add a url pattern in &lt;code&gt;urls.py&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;r&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;^static/(?P&amp;lt;path&amp;gt;.*)$&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;django.views.static.serve&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;document_root&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;settings.STATIC_ROOT&lt;/span&gt;&lt;span class="p"&gt;}),&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;url(r&amp;#39;^static/(?P&amp;lt;path&amp;gt;.*)$&amp;#39;, &amp;#39;django.views.static.serve&amp;#39;,
+    {&amp;#39;document_root&amp;#39;: settings.STATIC_ROOT}),
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="django"></category><category term="python"></category></entry><entry><title>dnsmasq config</title><link href="http://hehan.net/dnsmasq-config.html" rel="alternate"></link><updated>2014-07-01T19:07:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2014-07-01:dnsmasq-config.html</id><summary type="html">&lt;h3&gt;Set dns server for dnsmasq&lt;/h3&gt;
 &lt;p&gt;Use a separate conf file, the format is the same as resolv.conf.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;resolv&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="o"&gt;=/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;resolv&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;masq&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;conf&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;resolv-file=/etc/resolv.masq.conf
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Then after dnsmasq is started, set &lt;code&gt;127.0.0.1&lt;/code&gt; in &lt;code&gt;/etc/resolv.conf&lt;/code&gt;.&lt;/p&gt;
 &lt;h3&gt;listening address with localhost&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;listen&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;address&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;127.0.0.1&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;listen-address=127.0.0.1
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Use separate DNS for certain domains&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;=/&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;8.8.8.8&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;server=/www.google.com/8.8.8.8
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Use regular expression for server&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;=/:&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="err"&gt;*/&lt;/span&gt;&lt;span class="mf"&gt;8.8.8.8&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;server=/:.*google.*/8.8.8.8
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="system"></category></entry><entry><title>django collections</title><link href="http://hehan.net/django-collections.html" rel="alternate"></link><updated>2014-06-28T09:35:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2014-06-28:django-collections.html</id><summary type="html">&lt;h2&gt;django profiling tools&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://github.com/mtford90/silk"&gt;Silky smooth profiling for Django&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/django-debug-toolbar/django-debug-toolbar"&gt;Django Debug toolbar&lt;/a&gt;&lt;/p&gt;</summary><category term="python"></category><category term="django"></category></entry><entry><title>two foreign keys to same model</title><link href="http://hehan.net/two-foreign-keys-to-same-model.html" rel="alternate"></link><updated>2014-06-20T14:35:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2014-06-20:two-foreign-keys-to-same-model.html</id><summary type="html">&lt;h4&gt;Use &lt;code&gt;related_name&lt;/code&gt;:&lt;/h4&gt;
@@ -302,12 +310,12 @@ checker and displays any resulting errors to user.&lt;/p&gt;
 &lt;p&gt;Start vim, then type &lt;code&gt;:Helptags&lt;/code&gt;.&lt;/p&gt;
 &lt;h3&gt;How to use&lt;/h3&gt;
 &lt;p&gt;Check&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;SyntasticCheck&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;:SyntasticCheck
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;See available external checker:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;SyntasticInfo&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;:SyntasticInfo
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="vim"></category><category term="python"></category></entry><entry><title>Object - javascript: the good part</title><link href="http://hehan.net/object-javascript-the-good-part.html" rel="alternate"></link><updated>2013-11-10T10:42:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2013-11-10:object-javascript-the-good-part.html</id><summary type="html">&lt;h3&gt;Object Literals&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;empty_object&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{};&lt;/span&gt;
 
@@ -530,34 +538,34 @@ range beginning at &lt;em&gt;result&lt;/em&gt; with all its elements sorted.&lt;
 &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;copy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;output_iter&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="c++"></category></entry><entry><title>Install oracle jdk 32bit on 64bit Fedora</title><link href="http://hehan.net/install-oracle-jdk-32bit-on-64bit-fedora.html" rel="alternate"></link><updated>2013-10-18T22:31:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2013-10-18:install-oracle-jdk-32bit-on-64bit-fedora.html</id><summary type="html">&lt;h2&gt;Issue&lt;/h2&gt;
 &lt;p&gt;When execute:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# rpm -ivh ~/Downloads/jdk-7u45-linux-i586.rpm&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;# rpm -ivh ~/Downloads/jdk-7u45-linux-i586.rpm
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;There comes error messages:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;Unpacking&lt;/span&gt; &lt;span class="n"&gt;JAR&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt;
-    &lt;span class="n"&gt;rt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;jar&lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt;
-&lt;span class="nl"&gt;Error:&lt;/span&gt; &lt;span class="n"&gt;Could&lt;/span&gt; &lt;span class="n"&gt;not&lt;/span&gt; &lt;span class="n"&gt;open&lt;/span&gt; &lt;span class="n"&gt;input&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;java&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;jdk1&lt;/span&gt;&lt;span class="mf"&gt;.7.0&lt;/span&gt;&lt;span class="n"&gt;_45&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;jre&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lib&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;rt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pack&lt;/span&gt;
-&lt;span class="nl"&gt;Error:&lt;/span&gt; &lt;span class="n"&gt;unpack&lt;/span&gt; &lt;span class="n"&gt;could&lt;/span&gt; &lt;span class="n"&gt;not&lt;/span&gt; &lt;span class="n"&gt;create&lt;/span&gt; &lt;span class="n"&gt;JAR&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;Unpacking JAR files...
+    rt.jar...
+Error: Could not open input file: /usr/java/jdk1.7.0_45/jre/lib/rt.pack
+Error: unpack could not create JAR file:
 
-    &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;java&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;jdk1&lt;/span&gt;&lt;span class="mf"&gt;.7.0&lt;/span&gt;&lt;span class="n"&gt;_45&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;jre&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lib&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;rt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;jar&lt;/span&gt;
+    /usr/java/jdk1.7.0_45/jre/lib/rt.jar
 
-&lt;span class="n"&gt;Please&lt;/span&gt; &lt;span class="n"&gt;refer&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;Troubleshooting&lt;/span&gt; &lt;span class="n"&gt;section&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;Installation&lt;/span&gt; &lt;span class="n"&gt;Instructions&lt;/span&gt;
-&lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;download&lt;/span&gt; &lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-    &lt;span class="n"&gt;jsse&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;jar&lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt;
-&lt;span class="nl"&gt;Error:&lt;/span&gt; &lt;span class="n"&gt;Could&lt;/span&gt; &lt;span class="n"&gt;not&lt;/span&gt; &lt;span class="n"&gt;open&lt;/span&gt; &lt;span class="n"&gt;input&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;java&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;jdk1&lt;/span&gt;&lt;span class="mf"&gt;.7.0&lt;/span&gt;&lt;span class="n"&gt;_45&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;jre&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lib&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;jsse&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pack&lt;/span&gt;
-&lt;span class="nl"&gt;Error:&lt;/span&gt; &lt;span class="n"&gt;unpack&lt;/span&gt; &lt;span class="n"&gt;could&lt;/span&gt; &lt;span class="n"&gt;not&lt;/span&gt; &lt;span class="n"&gt;create&lt;/span&gt; &lt;span class="n"&gt;JAR&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+Please refer to the Troubleshooting section of the Installation Instructions
+on the download page.
+    jsse.jar...
+Error: Could not open input file: /usr/java/jdk1.7.0_45/jre/lib/jsse.pack
+Error: unpack could not create JAR file:
 
-    &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;java&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;jdk1&lt;/span&gt;&lt;span class="mf"&gt;.7.0&lt;/span&gt;&lt;span class="n"&gt;_45&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;jre&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lib&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;jsse&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;jar&lt;/span&gt;
+    /usr/java/jdk1.7.0_45/jre/lib/jsse.jar
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h2&gt;Solution&lt;/h2&gt;
 &lt;p&gt;Install the 32bit libraries:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# rpm -ivh glibc.i686 glibc-devel.i686&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;# rpm -ivh glibc.i686 glibc-devel.i686
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="jdk"></category><category term="fedora"></category></entry><entry><title>C++头文件include的顺序问题</title><link href="http://hehan.net/ctou-wen-jian-includede-shun-xu-wen-ti.html" rel="alternate"></link><updated>2013-10-16T16:48:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2013-10-16:ctou-wen-jian-includede-shun-xu-wen-ti.html</id><summary type="html">&lt;h2&gt;问题&lt;/h2&gt;
 &lt;p&gt;遇到一个很奇怪的问题，在工程中使用 stlport 的时候各种编译不过，即使仅仅是声明一个对象都会编译不过。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;sstream&lt;/span&gt; &lt;span class="n"&gt;mystream&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;std&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;:sstream&lt;/span&gt; &lt;span class="nt"&gt;mystream&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -569,34 +577,34 @@ range beginning at &lt;em&gt;result&lt;/em&gt; with all its elements sorted.&lt;
 &lt;li&gt;怀疑工程中使用的 stlport 有问题，重新编译了一份 stlport 还是不行；&lt;/li&gt;
 &lt;li&gt;检查stlport的源代码，出错的地方对 &lt;code&gt;#define XXX&lt;/code&gt; 有依赖，同时检查了工程中的代码，发现 &lt;code&gt;include&lt;/code&gt; std 头文件在所有 &lt;code&gt;include&lt;/code&gt; 的最后面。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="c"&gt;#include &amp;quot;a.h&amp;quot;&lt;/span&gt;
-    &lt;span class="c"&gt;#include &amp;quot;b.h&amp;quot;&lt;/span&gt;
-    &lt;span class="c"&gt;#include &amp;lt;sstream&amp;gt;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="cp"&gt;#include &amp;quot;a.h&amp;quot;&lt;/span&gt;
+    &lt;span class="cp"&gt;#include &amp;quot;b.h&amp;quot;&lt;/span&gt;
+    &lt;span class="cp"&gt;#include &amp;lt;sstream&amp;gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;ol&gt;
 &lt;li&gt;猜测可能前面的头文件中的 &lt;code&gt;#define&lt;/code&gt; 影响了 sstream 中的设置，将 &lt;code&gt;#include &amp;lt;sstream&amp;gt;&lt;/code&gt; 放到文件的最前面，问题解决；&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="c"&gt;#include &amp;quot;a.h&amp;quot;&lt;/span&gt;
-    &lt;span class="c"&gt;#include &amp;quot;b.h&amp;quot;&lt;/span&gt;
-    &lt;span class="c"&gt;#include &amp;lt;sstream&amp;gt;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="cp"&gt;#include &amp;quot;a.h&amp;quot;&lt;/span&gt;
+    &lt;span class="cp"&gt;#include &amp;quot;b.h&amp;quot;&lt;/span&gt;
+    &lt;span class="cp"&gt;#include &amp;lt;sstream&amp;gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="c++"></category></entry><entry><title>Ignore files when building tags</title><link href="http://hehan.net/ignore-files-when-building-tags.html" rel="alternate"></link><updated>2013-10-15T17:52:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2013-10-15:ignore-files-when-building-tags.html</id><summary type="html">&lt;p&gt;Use the following commands:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="n"&gt;ctags&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;exclude&lt;/span&gt;&lt;span class="o"&gt;=*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;exclude&lt;/span&gt;&lt;span class="o"&gt;=*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;exclude&lt;/span&gt;&lt;span class="o"&gt;=*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sql&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;R&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;    ctags --exclude=*.html --exclude=*.js --exclude=*.sql -R
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;It's annoying to enter the long parameters every time. You can configure&lt;br /&gt;
 it as the default config.&lt;/p&gt;
 &lt;p&gt;Edit &lt;code&gt;~/.ctags&lt;/code&gt;. Add the following lines:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;exclude&lt;/span&gt;&lt;span class="o"&gt;=*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
-    &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;exclude&lt;/span&gt;&lt;span class="o"&gt;=*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt;
-    &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;exclude&lt;/span&gt;&lt;span class="o"&gt;=*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sql&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;    --exclude=*.html
+    --exclude=*.js
+    --exclude=*.sql
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Then you only need to type:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="n"&gt;ctags&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;R&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;    ctags -R
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="ctags"></category></entry><entry><title>abnormal packets in socket</title><link href="http://hehan.net/abnormal-packets-in-socket.html" rel="alternate"></link><updated>2013-09-18T17:52:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2013-09-18:abnormal-packets-in-socket.html</id><summary type="html">&lt;p&gt;今天遇到一个奇怪的问题，从抓包中发现服务器收到客户端发来的HTTP请求后，&lt;br /&gt;
 会先回复一个乱七八糟的包，然后才会回正常的200 OK，自然的客户端就没办法&lt;br /&gt;
 正常工作了。&lt;/p&gt;
@@ -690,8 +698,8 @@ target.&lt;/p&gt;
 &lt;h3&gt;Add surroundings&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;ys&lt;/code&gt; takes an &lt;strong&gt;valid Vim motion&lt;/strong&gt; or text object as the first object and wraps it using the second
 argument.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;  &lt;span class="n"&gt;Old&lt;/span&gt; &lt;span class="n"&gt;text&lt;/span&gt;                  &lt;span class="n"&gt;Command&lt;/span&gt;     &lt;span class="n"&gt;New&lt;/span&gt; &lt;span class="n"&gt;text&lt;/span&gt;
-  &lt;span class="n"&gt;Hello&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;orld&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;             &lt;span class="n"&gt;ysiw&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;       &lt;span class="n"&gt;Hello&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;world&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;  Old text                  Command     New text
+  Hello w*orld!             ysiw)       Hello (world)!
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -699,42 +707,42 @@ argument.&lt;/p&gt;
 content.&lt;/p&gt;
 &lt;h3&gt;Delete surroundings&lt;/h3&gt;
 &lt;p&gt;Delete surroundings is &lt;code&gt;ds&lt;/code&gt; .&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;  &lt;span class="nx"&gt;Old&lt;/span&gt; &lt;span class="nx"&gt;text&lt;/span&gt;                  &lt;span class="nb"&gt;Command&lt;/span&gt;     &lt;span class="nb"&gt;New&lt;/span&gt; &lt;span class="nx"&gt;text&lt;/span&gt; &lt;span class="err"&gt;~&lt;/span&gt;
-  &lt;span class="s2"&gt;&amp;quot;Hello *world!&amp;quot;&lt;/span&gt;           &lt;span class="nx"&gt;ds&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;         Hello world!&lt;/span&gt;
-&lt;span class="s2"&gt;  (123+4*56)/2              ds)         123+456/2&lt;/span&gt;
-&lt;span class="s2"&gt;  &amp;lt;div&amp;gt;Yo!*&amp;lt;/div&amp;gt;           dst         Yo!&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;  Old text                  Command     New text ~
+  &amp;quot;Hello *world!&amp;quot;           ds&amp;quot;         Hello world!
+  (123+4*56)/2              ds)         123+456/2
+  &lt;span class="nt"&gt;&amp;lt;div&amp;gt;&lt;/span&gt;Yo!*&lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;           dst         Yo!
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="vim"></category></entry><entry><title>SQLite command tips</title><link href="http://hehan.net/sqlite-command-tips.html" rel="alternate"></link><updated>2013-08-07T13:26:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2013-08-07:sqlite-command-tips.html</id><summary type="html">&lt;h3&gt;Use a database file&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="nx"&gt;sqlite&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;database_file&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;    sqlite &amp;lt;database_file&amp;gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Get table information&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tables&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;    .tables
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Get schema information&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;schema&lt;/span&gt;
-    &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;schema&lt;/span&gt; &lt;span class="n"&gt;table_name&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;    .schema
+    .schema table_name
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Get help&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;help&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;    .help
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Write result to a file&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt;
-    &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;separator&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;
-    &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;output&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;
-    &lt;span class="n"&gt;select&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;table_name&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exit&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;    .mode list
+    .separator |
+    .output result.data
+    select * from table_name;
+    .exit
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Exit&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exit&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;    .exit
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -744,17 +752,17 @@ content.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Install xrdp&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;wget&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;//dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm&lt;/span&gt;
-&lt;span class="n"&gt;wget&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;//dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6&lt;/span&gt;
-&lt;span class="n"&gt;rpm&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;import&lt;/span&gt; &lt;span class="n"&gt;RPM&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;GPG&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;KEY&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;EPEL&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;
-&lt;span class="n"&gt;rpm&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;ivh&lt;/span&gt; &lt;span class="n"&gt;epel&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rpm&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;wget&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;dl&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fedoraproject&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pub&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;epel&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;x86_64&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;epel&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;release&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;8.&lt;/span&gt;&lt;span class="n"&gt;noarch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rpm&lt;/span&gt;
+&lt;span class="n"&gt;wget&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;dl&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fedoraproject&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pub&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;epel&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;RPM&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;GPG&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;KEY&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;EPEL&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;
+&lt;span class="n"&gt;rpm&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;RPM&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;GPG&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;KEY&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;EPEL&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;
+&lt;span class="n"&gt;rpm&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;ivh&lt;/span&gt; &lt;span class="n"&gt;epel&lt;/span&gt;&lt;span class="o"&gt;*.&lt;/span&gt;&lt;span class="n"&gt;rpm&lt;/span&gt;
 &lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;xrdp&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Start service&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;init&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;xrdp&lt;/span&gt; &lt;span class="n"&gt;start&lt;/span&gt;
-&lt;span class="n"&gt;chkconfig&lt;/span&gt; &lt;span class="n"&gt;xrdp&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;/etc/init.d/xrdp start
+chkconfig xrdp on
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -763,7 +771,7 @@ content.&lt;/p&gt;
 &lt;li&gt;problem connecting 5910
 try start vncserver&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;init&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;vncserver&lt;/span&gt; &lt;span class="n"&gt;start&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;/etc/init.d/vncserver start
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -771,8 +779,8 @@ try start vncserver&lt;/li&gt;
 &lt;li&gt;vnc no display configured
 edit /etc/sysconfig/vncservers&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;VNCSERVERS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;2:root&amp;quot;&lt;/span&gt;
-&lt;span class="n"&gt;VNCSERVERARGS&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;-geometry 1280x1024 -localhost&amp;quot;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;VNCSERVERS=&amp;quot;2:root&amp;quot;
+VNCSERVERARGS[2]=&amp;quot;-geometry 1280x1024 -localhost&amp;quot;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -780,19 +788,19 @@ edit /etc/sysconfig/vncservers&lt;/li&gt;
 &lt;li&gt;vnc password for user root is not configured
 login as root&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;vncpasswd&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;vncpasswd
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;ul&gt;
 &lt;li&gt;vnc undefined symbol: pixman_composite_trapezoids&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="n"&gt;update&lt;/span&gt; &lt;span class="n"&gt;pixman&lt;/span&gt; &lt;span class="n"&gt;pixman&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;devel&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;yum update pixman pixman-devel
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;ul&gt;
 &lt;li&gt;vnc could not open default font 'fixed'&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;libXfont&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;yum install libXfont
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="xrdp"></category><category term="centos"></category></entry></feed>

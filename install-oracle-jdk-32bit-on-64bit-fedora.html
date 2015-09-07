@@ -32,31 +32,31 @@
   <div class="entry-content">
     <h2>Issue</h2>
 <p>When execute:</p>
-<div class="highlight"><pre><span class="c"># rpm -ivh ~/Downloads/jdk-7u45-linux-i586.rpm</span>
+<div class="highlight"><pre># rpm -ivh ~/Downloads/jdk-7u45-linux-i586.rpm
 </pre></div>
 
 
 <p>There comes error messages:</p>
-<div class="highlight"><pre><span class="n">Unpacking</span> <span class="n">JAR</span> <span class="n">files</span><span class="p">...</span>
-    <span class="n">rt</span><span class="p">.</span><span class="n">jar</span><span class="p">...</span>
-<span class="nl">Error:</span> <span class="n">Could</span> <span class="n">not</span> <span class="n">open</span> <span class="n">input</span> <span class="n">file</span><span class="o">:</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">java</span><span class="o">/</span><span class="n">jdk1</span><span class="mf">.7.0</span><span class="n">_45</span><span class="o">/</span><span class="n">jre</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">rt</span><span class="p">.</span><span class="n">pack</span>
-<span class="nl">Error:</span> <span class="n">unpack</span> <span class="n">could</span> <span class="n">not</span> <span class="n">create</span> <span class="n">JAR</span> <span class="n">file</span><span class="o">:</span>
+<div class="highlight"><pre>Unpacking JAR files...
+    rt.jar...
+Error: Could not open input file: /usr/java/jdk1.7.0_45/jre/lib/rt.pack
+Error: unpack could not create JAR file:
 
-    <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">java</span><span class="o">/</span><span class="n">jdk1</span><span class="mf">.7.0</span><span class="n">_45</span><span class="o">/</span><span class="n">jre</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">rt</span><span class="p">.</span><span class="n">jar</span>
+    /usr/java/jdk1.7.0_45/jre/lib/rt.jar
 
-<span class="n">Please</span> <span class="n">refer</span> <span class="n">to</span> <span class="n">the</span> <span class="n">Troubleshooting</span> <span class="n">section</span> <span class="n">of</span> <span class="n">the</span> <span class="n">Installation</span> <span class="n">Instructions</span>
-<span class="n">on</span> <span class="n">the</span> <span class="n">download</span> <span class="n">page</span><span class="p">.</span>
-    <span class="n">jsse</span><span class="p">.</span><span class="n">jar</span><span class="p">...</span>
-<span class="nl">Error:</span> <span class="n">Could</span> <span class="n">not</span> <span class="n">open</span> <span class="n">input</span> <span class="n">file</span><span class="o">:</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">java</span><span class="o">/</span><span class="n">jdk1</span><span class="mf">.7.0</span><span class="n">_45</span><span class="o">/</span><span class="n">jre</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">jsse</span><span class="p">.</span><span class="n">pack</span>
-<span class="nl">Error:</span> <span class="n">unpack</span> <span class="n">could</span> <span class="n">not</span> <span class="n">create</span> <span class="n">JAR</span> <span class="n">file</span><span class="o">:</span>
+Please refer to the Troubleshooting section of the Installation Instructions
+on the download page.
+    jsse.jar...
+Error: Could not open input file: /usr/java/jdk1.7.0_45/jre/lib/jsse.pack
+Error: unpack could not create JAR file:
 
-    <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">java</span><span class="o">/</span><span class="n">jdk1</span><span class="mf">.7.0</span><span class="n">_45</span><span class="o">/</span><span class="n">jre</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">jsse</span><span class="p">.</span><span class="n">jar</span>
+    /usr/java/jdk1.7.0_45/jre/lib/jsse.jar
 </pre></div>
 
 
 <h2>Solution</h2>
 <p>Install the 32bit libraries:</p>
-<div class="highlight"><pre><span class="c"># rpm -ivh glibc.i686 glibc-devel.i686</span>
+<div class="highlight"><pre># rpm -ivh glibc.i686 glibc-devel.i686
 </pre></div>
   </div><!-- /.entry-content -->
    <footer class="post-info text-muted">
