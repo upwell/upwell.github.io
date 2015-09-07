@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
+from os.path import expanduser
+
 AUTHOR = u'Han'
 SITENAME = u'Note Everything'
 SITEURL = 'http://hehan.net'
@@ -12,7 +14,8 @@ TIMEZONE = 'Asia/Shanghai'
 
 DEFAULT_LANG = u'en'
 
-THEME = '/home/han/pelican-themes/simple-bootstrap'
+home_dir = expanduser('~')
+THEME = '{}/pelican-themes/simple-bootstrap'.format(home_dir)
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None

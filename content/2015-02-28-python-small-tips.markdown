@@ -13,6 +13,14 @@ c = a + b
 [1, 2, 3, 3, 4, 5]
 ```
 
+### Extend a list
+```
+a = [1, 2, 3]
+b = [3, 4, 5]
+a.extend(b)
+[1, 2, 3, 3, 4, 5]
+```
+
 ### Join two dicts
 ```python
 d1 = {1: 'a', 2: 'b'}
