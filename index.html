@@ -22,6 +22,12 @@
 <section id="content" class="content">
 
         <article class="hentry">
+                <header> <h2 class="entry-title"><a href="http://hehan.net/p4-command-line-tips.html" rel="bookmark" title="Permalink to p4 command line tips">p4 command line tips</a></h2> </header>
+                <div class="entry-content"> <h3>Remove files from changelist without removing the edits</h3>
+<div class="highlight"><pre># p4 revert -k -c changelist path_to_file
+</pre></div> </div><!-- entry-content -->
+        </article>
+        <article class="hentry">
                 <header> <h2 class="entry-title"><a href="http://hehan.net/weired-directory-permission-issue.html" rel="bookmark" title="Permalink to Weired directory permission issue">Weired directory permission issue</a></h2> </header>
                 <div class="entry-content"> <h3>Issue</h3>
 <p>While I was deploying a php project for apache on my <code>HOME</code> directory, although I used <code>chmod</code> and <code>usemod</code> to grant user <code>apache</code>  <br />
@@ -122,21 +128,6 @@ start android studio from desktop application, it still uses the open ...</p> </
                 <div class="entry-content"> <h2>django profiling tools</h2>
 <p><a href="https://github.com/mtford90/silk">Silky smooth profiling for Django</a></p>
 <p><a href="https://github.com/django-debug-toolbar/django-debug-toolbar">Django Debug toolbar</a></p> </div><!-- entry-content -->
-        </article>
-        <article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://hehan.net/two-foreign-keys-to-same-model.html" rel="bookmark" title="Permalink to two foreign keys to same model">two foreign keys to same model</a></h2> </header>
-                <div class="entry-content"> <h4>Use <code>related_name</code>:</h4>
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">Test</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-    <span class="n">example1</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Example</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&#39;test1&#39;</span><span class="p">)</span>
-    <span class="n">example2</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Example</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&#39;test2&#39;</span><span class="p">)</span>
-</pre></div>
-
-
-<p>See <a href="http://stackoverflow.com/questions/543377/how-can-i-have-two-foreign-keys-to-the-same-model-in-django">stackoverflow question</a> and <a href="http://docs.djangoproject.com/en/dev/ref/models/fields/#foreignkey">django doc</a></p>
-<h4>Why <code>related_name</code>:</h4>
-<p>The <code>related_name</code> attributes specifies the name of reverse relation from <code>Example</code> model<br />
-to your model.</p>
-<p>If no <code>related_name</code> is specified, Django creates one using ...</p> </div><!-- entry-content -->
         </article>
 <div class="pager">
       <ul>
