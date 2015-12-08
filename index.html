@@ -23,8 +23,13 @@
 
         <article class="hentry">
                 <header> <h2 class="entry-title"><a href="http://hehan.net/p4-command-line-tips.html" rel="bookmark" title="Permalink to p4 command line tips">p4 command line tips</a></h2> </header>
-                <div class="entry-content"> <h3>Remove files from changelist without removing the edits</h3>
+                <div class="entry-content"> <h4>Remove files from changelist without removing the edits</h4>
 <div class="highlight"><pre># p4 revert -k -c changelist path_to_file
+</pre></div>
+
+
+<h4>Diff unopened local file against depot file</h4>
+<div class="highlight"><pre># p4 diff -f path_to_file
 </pre></div> </div><!-- entry-content -->
         </article>
         <article class="hentry">
