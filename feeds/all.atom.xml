@@ -6,6 +6,12 @@
 
 &lt;h4&gt;Diff unopened local file against depot file&lt;/h4&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;# p4 diff -f path_to_file
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;Tampered with after resolve&lt;/h4&gt;
+&lt;p&gt;To ignore this error, you could re-edit the file.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;# p4 edit path_to_file
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="p4"></category></entry><entry><title>Weired directory permission issue</title><link href="http://hehan.net/weired-directory-permission-issue.html" rel="alternate"></link><updated>2015-06-19T17:06:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2015-06-19:weired-directory-permission-issue.html</id><summary type="html">&lt;h3&gt;Issue&lt;/h3&gt;
 &lt;p&gt;While I was deploying a php project for apache on my &lt;code&gt;HOME&lt;/code&gt; directory, although I used &lt;code&gt;chmod&lt;/code&gt; and &lt;code&gt;usemod&lt;/code&gt; to grant user &lt;code&gt;apache&lt;/code&gt;  &lt;br /&gt;
 the permissions, apache still failed to access the &lt;code&gt;HOME&lt;/code&gt; directory.&lt;/p&gt;
