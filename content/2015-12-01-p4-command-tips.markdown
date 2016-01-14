@@ -13,3 +13,8 @@ Category: tech
 # p4 diff -f path_to_file
 ```
 
+#### Tampered with after resolve
+To ignore this error, you could re-edit the file.
+```
+# p4 edit path_to_file
+```
