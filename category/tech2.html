@@ -24,6 +24,21 @@
 <h2>Articles in the tech category</h2>
 
         <article class="hentry">
+                <header> <h2 class="entry-title"><a href="http://hehan.net/two-foreign-keys-to-same-model.html" rel="bookmark" title="Permalink to two foreign keys to same model">two foreign keys to same model</a></h2> </header>
+                <div class="entry-content"> <h4>Use <code>related_name</code>:</h4>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Test</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">example1</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Example</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&#39;test1&#39;</span><span class="p">)</span>
+    <span class="n">example2</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Example</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&#39;test2&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>See <a href="http://stackoverflow.com/questions/543377/how-can-i-have-two-foreign-keys-to-the-same-model-in-django">stackoverflow question</a> and <a href="http://docs.djangoproject.com/en/dev/ref/models/fields/#foreignkey">django doc</a></p>
+<h4>Why <code>related_name</code>:</h4>
+<p>The <code>related_name</code> attributes specifies the name of reverse relation from <code>Example</code> model<br />
+to your model.</p>
+<p>If no <code>related_name</code> is specified, Django creates one using ...</p> </div><!-- entry-content -->
+        </article>
+        <article class="hentry">
                 <header> <h2 class="entry-title"><a href="http://hehan.net/configure-vim-for-python-dev.html" rel="bookmark" title="Permalink to configure vim for python dev">configure vim for python dev</a></h2> </header>
                 <div class="entry-content"> <h2>Flake8</h2>
 <p><a href="https://pypi.python.org/pypi/flake8/">flake8</a> :  wrapper for python checkers:</p>
@@ -206,46 +221,6 @@ the <code>&lt;number&gt;</code> out of <code>&lt;number&gt;w</code> or <code>&lt
 possible choices and allowing you to press one key to jump directly to the<br />
 target.</p>
 <p>The command is triggered by ...</p> </div><!-- entry-content -->
-        </article>
-        <article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://hehan.net/sqlite-command-tips.html" rel="bookmark" title="Permalink to SQLite command tips">SQLite command tips</a></h2> </header>
-                <div class="entry-content"> <h3>Use a database file</h3>
-<div class="highlight"><pre>    sqlite &lt;database_file&gt;
-</pre></div>
-
-
-<h3>Get table information</h3>
-<div class="highlight"><pre>    .tables
-</pre></div>
-
-
-<h3>Get schema information</h3>
-<div class="highlight"><pre>    .schema
-    .schema table_name
-</pre></div>
-
-
-<h3>Get help</h3>
-<div class="highlight"><pre>    .help
-</pre></div>
-
-
-<h3>Write result to a file</h3>
-<div class="highlight"><pre>    .mode list
-    .separator |
-    .output result.data
-    select * from table_name;
-    .exit
-</pre></div>
-
-
-<h3>Exit</h3>
-<div class="highlight"><pre>    .exit
-</pre></div>
-
-
-<h3>More</h3>
-<p><a href="http://www.sqlite.org/sqlite.html">sqlite official site help</a></p> </div><!-- entry-content -->
         </article>
 <div class="pager">
       <ul>

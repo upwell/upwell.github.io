@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Note Everything</title><link href="http://hehan.net/" rel="alternate"></link><link href="http://hehan.net/feeds/tech.atom.xml" rel="self"></link><id>http://hehan.net/</id><updated>2015-12-01T19:50:00+08:00</updated><entry><title>p4 command line tips</title><link href="http://hehan.net/p4-command-line-tips.html" rel="alternate"></link><updated>2015-12-01T19:50:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2015-12-01:p4-command-line-tips.html</id><summary type="html">&lt;h4&gt;Remove files from changelist without removing the edits&lt;/h4&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Note Everything</title><link href="http://hehan.net/" rel="alternate"></link><link href="http://hehan.net/feeds/tech.atom.xml" rel="self"></link><id>http://hehan.net/</id><updated>2016-01-26T18:03:00+08:00</updated><entry><title>osx small tips</title><link href="http://hehan.net/osx-small-tips.html" rel="alternate"></link><updated>2016-01-26T18:03:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2016-01-26:osx-small-tips.html</id><summary type="html">&lt;h4&gt;Encrypt / Decrypt file&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;# brew install gpg
+# gpg -c file.txt          // encrypt
+# gpg file.txt.gpg         // decrypt
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="osx"></category></entry><entry><title>p4 command line tips</title><link href="http://hehan.net/p4-command-line-tips.html" rel="alternate"></link><updated>2015-12-01T19:50:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2015-12-01:p4-command-line-tips.html</id><summary type="html">&lt;h4&gt;Remove files from changelist without removing the edits&lt;/h4&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;# p4 revert -k -c changelist path_to_file
 &lt;/pre&gt;&lt;/div&gt;
 
