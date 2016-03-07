@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Note Everything</title><link href="http://hehan.net/" rel="alternate"></link><link href="http://hehan.net/feeds/all.atom.xml" rel="self"></link><id>http://hehan.net/</id><updated>2016-01-26T18:03:00+08:00</updated><entry><title>osx small tips</title><link href="http://hehan.net/osx-small-tips.html" rel="alternate"></link><updated>2016-01-26T18:03:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2016-01-26:osx-small-tips.html</id><summary type="html">&lt;h4&gt;Encrypt / Decrypt file&lt;/h4&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Note Everything</title><link href="http://hehan.net/" rel="alternate"></link><link href="http://hehan.net/feeds/all.atom.xml" rel="self"></link><id>http://hehan.net/</id><updated>2016-01-26T18:03:00+08:00</updated><entry><title>http api 设计中 GET 还是 POST</title><link href="http://hehan.net/http-api-she-ji-zhong-get-huan-shi-post.html" rel="alternate"></link><updated>2016-01-26T18:03:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2016-01-26:http-api-she-ji-zhong-get-huan-shi-post.html</id><summary type="html">&lt;h4&gt;GET 用于安全的操作，POST 用于不安全的操作&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;GET&lt;/code&gt;有以下特性：
+- GET requests can be cached
+- GET requests can remain in the browser history
+- GET requests can be bookmarked
+- GET requests can be distributed &amp;amp; shared
+- GET requests can be hacked (CSRF)&lt;/p&gt;
+&lt;p&gt;如果对于一个删除接口，例如：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;GET /address/delete/&amp;lt;id&amp;gt;/&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这样的接口会存在安全隐患，在用户登录状态下，点击链接就会触发接口的调用，容易被用于攻击。&lt;/p&gt;
+&lt;p&gt;接口设计时应该有这样的设定：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;凡是对服务端数据进行修改的接口，使用 &lt;code&gt;POST&lt;/code&gt;，而不是 &lt;code&gt;GET&lt;/code&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4&gt;对于参数多导致URL过长的场景应该使用 POST&lt;/h4&gt;
+&lt;p&gt;虽然 RFC 没有 URL 长度的规定，但是老版 IE ，某些代理服务器，对 URL 的长度会有限制的，比如2048。&lt;/p&gt;
+&lt;h3&gt;ajax 请求数据时尽量使用 GET&lt;/h3&gt;
+&lt;p&gt;浏览器在处理 &lt;code&gt;XMLHttpRequest&lt;/code&gt; 的时候，会分两步进行发送，先发头部，再发送数据，使用 &lt;code&gt;GET&lt;/code&gt; 的话，可以更快的发送请求，获得响应。(待验证)&lt;/p&gt;</summary><category term="http"></category></entry><entry><title>osx small tips</title><link href="http://hehan.net/osx-small-tips.html" rel="alternate"></link><updated>2016-01-26T18:03:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2016-01-26:osx-small-tips.html</id><summary type="html">&lt;h4&gt;Encrypt / Decrypt file&lt;/h4&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;# brew install gpg
 # gpg -c file.txt          // encrypt
 # gpg file.txt.gpg         // decrypt

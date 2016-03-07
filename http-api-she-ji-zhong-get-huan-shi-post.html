@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>http api 设计中 GET 还是 POST - Note Everything</title>
+        <meta charset="utf-8" />
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="http://hehan.net/theme/static/css/style.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link href="http://hehan.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Note Everything Full Atom Feed" />
+        <link href="http://hehan.net/feeds/tech.atom.xml" type="application/atom+xml" rel="alternate" title="Note Everything Categories Atom Feed" />
+    </head>
+
+    <body id="index" class="archive">
+        <div class="container">
+            <div class="header">
+                <ul class="nav nav-pills pull-right">
+                    <li class=""><a href="http://hehan.net">Home</a></li>
+                    <li><a href="http://hehan.net/archives.html">Archives</a></li>
+                </ul>
+                <h3 class="text-muted"><a href="http://hehan.net">Note Everything</a></h3>
+				<h2 class="text-muted"></h2>
+             </div>
+<section id="content" class="article content">
+  <header>
+    <h2 class="entry-title">
+      <a href="http://hehan.net/http-api-she-ji-zhong-get-huan-shi-post.html" rel="bookmark"
+         title="Permalink to http api 设计中 GET 还是 POST">http api 设计中 GET 还是 POST</a></h2>
+ 
+  </header>
+  
+     
+  <div class="entry-content">
+    <h4>GET 用于安全的操作，POST 用于不安全的操作</h4>
+<p><code>GET</code>有以下特性：
+- GET requests can be cached
+- GET requests can remain in the browser history
+- GET requests can be bookmarked
+- GET requests can be distributed &amp; shared
+- GET requests can be hacked (CSRF)</p>
+<p>如果对于一个删除接口，例如：</p>
+<div class="highlight"><pre><span class="err">GET /address/delete/&lt;id&gt;/</span>
+</pre></div>
+
+
+<p>这样的接口会存在安全隐患，在用户登录状态下，点击链接就会触发接口的调用，容易被用于攻击。</p>
+<p>接口设计时应该有这样的设定：</p>
+<blockquote>
+<p>凡是对服务端数据进行修改的接口，使用 <code>POST</code>，而不是 <code>GET</code>。</p>
+</blockquote>
+<h4>对于参数多导致URL过长的场景应该使用 POST</h4>
+<p>虽然 RFC 没有 URL 长度的规定，但是老版 IE ，某些代理服务器，对 URL 的长度会有限制的，比如2048。</p>
+<h3>ajax 请求数据时尽量使用 GET</h3>
+<p>浏览器在处理 <code>XMLHttpRequest</code> 的时候，会分两步进行发送，先发头部，再发送数据，使用 <code>GET</code> 的话，可以更快的发送请求，获得响应。(待验证)</p>
+  </div><!-- /.entry-content -->
+   <footer class="post-info text-muted">
+    Posted on <abbr class="published" title="2016-01-26T18:03:00+08:00">
+      二 26 一月 2016
+    </abbr>
+    <address class="vcard author">
+      by <a class="url fn" href="http://hehan.net/author/han.html">Han</a>
+    </address> in <a href="http://hehan.net/category/tech.html">tech</a> Tagged <a href="http://hehan.net/tag/http.html">http </a>  </footer><!-- /.post-info -->
+</section>
+            <footer id="contentinfo" class="footer">
+                    <nav class="pull-right bottom-nav">
+                        <a href="http://hehan.net/feeds/all.atom.xml">RSS</a>
+                    </nav>
+                    <address id="about" class="vcard body">
+                    &copy; <a href="http://hehan.net">Note Everything</a> Proudly powered by <a href="http://getpelican.com/">Pelican</a>
+                    </address><!-- /#about -->
+            </footer><!-- /#contentinfo -->
+        </div><!-- container -->
+    </body>
+</html>

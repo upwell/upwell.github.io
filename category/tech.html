@@ -24,6 +24,25 @@
 <h2>Articles in the tech category</h2>
 
         <article class="hentry">
+                <header> <h2 class="entry-title"><a href="http://hehan.net/http-api-she-ji-zhong-get-huan-shi-post.html" rel="bookmark" title="Permalink to http api 设计中 GET 还是 POST">http api 设计中 GET 还是 POST</a></h2> </header>
+                <div class="entry-content"> <h4>GET 用于安全的操作，POST 用于不安全的操作</h4>
+<p><code>GET</code>有以下特性：
+- GET requests can be cached
+- GET requests can remain in the browser history
+- GET requests can be bookmarked
+- GET requests can be distributed &amp; shared
+- GET requests can be hacked (CSRF)</p>
+<p>如果对于一个删除接口，例如：</p>
+<div class="highlight"><pre><span class="err">GET /address/delete/&lt;id&gt;/</span>
+</pre></div>
+
+
+<p>这样的接口会存在安全隐患，在用户登录状态下，点击链接就会触发接口的调用，容易被用于攻击。</p>
+<p>接口设计时应该有这样的设定：</p>
+<blockquote>
+<p>凡是对服务端数据进行修改的接口，使用 <code>POST ...</code></p></blockquote> </div><!-- entry-content -->
+        </article>
+        <article class="hentry">
                 <header> <h2 class="entry-title"><a href="http://hehan.net/osx-small-tips.html" rel="bookmark" title="Permalink to osx small tips">osx small tips</a></h2> </header>
                 <div class="entry-content"> <h4>Encrypt / Decrypt file</h4>
 <div class="highlight"><pre># brew install gpg
@@ -135,12 +154,6 @@ start android studio from desktop application, it still uses the open ...</p> </
 
 
 <h3>Use separate DNS for ...</h3> </div><!-- entry-content -->
-        </article>
-        <article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://hehan.net/django-collections.html" rel="bookmark" title="Permalink to django collections">django collections</a></h2> </header>
-                <div class="entry-content"> <h2>django profiling tools</h2>
-<p><a href="https://github.com/mtford90/silk">Silky smooth profiling for Django</a></p>
-<p><a href="https://github.com/django-debug-toolbar/django-debug-toolbar">Django Debug toolbar</a></p> </div><!-- entry-content -->
         </article>
 <div class="pager">
       <ul>
