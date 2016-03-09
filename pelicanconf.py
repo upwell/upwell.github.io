@@ -6,7 +6,7 @@ from os.path import expanduser
 
 AUTHOR = u'Han'
 SITENAME = u'Note Everything'
-SITEURL = 'http://hehan.net'
+SITEURL = 'http://localhost:1515'
 
 PATH = 'content'
 
@@ -15,7 +15,7 @@ TIMEZONE = 'Asia/Shanghai'
 DEFAULT_LANG = u'en'
 
 home_dir = expanduser('~')
-THEME = '{}/pelican-themes/simple-bootstrap'.format(home_dir)
+THEME = '{}/pelican-themes/elegant'.format(home_dir)
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -47,3 +47,5 @@ EXTRA_PATH_METADATA = {
     'extra/CNAME': {'path': 'CNAME'},
     'extra/.gitignore': {'path': '.gitignore'},
 }
+
+RECENT_ARTICLES_COUNT = 20
