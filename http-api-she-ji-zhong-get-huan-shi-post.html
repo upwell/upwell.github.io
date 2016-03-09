@@ -1,36 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
     <head>
-        <title>http api 设计中 GET 还是 POST - Note Everything</title>
-        <meta charset="utf-8" />
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="http://hehan.net/theme/static/css/style.css" rel="stylesheet" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link href="http://hehan.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Note Everything Full Atom Feed" />
-        <link href="http://hehan.net/feeds/tech.atom.xml" type="application/atom+xml" rel="alternate" title="Note Everything Categories Atom Feed" />
-    </head>
+        <meta charset="utf-8"> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Han" />
+        <meta name="copyright" content="Han" />
 
-    <body id="index" class="archive">
-        <div class="container">
-            <div class="header">
-                <ul class="nav nav-pills pull-right">
-                    <li class=""><a href="http://hehan.net">Home</a></li>
-                    <li><a href="http://hehan.net/archives.html">Archives</a></li>
-                </ul>
-                <h3 class="text-muted"><a href="http://hehan.net">Note Everything</a></h3>
-				<h2 class="text-muted"></h2>
-             </div>
-<section id="content" class="article content">
-  <header>
-    <h2 class="entry-title">
-      <a href="http://hehan.net/http-api-she-ji-zhong-get-huan-shi-post.html" rel="bookmark"
-         title="Permalink to http api 设计中 GET 还是 POST">http api 设计中 GET 还是 POST</a></h2>
- 
-  </header>
-  
-     
-  <div class="entry-content">
-    <h4>GET 用于安全的操作，POST 用于不安全的操作</h4>
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="http, tech, " />
+
+<meta property="og:title" content="http api 设计中 GET 还是 POST "/>
+<meta property="og:url" content="http://hehan.net/http-api-she-ji-zhong-get-huan-shi-post.html" />
+<meta property="og:description" content="GET 用于安全的操作，POST 用于不安全的操作 GET有以下特性： - GET requests can be cached - GET requests can remain in the browser history - GET requests can be bookmarked - GET requests can be distributed &amp; shared - GET requests can be hacked (CSRF) 如果对于一个删除接口，例如： GET /address/delete/&lt;id&gt;/ 这样的接口会存在安全隐患，在用户登录状态下，点击链接就会触发接口的调用，容易被用于攻击。 接口设计时应该有这样的设定： 凡是对服务端数据进行修改的接口，使用 POST ..." />
+<meta property="og:site_name" content="Note Everything" />
+<meta property="og:article:author" content="Han" />
+<meta property="og:article:published_time" content="2016-01-26T18:03:00+08:00" />
+<meta name="twitter:title" content="http api 设计中 GET 还是 POST ">
+<meta name="twitter:description" content="GET 用于安全的操作，POST 用于不安全的操作 GET有以下特性： - GET requests can be cached - GET requests can remain in the browser history - GET requests can be bookmarked - GET requests can be distributed &amp; shared - GET requests can be hacked (CSRF) 如果对于一个删除接口，例如： GET /address/delete/&lt;id&gt;/ 这样的接口会存在安全隐患，在用户登录状态下，点击链接就会触发接口的调用，容易被用于攻击。 接口设计时应该有这样的设定： 凡是对服务端数据进行修改的接口，使用 POST ...">
+
+        <title>http api 设计中 GET 还是 POST  · Note Everything
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hehan.net/theme/css/pygments.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="http://hehan.net/theme/tipuesearch/tipuesearch.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="http://hehan.net/theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="http://hehan.net/theme/css/custom.css" media="screen">
+        <link href="http://hehan.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Note Everything - Full Atom Feed" />
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://hehan.net/"><span class=site-name>Note Everything</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="http://hehan.net">Home</a></li>
+                            <li ><a href="http://hehan.net/categories.html">Categories</a></li>
+                            <li ><a href="http://hehan.net/tags.html">Tags</a></li>
+                            <li ><a href="http://hehan.net/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://hehan.net/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="http://hehan.net/http-api-she-ji-zhong-get-huan-shi-post.html"> http api 设计中 GET 还是 POST  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+
+            
+            <h4>GET 用于安全的操作，POST 用于不安全的操作</h4>
 <p><code>GET</code>有以下特性：
 - GET requests can be cached
 - GET requests can remain in the browser history
@@ -51,23 +90,54 @@
 <p>虽然 RFC 没有 URL 长度的规定，但是老版 IE ，某些代理服务器，对 URL 的长度会有限制的，比如2048。</p>
 <h3>ajax 请求数据时尽量使用 GET</h3>
 <p>浏览器在处理 <code>XMLHttpRequest</code> 的时候，会分两步进行发送，先发头部，再发送数据，使用 <code>GET</code> 的话，可以更快的发送请求，获得响应。(待验证)</p>
-  </div><!-- /.entry-content -->
-   <footer class="post-info text-muted">
-    Posted on <abbr class="published" title="2016-01-26T18:03:00+08:00">
-      二 26 一月 2016
-    </abbr>
-    <address class="vcard author">
-      by <a class="url fn" href="http://hehan.net/author/han.html">Han</a>
-    </address> in <a href="http://hehan.net/category/tech.html">tech</a> Tagged <a href="http://hehan.net/tag/http.html">http </a>  </footer><!-- /.post-info -->
-</section>
-            <footer id="contentinfo" class="footer">
-                    <nav class="pull-right bottom-nav">
-                        <a href="http://hehan.net/feeds/all.atom.xml">RSS</a>
-                    </nav>
-                    <address id="about" class="vcard body">
-                    &copy; <a href="http://hehan.net">Note Everything</a> Proudly powered by <a href="http://getpelican.com/">Pelican</a>
-                    </address><!-- /#about -->
-            </footer><!-- /#contentinfo -->
-        </div><!-- container -->
+            
+            
+            <hr/>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2016-01-26T18:03:00+08:00"> 1 26, 2016</time>
+            <h4>Category</h4>
+            <a class="category-link" href="http://hehan.net/categories.html#tech-ref">tech</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="http://hehan.net/tags.html#http-ref">http
+                    <span>1</span>
+</a></li>
+            </ul>
+<h4>Contact</h4>
+    <a href="#" title="My You can add links in your config file Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-you can add links in your config file sidebar-social-links"></i></a>
+    <a href="#" title="My Another social link Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-another social link sidebar-social-links"></i></a>
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    
     </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
 </html>

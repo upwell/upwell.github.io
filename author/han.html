@@ -1,167 +1,193 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
     <head>
-        <title> Articles by Han - Note Everything</title>
-        <meta charset="utf-8" />
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="http://hehan.net/theme/static/css/style.css" rel="stylesheet" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link href="http://hehan.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Note Everything Full Atom Feed" />
+        <meta charset="utf-8"> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Han" />
+        <meta name="copyright" content="Han" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta property="og:title" content="Note Everything"/>
+<meta name="twitter:title" content="Note Everything">
+<meta property="og:url" content="http://hehan.net" />
+<meta property="og:site_name" content="Note Everything" />
+<meta property="og:article:author" content="Han" />
+        <title>Note Everything - Articles by Han</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://hehan.net/theme/css/pygments.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="http://hehan.net/theme/tipuesearch/tipuesearch.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="http://hehan.net/theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="http://hehan.net/theme/css/custom.css" media="screen">
+        <link href="http://hehan.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Note Everything - Full Atom Feed" />
     </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://hehan.net/"><span class=site-name>Note Everything</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="http://hehan.net">Home</a></li>
+                            <li ><a href="http://hehan.net/categories.html">Categories</a></li>
+                            <li ><a href="http://hehan.net/tags.html">Tags</a></li>
+                            <li ><a href="http://hehan.net/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://hehan.net/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<div class="row-fluid">
 
-    <body id="index" class="archive">
-        <div class="container">
-            <div class="header">
-                <ul class="nav nav-pills pull-right">
-                    <li class=""><a href="http://hehan.net">Home</a></li>
-                    <li class="active"><a href="http://hehan.net/archives.html">Archives</a></li>
-                </ul>
-                <h3 class="text-muted"><a href="http://hehan.net">Note Everything</a></h3>
-				<h2 class="text-muted"></h2>
-             </div>
-<section id="content" class="content">
-<h2>Articles by Han</h2>
+    <div class="row-fluid">
 
-        <article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://hehan.net/django-query-shi-yong-de-manager.html" rel="bookmark" title="Permalink to django query 使用的 manager">django query 使用的 manager</a></h2> </header>
-                <div class="entry-content"> <h2>default manager</h2>
-<p>如果 model 中定义了多个 manager 时，Django 会选取第一个（排在最前面的）作为 default manager，
-Django 中会选用 default manager 去执行一些操作 (dumpdata)，因此在 override <code>get_queryset</code> 的时候要小心，
-有可能会导致 <strong>获取对象的时候取不到值</strong> 的情况。</p>
-<h2>访问 related object 时使用的 manager</h2>
-<p><strong>默认</strong> Django 会选用 "plain" manager (<code>models.Manager</code>) 实例作为访问 related object 时的
-manager，这样访问 model 中的 Foreign Key 时，使用 ...</p> </div><!-- entry-content -->
-        </article>
-        <article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://hehan.net/http-api-she-ji-zhong-get-huan-shi-post.html" rel="bookmark" title="Permalink to http api 设计中 GET 还是 POST">http api 设计中 GET 还是 POST</a></h2> </header>
-                <div class="entry-content"> <h4>GET 用于安全的操作，POST 用于不安全的操作</h4>
-<p><code>GET</code>有以下特性：
-- GET requests can be cached
-- GET requests can remain in the browser history
-- GET requests can be bookmarked
-- GET requests can be distributed &amp; shared
-- GET requests can be hacked (CSRF)</p>
-<p>如果对于一个删除接口，例如：</p>
-<div class="highlight"><pre><span class="err">GET /address/delete/&lt;id&gt;/</span>
-</pre></div>
-
-
-<p>这样的接口会存在安全隐患，在用户登录状态下，点击链接就会触发接口的调用，容易被用于攻击。</p>
-<p>接口设计时应该有这样的设定：</p>
-<blockquote>
-<p>凡是对服务端数据进行修改的接口，使用 <code>POST ...</code></p></blockquote> </div><!-- entry-content -->
-        </article>
-        <article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://hehan.net/osx-small-tips.html" rel="bookmark" title="Permalink to osx small tips">osx small tips</a></h2> </header>
-                <div class="entry-content"> <h4>Encrypt / Decrypt file</h4>
-<div class="highlight"><pre># brew install gpg
-# gpg -c file.txt          // encrypt
-# gpg file.txt.gpg         // decrypt
-</pre></div> </div><!-- entry-content -->
-        </article>
-        <article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://hehan.net/p4-command-line-tips.html" rel="bookmark" title="Permalink to p4 command line tips">p4 command line tips</a></h2> </header>
-                <div class="entry-content"> <h4>Remove files from changelist without removing the edits</h4>
-<div class="highlight"><pre># p4 revert -k -c changelist path_to_file
-</pre></div>
-
-
-<h4>Diff unopened local file against depot file</h4>
-<div class="highlight"><pre># p4 diff -f path_to_file
-</pre></div>
-
-
-<h4>Tampered with after resolve</h4>
-<p>To ignore this error, you could re-edit the file.</p>
-<div class="highlight"><pre># p4 edit path_to_file
-</pre></div> </div><!-- entry-content -->
-        </article>
-        <article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://hehan.net/weired-directory-permission-issue.html" rel="bookmark" title="Permalink to Weired directory permission issue">Weired directory permission issue</a></h2> </header>
-                <div class="entry-content"> <h3>Issue</h3>
-<p>While I was deploying a php project for apache on my <code>HOME</code> directory, although I used <code>chmod</code> and <code>usemod</code> to grant user <code>apache</code>  <br />
-the permissions, apache still failed to access the <code>HOME</code> directory.</p>
-<h3>Solution</h3>
-<p>After a little dig, occationally I found the <code>HOME</code> directory has a special permission symbol ...</p> </div><!-- entry-content -->
-        </article>
-        <article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://hehan.net/reload-module-when-using-django-shell.html" rel="bookmark" title="Permalink to Reload module when using Django shell">Reload module when using Django shell</a></h2> </header>
-                <div class="entry-content"> <h3>Issue</h3>
-<p>The annoying part of using django shell is that:</p>
-<blockquote>
-<p>Once you changed the source code, you need restart the shell and enter the code again.</p>
-</blockquote>
-<h3>Solution</h3>
-<p>Use <code>django-extensions</code> in the project and with <code>shell_plus</code>, there is a better expirence using django shell, although
-it's not the best, anyway ...</p> </div><!-- entry-content -->
-        </article>
-        <article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://hehan.net/use-socks5-proxy-for-pip-install.html" rel="bookmark" title="Permalink to Use socks5 proxy for pip install">Use socks5 proxy for pip install</a></h2> </header>
-                <div class="entry-content"> <h3>Issue</h3>
-<p><code>pip install</code> doesn't provide the native socks5 proxy support.</p>
-<h3>Solution</h3>
-<p>Use a tool named <code>proxychains</code> which chains the connection through proxy.</p>
-<p>On Fedora, install via <code>sudo dnf install proxychains</code>.</p>
-<p>To change the default socks5 proxy, modify <code>/etc/proxychains.conf</code>, under <code>[ProxyList]</code> add one line:</p>
-<div class="highlight"><pre>socks5 127.0.0 ...</pre></div> </div><!-- entry-content -->
-        </article>
-        <article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://hehan.net/python-small-tips.html" rel="bookmark" title="Permalink to python small tips">python small tips</a></h2> </header>
-                <div class="entry-content"> <h3>Join two lists</h3>
-<div class="highlight"><pre>a = [1, 2, 3]
-b = [3, 4, 5]
-c = a + b
-[1, 2, 3, 3, 4, 5]
-</pre></div>
-
-
-<h3>Extend a list</h3>
-<div class="highlight"><pre>a = [1, 2, 3]
-b = [3, 4, 5]
-a.extend(b)
-[1, 2, 3, 3, 4, 5]
-</pre></div>
-
-
-<h3>Join two dicts</h3>
-<div class="highlight"><pre><span class="n">d1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s">&#39;b&#39;</span><span class="p">}</span>
-<span class="n">d2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3 ...</span></pre></div> </div><!-- entry-content -->
-        </article>
-        <article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://hehan.net/gimp-quick-use-guide.html" rel="bookmark" title="Permalink to gimp quick use guide">gimp quick use guide</a></h2> </header>
-                <div class="entry-content"> <h3>Copy layer to a new image</h3>
-<p>Use <code>ctrl+c</code> and <code>ctrl+v</code> to copy and paste a layer.</p>
-<h3>Crop to selection</h3>
-<p>Use <code>Crop tool</code> to select the area to crop, and then adjust the params in the toolbox windows, after
-all done, double click the selection.</p> </div><!-- entry-content -->
-        </article>
-        <article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://hehan.net/android-studio-tips.html" rel="bookmark" title="Permalink to android studio tips">android studio tips</a></h2> </header>
-                <div class="entry-content"> <h2>Cannot run program aapt -- no such file or directory</h2>
-<p>Install missing 32bit libraries:</p>
-<div class="highlight"><pre>yum install libstdc++.i686 zlib.i686
-</pre></div>
-
-
-<h2>studio running with the openjdk</h2>
-<p>Although I installed the oracle jdk, and export <code>STUDIO_JDK</code> in both zshrc and bashrc, when<br />
-start android studio from desktop application, it still uses the open ...</p> </div><!-- entry-content -->
-        </article>
-<div class="pager">
-      <ul>
-                        <li class="previous disabled"><a>← Previous</a></li>
-						<li class="next"><a href="http://hehan.net/author/han2.html">Next →</a></li>
-      </ul>
     </div>
-</section><!-- content -->
-            <footer id="contentinfo" class="footer">
-                    <nav class="pull-right bottom-nav">
-                        <a href="http://hehan.net/feeds/all.atom.xml">RSS</a>
-                    </nav>
-                    <address id="about" class="vcard body">
-                    &copy; <a href="http://hehan.net">Note Everything</a> Proudly powered by <a href="http://getpelican.com/">Pelican</a>
-                    </address><!-- /#about -->
-            </footer><!-- /#contentinfo -->
-        </div><!-- container -->
+
+    <div class="row-fluid">
+        <div class="span8 offset2">
+            <header>
+            <h1 id="recent-posts">Recent Posts <a id="allposts" href="http://hehan.net/archives.html">all posts</a></h1>
+            </header>
+        <div class="recent-posts">
+            <article>
+                <a href="http://hehan.net/django-query-shi-yong-de-manager.html">django query 使用的 manager  </a>
+                <section>
+                    posted in
+                <a href="http://hehan.net/categories.html#tech-ref">tech</a>
+                <div class="recent-posts-time">
+                <time pubdate="pubdate" datetime="2016-03-09T18:03:00+08:00">三 09 三月 2016</time>
+                </div>
+                </section>
+            </article>
+            <article>
+                <a href="http://hehan.net/http-api-she-ji-zhong-get-huan-shi-post.html">http api 设计中 GET 还是 POST  </a>
+                <section>
+                    posted in
+                <a href="http://hehan.net/categories.html#tech-ref">tech</a>
+                <div class="recent-posts-time">
+                <time pubdate="pubdate" datetime="2016-01-26T18:03:00+08:00">二 26 一月 2016</time>
+                </div>
+                </section>
+            </article>
+            <article>
+                <a href="http://hehan.net/osx-small-tips.html">osx small tips  </a>
+                <section>
+                    posted in
+                <a href="http://hehan.net/categories.html#tech-ref">tech</a>
+                <div class="recent-posts-time">
+                <time pubdate="pubdate" datetime="2016-01-26T18:03:00+08:00">二 26 一月 2016</time>
+                </div>
+                </section>
+            </article>
+            <article>
+                <a href="http://hehan.net/p4-command-line-tips.html">p4 command line tips  </a>
+                <section>
+                    posted in
+                <a href="http://hehan.net/categories.html#tech-ref">tech</a>
+                <div class="recent-posts-time">
+                <time pubdate="pubdate" datetime="2015-12-01T19:50:00+08:00">二 01 十二月 2015</time>
+                </div>
+                </section>
+            </article>
+            <article>
+                <a href="http://hehan.net/weired-directory-permission-issue.html">Weired directory permission issue  </a>
+                <section>
+                    posted in
+                <a href="http://hehan.net/categories.html#tech-ref">tech</a>
+                <div class="recent-posts-time">
+                <time pubdate="pubdate" datetime="2015-06-19T17:06:00+08:00">五 19 六月 2015</time>
+                </div>
+                </section>
+            </article>
+            <article>
+                <a href="http://hehan.net/reload-module-when-using-django-shell.html">Reload module when using Django shell  </a>
+                <section>
+                    posted in
+                <a href="http://hehan.net/categories.html#tech-ref">tech</a>
+                <div class="recent-posts-time">
+                <time pubdate="pubdate" datetime="2015-06-05T10:57:00+08:00">五 05 六月 2015</time>
+                </div>
+                </section>
+            </article>
+            <article>
+                <a href="http://hehan.net/use-socks5-proxy-for-pip-install.html">Use socks5 proxy for pip install  </a>
+                <section>
+                    posted in
+                <a href="http://hehan.net/categories.html#tech-ref">tech</a>
+                <div class="recent-posts-time">
+                <time pubdate="pubdate" datetime="2015-06-03T17:35:00+08:00">三 03 六月 2015</time>
+                </div>
+                </section>
+            </article>
+            <article>
+                <a href="http://hehan.net/python-small-tips.html">python small tips  </a>
+                <section>
+                    posted in
+                <a href="http://hehan.net/categories.html#tech-ref">tech</a>
+                <div class="recent-posts-time">
+                <time pubdate="pubdate" datetime="2015-02-28T10:09:00+08:00">六 28 二月 2015</time>
+                </div>
+                </section>
+            </article>
+            <article>
+                <a href="http://hehan.net/gimp-quick-use-guide.html">gimp quick use guide  </a>
+                <section>
+                    posted in
+                <a href="http://hehan.net/categories.html#tool-ref">tool</a>
+                <div class="recent-posts-time">
+                <time pubdate="pubdate" datetime="2014-10-15T10:40:00+08:00">三 15 十月 2014</time>
+                </div>
+                </section>
+            </article>
+            <article>
+                <a href="http://hehan.net/android-studio-tips.html">android studio tips  </a>
+                <section>
+                    posted in
+                <a href="http://hehan.net/categories.html#tech-ref">tech</a>
+                <div class="recent-posts-time">
+                <time pubdate="pubdate" datetime="2014-09-01T15:45:00+08:00">一 01 九月 2014</time>
+                </div>
+                </section>
+            </article>
+        </div>
+        </div>
+    </div>
+</div>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
     </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
 </html>
