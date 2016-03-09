@@ -23,6 +23,16 @@
 <h2>Articles with the python tag</h2>
 
         <article class="hentry">
+                <header> <h2 class="entry-title"><a href="http://hehan.net/django-query-shi-yong-de-manager.html" rel="bookmark" title="Permalink to django query 使用的 manager">django query 使用的 manager</a></h2> </header>
+                <div class="entry-content"> <h2>default manager</h2>
+<p>如果 model 中定义了多个 manager 时，Django 会选取第一个（排在最前面的）作为 default manager，
+Django 中会选用 default manager 去执行一些操作 (dumpdata)，因此在 override <code>get_queryset</code> 的时候要小心，
+有可能会导致 <strong>获取对象的时候取不到值</strong> 的情况。</p>
+<h2>访问 related object 时使用的 manager</h2>
+<p><strong>默认</strong> Django 会选用 "plain" manager (<code>models.Manager</code>) 实例作为访问 related object 时的
+manager，这样访问 model 中的 Foreign Key 时，使用 ...</p> </div><!-- entry-content -->
+        </article>
+        <article class="hentry">
                 <header> <h2 class="entry-title"><a href="http://hehan.net/reload-module-when-using-django-shell.html" rel="bookmark" title="Permalink to Reload module when using Django shell">Reload module when using Django shell</a></h2> </header>
                 <div class="entry-content"> <h3>Issue</h3>
 <p>The annoying part of using django shell is that:</p>

@@ -24,6 +24,16 @@
 <h2>Articles in the tech category</h2>
 
         <article class="hentry">
+                <header> <h2 class="entry-title"><a href="http://hehan.net/django-query-shi-yong-de-manager.html" rel="bookmark" title="Permalink to django query 使用的 manager">django query 使用的 manager</a></h2> </header>
+                <div class="entry-content"> <h2>default manager</h2>
+<p>如果 model 中定义了多个 manager 时，Django 会选取第一个（排在最前面的）作为 default manager，
+Django 中会选用 default manager 去执行一些操作 (dumpdata)，因此在 override <code>get_queryset</code> 的时候要小心，
+有可能会导致 <strong>获取对象的时候取不到值</strong> 的情况。</p>
+<h2>访问 related object 时使用的 manager</h2>
+<p><strong>默认</strong> Django 会选用 "plain" manager (<code>models.Manager</code>) 实例作为访问 related object 时的
+manager，这样访问 model 中的 Foreign Key 时，使用 ...</p> </div><!-- entry-content -->
+        </article>
+        <article class="hentry">
                 <header> <h2 class="entry-title"><a href="http://hehan.net/http-api-she-ji-zhong-get-huan-shi-post.html" rel="bookmark" title="Permalink to http api 设计中 GET 还是 POST">http api 设计中 GET 还是 POST</a></h2> </header>
                 <div class="entry-content"> <h4>GET 用于安全的操作，POST 用于不安全的操作</h4>
 <p><code>GET</code>有以下特性：
@@ -138,22 +148,6 @@ start android studio from desktop application, it still uses the open ...</p> </
 <h3>Tips</h3>
 <h4>Middleware Settings</h4>
 <p>Pay attention to the <strong>middleware</strong> setting, you should not just append the line at the end of existed ...</p> </div><!-- entry-content -->
-        </article>
-        <article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://hehan.net/dnsmasq-config.html" rel="bookmark" title="Permalink to dnsmasq config">dnsmasq config</a></h2> </header>
-                <div class="entry-content"> <h3>Set dns server for dnsmasq</h3>
-<p>Use a separate conf file, the format is the same as resolv.conf.</p>
-<div class="highlight"><pre>resolv-file=/etc/resolv.masq.conf
-</pre></div>
-
-
-<p>Then after dnsmasq is started, set <code>127.0.0.1</code> in <code>/etc/resolv.conf</code>.</p>
-<h3>listening address with localhost</h3>
-<div class="highlight"><pre>listen-address=127.0.0.1
-</pre></div>
-
-
-<h3>Use separate DNS for ...</h3> </div><!-- entry-content -->
         </article>
 <div class="pager">
       <ul>

@@ -23,6 +23,15 @@
 <h2>Articles by Han</h2>
 
         <article class="hentry">
+                <header> <h2 class="entry-title"><a href="http://hehan.net/django-use-silk-for-profiling.html" rel="bookmark" title="Permalink to django - use silk for profiling">django - use silk for profiling</a></h2> </header>
+                <div class="entry-content"> <p><a href="https://github.com/django-debug-toolbar/django-debug-toolbar">django-debug-toolbar</a> does not work for ajax requests. Here comes <a href="https://github.com/mtford90/silk">silk</a> which works perfect for the ajax condition.</p>
+<h3>Installation</h3>
+<p>Following the <a href="https://github.com/mtford90/silk">instructions</a> to install and configure for your own projects.</p>
+<h3>Tips</h3>
+<h4>Middleware Settings</h4>
+<p>Pay attention to the <strong>middleware</strong> setting, you should not just append the line at the end of existed ...</p> </div><!-- entry-content -->
+        </article>
+        <article class="hentry">
                 <header> <h2 class="entry-title"><a href="http://hehan.net/dnsmasq-config.html" rel="bookmark" title="Permalink to dnsmasq config">dnsmasq config</a></h2> </header>
                 <div class="entry-content"> <h3>Set dns server for dnsmasq</h3>
 <p>Use a separate conf file, the format is the same as resolv.conf.</p>
@@ -186,26 +195,6 @@ Please refer ...</pre></div> </div><!-- entry-content -->
 </ol>
 <div class="highlight"><pre>    <span class="cp">#include &quot;a.h&quot;</span>
     <span class="cp">#include &quot;b ...</span></pre></div> </div><!-- entry-content -->
-        </article>
-        <article class="hentry">
-                <header> <h2 class="entry-title"><a href="http://hehan.net/ignore-files-when-building-tags.html" rel="bookmark" title="Permalink to Ignore files when building tags">Ignore files when building tags</a></h2> </header>
-                <div class="entry-content"> <p>Use the following commands:</p>
-<div class="highlight"><pre>    ctags --exclude=*.html --exclude=*.js --exclude=*.sql -R
-</pre></div>
-
-
-<p>It's annoying to enter the long parameters every time. You can configure<br />
-it as the default config.</p>
-<p>Edit <code>~/.ctags</code>. Add the following lines:</p>
-<div class="highlight"><pre>    --exclude=*.html
-    --exclude=*.js
-    --exclude=*.sql
-</pre></div>
-
-
-<p>Then you only need to type:</p>
-<div class="highlight"><pre>    ctags -R
-</pre></div> </div><!-- entry-content -->
         </article>
 <div class="pager">
       <ul>

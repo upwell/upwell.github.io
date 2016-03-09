@@ -22,6 +22,26 @@
 <section id="content" class="content">
 
         <article class="hentry">
+                <header> <h2 class="entry-title"><a href="http://hehan.net/ignore-files-when-building-tags.html" rel="bookmark" title="Permalink to Ignore files when building tags">Ignore files when building tags</a></h2> </header>
+                <div class="entry-content"> <p>Use the following commands:</p>
+<div class="highlight"><pre>    ctags --exclude=*.html --exclude=*.js --exclude=*.sql -R
+</pre></div>
+
+
+<p>It's annoying to enter the long parameters every time. You can configure<br />
+it as the default config.</p>
+<p>Edit <code>~/.ctags</code>. Add the following lines:</p>
+<div class="highlight"><pre>    --exclude=*.html
+    --exclude=*.js
+    --exclude=*.sql
+</pre></div>
+
+
+<p>Then you only need to type:</p>
+<div class="highlight"><pre>    ctags -R
+</pre></div> </div><!-- entry-content -->
+        </article>
+        <article class="hentry">
                 <header> <h2 class="entry-title"><a href="http://hehan.net/abnormal-packets-in-socket.html" rel="bookmark" title="Permalink to abnormal packets in socket">abnormal packets in socket</a></h2> </header>
                 <div class="entry-content"> <p>今天遇到一个奇怪的问题，从抓包中发现服务器收到客户端发来的HTTP请求后，<br />
 会先回复一个乱七八糟的包，然后才会回正常的200 OK，自然的客户端就没办法<br />
