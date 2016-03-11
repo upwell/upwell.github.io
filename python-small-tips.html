@@ -70,7 +70,7 @@
 
             
             <h3>Join two lists</h3>
-<div class="highlight"><pre>a = [1, 2, 3]
+<div class="highlight"><pre><span></span>a = [1, 2, 3]
 b = [3, 4, 5]
 c = a + b
 [1, 2, 3, 3, 4, 5]
@@ -78,7 +78,7 @@ c = a + b
 
 
 <h3>Extend a list</h3>
-<div class="highlight"><pre>a = [1, 2, 3]
+<div class="highlight"><pre><span></span>a = [1, 2, 3]
 b = [3, 4, 5]
 a.extend(b)
 [1, 2, 3, 3, 4, 5]
@@ -86,15 +86,15 @@ a.extend(b)
 
 
 <h3>Join two dicts</h3>
-<div class="highlight"><pre><span class="n">d1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s">&#39;b&#39;</span><span class="p">}</span>
-<span class="n">d2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">:</span> <span class="s">&#39;c&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s">&#39;d&#39;</span><span class="p">}</span>
+<div class="highlight"><pre><span></span><span class="n">d1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;b&#39;</span><span class="p">}</span>
+<span class="n">d2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">:</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s1">&#39;d&#39;</span><span class="p">}</span>
 <span class="n">d1</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span>
-<span class="c"># {1: &#39;a&#39;, 2: &#39;b&#39;, 3: &#39;c&#39;, 4: &#39;d&#39;}</span>
+<span class="c1"># {1: &#39;a&#39;, 2: &#39;b&#39;, 3: &#39;c&#39;, 4: &#39;d&#39;}</span>
 </pre></div>
 
 
 <h3>Check if a list/dictionary/tuple is empty</h3>
-<div class="highlight"><pre>l = []      # same for {} and ()
+<div class="highlight"><pre><span></span>l = []      # same for {} and ()
 if l:
     print &#39;list is not empty&#39;
 else:
@@ -103,44 +103,44 @@ else:
 
 
 <h3>Iterate over dictionary</h3>
-<div class="highlight"><pre>d = {&#39;a&#39;: 1, &#39;b&#39;: 2}
+<div class="highlight"><pre><span></span>d = {&#39;a&#39;: 1, &#39;b&#39;: 2}
 for key in d:
     print key, d[key]
 </pre></div>
 
 
-<div class="highlight"><pre>d = {&#39;a&#39;: 1, &#39;b&#39;: 2}
+<div class="highlight"><pre><span></span>d = {&#39;a&#39;: 1, &#39;b&#39;: 2}
 for key, value in d.iteritems():
     print key, value
 </pre></div>
 
 
 <h3>Access the index while looping a list</h3>
-<div class="highlight"><pre>l = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]
+<div class="highlight"><pre><span></span>l = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]
 for idx, value in enumerate(l):
     print idx, value
 </pre></div>
 
 
 <h3>Reverse range</h3>
-<div class="highlight"><pre>&gt;&gt;&gt; reversed(range(3))
+<div class="highlight"><pre><span></span>&gt;&gt;&gt; reversed(range(3))
 [2, 1, 0]
 </pre></div>
 
 
 <h3>Select items from a list randomly</h3>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">random</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
 
 <span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
-<span class="k">print</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>         <span class="c"># select single item</span>
-<span class="k">print</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>      <span class="c"># select 3 random items</span>
+<span class="k">print</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>         <span class="c1"># select single item</span>
+<span class="k">print</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>      <span class="c1"># select 3 random items</span>
 </pre></div>
 
 
 <h3>Split and convert to int</h3>
-<div class="highlight"><pre><span class="n">c</span> <span class="o">=</span> <span class="s">&#39;1,2,3,4&#39;</span>
-<span class="n">c</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;,&#39;</span><span class="p">)</span>                <span class="c"># [&#39;1&#39;,&#39;2&#39;,&#39;3&#39;,&#39;4&#39;]</span>
-<span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;,&#39;</span><span class="p">))</span>      <span class="c"># [1,2,3,4]</span>
+<div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;1,2,3,4&#39;</span>
+<span class="n">c</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>                <span class="c1"># [&#39;1&#39;,&#39;2&#39;,&#39;3&#39;,&#39;4&#39;]</span>
+<span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">))</span>      <span class="c1"># [1,2,3,4]</span>
 </pre></div>
 
 
@@ -165,7 +165,7 @@ for idx, value in enumerate(l):
 <li>single quotes for small symbol-like strings</li>
 <li>use triple double quotes for docstrings and raw string literals</li>
 </ul>
-<div class="highlight"><pre>LIGHT_MESSAGES = {
+<div class="highlight"><pre><span></span>LIGHT_MESSAGES = {
     &#39;English&#39;: &quot;There are %(number_of_lights)s lights.&quot;,
     &#39;Pirate&#39;:  &quot;Arr! Thar be %(number_of_lights)s lights.&quot;
 }

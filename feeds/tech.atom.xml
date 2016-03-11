@@ -1,5 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Note Everything</title><link href="http://hehan.net/" rel="alternate"></link><link href="http://hehan.net/feeds/tech.atom.xml" rel="self"></link><id>http://hehan.net/</id><updated>2016-03-09T18:03:00+08:00</updated><entry><title>django query 使用的 manager</title><link href="http://hehan.net/django-query-shi-yong-de-manager.html" rel="alternate"></link><updated>2016-03-09T18:03:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2016-03-09:django-query-shi-yong-de-manager.html</id><summary type="html">&lt;h2&gt;default manager&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Note Everything</title><link href="http://hehan.net/" rel="alternate"></link><link href="http://hehan.net/feeds/tech.atom.xml" rel="self"></link><id>http://hehan.net/</id><updated>2016-03-10T13:36:00+08:00</updated><entry><title>python unicode 编码整理</title><link href="http://hehan.net/python-unicode-bian-ma-zheng-li.html" rel="alternate"></link><updated>2016-03-10T13:36:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2016-03-10:python-unicode-bian-ma-zheng-li.html</id><summary type="html">&lt;h2&gt;unicode 与 utf-8 的关系&lt;/h2&gt;
+&lt;h3&gt;unicode 是 character set&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;character set 是把每个字符&lt;strong&gt;对应&lt;/strong&gt;成数字的集合，比如unicode中 A对应0041，&lt;br /&gt;
+汉字『我』对应 '6211'&lt;/li&gt;
+&lt;li&gt;unicode 是个很大的集合，几乎覆盖世界上所有的字符，现在的规模已经可以容纳&lt;br /&gt;
+100万个字符。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;utf-8 是对 unicode 存储的实现方式&lt;/h3&gt;
+&lt;p&gt;unicode 只定义字符对应的数字，但没有规定这些数字如何存储起来，比如像中文的『我』字存储时&lt;br /&gt;
+需要两个字节来表示，而英文字母A却只需要一个字节，有些其他的字符可能需要3-4个字节。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果统一规定每个字符用3个或者4个字节来存储，那么每个英文字符都必然需要额外2到3个0，&lt;br /&gt;
+这对存储是很大的浪费。&lt;/li&gt;
+&lt;li&gt;如果每个字符按照实际需要的字节数来存储，计算机就分不清三个字节是表示三个字符还是一个字符。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;utf-8 是对 unicode 编码存储的一种实现方式，同样的还有 utf-16, utf-32。&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;utf-8 是使用最广泛的编码方式，采用变长的编码方式，可以使用1-4个字节来表示一个字&lt;br /&gt;
+符； utf-16 用2个或4个字节，utf-32 用4个字节表示。编码规则如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;对于单字节的符号，字节的第一位设为0，后面7位为这个符号的unicode码。因此&lt;br /&gt;
+对于英语字母， UTF-8编码和ASCII码是相同的。&lt;/li&gt;
+&lt;li&gt;对于n字节的符号（n&amp;gt;1），第一个字节的前n位都设为1，第n+1位设为0，后面字节&lt;br /&gt;
+的前两位一律设为10。剩下的没有提及的二进制位，全部为这个符号的unicode码。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;python2 中的 str 和 unicode&lt;/h2&gt;
+&lt;p&gt;python2 中有字符串类型有两种：&lt;code&gt;byte string (str)&lt;/code&gt;和 &lt;code&gt;unicode string (unicode)&lt;/code&gt;。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;美的&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="se"&gt;\xe7\xbe\x8e\xe7\x9a\x84&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;u&amp;#39;美的&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;
+&lt;span class="s1"&gt;u&amp;#39;&lt;/span&gt;&lt;span class="se"&gt;\u7f8e\u7684&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;美的&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;utf-8&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="s1"&gt;u&amp;#39;&lt;/span&gt;&lt;span class="se"&gt;\u7f8e\u7684&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;上面的输出中，第一个s的类型是str，打印出来的内容是 utf-8 编码过的内容。第二个s的类型是&lt;br /&gt;
+unicode，打印出来的两个双字节的数字分别表示了两个汉字『美的』。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;encode&lt;/code&gt;和&lt;code&gt;decode&lt;/code&gt;提供 str 和 unicode 这两种的类型的互相转化。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;encode 把 str(byte string) 转化成 unicode&lt;/li&gt;
+&lt;li&gt;decode 把 unicode 转化成 str(byte string)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;本质上，str是存放的字节序，有可能是ascii, gbk, utf-8等等中的任意一种，通过调用&lt;br /&gt;
+decode可以把他们转化成unicode，默认的decode编码是ascii。str中到底是用的哪一种&lt;br /&gt;
+编码，取决于它所在的场景，跟locale，文件编码等等都有关系。&lt;/p&gt;
+&lt;h3&gt;文本文件、编辑器的处理&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/usr/bin/env python&lt;/span&gt;
+&lt;span class="c1"&gt;# -*- coding: GBK -*-&lt;/span&gt;
+
+&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;u&amp;#39;中文&amp;#39;&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="nb"&gt;repr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="nb"&gt;repr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;GBK&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;比如上面的文件&lt;code&gt;enc.py&lt;/code&gt;，保存的时候选择&lt;code&gt;文件编码&lt;/code&gt;是GBK，程序文件本质上也是文件，当我们使用&lt;br /&gt;
+某个外部的应用  打开它时（编辑器或者python解释器等），外部应用是不知道该文件的编码格式的，&lt;br /&gt;
+这个时候有三种情况：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;应用使用其默认的编码方式去解析，比如UTF-8或者ASCII；python解释器默认是ASCII，编辑器&lt;br /&gt;
+可以自己设置；&lt;/li&gt;
+&lt;li&gt;应用根据文件中的字节内容，自动检测编码方式；&lt;/li&gt;
+&lt;li&gt;文本文件告诉应用使用什么编码方式去解码；比如&lt;code&gt;# -*- coding: GBK -*-&lt;/code&gt;告知解释器使用GBK&lt;br /&gt;
+来解码；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;试验一下，把&lt;code&gt;# -*- coding: GBK -*-&lt;/code&gt;删除后，执行&lt;code&gt;python enc.py&lt;/code&gt;，输出：  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;   &lt;span class="nt"&gt;File&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;enc.py&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nt"&gt;4&lt;/span&gt;
+ &lt;span class="nt"&gt;SyntaxError&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;Non-ASCII&lt;/span&gt; &lt;span class="nt"&gt;character&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;\xd6&amp;#39;&lt;/span&gt; &lt;span class="nt"&gt;in&lt;/span&gt; &lt;span class="nt"&gt;file&lt;/span&gt; &lt;span class="nt"&gt;enc&lt;/span&gt;&lt;span class="nc"&gt;.py&lt;/span&gt; &lt;span class="nt"&gt;on&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nt"&gt;4&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;but&lt;/span&gt; &lt;span class="nt"&gt;no&lt;/span&gt; &lt;span class="nt"&gt;encoding&lt;/span&gt; &lt;span class="nt"&gt;declared&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;试着用vim打开该文件时，『中文』两个字就会显示成乱码，应为vim默认的文件编码方式被设置成UTF-8了。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/usr/bin/env python&lt;/span&gt;
+&lt;span class="c1"&gt;# -*- coding: GBK -*-&lt;/span&gt;
+
+&lt;span class="n"&gt;s1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;u&amp;#39;中文&amp;#39;&lt;/span&gt;
+
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="nb"&gt;repr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="nb"&gt;repr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;GBK&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="n"&gt;s2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;中文&amp;#39;&lt;/span&gt;
+
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="nb"&gt;repr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="nb"&gt;repr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;GBK&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;输出结果：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;u&amp;#39;\u4e2d\u6587&amp;#39;
+&amp;#39;\xd6\xd0\xce\xc4&amp;#39;
+&amp;#39;\xd6\xd0\xce\xc4&amp;#39;
+u&amp;#39;\u4e2d\u6587&amp;#39;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;从这里可以看出来， s2中存放的是byte格式的从文件中读到的GBK编码的内容。&lt;/p&gt;
+&lt;p&gt;再看下面的这段代码，程序文件&lt;code&gt;utf8_enc.py&lt;/code&gt;，保存成UTF-8编码的。&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/usr/bin/env python&lt;/span&gt;
+&lt;span class="c1"&gt;# -*- coding: utf-8 -*-&lt;/span&gt;
+
+&lt;span class="n"&gt;s1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;u&amp;#39;中文&amp;#39;&lt;/span&gt;
+
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="nb"&gt;repr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="nb"&gt;repr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;GBK&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="n"&gt;s2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;中文&amp;#39;&lt;/span&gt;
+
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="nb"&gt;repr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="nb"&gt;repr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;GBK&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;输出：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;u&amp;#39;\u4e2d\u6587&amp;#39;
+&amp;#39;\xd6\xd0\xce\xc4&amp;#39;
+&amp;#39;\xe4\xb8\xad\xe6\x96\x87&amp;#39;
+Traceback (most recent call last):
+  File &amp;quot;unicode_enc.py&amp;quot;, line 12, in &amp;lt;module&amp;gt;
+    print repr(s2.decode(&amp;#39;GBK&amp;#39;))
+UnicodeDecodeError: &amp;#39;gbk&amp;#39; codec can&amp;#39;t decode bytes in position 2-3: illegal multibyte sequence
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这里同样可以知道，s2中存放的是文件保存的编码UTF-8的byte码。&lt;/p&gt;
+&lt;h2&gt;References&lt;/h2&gt;
+&lt;p&gt;http://www.rrn.dk/the-difference-between-utf-8-and-unicode/
+http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html
+https://docs.python.org/2/howto/unicode.html
+http://yergler.net/2012/bytes-chars/&lt;/p&gt;</summary><category term="python， unicode"></category></entry><entry><title>django query 使用的 manager</title><link href="http://hehan.net/django-query-shi-yong-de-manager.html" rel="alternate"></link><updated>2016-03-09T18:03:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2016-03-09:django-query-shi-yong-de-manager.html</id><summary type="html">&lt;h2&gt;default manager&lt;/h2&gt;
 &lt;p&gt;如果 model 中定义了多个 manager 时，Django 会选取第一个（排在最前面的）作为 default manager，
 Django 中会选用 default manager 去执行一些操作 (dumpdata)，因此在 override &lt;code&gt;get_queryset&lt;/code&gt; 的时候要小心，
 有可能会导致 &lt;strong&gt;获取对象的时候取不到值&lt;/strong&gt; 的情况。&lt;/p&gt;
@@ -9,23 +154,23 @@ manager，这样访问 model 中的 Foreign Key 时，使用 "plain" manager 能
 &lt;p&gt;也可以通过在 &lt;code&gt;default manager&lt;/code&gt; 中加入设置 &lt;code&gt;use_for_related_fields = True&lt;/code&gt; 来让访问 related object 时使用
 该 manager，而不是 "plain" manager。详细解释见下一条说明。&lt;/p&gt;
 &lt;h2&gt;use_for_related_fields 的更多场景 automatic manager&lt;/h2&gt;
-&lt;p&gt;Django 在有些场景下需要创建临时的 &lt;code&gt;automatic manager&lt;/code&gt; 来执行一些操作，比如：
+&lt;p&gt;Django 在有些场景下需要创建临时的 &lt;code&gt;automatic manager&lt;/code&gt; 来执行一些操作，比如：&lt;br /&gt;
 - 为没有定义 manager 的 model 生成 &lt;code&gt;default manager&lt;/code&gt;
-- 访问 related object 时的临时 manager
-通常情况下，Django 使用 &lt;code&gt;models.Manager&lt;/code&gt; 来生成 manager 实例。&lt;/p&gt;
-&lt;p&gt;Django 提供了一个机制来使用自定义的 manager，而不是 &lt;code&gt;models.Manager&lt;/code&gt; 来生成 &lt;code&gt;automatic manager&lt;/code&gt; 的实例：
+- 访问 related object 时的临时 manager&lt;/p&gt;
+&lt;p&gt;通常情况下，Django 使用 &lt;code&gt;models.Manager&lt;/code&gt; 来生成 manager 实例。&lt;/p&gt;
+&lt;p&gt;Django 提供了一个机制来使用自定义的 manager，而不是 &lt;code&gt;models.Manager&lt;/code&gt; 来生成 &lt;code&gt;automatic manager&lt;/code&gt; 的实例：&lt;br /&gt;
 - 该自定义的 manager 必须是 &lt;strong&gt;default manager&lt;/strong&gt;
 - 在 &lt;strong&gt;default manager&lt;/strong&gt; 中加入 &lt;code&gt;use_for_related_fields=True&lt;/code&gt;&lt;/p&gt;
 &lt;h2&gt;reverse query 时使用的 manager&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.db&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.db&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;
 
 &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Entry&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="c"&gt;#...&lt;/span&gt;
-    &lt;span class="n"&gt;objects&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Manager&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;  &lt;span class="c"&gt;# Default Manager&lt;/span&gt;
-    &lt;span class="n"&gt;entries&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;EntryManager&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;    &lt;span class="c"&gt;# Custom Manager&lt;/span&gt;
+    &lt;span class="c1"&gt;#...&lt;/span&gt;
+    &lt;span class="n"&gt;objects&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Manager&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;  &lt;span class="c1"&gt;# Default Manager&lt;/span&gt;
+    &lt;span class="n"&gt;entries&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;EntryManager&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;    &lt;span class="c1"&gt;# Custom Manager&lt;/span&gt;
 
 &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Blog&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;objects&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;entry_set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;manager&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;entries&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;entry_set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;manager&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;entries&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -33,7 +178,7 @@ manager，这样访问 model 中的 Foreign Key 时，使用 "plain" manager 能
 也可以通过传入 &lt;code&gt;manager&lt;/code&gt; 参数来使用指定的 manager。&lt;/p&gt;
 &lt;h2&gt;References&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://docs.djangoproject.com/en/1.9/topics/db/managers/#controlling-automatic-manager-types"&gt;django automatic manager &lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://docs.djangoproject.com/en/1.9/topics/db/queries/#using-a-custom-reverse-manager"&gt;using a custom reverse manager&lt;/a&gt;&lt;/p&gt;</summary><category term="django"></category><category term="python"></category></entry><entry><title>http api 设计中 GET 还是 POST</title><link href="http://hehan.net/http-api-she-ji-zhong-get-huan-shi-post.html" rel="alternate"></link><updated>2016-01-26T18:03:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2016-01-26:http-api-she-ji-zhong-get-huan-shi-post.html</id><summary type="html">&lt;h4&gt;GET 用于安全的操作，POST 用于不安全的操作&lt;/h4&gt;
+&lt;p&gt;&lt;a href="https://docs.djangoproject.com/en/1.9/topics/db/queries/#using-a-custom-reverse-manager"&gt;using a custom reverse manager&lt;/a&gt;&lt;/p&gt;</summary><category term="django"></category><category term="python"></category></entry><entry><title>http api 设计中 GET 还是 POST</title><link href="http://hehan.net/http-api-she-ji-zhong-get-huan-shi-post.html" rel="alternate"></link><updated>2016-01-26T18:03:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2016-01-26:http-api-she-ji-zhong-get-huan-shi-post.html</id><summary type="html">&lt;h3&gt;GET 用于安全的操作，POST 用于不安全的操作&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;GET&lt;/code&gt;有以下特性：
 - GET requests can be cached
 - GET requests can remain in the browser history
@@ -41,7 +186,7 @@ manager，这样访问 model 中的 Foreign Key 时，使用 "plain" manager 能
 - GET requests can be distributed &amp;amp; shared
 - GET requests can be hacked (CSRF)&lt;/p&gt;
 &lt;p&gt;如果对于一个删除接口，例如：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;GET /address/delete/&amp;lt;id&amp;gt;/&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;GET /address/delete/&amp;lt;id&amp;gt;/&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -50,51 +195,51 @@ manager，这样访问 model 中的 Foreign Key 时，使用 "plain" manager 能
 &lt;blockquote&gt;
 &lt;p&gt;凡是对服务端数据进行修改的接口，使用 &lt;code&gt;POST&lt;/code&gt;，而不是 &lt;code&gt;GET&lt;/code&gt;。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h4&gt;对于参数多导致URL过长的场景应该使用 POST&lt;/h4&gt;
+&lt;h3&gt;对于参数多导致URL过长的场景应该使用 POST&lt;/h3&gt;
 &lt;p&gt;虽然 RFC 没有 URL 长度的规定，但是老版 IE ，某些代理服务器，对 URL 的长度会有限制的，比如2048。&lt;/p&gt;
 &lt;h3&gt;ajax 请求数据时尽量使用 GET&lt;/h3&gt;
-&lt;p&gt;浏览器在处理 &lt;code&gt;XMLHttpRequest&lt;/code&gt; 的时候，会分两步进行发送，先发头部，再发送数据，使用 &lt;code&gt;GET&lt;/code&gt; 的话，可以更快的发送请求，获得响应。(待验证)&lt;/p&gt;</summary><category term="http"></category></entry><entry><title>osx small tips</title><link href="http://hehan.net/osx-small-tips.html" rel="alternate"></link><updated>2016-01-26T18:03:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2016-01-26:osx-small-tips.html</id><summary type="html">&lt;h4&gt;Encrypt / Decrypt file&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;# brew install gpg
+&lt;p&gt;浏览器在处理 &lt;code&gt;XMLHttpRequest&lt;/code&gt; 的时候，会分两步进行发送，先发头部，再发送数据，使用 &lt;code&gt;GET&lt;/code&gt; 的话，可以更快的发送请求，获得响应。(待验证)&lt;/p&gt;</summary><category term="http"></category><category term="api"></category></entry><entry><title>osx small tips</title><link href="http://hehan.net/osx-small-tips.html" rel="alternate"></link><updated>2016-01-26T18:03:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2016-01-26:osx-small-tips.html</id><summary type="html">&lt;h4&gt;Encrypt / Decrypt file&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# brew install gpg
 # gpg -c file.txt          // encrypt
 # gpg file.txt.gpg         // decrypt
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="osx"></category></entry><entry><title>p4 command line tips</title><link href="http://hehan.net/p4-command-line-tips.html" rel="alternate"></link><updated>2015-12-01T19:50:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2015-12-01:p4-command-line-tips.html</id><summary type="html">&lt;h4&gt;Remove files from changelist without removing the edits&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;# p4 revert -k -c changelist path_to_file
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# p4 revert -k -c changelist path_to_file
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h4&gt;Diff unopened local file against depot file&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;# p4 diff -f path_to_file
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# p4 diff -f path_to_file
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h4&gt;Tampered with after resolve&lt;/h4&gt;
 &lt;p&gt;To ignore this error, you could re-edit the file.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;# p4 edit path_to_file
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# p4 edit path_to_file
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="p4"></category></entry><entry><title>Weired directory permission issue</title><link href="http://hehan.net/weired-directory-permission-issue.html" rel="alternate"></link><updated>2015-06-19T17:06:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2015-06-19:weired-directory-permission-issue.html</id><summary type="html">&lt;h3&gt;Issue&lt;/h3&gt;
 &lt;p&gt;While I was deploying a php project for apache on my &lt;code&gt;HOME&lt;/code&gt; directory, although I used &lt;code&gt;chmod&lt;/code&gt; and &lt;code&gt;usemod&lt;/code&gt; to grant user &lt;code&gt;apache&lt;/code&gt;  &lt;br /&gt;
 the permissions, apache still failed to access the &lt;code&gt;HOME&lt;/code&gt; directory.&lt;/p&gt;
 &lt;h3&gt;Solution&lt;/h3&gt;
 &lt;p&gt;After a little dig, occationally I found the &lt;code&gt;HOME&lt;/code&gt; directory has a special permission symbol.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;drwxr-xr-x+ 93 han      han      4.0K 6月  23 11:30 han
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;drwxr-xr-x+ 93 han      han      4.0K 6月  23 11:30 han
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;There is a &lt;code&gt;+&lt;/code&gt; at the end of permission field. What does this means?&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://serverfault.com/questions/227852/what-does-a-mean-at-the-end-of-the-permissions-from-ls-l"&gt;This&lt;/a&gt; gives an explanation of this special &lt;code&gt;+&lt;/code&gt; sign.&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;HOME&lt;/code&gt; directory has extended permissions. The output of &lt;code&gt;getfacl&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# file: han&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# file: han&lt;/span&gt;
 &lt;span class="c1"&gt;# owner: han&lt;/span&gt;
 &lt;span class="c1"&gt;# group: han&lt;/span&gt;
-&lt;span class="nn"&gt;user&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s-Atom"&gt;:rwx&lt;/span&gt;
-&lt;span class="nn"&gt;user&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nn"&gt;qemu&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s-Atom"&gt;--x&lt;/span&gt;
-&lt;span class="nn"&gt;group&lt;/span&gt;&lt;span class="p"&gt;::-&lt;/span&gt;&lt;span class="s-Atom"&gt;--&lt;/span&gt;
-&lt;span class="nn"&gt;mask&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s-Atom"&gt;:r&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="s-Atom"&gt;x&lt;/span&gt;
-&lt;span class="nn"&gt;other&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s-Atom"&gt;:r&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="s-Atom"&gt;x&lt;/span&gt;
+&lt;span class="nn"&gt;user&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s s-Atom"&gt;:rwx&lt;/span&gt;
+&lt;span class="nn"&gt;user&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nn"&gt;qemu&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s s-Atom"&gt;--x&lt;/span&gt;
+&lt;span class="nn"&gt;group&lt;/span&gt;&lt;span class="p"&gt;::-&lt;/span&gt;&lt;span class="s s-Atom"&gt;--&lt;/span&gt;
+&lt;span class="nn"&gt;mask&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s s-Atom"&gt;:r&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="s s-Atom"&gt;x&lt;/span&gt;
+&lt;span class="nn"&gt;other&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s s-Atom"&gt;:r&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="s s-Atom"&gt;x&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;The following command grants the group &lt;code&gt;r+x&lt;/code&gt; permissions.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;# setfacl -m &amp;#39;g:han:rx&amp;#39; han
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# setfacl -m &amp;#39;g:han:rx&amp;#39; han
 &lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Reload module when using Django shell</title><link href="http://hehan.net/reload-module-when-using-django-shell.html" rel="alternate"></link><updated>2015-06-05T10:57:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2015-06-05:reload-module-when-using-django-shell.html</id><summary type="html">&lt;h3&gt;Issue&lt;/h3&gt;
 &lt;p&gt;The annoying part of using django shell is that:&lt;/p&gt;
 &lt;blockquote&gt;
@@ -103,7 +248,7 @@ the permissions, apache still failed to access the &lt;code&gt;HOME&lt;/code&gt;
 &lt;h3&gt;Solution&lt;/h3&gt;
 &lt;p&gt;Use &lt;code&gt;django-extensions&lt;/code&gt; in the project and with &lt;code&gt;shell_plus&lt;/code&gt;, there is a better expirence using django shell, although
 it's not the best, anyway it's much better.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;# python manage.py shell_plus --notebook
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# python manage.py shell_plus --notebook
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -115,17 +260,17 @@ When you changed your module, just click &lt;code&gt;Kernel &amp;gt; Restart&lt;
 &lt;p&gt;Use a tool named &lt;code&gt;proxychains&lt;/code&gt; which chains the connection through proxy.&lt;/p&gt;
 &lt;p&gt;On Fedora, install via &lt;code&gt;sudo dnf install proxychains&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;To change the default socks5 proxy, modify &lt;code&gt;/etc/proxychains.conf&lt;/code&gt;, under &lt;code&gt;[ProxyList]&lt;/code&gt; add one line:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;socks5 127.0.0.1 1080
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;socks5 127.0.0.1 1080
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;How to use:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;proxychains pip install requests
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;proxychains pip install requests
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Done! Happy pip with socks5 proxy.&lt;/p&gt;</summary><category term="pip"></category></entry><entry><title>python small tips</title><link href="http://hehan.net/python-small-tips.html" rel="alternate"></link><updated>2015-02-28T10:09:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2015-02-28:python-small-tips.html</id><summary type="html">&lt;h3&gt;Join two lists&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;a = [1, 2, 3]
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;a = [1, 2, 3]
 b = [3, 4, 5]
 c = a + b
 [1, 2, 3, 3, 4, 5]
@@ -133,7 +278,7 @@ c = a + b
 
 
 &lt;h3&gt;Extend a list&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;a = [1, 2, 3]
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;a = [1, 2, 3]
 b = [3, 4, 5]
 a.extend(b)
 [1, 2, 3, 3, 4, 5]
@@ -141,15 +286,15 @@ a.extend(b)
 
 
 &lt;h3&gt;Join two dicts&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;d1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="n"&gt;d2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;c&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;d&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;d1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="n"&gt;d2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;c&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;d&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="n"&gt;d1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;d2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="c"&gt;# {1: &amp;#39;a&amp;#39;, 2: &amp;#39;b&amp;#39;, 3: &amp;#39;c&amp;#39;, 4: &amp;#39;d&amp;#39;}&lt;/span&gt;
+&lt;span class="c1"&gt;# {1: &amp;#39;a&amp;#39;, 2: &amp;#39;b&amp;#39;, 3: &amp;#39;c&amp;#39;, 4: &amp;#39;d&amp;#39;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Check if a list/dictionary/tuple is empty&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;l = []      # same for {} and ()
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;l = []      # same for {} and ()
 if l:
     print &amp;#39;list is not empty&amp;#39;
 else:
@@ -158,44 +303,44 @@ else:
 
 
 &lt;h3&gt;Iterate over dictionary&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;d = {&amp;#39;a&amp;#39;: 1, &amp;#39;b&amp;#39;: 2}
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;d = {&amp;#39;a&amp;#39;: 1, &amp;#39;b&amp;#39;: 2}
 for key in d:
     print key, d[key]
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;d = {&amp;#39;a&amp;#39;: 1, &amp;#39;b&amp;#39;: 2}
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;d = {&amp;#39;a&amp;#39;: 1, &amp;#39;b&amp;#39;: 2}
 for key, value in d.iteritems():
     print key, value
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Access the index while looping a list&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;l = [&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;c&amp;#39;, &amp;#39;d&amp;#39;]
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;l = [&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;c&amp;#39;, &amp;#39;d&amp;#39;]
 for idx, value in enumerate(l):
     print idx, value
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Reverse range&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt;&amp;gt;&amp;gt; reversed(range(3))
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; reversed(range(3))
 [2, 1, 0]
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Select items from a list randomly&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;random&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;random&lt;/span&gt;
 
 &lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;choice&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;         &lt;span class="c"&gt;# select single item&lt;/span&gt;
-&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sample&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;      &lt;span class="c"&gt;# select 3 random items&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;choice&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;         &lt;span class="c1"&gt;# select single item&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sample&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;      &lt;span class="c1"&gt;# select 3 random items&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Split and convert to int&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;1,2,3,4&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;,&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;                &lt;span class="c"&gt;# [&amp;#39;1&amp;#39;,&amp;#39;2&amp;#39;,&amp;#39;3&amp;#39;,&amp;#39;4&amp;#39;]&lt;/span&gt;
-&lt;span class="nb"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;,&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;      &lt;span class="c"&gt;# [1,2,3,4]&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;1,2,3,4&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;,&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;                &lt;span class="c1"&gt;# [&amp;#39;1&amp;#39;,&amp;#39;2&amp;#39;,&amp;#39;3&amp;#39;,&amp;#39;4&amp;#39;]&lt;/span&gt;
+&lt;span class="nb"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;,&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;      &lt;span class="c1"&gt;# [1,2,3,4]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -220,7 +365,7 @@ for idx, value in enumerate(l):
 &lt;li&gt;single quotes for small symbol-like strings&lt;/li&gt;
 &lt;li&gt;use triple double quotes for docstrings and raw string literals&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;LIGHT_MESSAGES = {
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;LIGHT_MESSAGES = {
     &amp;#39;English&amp;#39;: &amp;quot;There are %(number_of_lights)s lights.&amp;quot;,
     &amp;#39;Pirate&amp;#39;:  &amp;quot;Arr! Thar be %(number_of_lights)s lights.&amp;quot;
 }
@@ -234,7 +379,7 @@ def is_pirate(message):
     return re.search(r&amp;quot;(?i)(arr|avast|yohoho)!&amp;quot;, message) is not None
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="python"></category></entry><entry><title>android studio tips</title><link href="http://hehan.net/android-studio-tips.html" rel="alternate"></link><updated>2014-09-01T15:45:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2014-09-01:android-studio-tips.html</id><summary type="html">&lt;h2&gt;Cannot run program aapt -- no such file or directory&lt;/h2&gt;
 &lt;p&gt;Install missing 32bit libraries:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;yum install libstdc++.i686 zlib.i686
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum install libstdc++.i686 zlib.i686
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -243,7 +388,7 @@ def is_pirate(message):
 start android studio from desktop application, it still uses the open jdk.&lt;/p&gt;
 &lt;p&gt;For desktop application defined under &lt;code&gt;~/.local/share/applications/&lt;/code&gt;, you need to&lt;br /&gt;
 setup the environment variables in &lt;code&gt;~/.profile&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;export STUDIO_JDK=/usr/java/jdk1.8.0_20
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;export STUDIO_JDK=/usr/java/jdk1.8.0_20
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -258,7 +403,7 @@ setup the environment variables in &lt;code&gt;~/.profile&lt;/code&gt;.&lt;/p&gt
 &lt;p&gt;AttributeError: 'thread._local' object has no attribute 'temp_identifier'&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;The solutions is, put it before the csrf middleware, like&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;MIDDLEWARE_CLASSES = (
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;MIDDLEWARE_CLASSES = (
     &amp;#39;django.contrib.sessions.middleware.SessionMiddleware&amp;#39;,
     &amp;#39;django.middleware.common.CommonMiddleware&amp;#39;,
     &amp;#39;silk.middleware.SilkyMiddleware&amp;#39;,
@@ -281,39 +426,39 @@ MySQL server has gone away&lt;/p&gt;
 &lt;h4&gt;Static file handling&lt;/h4&gt;
 &lt;p&gt;If you don't want to run django in debug mode and also haven't setup the external server (nginx, uwsgi, etc.) for static file serving.&lt;/p&gt;
 &lt;p&gt;To make &lt;code&gt;silk&lt;/code&gt; display as expected, you need to do the following changes:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;# python manage.py collectstatic
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# python manage.py collectstatic
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;This would collect static files to &lt;code&gt;settings.STATIC_ROOT&lt;/code&gt; folder.&lt;/p&gt;
 &lt;p&gt;After that, add a url pattern in &lt;code&gt;urls.py&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;url(r&amp;#39;^static/(?P&amp;lt;path&amp;gt;.*)$&amp;#39;, &amp;#39;django.views.static.serve&amp;#39;,
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;url(r&amp;#39;^static/(?P&amp;lt;path&amp;gt;.*)$&amp;#39;, &amp;#39;django.views.static.serve&amp;#39;,
     {&amp;#39;document_root&amp;#39;: settings.STATIC_ROOT}),
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="django"></category><category term="python"></category></entry><entry><title>dnsmasq config</title><link href="http://hehan.net/dnsmasq-config.html" rel="alternate"></link><updated>2014-07-01T19:07:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2014-07-01:dnsmasq-config.html</id><summary type="html">&lt;h3&gt;Set dns server for dnsmasq&lt;/h3&gt;
 &lt;p&gt;Use a separate conf file, the format is the same as resolv.conf.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;resolv-file=/etc/resolv.masq.conf
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;resolv-file=/etc/resolv.masq.conf
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Then after dnsmasq is started, set &lt;code&gt;127.0.0.1&lt;/code&gt; in &lt;code&gt;/etc/resolv.conf&lt;/code&gt;.&lt;/p&gt;
 &lt;h3&gt;listening address with localhost&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;listen-address=127.0.0.1
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;listen-address=127.0.0.1
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Use separate DNS for certain domains&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;server=/www.google.com/8.8.8.8
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;server=/www.google.com/8.8.8.8
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Use regular expression for server&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;server=/:.*google.*/8.8.8.8
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;server=/:.*google.*/8.8.8.8
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="system"></category></entry><entry><title>django collections</title><link href="http://hehan.net/django-collections.html" rel="alternate"></link><updated>2014-06-28T09:35:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2014-06-28:django-collections.html</id><summary type="html">&lt;h2&gt;django profiling tools&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://github.com/mtford90/silk"&gt;Silky smooth profiling for Django&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/django-debug-toolbar/django-debug-toolbar"&gt;Django Debug toolbar&lt;/a&gt;&lt;/p&gt;</summary><category term="python"></category><category term="django"></category></entry><entry><title>two foreign keys to same model</title><link href="http://hehan.net/two-foreign-keys-to-same-model.html" rel="alternate"></link><updated>2014-06-20T14:35:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2014-06-20:two-foreign-keys-to-same-model.html</id><summary type="html">&lt;h4&gt;Use &lt;code&gt;related_name&lt;/code&gt;:&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Test&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="n"&gt;example1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ForeignKey&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Example&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;related_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;test1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;example2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ForeignKey&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Example&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;related_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;test2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Test&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;example1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ForeignKey&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Example&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;related_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;test1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;example2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ForeignKey&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Example&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;related_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;test2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -333,14 +478,14 @@ doesn't know how to build up the reverse relation.&lt;/p&gt;
 &lt;li&gt;Ned Batchelder's McCabe script&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;Install&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# sudo pip install flake8&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# sudo pip install flake8&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h2&gt;Vim-flake8&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://github.com/nvie/vim-flake8"&gt;vim-flake8&lt;/a&gt; : vim wrapper for flake8.&lt;/p&gt;
 &lt;h3&gt;Install&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# git submodule add https://github.com/nvie/vim-flake8.git bundle/vim-flake8&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# git submodule add https://github.com/nvie/vim-flake8.git bundle/vim-flake8&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -353,21 +498,21 @@ doesn't know how to build up the reverse relation.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/scrooloose/syntastic"&gt;syntastic&lt;/a&gt; : syntax checking plugin that runs file through external syntax&lt;br /&gt;
 checker and displays any resulting errors to user.&lt;/p&gt;
 &lt;h3&gt;Install&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# git submodule add https://github.com/scrooloose/syntastic bundle/syntastic&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# git submodule add https://github.com/scrooloose/syntastic bundle/syntastic&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Start vim, then type &lt;code&gt;:Helptags&lt;/code&gt;.&lt;/p&gt;
 &lt;h3&gt;How to use&lt;/h3&gt;
 &lt;p&gt;Check&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;:SyntasticCheck
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;:SyntasticCheck
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;See available external checker:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;:SyntasticInfo
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;:SyntasticInfo
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="vim"></category><category term="python"></category></entry><entry><title>Object - javascript: the good part</title><link href="http://hehan.net/object-javascript-the-good-part.html" rel="alternate"></link><updated>2013-11-10T10:42:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2013-11-10:object-javascript-the-good-part.html</id><summary type="html">&lt;h3&gt;Object Literals&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;empty_object&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{};&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;empty_object&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{};&lt;/span&gt;
 
 &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;stooge&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="s2"&gt;&amp;quot;first-name&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Jerome&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
@@ -382,7 +527,7 @@ checker and displays any resulting errors to user.&lt;/p&gt;
 &lt;li&gt;&lt;strong&gt;the quote around the name is optional&lt;/strong&gt;, if the name is a legal Javascript&lt;br /&gt;
   name (not a reserved word);&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;flight&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;flight&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="nx"&gt;airline&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Ocreanic&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
     &lt;span class="nx"&gt;number&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;815&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
     &lt;span class="nx"&gt;departure&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
@@ -409,7 +554,7 @@ checker and displays any resulting errors to user.&lt;/p&gt;
   member:&lt;/li&gt;
 &lt;li&gt;Attempting to retrieve values from undefined will throw a TypeError exception;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nx"&gt;stoog&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;first-name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;         &lt;span class="c1"&gt;// &amp;quot;Jerome&amp;quot;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nx"&gt;stoog&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;first-name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;         &lt;span class="c1"&gt;// &amp;quot;Jerome&amp;quot;&lt;/span&gt;
 &lt;span class="nx"&gt;flight&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;departure&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;city&lt;/span&gt;       &lt;span class="c1"&gt;// &amp;quot;Sydney&amp;quot;&lt;/span&gt;
 
 &lt;span class="nx"&gt;flight&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;status&lt;/span&gt;               &lt;span class="c1"&gt;// undefined&lt;/span&gt;
@@ -420,7 +565,7 @@ checker and displays any resulting errors to user.&lt;/p&gt;
 
 
 &lt;h3&gt;Update&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nx"&gt;stoog&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;first-name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Jack&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="c1"&gt;// if the property name already exist, update the value;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nx"&gt;stoog&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;first-name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Jack&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="c1"&gt;// if the property name already exist, update the value;&lt;/span&gt;
 
 &lt;span class="nx"&gt;stoog&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;sex&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Male&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;          &lt;span class="c1"&gt;// if the property name not exist, the object is augmented;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -428,7 +573,7 @@ checker and displays any resulting errors to user.&lt;/p&gt;
 
 &lt;h3&gt;Reference&lt;/h3&gt;
 &lt;p&gt;Object is passed &lt;strong&gt;BY REFERENCE&lt;/strong&gt;, never by copied.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{},&lt;/span&gt; &lt;span class="nx"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{},&lt;/span&gt; &lt;span class="nx"&gt;c&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{};&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{},&lt;/span&gt; &lt;span class="nx"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{},&lt;/span&gt; &lt;span class="nx"&gt;c&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{};&lt;/span&gt;
     &lt;span class="c1"&gt;// refer to different empty objects&lt;/span&gt;
 
 &lt;span class="nx"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;c&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{};&lt;/span&gt;
@@ -443,7 +588,7 @@ are linked to &lt;code&gt;Object.prototype&lt;/code&gt;.&lt;/p&gt;
 prototype is not touched.&lt;/p&gt;
 &lt;p&gt;The prototype relationship is a dynamic relationship. If we add a new property to a prototype,&lt;br /&gt;
 that property will immediately be visible in all the objects that are based on that prototype.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nx"&gt;stooge&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;profession&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;actor&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nx"&gt;stooge&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;profession&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;actor&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="nx"&gt;another_stooge&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;profession&lt;/span&gt; &lt;span class="c1"&gt;// &amp;#39;actor&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -451,19 +596,19 @@ that property will immediately be visible in all the objects that are based on t
 &lt;h3&gt;Reflection&lt;/h3&gt;
 &lt;p&gt;Check if the object has a property:&lt;/p&gt;
 &lt;p&gt;Use &lt;code&gt;typeof&lt;/code&gt; operator.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;typeof&lt;/span&gt; &lt;span class="nx"&gt;flight&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;number&lt;/span&gt;        &lt;span class="c1"&gt;// &amp;#39;number&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;typeof&lt;/span&gt; &lt;span class="nx"&gt;flight&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;number&lt;/span&gt;        &lt;span class="c1"&gt;// &amp;#39;number&amp;#39;&lt;/span&gt;
 &lt;span class="k"&gt;typeof&lt;/span&gt; &lt;span class="nx"&gt;flight&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;status&lt;/span&gt;        &lt;span class="c1"&gt;// &amp;#39;string&amp;#39;&lt;/span&gt;
 &lt;span class="k"&gt;typeof&lt;/span&gt; &lt;span class="nx"&gt;flight&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;manifest&lt;/span&gt;      &lt;span class="c1"&gt;// &amp;#39;undefined&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Any property on the prototype chain can produce a value:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;typeof&lt;/span&gt; &lt;span class="nx"&gt;flight&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;toString&lt;/span&gt;      &lt;span class="c1"&gt;// &amp;#39;function&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;typeof&lt;/span&gt; &lt;span class="nx"&gt;flight&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;toString&lt;/span&gt;      &lt;span class="c1"&gt;// &amp;#39;function&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Use &lt;code&gt;hasOwnProperty&lt;/code&gt; method. This method does &lt;strong&gt;NOT&lt;/strong&gt; check the prototype chain.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nx"&gt;flight&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;hasOwnProperty&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;number&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;     &lt;span class="c1"&gt;// true&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nx"&gt;flight&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;hasOwnProperty&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;number&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;     &lt;span class="c1"&gt;// true&lt;/span&gt;
 &lt;span class="nx"&gt;flight&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;hasOwnProperty&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;toString&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="c1"&gt;// false&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -472,7 +617,7 @@ that property will immediately be visible in all the objects that are based on t
 &lt;p&gt;Loop over all the property names in an object.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;for in&lt;/code&gt; statement. The enumeration will include all of the properties (functions and&lt;br /&gt;
 properties in the prototype chain.)&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;name&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;name&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;name&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="nx"&gt;another_stooge&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;typeof&lt;/span&gt; &lt;span class="nx"&gt;another_stooge&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;name&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;!==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;function) {&lt;/span&gt;
 &lt;span class="s1"&gt;        document.writeln(name + &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;another_stooge&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;name&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt;
@@ -483,7 +628,7 @@ properties in the prototype chain.)&lt;/p&gt;
 
 &lt;p&gt;But there is &lt;strong&gt;NO&lt;/strong&gt; gurantee on the order of the names.&lt;/p&gt;
 &lt;p&gt;The better way is to created a property array and loop the array with the right order.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;properties&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
     &lt;span class="s1"&gt;&amp;#39;first-name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
     &lt;span class="s1"&gt;&amp;#39;last-name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
@@ -500,7 +645,7 @@ properties in the prototype chain.)&lt;/p&gt;
 &lt;h3&gt;Delete&lt;/h3&gt;
 &lt;p&gt;The &lt;code&gt;delete&lt;/code&gt; operator can be used to remove a property from a object. It does &lt;strong&gt;NOT&lt;/strong&gt; touch&lt;br /&gt;
 any object in the prototype linkage.&lt;/p&gt;</summary><category term="javascript"></category></entry><entry><title>c++ string / file practice</title><link href="http://hehan.net/c-string-file-practice.html" rel="alternate"></link><updated>2013-10-29T15:10:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2013-10-29:c-string-file-practice.html</id><summary type="html">&lt;h2&gt;Read one line from file each time&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;ifstream&lt;/span&gt; &lt;span class="nf"&gt;in&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;a.txt&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ifstream&lt;/span&gt; &lt;span class="nf"&gt;in&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;a.txt&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;getline&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;in&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -508,10 +653,10 @@ any object in the prototype linkage.&lt;/p&gt;</summary><category term="javascri
 
 &lt;h2&gt;Trim space from string&lt;/h2&gt;
 &lt;p&gt;&lt;a href="http://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring"&gt;original source&lt;/a&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#include &amp;lt;algorithm&amp;gt;&lt;/span&gt;
-&lt;span class="cp"&gt;#include &amp;lt;functional&amp;gt;&lt;/span&gt;
-&lt;span class="cp"&gt;#include &amp;lt;cctype&amp;gt;&lt;/span&gt;
-&lt;span class="cp"&gt;#include &amp;lt;locale&amp;gt;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;algorithm&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;functional&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;cctype&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;locale&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
 
 &lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="kr"&gt;inline&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;ltrim&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
         &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;erase&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;
@@ -533,14 +678,14 @@ any object in the prototype linkage.&lt;/p&gt;</summary><category term="javascri
 
 
 &lt;h2&gt;Concatenate two vectors&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;copy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;back_inserter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;destination&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;copy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;back_inserter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;destination&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h2&gt;Merge two vectors&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;std::merge&lt;/code&gt; conbines the elements in sorted range [first1, last1], [first2, last2], into a new&lt;br /&gt;
 range beginning at &lt;em&gt;result&lt;/em&gt; with all its elements sorted.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;vector&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;v1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;v2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tmp&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;vector&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;v1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;v2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tmp&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="n"&gt;tmp&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;reserve&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;v1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;v2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;
 
 &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;sort&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;v1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;v1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;
@@ -553,7 +698,7 @@ range beginning at &lt;em&gt;result&lt;/em&gt; with all its elements sorted.&lt;
 
 
 &lt;h2&gt;Concatenate two vectors, and remove duplicate elements&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;vector&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;v1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;v2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tmp&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;vector&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;v1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;v2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tmp&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
 &lt;span class="n"&gt;tmp&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;reserve&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;v1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;v2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;
 &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;sort&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;v1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;v1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;
@@ -566,7 +711,7 @@ range beginning at &lt;em&gt;result&lt;/em&gt; with all its elements sorted.&lt;
 
 
 &lt;h2&gt;Append with operations on each element&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="n"&gt;append_arrow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="n"&gt;append_arrow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;-&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
@@ -581,19 +726,19 @@ range beginning at &lt;em&gt;result&lt;/em&gt; with all its elements sorted.&lt;
 
 
 &lt;h2&gt;Write vector to file&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;ofstream&lt;/span&gt; &lt;span class="nf"&gt;out&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;a.txt&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ofstream&lt;/span&gt; &lt;span class="nf"&gt;out&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;a.txt&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;vector&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
 &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;ostream_iterator&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;output_iter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;out&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;copy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;output_iter&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="c++"></category></entry><entry><title>Install oracle jdk 32bit on 64bit Fedora</title><link href="http://hehan.net/install-oracle-jdk-32bit-on-64bit-fedora.html" rel="alternate"></link><updated>2013-10-18T22:31:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2013-10-18:install-oracle-jdk-32bit-on-64bit-fedora.html</id><summary type="html">&lt;h2&gt;Issue&lt;/h2&gt;
 &lt;p&gt;When execute:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;# rpm -ivh ~/Downloads/jdk-7u45-linux-i586.rpm
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# rpm -ivh ~/Downloads/jdk-7u45-linux-i586.rpm
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;There comes error messages:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;Unpacking JAR files...
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Unpacking JAR files...
     rt.jar...
 Error: Could not open input file: /usr/java/jdk1.7.0_45/jre/lib/rt.pack
 Error: unpack could not create JAR file:
@@ -612,10 +757,10 @@ Error: unpack could not create JAR file:
 
 &lt;h2&gt;Solution&lt;/h2&gt;
 &lt;p&gt;Install the 32bit libraries:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;# rpm -ivh glibc.i686 glibc-devel.i686
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# rpm -ivh glibc.i686 glibc-devel.i686
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="jdk"></category><category term="fedora"></category></entry><entry><title>C++头文件include的顺序问题</title><link href="http://hehan.net/ctou-wen-jian-includede-shun-xu-wen-ti.html" rel="alternate"></link><updated>2013-10-16T16:48:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2013-10-16:ctou-wen-jian-includede-shun-xu-wen-ti.html</id><summary type="html">&lt;h2&gt;问题&lt;/h2&gt;
 &lt;p&gt;遇到一个很奇怪的问题，在工程中使用 stlport 的时候各种编译不过，即使仅仅是声明一个对象都会编译不过。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;std&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;:sstream&lt;/span&gt; &lt;span class="nt"&gt;mystream&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;std&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;:sstream&lt;/span&gt; &lt;span class="nt"&gt;mystream&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -627,34 +772,34 @@ Error: unpack could not create JAR file:
 &lt;li&gt;怀疑工程中使用的 stlport 有问题，重新编译了一份 stlport 还是不行；&lt;/li&gt;
 &lt;li&gt;检查stlport的源代码，出错的地方对 &lt;code&gt;#define XXX&lt;/code&gt; 有依赖，同时检查了工程中的代码，发现 &lt;code&gt;include&lt;/code&gt; std 头文件在所有 &lt;code&gt;include&lt;/code&gt; 的最后面。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="cp"&gt;#include &amp;quot;a.h&amp;quot;&lt;/span&gt;
-    &lt;span class="cp"&gt;#include &amp;quot;b.h&amp;quot;&lt;/span&gt;
-    &lt;span class="cp"&gt;#include &amp;lt;sstream&amp;gt;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;quot;a.h&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+    &lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;quot;b.h&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+    &lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;sstream&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;ol&gt;
 &lt;li&gt;猜测可能前面的头文件中的 &lt;code&gt;#define&lt;/code&gt; 影响了 sstream 中的设置，将 &lt;code&gt;#include &amp;lt;sstream&amp;gt;&lt;/code&gt; 放到文件的最前面，问题解决；&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="cp"&gt;#include &amp;quot;a.h&amp;quot;&lt;/span&gt;
-    &lt;span class="cp"&gt;#include &amp;quot;b.h&amp;quot;&lt;/span&gt;
-    &lt;span class="cp"&gt;#include &amp;lt;sstream&amp;gt;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;quot;a.h&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+    &lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;quot;b.h&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+    &lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;sstream&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="c++"></category></entry><entry><title>Ignore files when building tags</title><link href="http://hehan.net/ignore-files-when-building-tags.html" rel="alternate"></link><updated>2013-10-15T17:52:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2013-10-15:ignore-files-when-building-tags.html</id><summary type="html">&lt;p&gt;Use the following commands:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    ctags --exclude=*.html --exclude=*.js --exclude=*.sql -R
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    ctags --exclude=*.html --exclude=*.js --exclude=*.sql -R
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;It's annoying to enter the long parameters every time. You can configure&lt;br /&gt;
 it as the default config.&lt;/p&gt;
 &lt;p&gt;Edit &lt;code&gt;~/.ctags&lt;/code&gt;. Add the following lines:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    --exclude=*.html
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    --exclude=*.html
     --exclude=*.js
     --exclude=*.sql
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Then you only need to type:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    ctags -R
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    ctags -R
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="ctags"></category></entry><entry><title>abnormal packets in socket</title><link href="http://hehan.net/abnormal-packets-in-socket.html" rel="alternate"></link><updated>2013-09-18T17:52:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2013-09-18:abnormal-packets-in-socket.html</id><summary type="html">&lt;p&gt;今天遇到一个奇怪的问题，从抓包中发现服务器收到客户端发来的HTTP请求后，&lt;br /&gt;
 会先回复一个乱七八糟的包，然后才会回正常的200 OK，自然的客户端就没办法&lt;br /&gt;
 正常工作了。&lt;/p&gt;
@@ -684,38 +829,38 @@ it as the default config.&lt;/p&gt;
 &lt;li&gt;当程序中存在多个线程操作同一个fd时，尤其要注意这样的问题。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;</summary><category term="network"></category><category term="socket"></category></entry><entry><title>octopress daily use</title><link href="http://hehan.net/octopress-daily-use.html" rel="alternate"></link><updated>2013-09-18T17:00:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2013-09-18:octopress-daily-use.html</id><summary type="html">&lt;h3&gt;Check ruby version&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    ruby -v
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    ruby -v
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;If the version is not 1.9.3, use the following commmand to switch to 1.9.3:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    rvm use 1.9.3
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    rvm use 1.9.3
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Create a new post&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    rake new_post&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;octopress daily use&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    rake new_post&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;octopress daily use&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;This would create a new markdown file under &lt;code&gt;source/_posts/&lt;/code&gt; folder. Edit the file&lt;br /&gt;
 to compose the new post.&lt;/p&gt;
 &lt;h3&gt;Preview and generate&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    rake generate
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    rake generate
     rake preview
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Visit &lt;code&gt;http://localhost:4000&lt;/code&gt; to preview the site.&lt;/p&gt;
 &lt;h3&gt;Deploy to github page&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    rake generate
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    rake generate
     rake deploy
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;This would deploy the generate file on to github page for display.&lt;/p&gt;
 &lt;h3&gt;Submit source to github repo&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    git add .
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    git add .
     git commit -m &lt;span class="s1"&gt;&amp;#39;new post&amp;#39;&lt;/span&gt;
     git push origin &lt;span class="nb"&gt;source&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -723,9 +868,9 @@ to compose the new post.&lt;/p&gt;
 
 &lt;h3&gt;Use octopress in two machines&lt;/h3&gt;
 &lt;p&gt;Before update / add a new post, remember:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    &lt;span class="nb"&gt;cd source&lt;/span&gt;
-&lt;span class="nb"&gt;    &lt;/span&gt;git pull origin &lt;span class="nb"&gt;source&lt;/span&gt;
-&lt;span class="nb"&gt;    cd&lt;/span&gt; ../_deploy
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="nb"&gt;cd&lt;/span&gt; &lt;span class="nb"&gt;source&lt;/span&gt;
+    git pull origin &lt;span class="nb"&gt;source&lt;/span&gt;
+    &lt;span class="nb"&gt;cd&lt;/span&gt; ../_deploy
     git pull origin master
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -748,7 +893,7 @@ target.&lt;/p&gt;
 &lt;h3&gt;Add surroundings&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;ys&lt;/code&gt; takes an &lt;strong&gt;valid Vim motion&lt;/strong&gt; or text object as the first object and wraps it using the second
 argument.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;  Old text                  Command     New text
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  Old text                  Command     New text
   Hello w*orld!             ysiw)       Hello (world)!
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -757,33 +902,33 @@ argument.&lt;/p&gt;
 content.&lt;/p&gt;
 &lt;h3&gt;Delete surroundings&lt;/h3&gt;
 &lt;p&gt;Delete surroundings is &lt;code&gt;ds&lt;/code&gt; .&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;  Old text                  Command     New text ~
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  Old text                  Command     New text ~
   &amp;quot;Hello *world!&amp;quot;           ds&amp;quot;         Hello world!
   (123+4*56)/2              ds)         123+456/2
   &lt;span class="nt"&gt;&amp;lt;div&amp;gt;&lt;/span&gt;Yo!*&lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;           dst         Yo!
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="vim"></category></entry><entry><title>SQLite command tips</title><link href="http://hehan.net/sqlite-command-tips.html" rel="alternate"></link><updated>2013-08-07T13:26:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2013-08-07:sqlite-command-tips.html</id><summary type="html">&lt;h3&gt;Use a database file&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    sqlite &amp;lt;database_file&amp;gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    sqlite &amp;lt;database_file&amp;gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Get table information&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    .tables
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    .tables
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Get schema information&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    .schema
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    .schema
     .schema table_name
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Get help&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    .help
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    .help
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Write result to a file&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    .mode list
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    .mode list
     .separator |
     .output result.data
     select * from table_name;
@@ -792,7 +937,7 @@ content.&lt;/p&gt;
 
 
 &lt;h3&gt;Exit&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    .exit
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    .exit
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -802,7 +947,7 @@ content.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Install xrdp&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;wget&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;dl&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fedoraproject&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pub&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;epel&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;x86_64&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;epel&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;release&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;8.&lt;/span&gt;&lt;span class="n"&gt;noarch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rpm&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;wget&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;dl&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fedoraproject&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pub&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;epel&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;x86_64&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;epel&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;release&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;8.&lt;/span&gt;&lt;span class="n"&gt;noarch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rpm&lt;/span&gt;
 &lt;span class="n"&gt;wget&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;dl&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fedoraproject&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pub&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;epel&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;RPM&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;GPG&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;KEY&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;EPEL&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;
 &lt;span class="n"&gt;rpm&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;RPM&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;GPG&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;KEY&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;EPEL&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;
 &lt;span class="n"&gt;rpm&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;ivh&lt;/span&gt; &lt;span class="n"&gt;epel&lt;/span&gt;&lt;span class="o"&gt;*.&lt;/span&gt;&lt;span class="n"&gt;rpm&lt;/span&gt;
@@ -811,7 +956,7 @@ content.&lt;/p&gt;
 
 
 &lt;h3&gt;Start service&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;/etc/init.d/xrdp start
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/etc/init.d/xrdp start
 chkconfig xrdp on
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -821,7 +966,7 @@ chkconfig xrdp on
 &lt;li&gt;problem connecting 5910
 try start vncserver&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;/etc/init.d/vncserver start
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/etc/init.d/vncserver start
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -829,7 +974,7 @@ try start vncserver&lt;/li&gt;
 &lt;li&gt;vnc no display configured
 edit /etc/sysconfig/vncservers&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;VNCSERVERS=&amp;quot;2:root&amp;quot;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;VNCSERVERS=&amp;quot;2:root&amp;quot;
 VNCSERVERARGS[2]=&amp;quot;-geometry 1280x1024 -localhost&amp;quot;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -838,19 +983,19 @@ VNCSERVERARGS[2]=&amp;quot;-geometry 1280x1024 -localhost&amp;quot;
 &lt;li&gt;vnc password for user root is not configured
 login as root&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;vncpasswd
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;vncpasswd
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;ul&gt;
 &lt;li&gt;vnc undefined symbol: pixman_composite_trapezoids&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;yum update pixman pixman-devel
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum update pixman pixman-devel
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;ul&gt;
 &lt;li&gt;vnc could not open default font 'fixed'&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;yum install libXfont
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum install libXfont
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="xrdp"></category><category term="centos"></category></entry></feed>

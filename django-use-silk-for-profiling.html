@@ -80,7 +80,7 @@
 <p>AttributeError: 'thread._local' object has no attribute 'temp_identifier'</p>
 </blockquote>
 <p>The solutions is, put it before the csrf middleware, like</p>
-<div class="highlight"><pre>MIDDLEWARE_CLASSES = (
+<div class="highlight"><pre><span></span>MIDDLEWARE_CLASSES = (
     &#39;django.contrib.sessions.middleware.SessionMiddleware&#39;,
     &#39;django.middleware.common.CommonMiddleware&#39;,
     &#39;silk.middleware.SilkyMiddleware&#39;,
@@ -103,13 +103,13 @@ MySQL server has gone away</p>
 <h4>Static file handling</h4>
 <p>If you don't want to run django in debug mode and also haven't setup the external server (nginx, uwsgi, etc.) for static file serving.</p>
 <p>To make <code>silk</code> display as expected, you need to do the following changes:</p>
-<div class="highlight"><pre># python manage.py collectstatic
+<div class="highlight"><pre><span></span># python manage.py collectstatic
 </pre></div>
 
 
 <p>This would collect static files to <code>settings.STATIC_ROOT</code> folder.</p>
 <p>After that, add a url pattern in <code>urls.py</code>.</p>
-<div class="highlight"><pre>url(r&#39;^static/(?P&lt;path&gt;.*)$&#39;, &#39;django.views.static.serve&#39;,
+<div class="highlight"><pre><span></span>url(r&#39;^static/(?P&lt;path&gt;.*)$&#39;, &#39;django.views.static.serve&#39;,
     {&#39;document_root&#39;: settings.STATIC_ROOT}),
 </pre></div>
             

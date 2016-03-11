@@ -10,7 +10,7 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="http, tech, " />
+<meta name="keywords" content="http, api, tech, " />
 
 <meta property="og:title" content="http api 设计中 GET 还是 POST "/>
 <meta property="og:url" content="http://hehan.net/http-api-she-ji-zhong-get-huan-shi-post.html" />
@@ -69,7 +69,7 @@
         <div class="span8 offset2 article-content">
 
             
-            <h4>GET 用于安全的操作，POST 用于不安全的操作</h4>
+            <h3>GET 用于安全的操作，POST 用于不安全的操作</h3>
 <p><code>GET</code>有以下特性：
 - GET requests can be cached
 - GET requests can remain in the browser history
@@ -77,7 +77,7 @@
 - GET requests can be distributed &amp; shared
 - GET requests can be hacked (CSRF)</p>
 <p>如果对于一个删除接口，例如：</p>
-<div class="highlight"><pre><span class="err">GET /address/delete/&lt;id&gt;/</span>
+<div class="highlight"><pre><span></span><span class="err">GET /address/delete/&lt;id&gt;/</span>
 </pre></div>
 
 
@@ -86,7 +86,7 @@
 <blockquote>
 <p>凡是对服务端数据进行修改的接口，使用 <code>POST</code>，而不是 <code>GET</code>。</p>
 </blockquote>
-<h4>对于参数多导致URL过长的场景应该使用 POST</h4>
+<h3>对于参数多导致URL过长的场景应该使用 POST</h3>
 <p>虽然 RFC 没有 URL 长度的规定，但是老版 IE ，某些代理服务器，对 URL 的长度会有限制的，比如2048。</p>
 <h3>ajax 请求数据时尽量使用 GET</h3>
 <p>浏览器在处理 <code>XMLHttpRequest</code> 的时候，会分两步进行发送，先发头部，再发送数据，使用 <code>GET</code> 的话，可以更快的发送请求，获得响应。(待验证)</p>
@@ -102,6 +102,9 @@
             <a class="category-link" href="http://hehan.net/categories.html#tech-ref">tech</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
+                <li><a href="http://hehan.net/tags.html#api-ref">api
+                    <span>1</span>
+</a></li>
                 <li><a href="http://hehan.net/tags.html#http-ref">http
                     <span>1</span>
 </a></li>

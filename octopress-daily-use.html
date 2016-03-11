@@ -70,38 +70,38 @@
 
             
             <h3>Check ruby version</h3>
-<div class="highlight"><pre>    ruby -v
+<div class="highlight"><pre><span></span>    ruby -v
 </pre></div>
 
 
 <p>If the version is not 1.9.3, use the following commmand to switch to 1.9.3:</p>
-<div class="highlight"><pre>    rvm use 1.9.3
+<div class="highlight"><pre><span></span>    rvm use 1.9.3
 </pre></div>
 
 
 <h3>Create a new post</h3>
-<div class="highlight"><pre>    rake new_post<span class="o">[</span><span class="s1">&#39;octopress daily use&#39;</span><span class="o">]</span>
+<div class="highlight"><pre><span></span>    rake new_post<span class="o">[</span><span class="s1">&#39;octopress daily use&#39;</span><span class="o">]</span>
 </pre></div>
 
 
 <p>This would create a new markdown file under <code>source/_posts/</code> folder. Edit the file<br />
 to compose the new post.</p>
 <h3>Preview and generate</h3>
-<div class="highlight"><pre>    rake generate
+<div class="highlight"><pre><span></span>    rake generate
     rake preview
 </pre></div>
 
 
 <p>Visit <code>http://localhost:4000</code> to preview the site.</p>
 <h3>Deploy to github page</h3>
-<div class="highlight"><pre>    rake generate
+<div class="highlight"><pre><span></span>    rake generate
     rake deploy
 </pre></div>
 
 
 <p>This would deploy the generate file on to github page for display.</p>
 <h3>Submit source to github repo</h3>
-<div class="highlight"><pre>    git add .
+<div class="highlight"><pre><span></span>    git add .
     git commit -m <span class="s1">&#39;new post&#39;</span>
     git push origin <span class="nb">source</span>
 </pre></div>
@@ -109,9 +109,9 @@ to compose the new post.</p>
 
 <h3>Use octopress in two machines</h3>
 <p>Before update / add a new post, remember:</p>
-<div class="highlight"><pre>    <span class="nb">cd source</span>
-<span class="nb">    </span>git pull origin <span class="nb">source</span>
-<span class="nb">    cd</span> ../_deploy
+<div class="highlight"><pre><span></span>    <span class="nb">cd</span> <span class="nb">source</span>
+    git pull origin <span class="nb">source</span>
+    <span class="nb">cd</span> ../_deploy
     git pull origin master
 </pre></div>
 

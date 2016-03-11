@@ -74,7 +74,7 @@
 <ul>
 <li>Install xrdp</li>
 </ul>
-<div class="highlight"><pre><span class="n">wget</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">dl</span><span class="o">.</span><span class="n">fedoraproject</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">epel</span><span class="o">/</span><span class="mi">6</span><span class="o">/</span><span class="n">x86_64</span><span class="o">/</span><span class="n">epel</span><span class="o">-</span><span class="n">release</span><span class="o">-</span><span class="mi">6</span><span class="o">-</span><span class="mf">8.</span><span class="n">noarch</span><span class="o">.</span><span class="n">rpm</span>
+<div class="highlight"><pre><span></span><span class="n">wget</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">dl</span><span class="o">.</span><span class="n">fedoraproject</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">epel</span><span class="o">/</span><span class="mi">6</span><span class="o">/</span><span class="n">x86_64</span><span class="o">/</span><span class="n">epel</span><span class="o">-</span><span class="n">release</span><span class="o">-</span><span class="mi">6</span><span class="o">-</span><span class="mf">8.</span><span class="n">noarch</span><span class="o">.</span><span class="n">rpm</span>
 <span class="n">wget</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">dl</span><span class="o">.</span><span class="n">fedoraproject</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">epel</span><span class="o">/</span><span class="n">RPM</span><span class="o">-</span><span class="n">GPG</span><span class="o">-</span><span class="n">KEY</span><span class="o">-</span><span class="n">EPEL</span><span class="o">-</span><span class="mi">6</span>
 <span class="n">rpm</span> <span class="o">--</span><span class="kn">import</span> <span class="nn">RPM</span><span class="o">-</span><span class="n">GPG</span><span class="o">-</span><span class="n">KEY</span><span class="o">-</span><span class="n">EPEL</span><span class="o">-</span><span class="mi">6</span>
 <span class="n">rpm</span> <span class="o">--</span><span class="n">ivh</span> <span class="n">epel</span><span class="o">*.</span><span class="n">rpm</span>
@@ -83,7 +83,7 @@
 
 
 <h3>Start service</h3>
-<div class="highlight"><pre>/etc/init.d/xrdp start
+<div class="highlight"><pre><span></span>/etc/init.d/xrdp start
 chkconfig xrdp on
 </pre></div>
 
@@ -93,7 +93,7 @@ chkconfig xrdp on
 <li>problem connecting 5910
 try start vncserver</li>
 </ul>
-<div class="highlight"><pre>/etc/init.d/vncserver start
+<div class="highlight"><pre><span></span>/etc/init.d/vncserver start
 </pre></div>
 
 
@@ -101,7 +101,7 @@ try start vncserver</li>
 <li>vnc no display configured
 edit /etc/sysconfig/vncservers</li>
 </ul>
-<div class="highlight"><pre>VNCSERVERS=&quot;2:root&quot;
+<div class="highlight"><pre><span></span>VNCSERVERS=&quot;2:root&quot;
 VNCSERVERARGS[2]=&quot;-geometry 1280x1024 -localhost&quot;
 </pre></div>
 
@@ -110,21 +110,21 @@ VNCSERVERARGS[2]=&quot;-geometry 1280x1024 -localhost&quot;
 <li>vnc password for user root is not configured
 login as root</li>
 </ul>
-<div class="highlight"><pre>vncpasswd
+<div class="highlight"><pre><span></span>vncpasswd
 </pre></div>
 
 
 <ul>
 <li>vnc undefined symbol: pixman_composite_trapezoids</li>
 </ul>
-<div class="highlight"><pre>yum update pixman pixman-devel
+<div class="highlight"><pre><span></span>yum update pixman pixman-devel
 </pre></div>
 
 
 <ul>
 <li>vnc could not open default font 'fixed'</li>
 </ul>
-<div class="highlight"><pre>yum install libXfont
+<div class="highlight"><pre><span></span>yum install libXfont
 </pre></div>
             
             

@@ -71,23 +71,23 @@
             
             <h3>Set dns server for dnsmasq</h3>
 <p>Use a separate conf file, the format is the same as resolv.conf.</p>
-<div class="highlight"><pre>resolv-file=/etc/resolv.masq.conf
+<div class="highlight"><pre><span></span>resolv-file=/etc/resolv.masq.conf
 </pre></div>
 
 
 <p>Then after dnsmasq is started, set <code>127.0.0.1</code> in <code>/etc/resolv.conf</code>.</p>
 <h3>listening address with localhost</h3>
-<div class="highlight"><pre>listen-address=127.0.0.1
+<div class="highlight"><pre><span></span>listen-address=127.0.0.1
 </pre></div>
 
 
 <h3>Use separate DNS for certain domains</h3>
-<div class="highlight"><pre>server=/www.google.com/8.8.8.8
+<div class="highlight"><pre><span></span>server=/www.google.com/8.8.8.8
 </pre></div>
 
 
 <h3>Use regular expression for server</h3>
-<div class="highlight"><pre>server=/:.*google.*/8.8.8.8
+<div class="highlight"><pre><span></span>server=/:.*google.*/8.8.8.8
 </pre></div>
             
             
