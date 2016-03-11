@@ -1,9 +1,9 @@
 Title: http api 设计中 GET 还是 POST
 Date: 2016-01-26 18:03
-Tags: http
+Tags: http, api
 Category: tech
 
-#### GET 用于安全的操作，POST 用于不安全的操作
+### GET 用于安全的操作，POST 用于不安全的操作
 `GET`有以下特性：
 - GET requests can be cached
 - GET requests can remain in the browser history
@@ -21,7 +21,7 @@ GET /address/delete/<id>/
 
 > 凡是对服务端数据进行修改的接口，使用 `POST`，而不是 `GET`。
 
-#### 对于参数多导致URL过长的场景应该使用 POST
+### 对于参数多导致URL过长的场景应该使用 POST
 虽然 RFC 没有 URL 长度的规定，但是老版 IE ，某些代理服务器，对 URL 的长度会有限制的，比如2048。
 
 ###  ajax 请求数据时尽量使用 GET
