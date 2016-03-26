@@ -17,7 +17,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: Baskerville, Garamond, Georgia, 'DejaVu Serif', 'Times New Roman', Times, Serif;
+    font-family: Helvetica, Tahoma, Arial, STXihei, "华文细黑", Heiti, "黑体", "Microsoft YaHei", "微软雅黑", SimSun, "宋体", sans-serif;
     font-weight: normal;
 }
 h1 small, h1 a, h1 a:hover,
@@ -603,4 +603,3 @@ div.figure.align-left, .article-content img.align-left {
     float: left;
     margin-right: 1.5em;
 }
-
