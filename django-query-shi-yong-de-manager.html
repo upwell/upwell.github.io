@@ -14,12 +14,12 @@
 
 <meta property="og:title" content="django query 使用的 manager "/>
 <meta property="og:url" content="http://hehan.net/django-query-shi-yong-de-manager.html" />
-<meta property="og:description" content="default manager 如果 model 中定义了多个 manager 时，Django 会选取第一个（排在最前面的）作为 default manager， Django 中会选用 default manager 去执行一些操作 (dumpdata)，因此在 override get_queryset 的时候要小心， 有可能会导致 获取对象的时候取不到值 的情况。 访问 related object 时使用的 manager 默认 Django 会选用 &#34;plain&#34; manager (models.Manager) 实例作为访问 related object 时的 manager，这样访问 model 中的 Foreign Key 时，使用 ..." />
+<meta property="og:description" content="default manager 如果 model 中定义了多个 manager 时，Django 会选取第一个（排在最前面的）作为 default manager，Django 中会选用 default manager 去执行一些操作 (dumpdata)，因此在 override get_queryset 的时候要小心，有可能会导致 获取对象的时候取不到值 的情况。 访问 related object 时使用的 manager 默认 Django 会选用 &#34;plain&#34; manager (models.Manager) 实例作为访问 related object 时的 manager，这样访问 model 中的 Foreign Key 时，使用 ..." />
 <meta property="og:site_name" content="Note Everything" />
 <meta property="og:article:author" content="Han" />
 <meta property="og:article:published_time" content="2016-03-09T18:03:00+08:00" />
 <meta name="twitter:title" content="django query 使用的 manager ">
-<meta name="twitter:description" content="default manager 如果 model 中定义了多个 manager 时，Django 会选取第一个（排在最前面的）作为 default manager， Django 中会选用 default manager 去执行一些操作 (dumpdata)，因此在 override get_queryset 的时候要小心， 有可能会导致 获取对象的时候取不到值 的情况。 访问 related object 时使用的 manager 默认 Django 会选用 &#34;plain&#34; manager (models.Manager) 实例作为访问 related object 时的 manager，这样访问 model 中的 Foreign Key 时，使用 ...">
+<meta name="twitter:description" content="default manager 如果 model 中定义了多个 manager 时，Django 会选取第一个（排在最前面的）作为 default manager，Django 中会选用 default manager 去执行一些操作 (dumpdata)，因此在 override get_queryset 的时候要小心，有可能会导致 获取对象的时候取不到值 的情况。 访问 related object 时使用的 manager 默认 Django 会选用 &#34;plain&#34; manager (models.Manager) 实例作为访问 related object 时的 manager，这样访问 model 中的 Foreign Key 时，使用 ...">
 
         <title>django query 使用的 manager  · Note Everything
 </title>
@@ -70,14 +70,10 @@
 
             
             <h2>default manager</h2>
-<p>如果 model 中定义了多个 manager 时，Django 会选取第一个（排在最前面的）作为 default manager，
-Django 中会选用 default manager 去执行一些操作 (dumpdata)，因此在 override <code>get_queryset</code> 的时候要小心，
-有可能会导致 <strong>获取对象的时候取不到值</strong> 的情况。</p>
+<p>如果 model 中定义了多个 manager 时，Django 会选取第一个（排在最前面的）作为 default manager，Django 中会选用 default manager 去执行一些操作 (dumpdata)，因此在 override <code>get_queryset</code> 的时候要小心，有可能会导致 <strong>获取对象的时候取不到值</strong> 的情况。</p>
 <h2>访问 related object 时使用的 manager</h2>
-<p><strong>默认</strong> Django 会选用 "plain" manager (<code>models.Manager</code>) 实例作为访问 related object 时的
-manager，这样访问 model 中的 Foreign Key 时，使用 "plain" manager 能够保证总是能取到值。</p>
-<p>也可以通过在 <code>default manager</code> 中加入设置 <code>use_for_related_fields = True</code> 来让访问 related object 时使用
-该 manager，而不是 "plain" manager。详细解释见下一条说明。</p>
+<p><strong>默认</strong> Django 会选用 "plain" manager (<code>models.Manager</code>) 实例作为访问 related object 时的 manager，这样访问 model 中的 Foreign Key 时，使用 "plain" manager 能够保证总是能取到值。</p>
+<p>也可以通过在 <code>default manager</code> 中加入设置 <code>use_for_related_fields = True</code> 来让访问 related object 时使用该 manager，而不是 "plain" manager。详细解释见下一条说明。</p>
 <h2>use_for_related_fields 的更多场景 automatic manager</h2>
 <p>Django 在有些场景下需要创建临时的 <code>automatic manager</code> 来执行一些操作，比如：<br />
 - 为没有定义 manager 的 model 生成 <code>default manager</code>
@@ -99,8 +95,7 @@ manager，这样访问 model 中的 Foreign Key 时，使用 "plain" manager 能
 </pre></div>
 
 
-<p>默认情况下，<code>RelatedManager</code> 会使用对应 model 的 <strong>default manager</strong> 的子类作为查询时的 manager，你
-也可以通过传入 <code>manager</code> 参数来使用指定的 manager。</p>
+<p>默认情况下，<code>RelatedManager</code> 会使用对应 model 的 <strong>default manager</strong> 的子类作为查询时的 manager，你也可以通过传入 <code>manager</code> 参数来使用指定的 manager。</p>
 <h2>References</h2>
 <p><a href="https://docs.djangoproject.com/en/1.9/topics/db/managers/#controlling-automatic-manager-types">django automatic manager </a></p>
 <p><a href="https://docs.djangoproject.com/en/1.9/topics/db/queries/#using-a-custom-reverse-manager">using a custom reverse manager</a></p>

@@ -3,11 +3,18 @@ h1 {
 }
 
 h2 {
+  color: #550000;
   font-size: 28px;
+  font-weight: bold;
 }
 
 h3 {
+  color: #d03030;
   font-size: 22px;
+}
+
+.container-fluid {
+  color: #444;
 }
 
 .article-content {

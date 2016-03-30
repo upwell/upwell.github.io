@@ -10,18 +10,18 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="osx, tech, " />
+<meta name="keywords" content="docker, osx, tips, " />
 
-<meta property="og:title" content="osx small tips "/>
-<meta property="og:url" content="http://hehan.net/osx-small-tips.html" />
-<meta property="og:description" content="Encrypt / Decrypt file # brew install gpg # gpg -c file.txt // encrypt # gpg file.txt.gpg // decrypt Reset the DNS cache sudo killall -HUP mDNSResponder" />
+<meta property="og:title" content="osx 上使用 docker "/>
+<meta property="og:url" content="http://hehan.net/osx-shang-shi-yong-docker.html" />
+<meta property="og:description" content="安装 根据官方文档的步骤进行安装，由于 mac 原生没有 container 的机制，需要在 mac 上安装一个 linux 的虚拟机，然后再在虚拟机上跑 docker engine，安装好之后点击运行 Docker Quickstart Terminal。 注意: 这里如果选择使用 iTerm 打开的话会有问题，建议使用 Terminal 打开。 运行 启动 Docker Quickstart Terminal 后，默认会创建好一台 linux 虚拟机，可以通过下面的命令查看： ➜ ~ docker-machine ls NAME ACTIVE DRIVER STATE URL SWARM DOCKER ERRORS default * virtualbox ..." />
 <meta property="og:site_name" content="Note Everything" />
 <meta property="og:article:author" content="Han" />
-<meta property="og:article:published_time" content="2016-01-26T18:03:00+08:00" />
-<meta name="twitter:title" content="osx small tips ">
-<meta name="twitter:description" content="Encrypt / Decrypt file # brew install gpg # gpg -c file.txt // encrypt # gpg file.txt.gpg // decrypt Reset the DNS cache sudo killall -HUP mDNSResponder">
+<meta property="og:article:published_time" content="2016-03-10T13:36:00+08:00" />
+<meta name="twitter:title" content="osx 上使用 docker ">
+<meta name="twitter:description" content="安装 根据官方文档的步骤进行安装，由于 mac 原生没有 container 的机制，需要在 mac 上安装一个 linux 的虚拟机，然后再在虚拟机上跑 docker engine，安装好之后点击运行 Docker Quickstart Terminal。 注意: 这里如果选择使用 iTerm 打开的话会有问题，建议使用 Terminal 打开。 运行 启动 Docker Quickstart Terminal 后，默认会创建好一台 linux 虚拟机，可以通过下面的命令查看： ➜ ~ docker-machine ls NAME ACTIVE DRIVER STATE URL SWARM DOCKER ERRORS default * virtualbox ...">
 
-        <title>osx small tips  · Note Everything
+        <title>osx 上使用 docker  · Note Everything
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
@@ -61,7 +61,7 @@
 <article>
 <div class="row-fluid">
     <header class="page-header span10 offset2">
-    <h1><a href="http://hehan.net/osx-small-tips.html"> osx small tips  </a></h1>
+    <h1><a href="http://hehan.net/osx-shang-shi-yong-docker.html"> osx 上使用 docker  </a></h1>
     </header>
 </div>
 
@@ -69,16 +69,48 @@
         <div class="span8 offset2 article-content">
 
             
-            <h3>Encrypt / Decrypt file</h3>
-<div class="highlight"><pre><span></span># brew install gpg
-# gpg -c file.txt          // encrypt
-# gpg file.txt.gpg         // decrypt
+            <h2>安装</h2>
+<p>根据<a href="https://docs.docker.com/mac/">官方文档</a>的步骤进行安装，由于 mac 原生没有 container 的机制，需要在 mac 上安装一个 linux 的虚拟机，然后再在虚拟机上跑 docker engine，安装好之后点击运行 <code>Docker Quickstart Terminal</code>。</p>
+<blockquote>
+<p>注意: 这里如果选择使用 iTerm 打开的话会有问题，建议使用 Terminal 打开。</p>
+</blockquote>
+<h2>运行</h2>
+<p>启动 <code>Docker Quickstart Terminal</code> 后，默认会创建好一台 linux 虚拟机，可以通过下面的命令查看：</p>
+<div class="highlight"><pre><span></span>➜  ~ docker-machine ls
+NAME      ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER    ERRORS
+default   *        virtualbox   Running   tcp://192.168.99.100:2376           v1.10.3  
 </pre></div>
 
 
-<h3>Reset the DNS cache</h3>
-<div class="highlight"><pre><span></span>sudo killall -HUP mDNSResponder
+<p>这里可以看到已经通过 virtualbox 创建好了一台 linux 虚拟机，基于 docker 的操作都在该台虚拟机中完成。同时在 mac 中打开 VirtualBox 应用，也能打开相应的虚拟机在运行中。</p>
+<p>执行<code>docker run hello-world</code>可以验证 docker 是否安装好了，由于 docker 服务在国外，速度慢，可以配置使用代理服务器来下载，执行下面的命令让<code>docker run</code>使用代理服务器。</p>
+<div class="highlight"><pre><span></span>export http_proxy=http://localhost:8118
+export https_proxy=http://localhost:8118
+export no_proxy=&quot;192.168.99.100&quot;
 </pre></div>
+
+
+<p>注意最后的<code>export no_proxy</code>是必须的，否则<code>docker</code>在连接虚拟机时也会走代理服务器，连接当然会出错了。</p>
+<h2>使用 docker</h2>
+<p>使用 docker 部署 <a href="https://github.com/Thibaut/devdocs/">devdocs</a></p>
+<div class="highlight"><pre><span></span>docker build -t thibaut/devdocs .
+</pre></div>
+
+
+<p>这个时候，container 中会更新服务，这个时候有两个需要注意的：</p>
+<blockquote>
+<ol>
+<li>内部系统更新时，网络会使用 ipv6，但本地网络并不具备 ipv6 的环境，这时需要在<code>docker-machine</code>的 linux 虚拟机中禁用 ipv6，禁用后需要重启。</li>
+<li>内部系统更新时，网络较慢时，需要使用代理，可以在 Dockerfile 中配置 <code>ENV http(s)_proxy=</code>。</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre><span></span>docker run --name devdocs -d -p 9292:9292 thibaut/devdocs
+</pre></div>
+
+
+<blockquote>
+<p>服务跑起来后，并不是在<code>localhost:9292</code>，而是<code>192.168.99.100:9292</code>。</p>
+</blockquote>
             
             
             <hr/>
@@ -86,11 +118,14 @@
         <section>
         <div class="span2" style="float:right;font-size:0.9em;">
             <h4>Published</h4>
-            <time pubdate="pubdate" datetime="2016-01-26T18:03:00+08:00"> 1 26, 2016</time>
+            <time pubdate="pubdate" datetime="2016-03-10T13:36:00+08:00"> 3 10, 2016</time>
             <h4>Category</h4>
-            <a class="category-link" href="http://hehan.net/categories.html#tech-ref">tech</a>
+            <a class="category-link" href="http://hehan.net/categories.html#tips-ref">tips</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
+                <li><a href="http://hehan.net/tags.html#docker-ref">docker
+                    <span>1</span>
+</a></li>
                 <li><a href="http://hehan.net/tags.html#osx-ref">osx
                     <span>2</span>
 </a></li>

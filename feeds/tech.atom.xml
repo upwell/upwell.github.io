@@ -2,27 +2,20 @@
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Note Everything</title><link href="http://hehan.net/" rel="alternate"></link><link href="http://hehan.net/feeds/tech.atom.xml" rel="self"></link><id>http://hehan.net/</id><updated>2016-03-10T13:36:00+08:00</updated><entry><title>python unicode 编码整理</title><link href="http://hehan.net/python-unicode-bian-ma-zheng-li.html" rel="alternate"></link><updated>2016-03-10T13:36:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2016-03-10:python-unicode-bian-ma-zheng-li.html</id><summary type="html">&lt;h2&gt;unicode 与 utf-8 的关系&lt;/h2&gt;
 &lt;h3&gt;unicode 是 character set&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;character set 是把每个字符&lt;strong&gt;对应&lt;/strong&gt;成数字的集合，比如unicode中 A对应0041，&lt;br /&gt;
-汉字『我』对应 '6211'&lt;/li&gt;
-&lt;li&gt;unicode 是个很大的集合，几乎覆盖世界上所有的字符，现在的规模已经可以容纳&lt;br /&gt;
-100万个字符。&lt;/li&gt;
+&lt;li&gt;character set 是把每个字符&lt;strong&gt;对应&lt;/strong&gt;成数字的集合，比如unicode中 A对应0041，汉字『我』对应 '6211'&lt;/li&gt;
+&lt;li&gt;unicode 是个很大的集合，几乎覆盖世界上所有的字符，现在的规模已经可以容纳100万个字符。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;utf-8 是对 unicode 存储的实现方式&lt;/h3&gt;
-&lt;p&gt;unicode 只定义字符对应的数字，但没有规定这些数字如何存储起来，比如像中文的『我』字存储时&lt;br /&gt;
-需要两个字节来表示，而英文字母A却只需要一个字节，有些其他的字符可能需要3-4个字节。&lt;/p&gt;
+&lt;p&gt;unicode 只定义字符对应的数字，但没有规定这些数字如何存储起来，比如像中文的『我』字存储时需要两个字节来表示，而英文字母A却只需要一个字节，有些其他的字符可能需要3-4个字节。&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;如果统一规定每个字符用3个或者4个字节来存储，那么每个英文字符都必然需要额外2到3个0，&lt;br /&gt;
-这对存储是很大的浪费。&lt;/li&gt;
+&lt;li&gt;如果统一规定每个字符用3个或者4个字节来存储，那么每个英文字符都必然需要额外2到3个0，这对存储是很大的浪费。&lt;/li&gt;
 &lt;li&gt;如果每个字符按照实际需要的字节数来存储，计算机就分不清三个字节是表示三个字符还是一个字符。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;utf-8 是对 unicode 编码存储的一种实现方式，同样的还有 utf-16, utf-32。&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;utf-8 是使用最广泛的编码方式，采用变长的编码方式，可以使用1-4个字节来表示一个字&lt;br /&gt;
-符； utf-16 用2个或4个字节，utf-32 用4个字节表示。编码规则如下：&lt;/p&gt;
+&lt;p&gt;utf-8 是使用最广泛的编码方式，采用变长的编码方式，可以使用1-4个字节来表示一个字符； utf-16 用2个或4个字节，utf-32 用4个字节表示。编码规则如下：&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;对于单字节的符号，字节的第一位设为0，后面7位为这个符号的unicode码。因此&lt;br /&gt;
-对于英语字母， UTF-8编码和ASCII码是相同的。&lt;/li&gt;
-&lt;li&gt;对于n字节的符号（n&amp;gt;1），第一个字节的前n位都设为1，第n+1位设为0，后面字节&lt;br /&gt;
-的前两位一律设为10。剩下的没有提及的二进制位，全部为这个符号的unicode码。&lt;/li&gt;
+&lt;li&gt;对于单字节的符号，字节的第一位设为0，后面7位为这个符号的unicode码。因此对于英语字母， UTF-8编码和ASCII码是相同的。&lt;/li&gt;
+&lt;li&gt;对于n字节的符号（n&amp;gt;1），第一个字节的前n位都设为1，第n+1位设为0，后面字节的前两位一律设为10。剩下的没有提及的二进制位，全部为这个符号的unicode码。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2&gt;python2 中的 str 和 unicode&lt;/h2&gt;
 &lt;p&gt;python2 中有字符串类型有两种：&lt;code&gt;byte string (str)&lt;/code&gt;和 &lt;code&gt;unicode string (unicode)&lt;/code&gt;。&lt;/p&gt;
@@ -38,8 +31,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;上面的输出中，第一个s的类型是str，打印出来的内容是 utf-8 编码过的内容。第二个s的类型是&lt;br /&gt;
-unicode，打印出来的两个双字节的数字分别表示了两个汉字『美的』。&lt;/p&gt;
+&lt;p&gt;上面的输出中，第一个s的类型是 str，打印出来的内容是 utf-8 编码过的内容。第二个s的类型是 unicode，打印出来的两个双字节的数字分别表示了两个汉字『美的』。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;encode&lt;/code&gt;和&lt;code&gt;decode&lt;/code&gt;提供 str 和 unicode 这两种的类型的互相转化。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -47,9 +39,7 @@ unicode，打印出来的两个双字节的数字分别表示了两个汉字『�
 &lt;li&gt;encode 把 str(byte string) 转化成 unicode&lt;/li&gt;
 &lt;li&gt;decode 把 unicode 转化成 str(byte string)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;本质上，str是存放的字节序，有可能是ascii, gbk, utf-8等等中的任意一种，通过调用&lt;br /&gt;
-decode可以把他们转化成unicode，默认的decode编码是ascii。str中到底是用的哪一种&lt;br /&gt;
-编码，取决于它所在的场景，跟locale，文件编码等等都有关系。&lt;/p&gt;
+&lt;p&gt;本质上，str是存放的字节序，有可能是 ascii, gbk, utf-8 等等中的任意一种，通过调用 decode 可以把他们转化成 unicode ，默认的 decode 编码是 ascii 。str中到底是用的哪一种编码，取决于它所在的场景，跟 locale ，文件编码等等都有关系。&lt;/p&gt;
 &lt;h3&gt;文本文件、编辑器的处理&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/usr/bin/env python&lt;/span&gt;
 &lt;span class="c1"&gt;# -*- coding: GBK -*-&lt;/span&gt;
@@ -60,15 +50,12 @@ decode可以把他们转化成unicode，默认的decode编码是ascii。str中�
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;比如上面的文件&lt;code&gt;enc.py&lt;/code&gt;，保存的时候选择&lt;code&gt;文件编码&lt;/code&gt;是GBK，程序文件本质上也是文件，当我们使用&lt;br /&gt;
-某个外部的应用  打开它时（编辑器或者python解释器等），外部应用是不知道该文件的编码格式的，&lt;br /&gt;
-这个时候有三种情况：&lt;/p&gt;
+&lt;p&gt;比如上面的文件&lt;code&gt;enc.py&lt;/code&gt;，保存的时候选择&lt;code&gt;文件编码&lt;/code&gt;是GBK，程序文件本质上也是文件，当我们使用某个外部的应用  打开它时（编辑器或者python解释器等），外部应用是不知道该文件的编码格式的，  &lt;/p&gt;
+&lt;p&gt;这个时候有三种情况：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;应用使用其默认的编码方式去解析，比如UTF-8或者ASCII；python解释器默认是ASCII，编辑器&lt;br /&gt;
-可以自己设置；&lt;/li&gt;
+&lt;li&gt;应用使用其默认的编码方式去解析，比如UTF-8或者ASCII；python解释器默认是ASCII，编辑器可以自己设置；&lt;/li&gt;
 &lt;li&gt;应用根据文件中的字节内容，自动检测编码方式；&lt;/li&gt;
-&lt;li&gt;文本文件告诉应用使用什么编码方式去解码；比如&lt;code&gt;# -*- coding: GBK -*-&lt;/code&gt;告知解释器使用GBK&lt;br /&gt;
-来解码；&lt;/li&gt;
+&lt;li&gt;文本文件告诉应用使用什么编码方式去解码；比如&lt;code&gt;# -*- coding: GBK -*-&lt;/code&gt;告知解释器使用GBK来解码；&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;试验一下，把&lt;code&gt;# -*- coding: GBK -*-&lt;/code&gt;删除后，执行&lt;code&gt;python enc.py&lt;/code&gt;，输出：  &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;   &lt;span class="nt"&gt;File&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;enc.py&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;line&lt;/span&gt; &lt;span class="nt"&gt;4&lt;/span&gt;
@@ -141,18 +128,14 @@ UnicodeDecodeError: &amp;#39;gbk&amp;#39; codec can&amp;#39;t decode bytes in po
 
 &lt;p&gt;这里同样可以知道，s2中存放的是文件保存的编码UTF-8的byte码。&lt;/p&gt;
 &lt;h2&gt;References&lt;/h2&gt;
-&lt;p&gt;http://www.rrn.dk/the-difference-between-utf-8-and-unicode/
-http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html
-https://docs.python.org/2/howto/unicode.html
-http://yergler.net/2012/bytes-chars/&lt;/p&gt;</summary><category term="python， unicode"></category></entry><entry><title>django query 使用的 manager</title><link href="http://hehan.net/django-query-shi-yong-de-manager.html" rel="alternate"></link><updated>2016-03-09T18:03:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2016-03-09:django-query-shi-yong-de-manager.html</id><summary type="html">&lt;h2&gt;default manager&lt;/h2&gt;
-&lt;p&gt;如果 model 中定义了多个 manager 时，Django 会选取第一个（排在最前面的）作为 default manager，
-Django 中会选用 default manager 去执行一些操作 (dumpdata)，因此在 override &lt;code&gt;get_queryset&lt;/code&gt; 的时候要小心，
-有可能会导致 &lt;strong&gt;获取对象的时候取不到值&lt;/strong&gt; 的情况。&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.rrn.dk/the-difference-between-utf-8-and-unicode/"&gt;http://www.rrn.dk/the-difference-between-utf-8-and-unicode/&lt;/a&gt;
+&lt;a href="http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html"&gt;http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html&lt;/a&gt;
+&lt;a href="https://docs.python.org/2/howto/unicode.html"&gt;https://docs.python.org/2/howto/unicode.html&lt;/a&gt;
+&lt;a href="http://yergler.net/2012/bytes-chars/"&gt;http://yergler.net/2012/bytes-chars/&lt;/a&gt;&lt;/p&gt;</summary><category term="python， unicode"></category></entry><entry><title>django query 使用的 manager</title><link href="http://hehan.net/django-query-shi-yong-de-manager.html" rel="alternate"></link><updated>2016-03-09T18:03:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2016-03-09:django-query-shi-yong-de-manager.html</id><summary type="html">&lt;h2&gt;default manager&lt;/h2&gt;
+&lt;p&gt;如果 model 中定义了多个 manager 时，Django 会选取第一个（排在最前面的）作为 default manager，Django 中会选用 default manager 去执行一些操作 (dumpdata)，因此在 override &lt;code&gt;get_queryset&lt;/code&gt; 的时候要小心，有可能会导致 &lt;strong&gt;获取对象的时候取不到值&lt;/strong&gt; 的情况。&lt;/p&gt;
 &lt;h2&gt;访问 related object 时使用的 manager&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;默认&lt;/strong&gt; Django 会选用 "plain" manager (&lt;code&gt;models.Manager&lt;/code&gt;) 实例作为访问 related object 时的
-manager，这样访问 model 中的 Foreign Key 时，使用 "plain" manager 能够保证总是能取到值。&lt;/p&gt;
-&lt;p&gt;也可以通过在 &lt;code&gt;default manager&lt;/code&gt; 中加入设置 &lt;code&gt;use_for_related_fields = True&lt;/code&gt; 来让访问 related object 时使用
-该 manager，而不是 "plain" manager。详细解释见下一条说明。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;默认&lt;/strong&gt; Django 会选用 "plain" manager (&lt;code&gt;models.Manager&lt;/code&gt;) 实例作为访问 related object 时的 manager，这样访问 model 中的 Foreign Key 时，使用 "plain" manager 能够保证总是能取到值。&lt;/p&gt;
+&lt;p&gt;也可以通过在 &lt;code&gt;default manager&lt;/code&gt; 中加入设置 &lt;code&gt;use_for_related_fields = True&lt;/code&gt; 来让访问 related object 时使用该 manager，而不是 "plain" manager。详细解释见下一条说明。&lt;/p&gt;
 &lt;h2&gt;use_for_related_fields 的更多场景 automatic manager&lt;/h2&gt;
 &lt;p&gt;Django 在有些场景下需要创建临时的 &lt;code&gt;automatic manager&lt;/code&gt; 来执行一些操作，比如：&lt;br /&gt;
 - 为没有定义 manager 的 model 生成 &lt;code&gt;default manager&lt;/code&gt;
@@ -174,8 +157,7 @@ manager，这样访问 model 中的 Foreign Key 时，使用 "plain" manager 能
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;默认情况下，&lt;code&gt;RelatedManager&lt;/code&gt; 会使用对应 model 的 &lt;strong&gt;default manager&lt;/strong&gt; 的子类作为查询时的 manager，你
-也可以通过传入 &lt;code&gt;manager&lt;/code&gt; 参数来使用指定的 manager。&lt;/p&gt;
+&lt;p&gt;默认情况下，&lt;code&gt;RelatedManager&lt;/code&gt; 会使用对应 model 的 &lt;strong&gt;default manager&lt;/strong&gt; 的子类作为查询时的 manager，你也可以通过传入 &lt;code&gt;manager&lt;/code&gt; 参数来使用指定的 manager。&lt;/p&gt;
 &lt;h2&gt;References&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://docs.djangoproject.com/en/1.9/topics/db/managers/#controlling-automatic-manager-types"&gt;django automatic manager &lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://docs.djangoproject.com/en/1.9/topics/db/queries/#using-a-custom-reverse-manager"&gt;using a custom reverse manager&lt;/a&gt;&lt;/p&gt;</summary><category term="django"></category><category term="python"></category></entry><entry><title>http api 设计中 GET 还是 POST</title><link href="http://hehan.net/http-api-she-ji-zhong-get-huan-shi-post.html" rel="alternate"></link><updated>2016-01-26T18:03:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2016-01-26:http-api-she-ji-zhong-get-huan-shi-post.html</id><summary type="html">&lt;h3&gt;GET 用于安全的操作，POST 用于不安全的操作&lt;/h3&gt;
