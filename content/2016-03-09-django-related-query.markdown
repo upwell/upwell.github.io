@@ -6,17 +6,13 @@ Category: tech
 
 ## default manager
 
-如果 model 中定义了多个 manager 时，Django 会选取第一个（排在最前面的）作为 default manager，
-Django 中会选用 default manager 去执行一些操作 (dumpdata)，因此在 override `get_queryset` 的时候要小心，
-有可能会导致 **获取对象的时候取不到值** 的情况。
+如果 model 中定义了多个 manager 时，Django 会选取第一个（排在最前面的）作为 default manager，Django 中会选用 default manager 去执行一些操作 (dumpdata)，因此在 override `get_queryset` 的时候要小心，有可能会导致 **获取对象的时候取不到值** 的情况。
 
 ## 访问 related object 时使用的 manager
 
-**默认** Django 会选用 "plain" manager (`models.Manager`) 实例作为访问 related object 时的
-manager，这样访问 model 中的 Foreign Key 时，使用 "plain" manager 能够保证总是能取到值。
+**默认** Django 会选用 "plain" manager (`models.Manager`) 实例作为访问 related object 时的 manager，这样访问 model 中的 Foreign Key 时，使用 "plain" manager 能够保证总是能取到值。
 
-也可以通过在 `default manager` 中加入设置 `use_for_related_fields = True` 来让访问 related object 时使用
-该 manager，而不是 "plain" manager。详细解释见下一条说明。
+也可以通过在 `default manager` 中加入设置 `use_for_related_fields = True` 来让访问 related object 时使用该 manager，而不是 "plain" manager。详细解释见下一条说明。
 
 ## use_for_related_fields 的更多场景 automatic manager
 
@@ -42,8 +38,7 @@ class Entry(models.Model):
 b = Blog.objects.get(id=1)
 b.entry_set(manager='entries').all()
 ```
-默认情况下，`RelatedManager` 会使用对应 model 的 **default manager** 的子类作为查询时的 manager，你
-也可以通过传入 `manager` 参数来使用指定的 manager。
+默认情况下，`RelatedManager` 会使用对应 model 的 **default manager** 的子类作为查询时的 manager，你也可以通过传入 `manager` 参数来使用指定的 manager。
 
 
 ## References
