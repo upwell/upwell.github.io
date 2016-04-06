@@ -13,7 +13,7 @@
 <meta name="keywords" content="python， unicode, tech, " />
 
 <meta property="og:title" content="python unicode 编码整理 "/>
-<meta property="og:url" content="http://hehan.net/python-unicode-bian-ma-zheng-li.html" />
+<meta property="og:url" content="http://blog.hehan.net/python-unicode-bian-ma-zheng-li.html" />
 <meta property="og:description" content="unicode 与 utf-8 的关系 unicode 是 character set character set 是把每个字符对应成数字的集合，比如unicode中 A对应0041，汉字『我』对应 &#39;6211&#39; unicode 是个很大的集合，几乎覆盖世界上所有的字符，现在的规模已经可以容纳100万个字符。 utf-8 是对 unicode 存储的实现方式 unicode 只定义字符对应的数字，但没有规定这些数字如何存储起来，比如像中文的『我』字存储时需要两个字节来表示，而英文字母A却只需要一个字节，有些其他的字符可能需要3-4个字节。 如果统一规定每个字符用3个或者4个字节来存储，那么每个英文字符都必然需要额外2到3个0，这对存储是很大的浪费。 如果每个字符按照实际需要的字节数来存储，计算机就分不清三个字节是表示三个字符还是一个字符。 utf-8 是对 unicode 编码存储的一种实现方式，同样的还有 utf-16, utf-32。 utf-8 是使用最广泛的编码方式，采用变长的编码方式 ..." />
 <meta property="og:site_name" content="Note Everything" />
 <meta property="og:article:author" content="Han" />
@@ -25,11 +25,11 @@
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="http://hehan.net/theme/css/pygments.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="http://hehan.net/theme/tipuesearch/tipuesearch.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="http://hehan.net/theme/css/elegant.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="http://hehan.net/theme/css/custom.css" media="screen">
-        <link href="http://hehan.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Note Everything - Full Atom Feed" />
+        <link rel="stylesheet" type="text/css" href="http://blog.hehan.net/theme/css/pygments.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="http://blog.hehan.net/theme/tipuesearch/tipuesearch.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="http://blog.hehan.net/theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="http://blog.hehan.net/theme/css/custom.css" media="screen">
+        <link href="http://blog.hehan.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Note Everything - Full Atom Feed" />
     </head>
     <body>
         <div id="content-sans-footer">
@@ -41,14 +41,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="http://hehan.net/"><span class=site-name>Note Everything</span></a>
+                    <a class="brand" href="http://blog.hehan.net/"><span class=site-name>Note Everything</span></a>
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right top-menu">
-                            <li ><a href="http://hehan.net">Home</a></li>
-                            <li ><a href="http://hehan.net/categories.html">Categories</a></li>
-                            <li ><a href="http://hehan.net/tags.html">Tags</a></li>
-                            <li ><a href="http://hehan.net/archives.html">Archives</a></li>
-                            <li><form class="navbar-search" action="http://hehan.net/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            <li ><a href="http://blog.hehan.net">Home</a></li>
+                            <li ><a href="http://blog.hehan.net/categories.html">Categories</a></li>
+                            <li ><a href="http://blog.hehan.net/tags.html">Tags</a></li>
+                            <li ><a href="http://blog.hehan.net/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://blog.hehan.net/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
                         </ul>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
 <article>
 <div class="row-fluid">
     <header class="page-header span10 offset2">
-    <h1><a href="http://hehan.net/python-unicode-bian-ma-zheng-li.html"> python unicode 编码整理  </a></h1>
+    <h1><a href="http://blog.hehan.net/python-unicode-bian-ma-zheng-li.html"> python unicode 编码整理  </a></h1>
     </header>
 </div>
 
@@ -211,10 +211,10 @@ UnicodeDecodeError: &#39;gbk&#39; codec can&#39;t decode bytes in position 2-3: 
             <h4>Published</h4>
             <time pubdate="pubdate" datetime="2016-03-10T13:36:00+08:00"> 3 10, 2016</time>
             <h4>Category</h4>
-            <a class="category-link" href="http://hehan.net/categories.html#tech-ref">tech</a>
+            <a class="category-link" href="http://blog.hehan.net/categories.html#tech-ref">tech</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="http://hehan.net/tags.html#python-unicode-ref">python， unicode
+                <li><a href="http://blog.hehan.net/tags.html#python-unicode-ref">python， unicode
                     <span>1</span>
 </a></li>
             </ul>

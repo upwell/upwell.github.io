@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Note Everything</title><link href="http://hehan.net/" rel="alternate"></link><link href="http://hehan.net/feeds/tech.atom.xml" rel="self"></link><id>http://hehan.net/</id><updated>2016-03-10T13:36:00+08:00</updated><entry><title>python unicode 编码整理</title><link href="http://hehan.net/python-unicode-bian-ma-zheng-li.html" rel="alternate"></link><updated>2016-03-10T13:36:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2016-03-10:python-unicode-bian-ma-zheng-li.html</id><summary type="html">&lt;h2&gt;unicode 与 utf-8 的关系&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Note Everything</title><link href="http://blog.hehan.net/" rel="alternate"></link><link href="http://blog.hehan.net/feeds/tech.atom.xml" rel="self"></link><id>http://blog.hehan.net/</id><updated>2016-03-10T13:36:00+08:00</updated><entry><title>python unicode 编码整理</title><link href="http://blog.hehan.net/python-unicode-bian-ma-zheng-li.html" rel="alternate"></link><updated>2016-03-10T13:36:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-03-10:python-unicode-bian-ma-zheng-li.html</id><summary type="html">&lt;h2&gt;unicode 与 utf-8 的关系&lt;/h2&gt;
 &lt;h3&gt;unicode 是 character set&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;character set 是把每个字符&lt;strong&gt;对应&lt;/strong&gt;成数字的集合，比如unicode中 A对应0041，汉字『我』对应 '6211'&lt;/li&gt;
@@ -131,7 +131,7 @@ UnicodeDecodeError: &amp;#39;gbk&amp;#39; codec can&amp;#39;t decode bytes in po
 &lt;p&gt;&lt;a href="http://www.rrn.dk/the-difference-between-utf-8-and-unicode/"&gt;http://www.rrn.dk/the-difference-between-utf-8-and-unicode/&lt;/a&gt;
 &lt;a href="http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html"&gt;http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html&lt;/a&gt;
 &lt;a href="https://docs.python.org/2/howto/unicode.html"&gt;https://docs.python.org/2/howto/unicode.html&lt;/a&gt;
-&lt;a href="http://yergler.net/2012/bytes-chars/"&gt;http://yergler.net/2012/bytes-chars/&lt;/a&gt;&lt;/p&gt;</summary><category term="python， unicode"></category></entry><entry><title>django query 使用的 manager</title><link href="http://hehan.net/django-query-shi-yong-de-manager.html" rel="alternate"></link><updated>2016-03-09T18:03:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2016-03-09:django-query-shi-yong-de-manager.html</id><summary type="html">&lt;h2&gt;default manager&lt;/h2&gt;
+&lt;a href="http://yergler.net/2012/bytes-chars/"&gt;http://yergler.net/2012/bytes-chars/&lt;/a&gt;&lt;/p&gt;</summary><category term="python， unicode"></category></entry><entry><title>django query 使用的 manager</title><link href="http://blog.hehan.net/django-query-shi-yong-de-manager.html" rel="alternate"></link><updated>2016-03-09T18:03:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-03-09:django-query-shi-yong-de-manager.html</id><summary type="html">&lt;h2&gt;default manager&lt;/h2&gt;
 &lt;p&gt;如果 model 中定义了多个 manager 时，Django 会选取第一个（排在最前面的）作为 default manager，Django 中会选用 default manager 去执行一些操作 (dumpdata)，因此在 override &lt;code&gt;get_queryset&lt;/code&gt; 的时候要小心，有可能会导致 &lt;strong&gt;获取对象的时候取不到值&lt;/strong&gt; 的情况。&lt;/p&gt;
 &lt;h2&gt;访问 related object 时使用的 manager&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;默认&lt;/strong&gt; Django 会选用 "plain" manager (&lt;code&gt;models.Manager&lt;/code&gt;) 实例作为访问 related object 时的 manager，这样访问 model 中的 Foreign Key 时，使用 "plain" manager 能够保证总是能取到值。&lt;/p&gt;
@@ -160,7 +160,7 @@ UnicodeDecodeError: &amp;#39;gbk&amp;#39; codec can&amp;#39;t decode bytes in po
 &lt;p&gt;默认情况下，&lt;code&gt;RelatedManager&lt;/code&gt; 会使用对应 model 的 &lt;strong&gt;default manager&lt;/strong&gt; 的子类作为查询时的 manager，你也可以通过传入 &lt;code&gt;manager&lt;/code&gt; 参数来使用指定的 manager。&lt;/p&gt;
 &lt;h2&gt;References&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://docs.djangoproject.com/en/1.9/topics/db/managers/#controlling-automatic-manager-types"&gt;django automatic manager &lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://docs.djangoproject.com/en/1.9/topics/db/queries/#using-a-custom-reverse-manager"&gt;using a custom reverse manager&lt;/a&gt;&lt;/p&gt;</summary><category term="django"></category><category term="python"></category></entry><entry><title>http api 设计中 GET 还是 POST</title><link href="http://hehan.net/http-api-she-ji-zhong-get-huan-shi-post.html" rel="alternate"></link><updated>2016-01-26T18:03:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2016-01-26:http-api-she-ji-zhong-get-huan-shi-post.html</id><summary type="html">&lt;h3&gt;GET 用于安全的操作，POST 用于不安全的操作&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://docs.djangoproject.com/en/1.9/topics/db/queries/#using-a-custom-reverse-manager"&gt;using a custom reverse manager&lt;/a&gt;&lt;/p&gt;</summary><category term="django"></category><category term="python"></category></entry><entry><title>http api 设计中 GET 还是 POST</title><link href="http://blog.hehan.net/http-api-she-ji-zhong-get-huan-shi-post.html" rel="alternate"></link><updated>2016-01-26T18:03:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-01-26:http-api-she-ji-zhong-get-huan-shi-post.html</id><summary type="html">&lt;h3&gt;GET 用于安全的操作，POST 用于不安全的操作&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;GET&lt;/code&gt;有以下特性：
 - GET requests can be cached
 - GET requests can remain in the browser history
@@ -180,7 +180,7 @@ UnicodeDecodeError: &amp;#39;gbk&amp;#39; codec can&amp;#39;t decode bytes in po
 &lt;h3&gt;对于参数多导致URL过长的场景应该使用 POST&lt;/h3&gt;
 &lt;p&gt;虽然 RFC 没有 URL 长度的规定，但是老版 IE ，某些代理服务器，对 URL 的长度会有限制的，比如2048。&lt;/p&gt;
 &lt;h3&gt;ajax 请求数据时尽量使用 GET&lt;/h3&gt;
-&lt;p&gt;浏览器在处理 &lt;code&gt;XMLHttpRequest&lt;/code&gt; 的时候，会分两步进行发送，先发头部，再发送数据，使用 &lt;code&gt;GET&lt;/code&gt; 的话，可以更快的发送请求，获得响应。(待验证)&lt;/p&gt;</summary><category term="http"></category><category term="api"></category></entry><entry><title>osx small tips</title><link href="http://hehan.net/osx-small-tips.html" rel="alternate"></link><updated>2016-01-26T18:03:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2016-01-26:osx-small-tips.html</id><summary type="html">&lt;h3&gt;Encrypt / Decrypt file&lt;/h3&gt;
+&lt;p&gt;浏览器在处理 &lt;code&gt;XMLHttpRequest&lt;/code&gt; 的时候，会分两步进行发送，先发头部，再发送数据，使用 &lt;code&gt;GET&lt;/code&gt; 的话，可以更快的发送请求，获得响应。(待验证)&lt;/p&gt;</summary><category term="http"></category><category term="api"></category></entry><entry><title>osx small tips</title><link href="http://blog.hehan.net/osx-small-tips.html" rel="alternate"></link><updated>2016-01-26T18:03:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-01-26:osx-small-tips.html</id><summary type="html">&lt;h3&gt;Encrypt / Decrypt file&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# brew install gpg
 # gpg -c file.txt          // encrypt
 # gpg file.txt.gpg         // decrypt
@@ -189,7 +189,7 @@ UnicodeDecodeError: &amp;#39;gbk&amp;#39; codec can&amp;#39;t decode bytes in po
 
 &lt;h3&gt;Reset the DNS cache&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo killall -HUP mDNSResponder
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="osx"></category></entry><entry><title>p4 command line tips</title><link href="http://hehan.net/p4-command-line-tips.html" rel="alternate"></link><updated>2015-12-01T19:50:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2015-12-01:p4-command-line-tips.html</id><summary type="html">&lt;h4&gt;Remove files from changelist without removing the edits&lt;/h4&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="osx"></category></entry><entry><title>p4 command line tips</title><link href="http://blog.hehan.net/p4-command-line-tips.html" rel="alternate"></link><updated>2015-12-01T19:50:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2015-12-01:p4-command-line-tips.html</id><summary type="html">&lt;h4&gt;Remove files from changelist without removing the edits&lt;/h4&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# p4 revert -k -c changelist path_to_file
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -202,7 +202,7 @@ UnicodeDecodeError: &amp;#39;gbk&amp;#39; codec can&amp;#39;t decode bytes in po
 &lt;h4&gt;Tampered with after resolve&lt;/h4&gt;
 &lt;p&gt;To ignore this error, you could re-edit the file.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# p4 edit path_to_file
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="p4"></category></entry><entry><title>Weired directory permission issue</title><link href="http://hehan.net/weired-directory-permission-issue.html" rel="alternate"></link><updated>2015-06-19T17:06:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2015-06-19:weired-directory-permission-issue.html</id><summary type="html">&lt;h3&gt;Issue&lt;/h3&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="p4"></category></entry><entry><title>Weired directory permission issue</title><link href="http://blog.hehan.net/weired-directory-permission-issue.html" rel="alternate"></link><updated>2015-06-19T17:06:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2015-06-19:weired-directory-permission-issue.html</id><summary type="html">&lt;h3&gt;Issue&lt;/h3&gt;
 &lt;p&gt;While I was deploying a php project for apache on my &lt;code&gt;HOME&lt;/code&gt; directory, although I used &lt;code&gt;chmod&lt;/code&gt; and &lt;code&gt;usemod&lt;/code&gt; to grant user &lt;code&gt;apache&lt;/code&gt;  &lt;br /&gt;
 the permissions, apache still failed to access the &lt;code&gt;HOME&lt;/code&gt; directory.&lt;/p&gt;
 &lt;h3&gt;Solution&lt;/h3&gt;
@@ -227,7 +227,7 @@ the permissions, apache still failed to access the &lt;code&gt;HOME&lt;/code&gt;
 
 &lt;p&gt;The following command grants the group &lt;code&gt;r+x&lt;/code&gt; permissions.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# setfacl -m &amp;#39;g:han:rx&amp;#39; han
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Reload module when using Django shell</title><link href="http://hehan.net/reload-module-when-using-django-shell.html" rel="alternate"></link><updated>2015-06-05T10:57:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2015-06-05:reload-module-when-using-django-shell.html</id><summary type="html">&lt;h3&gt;Issue&lt;/h3&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Reload module when using Django shell</title><link href="http://blog.hehan.net/reload-module-when-using-django-shell.html" rel="alternate"></link><updated>2015-06-05T10:57:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2015-06-05:reload-module-when-using-django-shell.html</id><summary type="html">&lt;h3&gt;Issue&lt;/h3&gt;
 &lt;p&gt;The annoying part of using django shell is that:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Once you changed the source code, you need restart the shell and enter the code again.&lt;/p&gt;
@@ -241,7 +241,7 @@ it's not the best, anyway it's much better.&lt;/p&gt;
 
 &lt;p&gt;The above command would open a notebook on your browser, write your code in a cell.
 When you changed your module, just click &lt;code&gt;Kernel &amp;gt; Restart&lt;/code&gt;, and rerun the code.&lt;/p&gt;
-&lt;p&gt;Done! Happy django.&lt;/p&gt;</summary><category term="django"></category><category term="python"></category></entry><entry><title>Use socks5 proxy for pip install</title><link href="http://hehan.net/use-socks5-proxy-for-pip-install.html" rel="alternate"></link><updated>2015-06-03T17:35:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2015-06-03:use-socks5-proxy-for-pip-install.html</id><summary type="html">&lt;h3&gt;Issue&lt;/h3&gt;
+&lt;p&gt;Done! Happy django.&lt;/p&gt;</summary><category term="django"></category><category term="python"></category></entry><entry><title>Use socks5 proxy for pip install</title><link href="http://blog.hehan.net/use-socks5-proxy-for-pip-install.html" rel="alternate"></link><updated>2015-06-03T17:35:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2015-06-03:use-socks5-proxy-for-pip-install.html</id><summary type="html">&lt;h3&gt;Issue&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;pip install&lt;/code&gt; doesn't provide the native socks5 proxy support.&lt;/p&gt;
 &lt;h3&gt;Solution&lt;/h3&gt;
 &lt;p&gt;Use a tool named &lt;code&gt;proxychains&lt;/code&gt; which chains the connection through proxy.&lt;/p&gt;
@@ -256,7 +256,7 @@ When you changed your module, just click &lt;code&gt;Kernel &amp;gt; Restart&lt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Done! Happy pip with socks5 proxy.&lt;/p&gt;</summary><category term="pip"></category></entry><entry><title>python small tips</title><link href="http://hehan.net/python-small-tips.html" rel="alternate"></link><updated>2015-02-28T10:09:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2015-02-28:python-small-tips.html</id><summary type="html">&lt;h3&gt;Join two lists&lt;/h3&gt;
+&lt;p&gt;Done! Happy pip with socks5 proxy.&lt;/p&gt;</summary><category term="pip"></category></entry><entry><title>python small tips</title><link href="http://blog.hehan.net/python-small-tips.html" rel="alternate"></link><updated>2015-02-28T10:09:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2015-02-28:python-small-tips.html</id><summary type="html">&lt;h3&gt;Join two lists&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;a = [1, 2, 3]
 b = [3, 4, 5]
 c = a + b
@@ -364,7 +364,7 @@ def lights_message(language, number_of_lights):
 def is_pirate(message):
     &amp;quot;&amp;quot;&amp;quot;Return True if the given message sounds piratical.&amp;quot;&amp;quot;&amp;quot;
     return re.search(r&amp;quot;(?i)(arr|avast|yohoho)!&amp;quot;, message) is not None
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="python"></category></entry><entry><title>android studio tips</title><link href="http://hehan.net/android-studio-tips.html" rel="alternate"></link><updated>2014-09-01T15:45:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2014-09-01:android-studio-tips.html</id><summary type="html">&lt;h2&gt;Cannot run program aapt -- no such file or directory&lt;/h2&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="python"></category></entry><entry><title>android studio tips</title><link href="http://blog.hehan.net/android-studio-tips.html" rel="alternate"></link><updated>2014-09-01T15:45:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2014-09-01:android-studio-tips.html</id><summary type="html">&lt;h2&gt;Cannot run program aapt -- no such file or directory&lt;/h2&gt;
 &lt;p&gt;Install missing 32bit libraries:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum install libstdc++.i686 zlib.i686
 &lt;/pre&gt;&lt;/div&gt;
@@ -379,7 +379,7 @@ setup the environment variables in &lt;code&gt;~/.profile&lt;/code&gt;.&lt;/p&gt
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;After that, logout and relogin, start android studio again, it works now.&lt;/p&gt;</summary><category term="android"></category></entry><entry><title>django - use silk for profiling</title><link href="http://hehan.net/django-use-silk-for-profiling.html" rel="alternate"></link><updated>2014-08-13T17:41:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2014-08-13:django-use-silk-for-profiling.html</id><summary type="html">&lt;p&gt;&lt;a href="https://github.com/django-debug-toolbar/django-debug-toolbar"&gt;django-debug-toolbar&lt;/a&gt; does not work for ajax requests. Here comes &lt;a href="https://github.com/mtford90/silk"&gt;silk&lt;/a&gt; which works perfect for the ajax condition.&lt;/p&gt;
+&lt;p&gt;After that, logout and relogin, start android studio again, it works now.&lt;/p&gt;</summary><category term="android"></category></entry><entry><title>django - use silk for profiling</title><link href="http://blog.hehan.net/django-use-silk-for-profiling.html" rel="alternate"></link><updated>2014-08-13T17:41:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2014-08-13:django-use-silk-for-profiling.html</id><summary type="html">&lt;p&gt;&lt;a href="https://github.com/django-debug-toolbar/django-debug-toolbar"&gt;django-debug-toolbar&lt;/a&gt; does not work for ajax requests. Here comes &lt;a href="https://github.com/mtford90/silk"&gt;silk&lt;/a&gt; which works perfect for the ajax condition.&lt;/p&gt;
 &lt;h3&gt;Installation&lt;/h3&gt;
 &lt;p&gt;Following the &lt;a href="https://github.com/mtford90/silk"&gt;instructions&lt;/a&gt; to install and configure for your own projects.&lt;/p&gt;
 &lt;h3&gt;Tips&lt;/h3&gt;
@@ -421,7 +421,7 @@ MySQL server has gone away&lt;/p&gt;
 &lt;p&gt;After that, add a url pattern in &lt;code&gt;urls.py&lt;/code&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;url(r&amp;#39;^static/(?P&amp;lt;path&amp;gt;.*)$&amp;#39;, &amp;#39;django.views.static.serve&amp;#39;,
     {&amp;#39;document_root&amp;#39;: settings.STATIC_ROOT}),
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="django"></category><category term="python"></category></entry><entry><title>dnsmasq config</title><link href="http://hehan.net/dnsmasq-config.html" rel="alternate"></link><updated>2014-07-01T19:07:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2014-07-01:dnsmasq-config.html</id><summary type="html">&lt;h3&gt;Set dns server for dnsmasq&lt;/h3&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="django"></category><category term="python"></category></entry><entry><title>dnsmasq config</title><link href="http://blog.hehan.net/dnsmasq-config.html" rel="alternate"></link><updated>2014-07-01T19:07:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2014-07-01:dnsmasq-config.html</id><summary type="html">&lt;h3&gt;Set dns server for dnsmasq&lt;/h3&gt;
 &lt;p&gt;Use a separate conf file, the format is the same as resolv.conf.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;resolv-file=/etc/resolv.masq.conf
 &lt;/pre&gt;&lt;/div&gt;
@@ -440,9 +440,9 @@ MySQL server has gone away&lt;/p&gt;
 
 &lt;h3&gt;Use regular expression for server&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;server=/:.*google.*/8.8.8.8
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="system"></category></entry><entry><title>django collections</title><link href="http://hehan.net/django-collections.html" rel="alternate"></link><updated>2014-06-28T09:35:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2014-06-28:django-collections.html</id><summary type="html">&lt;h2&gt;django profiling tools&lt;/h2&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="system"></category></entry><entry><title>django collections</title><link href="http://blog.hehan.net/django-collections.html" rel="alternate"></link><updated>2014-06-28T09:35:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2014-06-28:django-collections.html</id><summary type="html">&lt;h2&gt;django profiling tools&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://github.com/mtford90/silk"&gt;Silky smooth profiling for Django&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://github.com/django-debug-toolbar/django-debug-toolbar"&gt;Django Debug toolbar&lt;/a&gt;&lt;/p&gt;</summary><category term="python"></category><category term="django"></category></entry><entry><title>two foreign keys to same model</title><link href="http://hehan.net/two-foreign-keys-to-same-model.html" rel="alternate"></link><updated>2014-06-20T14:35:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2014-06-20:two-foreign-keys-to-same-model.html</id><summary type="html">&lt;h4&gt;Use &lt;code&gt;related_name&lt;/code&gt;:&lt;/h4&gt;
+&lt;p&gt;&lt;a href="https://github.com/django-debug-toolbar/django-debug-toolbar"&gt;Django Debug toolbar&lt;/a&gt;&lt;/p&gt;</summary><category term="python"></category><category term="django"></category></entry><entry><title>two foreign keys to same model</title><link href="http://blog.hehan.net/two-foreign-keys-to-same-model.html" rel="alternate"></link><updated>2014-06-20T14:35:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2014-06-20:two-foreign-keys-to-same-model.html</id><summary type="html">&lt;h4&gt;Use &lt;code&gt;related_name&lt;/code&gt;:&lt;/h4&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Test&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;example1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ForeignKey&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Example&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;related_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;test1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;example2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ForeignKey&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Example&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;related_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;test2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -457,7 +457,7 @@ to your model.&lt;/p&gt;
 for instance &lt;code&gt;example.test_set.all()&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;In this case, as there are two foreign keys to &lt;code&gt;Example&lt;/code&gt;, if &lt;code&gt;related_name&lt;/code&gt; is not specified, Django
 doesn't know how to build up the reverse relation.&lt;/p&gt;
-&lt;p&gt;See &lt;a href="http://docs.djangoproject.com/en/dev/topics/db/queries/#backwards-related-objects"&gt;django doc&lt;/a&gt;&lt;/p&gt;</summary><category term="django"></category><category term="python"></category></entry><entry><title>configure vim for python dev</title><link href="http://hehan.net/configure-vim-for-python-dev.html" rel="alternate"></link><updated>2013-11-23T08:42:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2013-11-23:configure-vim-for-python-dev.html</id><summary type="html">&lt;h2&gt;Flake8&lt;/h2&gt;
+&lt;p&gt;See &lt;a href="http://docs.djangoproject.com/en/dev/topics/db/queries/#backwards-related-objects"&gt;django doc&lt;/a&gt;&lt;/p&gt;</summary><category term="django"></category><category term="python"></category></entry><entry><title>configure vim for python dev</title><link href="http://blog.hehan.net/configure-vim-for-python-dev.html" rel="alternate"></link><updated>2013-11-23T08:42:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2013-11-23:configure-vim-for-python-dev.html</id><summary type="html">&lt;h2&gt;Flake8&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://pypi.python.org/pypi/flake8/"&gt;flake8&lt;/a&gt; :  wrapper for python checkers:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;PyFlakes&lt;/li&gt;
@@ -498,7 +498,7 @@ checker and displays any resulting errors to user.&lt;/p&gt;
 
 &lt;p&gt;See available external checker:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;:SyntasticInfo
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="vim"></category><category term="python"></category></entry><entry><title>Object - javascript: the good part</title><link href="http://hehan.net/object-javascript-the-good-part.html" rel="alternate"></link><updated>2013-11-10T10:42:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2013-11-10:object-javascript-the-good-part.html</id><summary type="html">&lt;h3&gt;Object Literals&lt;/h3&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="vim"></category><category term="python"></category></entry><entry><title>Object - javascript: the good part</title><link href="http://blog.hehan.net/object-javascript-the-good-part.html" rel="alternate"></link><updated>2013-11-10T10:42:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2013-11-10:object-javascript-the-good-part.html</id><summary type="html">&lt;h3&gt;Object Literals&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;empty_object&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{};&lt;/span&gt;
 
 &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;stooge&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
@@ -631,7 +631,7 @@ properties in the prototype chain.)&lt;/p&gt;
 
 &lt;h3&gt;Delete&lt;/h3&gt;
 &lt;p&gt;The &lt;code&gt;delete&lt;/code&gt; operator can be used to remove a property from a object. It does &lt;strong&gt;NOT&lt;/strong&gt; touch&lt;br /&gt;
-any object in the prototype linkage.&lt;/p&gt;</summary><category term="javascript"></category></entry><entry><title>c++ string / file practice</title><link href="http://hehan.net/c-string-file-practice.html" rel="alternate"></link><updated>2013-10-29T15:10:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2013-10-29:c-string-file-practice.html</id><summary type="html">&lt;h2&gt;Read one line from file each time&lt;/h2&gt;
+any object in the prototype linkage.&lt;/p&gt;</summary><category term="javascript"></category></entry><entry><title>c++ string / file practice</title><link href="http://blog.hehan.net/c-string-file-practice.html" rel="alternate"></link><updated>2013-10-29T15:10:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2013-10-29:c-string-file-practice.html</id><summary type="html">&lt;h2&gt;Read one line from file each time&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ifstream&lt;/span&gt; &lt;span class="nf"&gt;in&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;a.txt&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;getline&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;in&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
@@ -718,7 +718,7 @@ range beginning at &lt;em&gt;result&lt;/em&gt; with all its elements sorted.&lt;
 
 &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;ostream_iterator&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;output_iter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;out&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;copy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;output_iter&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="c++"></category></entry><entry><title>Install oracle jdk 32bit on 64bit Fedora</title><link href="http://hehan.net/install-oracle-jdk-32bit-on-64bit-fedora.html" rel="alternate"></link><updated>2013-10-18T22:31:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2013-10-18:install-oracle-jdk-32bit-on-64bit-fedora.html</id><summary type="html">&lt;h2&gt;Issue&lt;/h2&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="c++"></category></entry><entry><title>Install oracle jdk 32bit on 64bit Fedora</title><link href="http://blog.hehan.net/install-oracle-jdk-32bit-on-64bit-fedora.html" rel="alternate"></link><updated>2013-10-18T22:31:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2013-10-18:install-oracle-jdk-32bit-on-64bit-fedora.html</id><summary type="html">&lt;h2&gt;Issue&lt;/h2&gt;
 &lt;p&gt;When execute:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# rpm -ivh ~/Downloads/jdk-7u45-linux-i586.rpm
 &lt;/pre&gt;&lt;/div&gt;
@@ -745,7 +745,7 @@ Error: unpack could not create JAR file:
 &lt;h2&gt;Solution&lt;/h2&gt;
 &lt;p&gt;Install the 32bit libraries:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# rpm -ivh glibc.i686 glibc-devel.i686
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="jdk"></category><category term="fedora"></category></entry><entry><title>C++头文件include的顺序问题</title><link href="http://hehan.net/ctou-wen-jian-includede-shun-xu-wen-ti.html" rel="alternate"></link><updated>2013-10-16T16:48:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2013-10-16:ctou-wen-jian-includede-shun-xu-wen-ti.html</id><summary type="html">&lt;h2&gt;问题&lt;/h2&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="jdk"></category><category term="fedora"></category></entry><entry><title>C++头文件include的顺序问题</title><link href="http://blog.hehan.net/ctou-wen-jian-includede-shun-xu-wen-ti.html" rel="alternate"></link><updated>2013-10-16T16:48:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2013-10-16:ctou-wen-jian-includede-shun-xu-wen-ti.html</id><summary type="html">&lt;h2&gt;问题&lt;/h2&gt;
 &lt;p&gt;遇到一个很奇怪的问题，在工程中使用 stlport 的时候各种编译不过，即使仅仅是声明一个对象都会编译不过。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;std&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;:sstream&lt;/span&gt; &lt;span class="nt"&gt;mystream&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -771,7 +771,7 @@ Error: unpack could not create JAR file:
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;quot;a.h&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
     &lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;quot;b.h&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
     &lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;sstream&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="c++"></category></entry><entry><title>Ignore files when building tags</title><link href="http://hehan.net/ignore-files-when-building-tags.html" rel="alternate"></link><updated>2013-10-15T17:52:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2013-10-15:ignore-files-when-building-tags.html</id><summary type="html">&lt;p&gt;Use the following commands:&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="c++"></category></entry><entry><title>Ignore files when building tags</title><link href="http://blog.hehan.net/ignore-files-when-building-tags.html" rel="alternate"></link><updated>2013-10-15T17:52:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2013-10-15:ignore-files-when-building-tags.html</id><summary type="html">&lt;p&gt;Use the following commands:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    ctags --exclude=*.html --exclude=*.js --exclude=*.sql -R
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -787,7 +787,7 @@ it as the default config.&lt;/p&gt;
 
 &lt;p&gt;Then you only need to type:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    ctags -R
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="ctags"></category></entry><entry><title>abnormal packets in socket</title><link href="http://hehan.net/abnormal-packets-in-socket.html" rel="alternate"></link><updated>2013-09-18T17:52:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2013-09-18:abnormal-packets-in-socket.html</id><summary type="html">&lt;p&gt;今天遇到一个奇怪的问题，从抓包中发现服务器收到客户端发来的HTTP请求后，&lt;br /&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="ctags"></category></entry><entry><title>abnormal packets in socket</title><link href="http://blog.hehan.net/abnormal-packets-in-socket.html" rel="alternate"></link><updated>2013-09-18T17:52:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2013-09-18:abnormal-packets-in-socket.html</id><summary type="html">&lt;p&gt;今天遇到一个奇怪的问题，从抓包中发现服务器收到客户端发来的HTTP请求后，&lt;br /&gt;
 会先回复一个乱七八糟的包，然后才会回正常的200 OK，自然的客户端就没办法&lt;br /&gt;
 正常工作了。&lt;/p&gt;
 &lt;p&gt;从代码分析，发现正常的逻辑下面，是不会出现这种情况的。&lt;/p&gt;
@@ -815,7 +815,7 @@ it as the default config.&lt;/p&gt;
 额外的操作，比如继续写数据（有些情况可以），重复close。&lt;/li&gt;
 &lt;li&gt;当程序中存在多个线程操作同一个fd时，尤其要注意这样的问题。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/blockquote&gt;</summary><category term="network"></category><category term="socket"></category></entry><entry><title>octopress daily use</title><link href="http://hehan.net/octopress-daily-use.html" rel="alternate"></link><updated>2013-09-18T17:00:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2013-09-18:octopress-daily-use.html</id><summary type="html">&lt;h3&gt;Check ruby version&lt;/h3&gt;
+&lt;/blockquote&gt;</summary><category term="network"></category><category term="socket"></category></entry><entry><title>octopress daily use</title><link href="http://blog.hehan.net/octopress-daily-use.html" rel="alternate"></link><updated>2013-09-18T17:00:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2013-09-18:octopress-daily-use.html</id><summary type="html">&lt;h3&gt;Check ruby version&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    ruby -v
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -862,7 +862,7 @@ to compose the new post.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;After the update, remember to submit to source and deploy to github&lt;/p&gt;</summary><category term="octopress"></category></entry><entry><title>Vim Tips</title><link href="http://hehan.net/vim-tips.html" rel="alternate"></link><updated>2013-08-14T21:54:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2013-08-14:vim-tips.html</id><summary type="html">&lt;h2&gt;Move faster : EasyMotion&lt;/h2&gt;
+&lt;p&gt;After the update, remember to submit to source and deploy to github&lt;/p&gt;</summary><category term="octopress"></category></entry><entry><title>Vim Tips</title><link href="http://blog.hehan.net/vim-tips.html" rel="alternate"></link><updated>2013-08-14T21:54:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2013-08-14:vim-tips.html</id><summary type="html">&lt;h2&gt;Move faster : EasyMotion&lt;/h2&gt;
 &lt;p&gt;EasyMotion provides a much simpler way to use some motions in vim. It takes&lt;br /&gt;
 the &lt;code&gt;&amp;lt;number&amp;gt;&lt;/code&gt; out of &lt;code&gt;&amp;lt;number&amp;gt;w&lt;/code&gt; or &lt;code&gt;&amp;lt;number&amp;gt;f{char}&lt;/code&gt; by highlighting all&lt;br /&gt;
 possible choices and allowing you to press one key to jump directly to the&lt;br /&gt;
@@ -893,7 +893,7 @@ content.&lt;/p&gt;
   &amp;quot;Hello *world!&amp;quot;           ds&amp;quot;         Hello world!
   (123+4*56)/2              ds)         123+456/2
   &lt;span class="nt"&gt;&amp;lt;div&amp;gt;&lt;/span&gt;Yo!*&lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;           dst         Yo!
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="vim"></category></entry><entry><title>SQLite command tips</title><link href="http://hehan.net/sqlite-command-tips.html" rel="alternate"></link><updated>2013-08-07T13:26:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2013-08-07:sqlite-command-tips.html</id><summary type="html">&lt;h3&gt;Use a database file&lt;/h3&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="vim"></category></entry><entry><title>SQLite command tips</title><link href="http://blog.hehan.net/sqlite-command-tips.html" rel="alternate"></link><updated>2013-08-07T13:26:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2013-08-07:sqlite-command-tips.html</id><summary type="html">&lt;h3&gt;Use a database file&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    sqlite &amp;lt;database_file&amp;gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -929,7 +929,7 @@ content.&lt;/p&gt;
 
 
 &lt;h3&gt;More&lt;/h3&gt;
-&lt;p&gt;&lt;a href="http://www.sqlite.org/sqlite.html"&gt;sqlite official site help&lt;/a&gt;&lt;/p&gt;</summary><category term="sqlite"></category></entry><entry><title>Install xrdp on CentOS63</title><link href="http://hehan.net/install-xrdp-on-centos63.html" rel="alternate"></link><updated>2013-08-07T11:35:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2013-08-07:install-xrdp-on-centos63.html</id><summary type="html">&lt;h3&gt;Install packages&lt;/h3&gt;
+&lt;p&gt;&lt;a href="http://www.sqlite.org/sqlite.html"&gt;sqlite official site help&lt;/a&gt;&lt;/p&gt;</summary><category term="sqlite"></category></entry><entry><title>Install xrdp on CentOS63</title><link href="http://blog.hehan.net/install-xrdp-on-centos63.html" rel="alternate"></link><updated>2013-08-07T11:35:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2013-08-07:install-xrdp-on-centos63.html</id><summary type="html">&lt;h3&gt;Install packages&lt;/h3&gt;
 &lt;p&gt;CentOS 6.3 does not have xrdp package in the official repo.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Install xrdp&lt;/li&gt;

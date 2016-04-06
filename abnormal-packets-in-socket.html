@@ -13,7 +13,7 @@
 <meta name="keywords" content="network, socket, tech, " />
 
 <meta property="og:title" content="abnormal packets in socket "/>
-<meta property="og:url" content="http://hehan.net/abnormal-packets-in-socket.html" />
+<meta property="og:url" content="http://blog.hehan.net/abnormal-packets-in-socket.html" />
 <meta property="og:description" content="今天遇到一个奇怪的问题，从抓包中发现服务器收到客户端发来的HTTP请求后， 会先回复一个乱七八糟的包，然后才会回正常的200 OK，自然的客户端就没办法 正常工作了。 从代码分析，发现正常的逻辑下面，是不会出现这种情况的。 通过使用netstat观察，发现出问题的连接在建立好了以后，Recv-Q里面会有内容， 应该是客户端发过来的数据，奇怪的是在Recv-Q里面有数据的同时，马上Send-Q里 面也有数据了，也就是说当上层应用程序还没有调用recv或者read的时候，已经有 数据被塞到Send-Q中了，但是按照上层应用程序处理的逻辑，只有当数据被recv了以后， 才会开始写。 因为程序中有重用的机制，于是怀疑是不是前面的连接没有处理完，导致遗留的数据 被写到新的连接里面。 仔细查看日志和代码后，发现了问题产生的根源。 socket的fd会在被完全close之后被系统马上重用到新的连接上； 应用程序中，accept新连接(listen thread)和处理连接(working thread)是两个线程 问题在于当working thread把fd关闭以后，后面有一些清理工作还往该fd写了数据，于 是乎在fd被关闭和写数据之间，有可能listen thread接受了一个新的连接重用了之前的那个fd， 于是数据就会被写到这个新的连接中。 从这个问题可以学习到： 管理socket的时候，一定要注意其生命周期，尤其注意在在socket被close以后 ..." />
 <meta property="og:site_name" content="Note Everything" />
 <meta property="og:article:author" content="Han" />
@@ -25,11 +25,11 @@
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="http://hehan.net/theme/css/pygments.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="http://hehan.net/theme/tipuesearch/tipuesearch.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="http://hehan.net/theme/css/elegant.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="http://hehan.net/theme/css/custom.css" media="screen">
-        <link href="http://hehan.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Note Everything - Full Atom Feed" />
+        <link rel="stylesheet" type="text/css" href="http://blog.hehan.net/theme/css/pygments.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="http://blog.hehan.net/theme/tipuesearch/tipuesearch.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="http://blog.hehan.net/theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="http://blog.hehan.net/theme/css/custom.css" media="screen">
+        <link href="http://blog.hehan.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Note Everything - Full Atom Feed" />
     </head>
     <body>
         <div id="content-sans-footer">
@@ -41,14 +41,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="http://hehan.net/"><span class=site-name>Note Everything</span></a>
+                    <a class="brand" href="http://blog.hehan.net/"><span class=site-name>Note Everything</span></a>
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right top-menu">
-                            <li ><a href="http://hehan.net">Home</a></li>
-                            <li ><a href="http://hehan.net/categories.html">Categories</a></li>
-                            <li ><a href="http://hehan.net/tags.html">Tags</a></li>
-                            <li ><a href="http://hehan.net/archives.html">Archives</a></li>
-                            <li><form class="navbar-search" action="http://hehan.net/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            <li ><a href="http://blog.hehan.net">Home</a></li>
+                            <li ><a href="http://blog.hehan.net/categories.html">Categories</a></li>
+                            <li ><a href="http://blog.hehan.net/tags.html">Tags</a></li>
+                            <li ><a href="http://blog.hehan.net/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://blog.hehan.net/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
                         </ul>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
 <article>
 <div class="row-fluid">
     <header class="page-header span10 offset2">
-    <h1><a href="http://hehan.net/abnormal-packets-in-socket.html"> abnormal packets in socket  </a></h1>
+    <h1><a href="http://blog.hehan.net/abnormal-packets-in-socket.html"> abnormal packets in socket  </a></h1>
     </header>
 </div>
 
@@ -107,13 +107,13 @@
             <h4>Published</h4>
             <time pubdate="pubdate" datetime="2013-09-18T17:52:00+08:00"> 9 18, 2013</time>
             <h4>Category</h4>
-            <a class="category-link" href="http://hehan.net/categories.html#tech-ref">tech</a>
+            <a class="category-link" href="http://blog.hehan.net/categories.html#tech-ref">tech</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="http://hehan.net/tags.html#network-ref">network
+                <li><a href="http://blog.hehan.net/tags.html#network-ref">network
                     <span>1</span>
 </a></li>
-                <li><a href="http://hehan.net/tags.html#socket-ref">socket
+                <li><a href="http://blog.hehan.net/tags.html#socket-ref">socket
                     <span>1</span>
 </a></li>
             </ul>
