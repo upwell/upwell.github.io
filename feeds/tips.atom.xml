@@ -40,4 +40,8 @@ export no_proxy=&amp;quot;192.168.99.100&amp;quot;
 
 &lt;blockquote&gt;
 &lt;p&gt;服务跑起来后，并不是在&lt;code&gt;localhost:9292&lt;/code&gt;，而是&lt;code&gt;192.168.99.100:9292&lt;/code&gt;。&lt;/p&gt;
-&lt;/blockquote&gt;</summary><category term="docker"></category><category term="osx"></category></entry></feed>
+&lt;/blockquote&gt;
+&lt;p&gt;重新启动&lt;code&gt;devdocs&lt;/code&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker start devdocs
+docker restart devdocs
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="docker"></category><category term="osx"></category></entry></feed>

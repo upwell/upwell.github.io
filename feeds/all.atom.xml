@@ -40,7 +40,11 @@ export no_proxy=&amp;quot;192.168.99.100&amp;quot;
 
 &lt;blockquote&gt;
 &lt;p&gt;服务跑起来后，并不是在&lt;code&gt;localhost:9292&lt;/code&gt;，而是&lt;code&gt;192.168.99.100:9292&lt;/code&gt;。&lt;/p&gt;
-&lt;/blockquote&gt;</summary><category term="docker"></category><category term="osx"></category></entry><entry><title>python unicode 编码整理</title><link href="http://hehan.net/python-unicode-bian-ma-zheng-li.html" rel="alternate"></link><updated>2016-03-10T13:36:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2016-03-10:python-unicode-bian-ma-zheng-li.html</id><summary type="html">&lt;h2&gt;unicode 与 utf-8 的关系&lt;/h2&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;重新启动&lt;code&gt;devdocs&lt;/code&gt;：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker start devdocs
+docker restart devdocs
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="docker"></category><category term="osx"></category></entry><entry><title>python unicode 编码整理</title><link href="http://hehan.net/python-unicode-bian-ma-zheng-li.html" rel="alternate"></link><updated>2016-03-10T13:36:00+08:00</updated><author><name>Han</name></author><id>tag:hehan.net,2016-03-10:python-unicode-bian-ma-zheng-li.html</id><summary type="html">&lt;h2&gt;unicode 与 utf-8 的关系&lt;/h2&gt;
 &lt;h3&gt;unicode 是 character set&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;character set 是把每个字符&lt;strong&gt;对应&lt;/strong&gt;成数字的集合，比如unicode中 A对应0041，汉字『我』对应 '6211'&lt;/li&gt;
