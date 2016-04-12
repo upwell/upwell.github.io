@@ -74,6 +74,15 @@ print random.choice(l)         # select single item
 print random.sample(l, 3)      # select 3 random items
 ```
 
+### Intersection of sets
+```python
+set1 = set(1, 2, 3)
+set2 = set(1, 3)
+set3 = set(3, 4, 5)
+
+set4 = set1.intersection(set2, set3)
+```
+
 ### Split and convert to int
 
 ```python

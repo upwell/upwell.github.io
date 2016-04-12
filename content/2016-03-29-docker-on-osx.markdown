@@ -36,9 +36,11 @@ docker build -t thibaut/devdocs .
 ```
 
 这个时候，container 中会更新服务，这个时候有两个需要注意的：
-> 1. 内部系统更新时，网络会使用 ipv6，但本地网络并不具备 ipv6 的环境，这时需要在`docker-machine`的 linux 虚拟机中禁用 ipv6，禁用后需要重启。
-> 2. 内部系统更新时，网络较慢时，需要使用代理，可以在 Dockerfile 中配置 `ENV http(s)_proxy=`。
 
+1. 内部系统更新时，网络会使用 ipv6，但本地网络并不具备 ipv6 的环境，这时需要在`docker-machine`的 linux 虚拟机中禁用 ipv6，禁用后需要重启。
+2. 内部系统更新时，网络较慢时，需要使用代理，可以在 Dockerfile 中配置 `ENV http(s)_proxy=`。
+
+初始化启动服务：
 ```
 docker run --name devdocs -d -p 9292:9292 thibaut/devdocs
 ```

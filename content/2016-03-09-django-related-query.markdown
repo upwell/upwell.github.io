@@ -16,15 +16,17 @@ Category: tech
 
 ## use_for_related_fields 的更多场景 automatic manager
 
-Django 在有些场景下需要创建临时的 `automatic manager` 来执行一些操作，比如：  
-- 为没有定义 manager 的 model 生成 `default manager`
-- 访问 related object 时的临时 manager
+Django 在有些场景下需要创建临时的 `automatic manager` 来执行一些操作，比如：
+
+- 为没有定义 manager 的 model 生成 `default manager`；
+- 访问 related object 时的临时 manager；
 
 通常情况下，Django 使用 `models.Manager` 来生成 manager 实例。
 
-Django 提供了一个机制来使用自定义的 manager，而不是 `models.Manager` 来生成 `automatic manager` 的实例：  
-- 该自定义的 manager 必须是 **default manager**
-- 在 **default manager** 中加入 `use_for_related_fields=True`
+Django 也提供了机制来使用自定义的 manager 而不是 `models.Manager` 来生成 `automatic manager` 的实例：
+
+- 自定义的 manager 必须是 `default manager`；
+- 同时在 `default manager` 中加入 `use_for_related_fields=True`；
 
 ## reverse query 时使用的 manager
 ```python
@@ -38,7 +40,8 @@ class Entry(models.Model):
 b = Blog.objects.get(id=1)
 b.entry_set(manager='entries').all()
 ```
-默认情况下，`RelatedManager` 会使用对应 model 的 **default manager** 的子类作为查询时的 manager，你也可以通过传入 `manager` 参数来使用指定的 manager。
+默认情况下，`RelatedManager` 会使用对应 model 的 **default manager** 的子类作为查询时的 manager，你也可以通过传入 `manager` 参数来使用指定的 manager。  
+`ManyToMany` 的查询也采用了上面的逻辑。
 
 
 ## References

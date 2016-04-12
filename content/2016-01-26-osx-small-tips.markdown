@@ -14,3 +14,10 @@ Category: tech
 ```
 sudo killall -HUP mDNSResponder
 ```
+
+### Copy file path to clipboard
+In `Finder`, after right click the file, hold `Alt`, `copy as path option` will appear.
+
+
+### Go to file/path in file selector
+Click `Command + Shift + G` will trigger the `Go to` dialog.
