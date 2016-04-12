@@ -28,12 +28,11 @@ export no_proxy=&amp;quot;192.168.99.100&amp;quot;
 
 
 &lt;p&gt;这个时候，container 中会更新服务，这个时候有两个需要注意的：&lt;/p&gt;
-&lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;内部系统更新时，网络会使用 ipv6，但本地网络并不具备 ipv6 的环境，这时需要在&lt;code&gt;docker-machine&lt;/code&gt;的 linux 虚拟机中禁用 ipv6，禁用后需要重启。&lt;/li&gt;
 &lt;li&gt;内部系统更新时，网络较慢时，需要使用代理，可以在 Dockerfile 中配置 &lt;code&gt;ENV http(s)_proxy=&lt;/code&gt;。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;初始化启动服务：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker run --name devdocs -d -p 9292:9292 thibaut/devdocs
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -182,13 +181,17 @@ UnicodeDecodeError: &amp;#39;gbk&amp;#39; codec can&amp;#39;t decode bytes in po
 &lt;p&gt;&lt;strong&gt;默认&lt;/strong&gt; Django 会选用 "plain" manager (&lt;code&gt;models.Manager&lt;/code&gt;) 实例作为访问 related object 时的 manager，这样访问 model 中的 Foreign Key 时，使用 "plain" manager 能够保证总是能取到值。&lt;/p&gt;
 &lt;p&gt;也可以通过在 &lt;code&gt;default manager&lt;/code&gt; 中加入设置 &lt;code&gt;use_for_related_fields = True&lt;/code&gt; 来让访问 related object 时使用该 manager，而不是 "plain" manager。详细解释见下一条说明。&lt;/p&gt;
 &lt;h2&gt;use_for_related_fields 的更多场景 automatic manager&lt;/h2&gt;
-&lt;p&gt;Django 在有些场景下需要创建临时的 &lt;code&gt;automatic manager&lt;/code&gt; 来执行一些操作，比如：&lt;br /&gt;
-- 为没有定义 manager 的 model 生成 &lt;code&gt;default manager&lt;/code&gt;
-- 访问 related object 时的临时 manager&lt;/p&gt;
+&lt;p&gt;Django 在有些场景下需要创建临时的 &lt;code&gt;automatic manager&lt;/code&gt; 来执行一些操作，比如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;为没有定义 manager 的 model 生成 &lt;code&gt;default manager&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;访问 related object 时的临时 manager；&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;通常情况下，Django 使用 &lt;code&gt;models.Manager&lt;/code&gt; 来生成 manager 实例。&lt;/p&gt;
-&lt;p&gt;Django 提供了一个机制来使用自定义的 manager，而不是 &lt;code&gt;models.Manager&lt;/code&gt; 来生成 &lt;code&gt;automatic manager&lt;/code&gt; 的实例：&lt;br /&gt;
-- 该自定义的 manager 必须是 &lt;strong&gt;default manager&lt;/strong&gt;
-- 在 &lt;strong&gt;default manager&lt;/strong&gt; 中加入 &lt;code&gt;use_for_related_fields=True&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Django 也提供了机制来使用自定义的 manager 而不是 &lt;code&gt;models.Manager&lt;/code&gt; 来生成 &lt;code&gt;automatic manager&lt;/code&gt; 的实例：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;自定义的 manager 必须是 &lt;code&gt;default manager&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;同时在 &lt;code&gt;default manager&lt;/code&gt; 中加入 &lt;code&gt;use_for_related_fields=True&lt;/code&gt;；&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2&gt;reverse query 时使用的 manager&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.db&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;
 
@@ -202,7 +205,8 @@ UnicodeDecodeError: &amp;#39;gbk&amp;#39; codec can&amp;#39;t decode bytes in po
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;默认情况下，&lt;code&gt;RelatedManager&lt;/code&gt; 会使用对应 model 的 &lt;strong&gt;default manager&lt;/strong&gt; 的子类作为查询时的 manager，你也可以通过传入 &lt;code&gt;manager&lt;/code&gt; 参数来使用指定的 manager。&lt;/p&gt;
+&lt;p&gt;默认情况下，&lt;code&gt;RelatedManager&lt;/code&gt; 会使用对应 model 的 &lt;strong&gt;default manager&lt;/strong&gt; 的子类作为查询时的 manager，你也可以通过传入 &lt;code&gt;manager&lt;/code&gt; 参数来使用指定的 manager。&lt;br /&gt;
+&lt;code&gt;ManyToMany&lt;/code&gt; 的查询也采用了上面的逻辑。&lt;/p&gt;
 &lt;h2&gt;References&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://docs.djangoproject.com/en/1.9/topics/db/managers/#controlling-automatic-manager-types"&gt;django automatic manager &lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://docs.djangoproject.com/en/1.9/topics/db/queries/#using-a-custom-reverse-manager"&gt;using a custom reverse manager&lt;/a&gt;&lt;/p&gt;</summary><category term="django"></category><category term="python"></category></entry><entry><title>http api 设计中 GET 还是 POST</title><link href="http://blog.hehan.net/http-api-she-ji-zhong-get-huan-shi-post.html" rel="alternate"></link><updated>2016-01-26T18:03:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-01-26:http-api-she-ji-zhong-get-huan-shi-post.html</id><summary type="html">&lt;h3&gt;GET 用于安全的操作，POST 用于不安全的操作&lt;/h3&gt;
@@ -234,7 +238,13 @@ UnicodeDecodeError: &amp;#39;gbk&amp;#39; codec can&amp;#39;t decode bytes in po
 
 &lt;h3&gt;Reset the DNS cache&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo killall -HUP mDNSResponder
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="osx"></category></entry><entry><title>p4 command line tips</title><link href="http://blog.hehan.net/p4-command-line-tips.html" rel="alternate"></link><updated>2015-12-01T19:50:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2015-12-01:p4-command-line-tips.html</id><summary type="html">&lt;h4&gt;Remove files from changelist without removing the edits&lt;/h4&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Copy file path to clipboard&lt;/h3&gt;
+&lt;p&gt;In &lt;code&gt;Finder&lt;/code&gt;, after right click the file, hold &lt;code&gt;Alt&lt;/code&gt;, &lt;code&gt;copy as path option&lt;/code&gt; will appear.&lt;/p&gt;
+&lt;h3&gt;Go to file/path in file selector&lt;/h3&gt;
+&lt;p&gt;Click &lt;code&gt;Command + Shift + G&lt;/code&gt; will trigger the &lt;code&gt;Go to&lt;/code&gt; dialog.&lt;/p&gt;</summary><category term="osx"></category></entry><entry><title>p4 command line tips</title><link href="http://blog.hehan.net/p4-command-line-tips.html" rel="alternate"></link><updated>2015-12-01T19:50:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2015-12-01:p4-command-line-tips.html</id><summary type="html">&lt;h4&gt;Remove files from changelist without removing the edits&lt;/h4&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# p4 revert -k -c changelist path_to_file
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -366,6 +376,15 @@ for idx, value in enumerate(l):
 &lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;choice&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;         &lt;span class="c1"&gt;# select single item&lt;/span&gt;
 &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sample&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;      &lt;span class="c1"&gt;# select 3 random items&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Intersection of sets&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;set1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;set2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;set3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;set4&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;set1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;intersection&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;set2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;set3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
