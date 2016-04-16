@@ -9,7 +9,6 @@ Category: tips
 > 注意: 这里如果选择使用 iTerm 打开的话会有问题，建议使用 Terminal 打开。
 
 ## 运行
-
 启动 `Docker Quickstart Terminal` 后，默认会创建好一台 linux 虚拟机，可以通过下面的命令查看：
 
 ```bash

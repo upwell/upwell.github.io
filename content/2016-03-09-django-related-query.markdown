@@ -41,6 +41,7 @@ b = Blog.objects.get(id=1)
 b.entry_set(manager='entries').all()
 ```
 默认情况下，`RelatedManager` 会使用对应 model 的 **default manager** 的子类作为查询时的 manager，你也可以通过传入 `manager` 参数来使用指定的 manager。  
+
 `ManyToMany` 的查询也采用了上面的逻辑。
 
 

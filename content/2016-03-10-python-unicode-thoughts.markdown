@@ -1,6 +1,6 @@
 Title: python unicode 编码整理
 Date: 2016-03-10 13:36
-Tags: python， unicode
+Tags: python,unicode
 Category: tech
 
 ## unicode 与 utf-8 的关系
