@@ -70,93 +70,88 @@
 
             
             <h2>Read one line from file each time</h2>
-<div class="highlight"><pre><span></span><span class="n">ifstream</span> <span class="nf">in</span><span class="p">(</span><span class="s">&quot;a.txt&quot;</span><span class="p">);</span>
-<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">line</span><span class="p">;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="n">in</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span>
-</pre></div>
-
+<pre><code class="c++">ifstream in(&quot;a.txt&quot;);
+std::string line;
+std::getline(in, line);
+</code></pre>
 
 <h2>Trim space from string</h2>
 <p><a href="http://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring">original source</a></p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;functional&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cctype&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;locale&gt;</span><span class="cp"></span>
+<pre><code class="c++">#include &lt;algorithm&gt;
+#include &lt;functional&gt;
+#include &lt;cctype&gt;
+#include &lt;locale&gt;
 
-<span class="k">static</span> <span class="kr">inline</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">ltrim</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">s</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span>
-                <span class="n">std</span><span class="o">::</span><span class="n">find_if</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
-                    <span class="n">std</span><span class="o">::</span><span class="n">not1</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ptr_fun</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">isspace</span><span class="p">))));</span>
-        <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
-<span class="p">}</span>
+static inline std::string &amp;ltrim(std::string &amp;s) {
+        s.erase(s.begin(),
+                std::find_if(s.begin(), s.end(),
+                    std::not1(std::ptr_fun&lt;int, int&gt;(std::isspace))));
+        return s;
+}
 
-<span class="k">static</span> <span class="kr">inline</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">rtrim</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">s</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">find_if</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">rbegin</span><span class="p">(),</span> <span class="n">s</span><span class="p">.</span><span class="n">rend</span><span class="p">(),</span>
-                    <span class="n">std</span><span class="o">::</span><span class="n">not1</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ptr_fun</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">isspace</span><span class="p">))).</span><span class="n">base</span><span class="p">(),</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
-        <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
-<span class="p">}</span>
+static inline std::string &amp;rtrim(std::string &amp;s) {
+        s.erase(std::find_if(s.rbegin(), s.rend(),
+                    std::not1(std::ptr_fun&lt;int, int&gt;(std::isspace))).base(), s.end());
+        return s;
+}
 
-<span class="k">static</span> <span class="kr">inline</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">trim</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">ltrim</span><span class="p">(</span><span class="n">rtrim</span><span class="p">(</span><span class="n">s</span><span class="p">));</span>
-<span class="p">}</span>
-</pre></div>
+static inline std::string &amp;trim(std::string &amp;s) {
+        return ltrim(rtrim(s));
+}
 
+</code></pre>
 
 <h2>Concatenate two vectors</h2>
-<div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">source</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">source</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">destination</span><span class="p">));</span>
-</pre></div>
-
+<pre><code class="c++">std::copy(source.begin(), source.end(), std::back_inserter(destination));
+</code></pre>
 
 <h2>Merge two vectors</h2>
 <p><code>std::merge</code> conbines the elements in sorted range [first1, last1], [first2, last2], into a new<br />
 range beginning at <em>result</em> with all its elements sorted.</p>
-<div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">tmp</span><span class="p">;</span>
-<span class="n">tmp</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">v1</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">+</span> <span class="n">v2</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+<pre><code class="c++">std::vector&lt;std::string&gt; v1, v2, tmp;
+tmp.reserve(v1.size() + v2.size());
 
-<span class="n">std</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">v1</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">v1</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
-<span class="n">std</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">v2</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">v2</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+std::sort(v1.begin(), v1.end());
+std::sort(v2.begin(), v2.end());
 
-<span class="n">std</span><span class="o">::</span><span class="n">merge</span><span class="p">(</span><span class="n">v1</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">v1</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
-        <span class="n">v2</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">v2</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">tmp</span><span class="p">));</span>
-</pre></div>
-
+std::merge(v1.begin(), v1.end(),
+        v2.begin(), v2.end(),
+        std::back_inserter(tmp));
+</code></pre>
 
 <h2>Concatenate two vectors, and remove duplicate elements</h2>
-<div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">tmp</span><span class="p">;</span>
+<pre><code class="c++">std::vector&lt;std::string&gt; v1, v2, tmp;
 
-<span class="n">tmp</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">v1</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">+</span> <span class="n">v2</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
-<span class="n">std</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">v1</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">v1</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
-<span class="n">std</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">v2</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">v2</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+tmp.reserve(v1.size() + v2.size());
+std::sort(v1.begin(), v1.end());
+std::sort(v2.begin(), v2.end());
 
-<span class="n">std</span><span class="o">::</span><span class="n">set_union</span><span class="p">(</span><span class="n">v1</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">v1</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
-            <span class="n">v2</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">v2</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
-            <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">tmp</span><span class="p">));</span>
-</pre></div>
-
+std::set_union(v1.begin(), v1.end(),
+            v2.begin(), v2.end(),
+            std::back_inserter(tmp));
+</code></pre>
 
 <h2>Append with operations on each element</h2>
-<div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">append_arrow</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="k">return</span> <span class="n">str</span> <span class="o">+</span> <span class="s">&quot;-&gt;&quot;</span><span class="p">;</span>
-<span class="p">}</span>
+<pre><code class="c++">std::string append_arrow(std::string &amp;str)
+{
+    return str + &quot;-&gt;&quot;;
+}
 
-<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">tmp_urls</span><span class="p">;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">content</span><span class="p">;</span>
+std::vector&lt;std::string&gt; tmp_urls;
+std::vector&lt;std::string&gt; content;
 
-<span class="n">std</span><span class="o">::</span><span class="n">transform</span><span class="p">(</span><span class="n">tmp_urls</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">tmp_urls</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">content</span><span class="p">),</span>
-        <span class="n">append_arrow</span><span class="p">);</span>
-</pre></div>
-
+std::transform(tmp_urls.begin(), tmp_urls.end(),
+        std::back_inserter(content),
+        append_arrow);
+</code></pre>
 
 <h2>Write vector to file</h2>
-<div class="highlight"><pre><span></span><span class="n">ofstream</span> <span class="nf">out</span><span class="p">(</span><span class="s">&quot;a.txt&quot;</span><span class="p">);</span>
-<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">content</span><span class="p">;</span>
+<pre><code class="c++">ofstream out(&quot;a.txt&quot;);
+std::vector&lt;std::string&gt; content;
 
-<span class="n">std</span><span class="o">::</span><span class="n">ostream_iterator</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">output_iter</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-<span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">content</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">content</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">output_iter</span><span class="p">);</span>
-</pre></div>
+std::ostream_iterator&lt;std::string&gt; output_iter(out, &quot;\n&quot;);
+std::copy(content.begin(), content.end(), output_iter);
+</code></pre>
             
             
             <hr/>

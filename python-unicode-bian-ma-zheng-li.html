@@ -10,7 +10,7 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="python， unicode, tech, " />
+<meta name="keywords" content="python, unicode, tech, " />
 
 <meta property="og:title" content="python unicode 编码整理 "/>
 <meta property="og:url" content="http://blog.hehan.net/python-unicode-bian-ma-zheng-li.html" />
@@ -89,17 +89,16 @@
 </ol>
 <h2>python2 中的 str 和 unicode</h2>
 <p>python2 中有字符串类型有两种：<code>byte string (str)</code>和 <code>unicode string (unicode)</code>。</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;美的&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">s</span>
-<span class="s1">&#39;</span><span class="se">\xe7\xbe\x8e\xe7\x9a\x84</span><span class="s1">&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="s1">u&#39;美的&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">s</span>
-<span class="s1">u&#39;</span><span class="se">\u7f8e\u7684</span><span class="s1">&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;美的&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">s</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-<span class="s1">u&#39;</span><span class="se">\u7f8e\u7684</span><span class="s1">&#39;</span>
-</pre></div>
-
+<pre><code class="python">&gt;&gt;&gt; s = '美的'
+&gt;&gt;&gt; s
+'\xe7\xbe\x8e\xe7\x9a\x84'
+&gt;&gt;&gt; s = u'美的'
+&gt;&gt;&gt; s
+u'\u7f8e\u7684'
+&gt;&gt;&gt; s = '美的'
+&gt;&gt;&gt; s.decode('utf-8')
+u'\u7f8e\u7684'
+</code></pre>
 
 <p>上面的输出中，第一个s的类型是 str，打印出来的内容是 utf-8 编码过的内容。第二个s的类型是 unicode，打印出来的两个双字节的数字分别表示了两个汉字『美的』。</p>
 <blockquote>
@@ -111,14 +110,13 @@
 </ul>
 <p>本质上，str是存放的字节序，有可能是 ascii, gbk, utf-8 等等中的任意一种，通过调用 decode 可以把他们转化成 unicode ，默认的 decode 编码是 ascii 。str中到底是用的哪一种编码，取决于它所在的场景，跟 locale ，文件编码等等都有关系。</p>
 <h3>文本文件、编辑器的处理</h3>
-<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
-<span class="c1"># -*- coding: GBK -*-</span>
+<pre><code class="python">#!/usr/bin/env python
+# -*- coding: GBK -*-
 
-<span class="n">s</span> <span class="o">=</span> <span class="s1">u&#39;中文&#39;</span>
-<span class="k">print</span> <span class="nb">repr</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-<span class="k">print</span> <span class="nb">repr</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;GBK&#39;</span><span class="p">))</span>
-</pre></div>
-
+s = u'中文'
+print repr(s)
+print repr(s.encode('GBK'))
+</code></pre>
 
 <p>比如上面的文件<code>enc.py</code>，保存的时候选择<code>文件编码</code>是GBK，程序文件本质上也是文件，当我们使用某个外部的应用  打开它时（编辑器或者python解释器等），外部应用是不知道该文件的编码格式的，  </p>
 <p>这个时候有三种情况：</p>
@@ -128,79 +126,63 @@
 <li>文本文件告诉应用使用什么编码方式去解码；比如<code># -*- coding: GBK -*-</code>告知解释器使用GBK来解码；</li>
 </ul>
 <p>试验一下，把<code># -*- coding: GBK -*-</code>删除后，执行<code>python enc.py</code>，输出：  </p>
-<div class="highlight"><pre><span></span>   <span class="nt">File</span> <span class="s2">&quot;enc.py&quot;</span><span class="o">,</span> <span class="nt">line</span> <span class="nt">4</span>
- <span class="nt">SyntaxError</span><span class="o">:</span> <span class="nt">Non-ASCII</span> <span class="nt">character</span> <span class="s1">&#39;\xd6&#39;</span> <span class="nt">in</span> <span class="nt">file</span> <span class="nt">enc</span><span class="nc">.py</span> <span class="nt">on</span> <span class="nt">line</span> <span class="nt">4</span><span class="o">,</span> <span class="nt">but</span> <span class="nt">no</span> <span class="nt">encoding</span> <span class="nt">declared</span><span class="o">;</span>
-</pre></div>
-
+<pre><code>   File &quot;enc.py&quot;, line 4
+ SyntaxError: Non-ASCII character '\xd6' in file enc.py on line 4, but no encoding declared;
+</code></pre>
 
 <p>试着用vim打开该文件时，『中文』两个字就会显示成乱码，应为vim默认的文件编码方式被设置成UTF-8了。</p>
-<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
-<span class="c1"># -*- coding: GBK -*-</span>
+<pre><code class="python">#!/usr/bin/env python
+# -*- coding: GBK -*-
 
-<span class="n">s1</span> <span class="o">=</span> <span class="s1">u&#39;中文&#39;</span>
+s1 = u'中文'
 
-<span class="k">print</span> <span class="nb">repr</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>
-<span class="k">print</span> <span class="nb">repr</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;GBK&#39;</span><span class="p">))</span>
+print repr(s1)
+print repr(s1.encode('GBK'))
 
-<span class="n">s2</span> <span class="o">=</span> <span class="s1">&#39;中文&#39;</span>
+s2 = '中文'
 
-<span class="k">print</span> <span class="nb">repr</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
-<span class="k">print</span> <span class="nb">repr</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;GBK&#39;</span><span class="p">))</span>
-</pre></div>
-
+print repr(s2)
+print repr(s2.decode('GBK'))
+</code></pre>
 
 <p>输出结果：</p>
-<div class="highlight"><pre><span></span>u&#39;\u4e2d\u6587&#39;
-&#39;\xd6\xd0\xce\xc4&#39;
-&#39;\xd6\xd0\xce\xc4&#39;
-u&#39;\u4e2d\u6587&#39;
-</pre></div>
-
+<pre><code>u'\u4e2d\u6587'
+'\xd6\xd0\xce\xc4'
+'\xd6\xd0\xce\xc4'
+u'\u4e2d\u6587'
+</code></pre>
 
 <p>从这里可以看出来， s2中存放的是byte格式的从文件中读到的GBK编码的内容。</p>
 <p>再看下面的这段代码，程序文件<code>utf8_enc.py</code>，保存成UTF-8编码的。</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
-<span class="c1"># -*- coding: utf-8 -*-</span>
+<pre><code>#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
-<span class="n">s1</span> <span class="o">=</span> <span class="s1">u&#39;中文&#39;</span>
+s1 = u'中文'
 
-<span class="k">print</span> <span class="nb">repr</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>
-<span class="k">print</span> <span class="nb">repr</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;GBK&#39;</span><span class="p">))</span>
+print repr(s1)
+print repr(s1.encode('GBK'))
 
-<span class="n">s2</span> <span class="o">=</span> <span class="s1">&#39;中文&#39;</span>
+s2 = '中文'
 
-<span class="k">print</span> <span class="nb">repr</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
-<span class="k">print</span> <span class="nb">repr</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;GBK&#39;</span><span class="p">))</span>
-</pre></div>
-</td></tr></table>
+print repr(s2)
+print repr(s2.decode('GBK'))
+</code></pre>
 
 <p>输出：</p>
-<div class="highlight"><pre><span></span>u&#39;\u4e2d\u6587&#39;
-&#39;\xd6\xd0\xce\xc4&#39;
-&#39;\xe4\xb8\xad\xe6\x96\x87&#39;
+<pre><code>u'\u4e2d\u6587'
+'\xd6\xd0\xce\xc4'
+'\xe4\xb8\xad\xe6\x96\x87'
 Traceback (most recent call last):
   File &quot;unicode_enc.py&quot;, line 12, in &lt;module&gt;
-    print repr(s2.decode(&#39;GBK&#39;))
-UnicodeDecodeError: &#39;gbk&#39; codec can&#39;t decode bytes in position 2-3: illegal multibyte sequence
-</pre></div>
-
+    print repr(s2.decode('GBK'))
+UnicodeDecodeError: 'gbk' codec can't decode bytes in position 2-3: illegal multibyte sequence
+</code></pre>
 
 <p>这里同样可以知道，s2中存放的是文件保存的编码UTF-8的byte码。</p>
 <h2>References</h2>
-<p><a href="http://www.rrn.dk/the-difference-between-utf-8-and-unicode/">http://www.rrn.dk/the-difference-between-utf-8-and-unicode/</a>
-<a href="http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html">http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html</a>
-<a href="https://docs.python.org/2/howto/unicode.html">https://docs.python.org/2/howto/unicode.html</a>
+<p><a href="http://www.rrn.dk/the-difference-between-utf-8-and-unicode/">http://www.rrn.dk/the-difference-between-utf-8-and-unicode/</a><br />
+<a href="http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html">http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html</a><br />
+<a href="https://docs.python.org/2/howto/unicode.html">https://docs.python.org/2/howto/unicode.html</a><br />
 <a href="http://yergler.net/2012/bytes-chars/">http://yergler.net/2012/bytes-chars/</a></p>
             
             
@@ -214,7 +196,10 @@ UnicodeDecodeError: &#39;gbk&#39; codec can&#39;t decode bytes in position 2-3: 
             <a class="category-link" href="http://blog.hehan.net/categories.html#tech-ref">tech</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="http://blog.hehan.net/tags.html#python-unicode-ref">python， unicode
+                <li><a href="http://blog.hehan.net/tags.html#python-ref">python
+                    <span>10</span>
+</a></li>
+                <li><a href="http://blog.hehan.net/tags.html#unicode-ref">unicode
                     <span>1</span>
 </a></li>
             </ul>

@@ -12,16 +12,16 @@
 
 <meta name="keywords" content="python, tech, " />
 
-<meta property="og:title" content="python small tips "/>
-<meta property="og:url" content="http://blog.hehan.net/python-small-tips.html" />
-<meta property="og:description" content="Join two lists a = [1, 2, 3] b = [3, 4, 5] c = a + b [1, 2, 3, 3, 4, 5] Extend a list a = [1, 2, 3] b = [3, 4, 5] a.extend(b) [1, 2, 3, 3, 4, 5] Join two dicts d1 = {1: &#39;a&#39;, 2: &#39;b&#39;} d2 = {3 ..." />
+<meta property="og:title" content="python GIL 整理 "/>
+<meta property="og:url" content="http://blog.hehan.net/python-gil-zheng-li.html" />
+<meta property="og:description" content="GIL 是什么 GIL 是 Global Interpreter Lock 的缩写，全局解释器锁。在 CPython 中，GIL 被用来防止多个原生线程同时执行。 其实并不是所有的 Python 实现都使用 GIL，Python 实现中，包含 GIL 的有： CPython (我们通常说到 Python 时指的就是这个实现) PyPy 没有 GIL 机制的实现： Jython (Java) IronPython (.NET) 为什么 CPython 中使用 GIL 主要是因为 CPython 的内存管理不是线程安全的。线程安全，主要是要保护共享数据，通常有两种做法： 对每个共享数据进行操作时采用独立的细粒度锁进行保护 使用一个全局粗粒度锁保护所有的共享数据 （GIL） 这两种做法各有优缺点： 细粒度锁可以利用多CPU ..." />
 <meta property="og:site_name" content="Note Everything" />
 <meta property="og:article:author" content="Han" />
-<meta property="og:article:published_time" content="2015-02-28T10:09:00+08:00" />
-<meta name="twitter:title" content="python small tips ">
-<meta name="twitter:description" content="Join two lists a = [1, 2, 3] b = [3, 4, 5] c = a + b [1, 2, 3, 3, 4, 5] Extend a list a = [1, 2, 3] b = [3, 4, 5] a.extend(b) [1, 2, 3, 3, 4, 5] Join two dicts d1 = {1: &#39;a&#39;, 2: &#39;b&#39;} d2 = {3 ...">
+<meta property="og:article:published_time" content="2016-04-18T13:36:00+08:00" />
+<meta name="twitter:title" content="python GIL 整理 ">
+<meta name="twitter:description" content="GIL 是什么 GIL 是 Global Interpreter Lock 的缩写，全局解释器锁。在 CPython 中，GIL 被用来防止多个原生线程同时执行。 其实并不是所有的 Python 实现都使用 GIL，Python 实现中，包含 GIL 的有： CPython (我们通常说到 Python 时指的就是这个实现) PyPy 没有 GIL 机制的实现： Jython (Java) IronPython (.NET) 为什么 CPython 中使用 GIL 主要是因为 CPython 的内存管理不是线程安全的。线程安全，主要是要保护共享数据，通常有两种做法： 对每个共享数据进行操作时采用独立的细粒度锁进行保护 使用一个全局粗粒度锁保护所有的共享数据 （GIL） 这两种做法各有优缺点： 细粒度锁可以利用多CPU ...">
 
-        <title>python small tips  · Note Everything
+        <title>python GIL 整理  · Note Everything
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
@@ -61,7 +61,7 @@
 <article>
 <div class="row-fluid">
     <header class="page-header span10 offset2">
-    <h1><a href="http://blog.hehan.net/python-small-tips.html"> python small tips  </a></h1>
+    <h1><a href="http://blog.hehan.net/python-gil-zheng-li.html"> python GIL 整理  </a></h1>
     </header>
 </div>
 
@@ -69,113 +69,48 @@
         <div class="span8 offset2 article-content">
 
             
-            <h3>Join two lists</h3>
-<pre><code>a = [1, 2, 3]
-b = [3, 4, 5]
-c = a + b
-[1, 2, 3, 3, 4, 5]
-</code></pre>
-
-<h3>Extend a list</h3>
-<pre><code>a = [1, 2, 3]
-b = [3, 4, 5]
-a.extend(b)
-[1, 2, 3, 3, 4, 5]
-</code></pre>
-
-<h3>Join two dicts</h3>
-<pre><code class="python">d1 = {1: 'a', 2: 'b'}
-d2 = {3: 'c', 4: 'd'}
-d1.update(d2)
-# {1: 'a', 2: 'b', 3: 'c', 4: 'd'}
-</code></pre>
-
-<h3>Check if a list/dictionary/tuple is empty</h3>
-<pre><code>l = []      # same for {} and ()
-if l:
-    print 'list is not empty'
-else:
-    print 'list is empty'
-</code></pre>
-
-<h3>Iterate over dictionary</h3>
-<pre><code>d = {'a': 1, 'b': 2}
-for key in d:
-    print key, d[key]
-</code></pre>
-
-<pre><code>d = {'a': 1, 'b': 2}
-for key, value in d.iteritems():
-    print key, value
-</code></pre>
-
-<h3>Access the index while looping a list</h3>
-<pre><code>l = ['a', 'b', 'c', 'd']
-for idx, value in enumerate(l):
-    print idx, value
-</code></pre>
-
-<h3>Reverse range</h3>
-<pre><code>&gt;&gt;&gt; reversed(range(3))
-[2, 1, 0]
-</code></pre>
-
-<h3>Select items from a list randomly</h3>
-<pre><code class="python">import random
-
-l = [1, 2, 3, 4, 6, 7]
-print random.choice(l)         # select single item
-print random.sample(l, 3)      # select 3 random items
-</code></pre>
-
-<h3>Intersection of sets</h3>
-<pre><code class="python">set1 = set(1, 2, 3)
-set2 = set(1, 3)
-set3 = set(3, 4, 5)
-
-set4 = set1.intersection(set2, set3)
-</code></pre>
-
-<h3>Split and convert to int</h3>
-<pre><code class="python">c = '1,2,3,4'
-c.split(',')                # ['1','2','3','4']
-map(int, c.split(','))      # [1,2,3,4]
-</code></pre>
-
-<h3>Mutable and immutable</h3>
-<p><strong>Immutable</strong>:</p>
+            <h2>GIL 是什么</h2>
+<p>GIL 是 Global Interpreter Lock 的缩写，全局解释器锁。在 CPython 中，GIL 被用来防止多个原生线程同时执行。</p>
+<p>其实并不是所有的 Python 实现都使用 GIL，Python 实现中，包含 GIL 的有：</p>
 <ul>
-<li>integers and other numerical types</li>
-<li>string types like str and unicode</li>
-<li>tuples</li>
+<li>CPython (我们通常说到 Python 时指的就是这个实现)</li>
+<li>PyPy</li>
 </ul>
-<p><strong>Mutable</strong>: everything else, like,</p>
+<p>没有 GIL 机制的实现：</p>
 <ul>
-<li>lists</li>
-<li>dicts</li>
-<li>class</li>
-<li>class instance</li>
-<li>etc.</li>
+<li>Jython (Java)</li>
+<li>IronPython (.NET)</li>
 </ul>
-<h3>Double quote VS. single quote</h3>
+<h2>为什么 CPython 中使用 GIL</h2>
+<p>主要是因为 CPython 的内存管理不是线程安全的。线程安全，主要是要保护共享数据，通常有两种做法：</p>
 <ul>
-<li>use double quotes around strings that are used for interpolation or that are natural language messages</li>
-<li>single quotes for small symbol-like strings</li>
-<li>use triple double quotes for docstrings and raw string literals</li>
+<li>对每个共享数据进行操作时采用独立的细粒度锁进行保护</li>
+<li>使用一个全局粗粒度锁保护所有的共享数据 （GIL）</li>
 </ul>
-<pre><code>LIGHT_MESSAGES = {
-    'English': &quot;There are %(number_of_lights)s lights.&quot;,
-    'Pirate':  &quot;Arr! Thar be %(number_of_lights)s lights.&quot;
-}
-
-def lights_message(language, number_of_lights):
-    &quot;&quot;&quot;Return a language-appropriate string reporting the light count.&quot;&quot;&quot;
-    return LIGHT_MESSAGES[language] % locals()
-
-def is_pirate(message):
-    &quot;&quot;&quot;Return True if the given message sounds piratical.&quot;&quot;&quot;
-    return re.search(r&quot;(?i)(arr|avast|yohoho)!&quot;, message) is not None
-</code></pre>
+<p>这两种做法各有优缺点：</p>
+<ul>
+<li>细粒度锁可以利用多CPU，多个线程可以同时执行，发挥并发的优势，但锁是有开销的，而且程序复杂度也较高；</li>
+<li>全局锁正好相反，两个线程不能同时执行，但是单线程执行时效率会更高；</li>
+</ul>
+<p>采用 GIL 而不是细粒度锁的好处：</p>
+<ul>
+<li>单线程程序会更快</li>
+<li>编写基于C的扩展程序时更容易</li>
+<li>使用C库时更容易，不用考虑C库是否线程安全</li>
+</ul>
+<p>减小 GIL 影响的做法：</p>
+<ul>
+<li>提供了释放 GIL 的机制，实际上标准库中，在每个 blocking i/o 的调用时候，GIL 都会被释放掉，所以对于IO型的程序，GIL 并不会导致性能下降;</li>
+<li>对于像 NumPy 这样的计算型库，在调用C或者Fortran时，总是尽可能的先释放掉 GIL，保证其它的线程可以继续执行;</li>
+</ul>
+<p>实际上移除 GIL 的讨论一直都存在，但是到目前为止都还没有一个很好的实现，<a href="http://www.artima.com/weblogs/viewpost.jsp?thread=214235">Guido 也承认移除 GIL 是很困难的</a>。之前的 Patch 会使单线程的性能下降很多，但对多线程程序的性能提升又有限，所以被弃用。</p>
+<h2>References</h2>
+<p><a href="https://wiki.python.org/moin/GlobalInterpreterLock">https://wiki.python.org/moin/GlobalInterpreterLock</a><br />
+<a href="http://programmers.stackexchange.com/questions/186889/why-was-python-written-with-the-gil">http://programmers.stackexchange.com/questions/186889/why-was-python-written-with-the-gil</a><br />
+<a href="http://stackoverflow.com/questions/265687/why-the-global-interpreter-lock">http://stackoverflow.com/questions/265687/why-the-global-interpreter-lock</a><br />
+<a href="https://docs.python.org/2/faq/library.html#can-t-we-get-rid-of-the-global-interpreter-lock">https://docs.python.org/2/faq/library.html#can-t-we-get-rid-of-the-global-interpreter-lock</a><br />
+<a href="http://www.dabeaz.com/GIL/">http://www.dabeaz.com/GIL/</a><br />
+<a href="http://python-notes.curiousefficiency.org/en/latest/python3/multicore_python.html">http://python-notes.curiousefficiency.org/en/latest/python3/multicore_python.html</a>  </p>
             
             
             <hr/>
@@ -183,7 +118,7 @@ def is_pirate(message):
         <section>
         <div class="span2" style="float:right;font-size:0.9em;">
             <h4>Published</h4>
-            <time pubdate="pubdate" datetime="2015-02-28T10:09:00+08:00"> 2 28, 2015</time>
+            <time pubdate="pubdate" datetime="2016-04-18T13:36:00+08:00"> 4 18, 2016</time>
             <h4>Category</h4>
             <a class="category-link" href="http://blog.hehan.net/categories.html#tech-ref">tech</a>
             <h4>Tags</h4>

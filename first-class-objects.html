@@ -10,18 +10,18 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="http, api, tech, " />
+<meta name="keywords" content="python, tech, " />
 
-<meta property="og:title" content="http api 设计中 GET 还是 POST "/>
-<meta property="og:url" content="http://blog.hehan.net/http-api-she-ji-zhong-get-huan-shi-post.html" />
-<meta property="og:description" content="GET 用于安全的操作，POST 用于不安全的操作 GET有以下特性： - GET requests can be cached - GET requests can remain in the browser history - GET requests can be bookmarked - GET requests can be distributed &amp; shared - GET requests can be hacked (CSRF) 如果对于一个删除接口，例如： GET /address/delete/&lt;id&gt;/ 这样的接口会存在安全隐患，在用户登录状态下，点击链接就会触发接口的调用，容易被用于攻击。 接口设计时应该有这样的设定： 凡是对服务端数据进行修改的接口，使用 POST ..." />
+<meta property="og:title" content="first class objects "/>
+<meta property="og:url" content="http://blog.hehan.net/first-class-objects.html" />
+<meta property="og:description" content="我们经常听到说，python 中一切皆对象，还有就是function is first class object，到底 first class object 是什么意思？ 维基百科里面是这样定义 first class 的： In programming language design, a first-class citizen (also type, object, entity, or value) in a given programming language is an entity which supports all the operations generally available to other entities ..." />
 <meta property="og:site_name" content="Note Everything" />
 <meta property="og:article:author" content="Han" />
-<meta property="og:article:published_time" content="2016-01-26T18:03:00+08:00" />
-<meta name="twitter:title" content="http api 设计中 GET 还是 POST ">
-<meta name="twitter:description" content="GET 用于安全的操作，POST 用于不安全的操作 GET有以下特性： - GET requests can be cached - GET requests can remain in the browser history - GET requests can be bookmarked - GET requests can be distributed &amp; shared - GET requests can be hacked (CSRF) 如果对于一个删除接口，例如： GET /address/delete/&lt;id&gt;/ 这样的接口会存在安全隐患，在用户登录状态下，点击链接就会触发接口的调用，容易被用于攻击。 接口设计时应该有这样的设定： 凡是对服务端数据进行修改的接口，使用 POST ...">
+<meta property="og:article:published_time" content="2016-04-18T13:36:00+08:00" />
+<meta name="twitter:title" content="first class objects ">
+<meta name="twitter:description" content="我们经常听到说，python 中一切皆对象，还有就是function is first class object，到底 first class object 是什么意思？ 维基百科里面是这样定义 first class 的： In programming language design, a first-class citizen (also type, object, entity, or value) in a given programming language is an entity which supports all the operations generally available to other entities ...">
 
-        <title>http api 设计中 GET 还是 POST  · Note Everything
+        <title>first class objects  · Note Everything
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
@@ -61,7 +61,7 @@
 <article>
 <div class="row-fluid">
     <header class="page-header span10 offset2">
-    <h1><a href="http://blog.hehan.net/http-api-she-ji-zhong-get-huan-shi-post.html"> http api 设计中 GET 还是 POST  </a></h1>
+    <h1><a href="http://blog.hehan.net/first-class-objects.html"> first class objects  </a></h1>
     </header>
 </div>
 
@@ -69,26 +69,17 @@
         <div class="span8 offset2 article-content">
 
             
-            <h3>GET 用于安全的操作，POST 用于不安全的操作</h3>
-<p><code>GET</code>有以下特性：<br />
-- GET requests can be cached<br />
-- GET requests can remain in the browser history<br />
-- GET requests can be bookmarked<br />
-- GET requests can be distributed &amp; shared<br />
-- GET requests can be hacked (CSRF)</p>
-<p>如果对于一个删除接口，例如：</p>
-<pre><code>GET /address/delete/&lt;id&gt;/
-</code></pre>
-
-<p>这样的接口会存在安全隐患，在用户登录状态下，点击链接就会触发接口的调用，容易被用于攻击。</p>
-<p>接口设计时应该有这样的设定：</p>
+            <p>我们经常听到说，python 中一切皆对象，还有就是<code>function is first class object</code>，到底 first class object 是什么意思？<br />
+<a href="https://en.wikipedia.org/wiki/First-class_citizen">维基百科</a>里面是这样定义 <code>first class</code> 的：</p>
 <blockquote>
-<p>凡是对服务端数据进行修改的接口，使用 <code>POST</code>，而不是 <code>GET</code>。</p>
+<p>In programming language design, a first-class citizen (also type, object, entity, or value) in a given programming language is an entity which supports all the operations generally available to other entities. These operations typically include being passed as an argument, returned from a function, and assigned to a variable.</p>
 </blockquote>
-<h3>对于参数多导致URL过长的场景应该使用 POST</h3>
-<p>虽然 RFC 没有 URL 长度的规定，但是老版 IE ，某些代理服务器，对 URL 的长度会有限制的，比如2048。</p>
-<h3>ajax 请求数据时尽量使用 GET</h3>
-<p>浏览器在处理 <code>XMLHttpRequest</code> 的时候，会分两步进行发送，先发头部，再发送数据，使用 <code>GET</code> 的话，可以更快的发送请求，获得响应。(待验证)</p>
+<p>对应到 python 中，也就是说函数跟普通的变量一样，可以被创建，传递，赋值，返回。</p>
+<p>实际上，python 的<a href="http://python-history.blogspot.jp/2009/02/first-class-everything.html">设计目标</a>是 <code>Everything is a object and first class everything</code>.</p>
+<blockquote>
+<p>By this, I meant that I wanted all objects that could be named in the language (e.g., integers, strings, functions, classes, modules, methods, etc.) to have equal status. That is, they can be assigned to variables, placed in lists, stored in dictionaries, passed as arguments, and so forth.</p>
+</blockquote>
+<p><a href="http://stackoverflow.com/questions/245192/what-are-first-class-objects">http://stackoverflow.com/questions/245192/what-are-first-class-objects</a></p>
             
             
             <hr/>
@@ -96,16 +87,13 @@
         <section>
         <div class="span2" style="float:right;font-size:0.9em;">
             <h4>Published</h4>
-            <time pubdate="pubdate" datetime="2016-01-26T18:03:00+08:00"> 1 26, 2016</time>
+            <time pubdate="pubdate" datetime="2016-04-18T13:36:00+08:00"> 4 18, 2016</time>
             <h4>Category</h4>
             <a class="category-link" href="http://blog.hehan.net/categories.html#tech-ref">tech</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="http://blog.hehan.net/tags.html#api-ref">api
-                    <span>1</span>
-</a></li>
-                <li><a href="http://blog.hehan.net/tags.html#http-ref">http
-                    <span>1</span>
+                <li><a href="http://blog.hehan.net/tags.html#python-ref">python
+                    <span>10</span>
 </a></li>
             </ul>
 <h4>Contact</h4>

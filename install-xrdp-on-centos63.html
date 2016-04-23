@@ -14,12 +14,12 @@
 
 <meta property="og:title" content="Install xrdp on CentOS63 "/>
 <meta property="og:url" content="http://blog.hehan.net/install-xrdp-on-centos63.html" />
-<meta property="og:description" content="Install packages CentOS 6.3 does not have xrdp package in the official repo. Install xrdp wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm wget http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6 rpm --import RPM-GPG-KEY-EPEL-6 ..." />
+<meta property="og:description" content="Install packages CentOS 6.3 does not have xrdp package in the official repo. Install xrdp wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm wget http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6 rpm --import RPM-GPG-KEY-EPEL-6 rpm --ivh epel*.rpm yum install xrdp Start service /etc/init ..." />
 <meta property="og:site_name" content="Note Everything" />
 <meta property="og:article:author" content="Han" />
 <meta property="og:article:published_time" content="2013-08-07T11:35:00+08:00" />
 <meta name="twitter:title" content="Install xrdp on CentOS63 ">
-<meta name="twitter:description" content="Install packages CentOS 6.3 does not have xrdp package in the official repo. Install xrdp wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm wget http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6 rpm --import RPM-GPG-KEY-EPEL-6 ...">
+<meta name="twitter:description" content="Install packages CentOS 6.3 does not have xrdp package in the official repo. Install xrdp wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm wget http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6 rpm --import RPM-GPG-KEY-EPEL-6 rpm --ivh epel*.rpm yum install xrdp Start service /etc/init ...">
 
         <title>Install xrdp on CentOS63  · Note Everything
 </title>
@@ -74,58 +74,52 @@
 <ul>
 <li>Install xrdp</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="n">wget</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">dl</span><span class="o">.</span><span class="n">fedoraproject</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">epel</span><span class="o">/</span><span class="mi">6</span><span class="o">/</span><span class="n">x86_64</span><span class="o">/</span><span class="n">epel</span><span class="o">-</span><span class="n">release</span><span class="o">-</span><span class="mi">6</span><span class="o">-</span><span class="mf">8.</span><span class="n">noarch</span><span class="o">.</span><span class="n">rpm</span>
-<span class="n">wget</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">dl</span><span class="o">.</span><span class="n">fedoraproject</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">epel</span><span class="o">/</span><span class="n">RPM</span><span class="o">-</span><span class="n">GPG</span><span class="o">-</span><span class="n">KEY</span><span class="o">-</span><span class="n">EPEL</span><span class="o">-</span><span class="mi">6</span>
-<span class="n">rpm</span> <span class="o">--</span><span class="kn">import</span> <span class="nn">RPM</span><span class="o">-</span><span class="n">GPG</span><span class="o">-</span><span class="n">KEY</span><span class="o">-</span><span class="n">EPEL</span><span class="o">-</span><span class="mi">6</span>
-<span class="n">rpm</span> <span class="o">--</span><span class="n">ivh</span> <span class="n">epel</span><span class="o">*.</span><span class="n">rpm</span>
-<span class="n">yum</span> <span class="n">install</span> <span class="n">xrdp</span>
-</pre></div>
-
+<pre><code>wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+wget http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6
+rpm --import RPM-GPG-KEY-EPEL-6
+rpm --ivh epel*.rpm
+yum install xrdp
+</code></pre>
 
 <h3>Start service</h3>
-<div class="highlight"><pre><span></span>/etc/init.d/xrdp start
+<pre><code>/etc/init.d/xrdp start
 chkconfig xrdp on
-</pre></div>
-
+</code></pre>
 
 <h3>Issues</h3>
 <ul>
-<li>problem connecting 5910
+<li>problem connecting 5910<br />
 try start vncserver</li>
 </ul>
-<div class="highlight"><pre><span></span>/etc/init.d/vncserver start
-</pre></div>
-
+<pre><code>/etc/init.d/vncserver start
+</code></pre>
 
 <ul>
-<li>vnc no display configured
+<li>vnc no display configured<br />
 edit /etc/sysconfig/vncservers</li>
 </ul>
-<div class="highlight"><pre><span></span>VNCSERVERS=&quot;2:root&quot;
+<pre><code>VNCSERVERS=&quot;2:root&quot;
 VNCSERVERARGS[2]=&quot;-geometry 1280x1024 -localhost&quot;
-</pre></div>
-
+</code></pre>
 
 <ul>
-<li>vnc password for user root is not configured
+<li>vnc password for user root is not configured<br />
 login as root</li>
 </ul>
-<div class="highlight"><pre><span></span>vncpasswd
-</pre></div>
-
+<pre><code>vncpasswd
+</code></pre>
 
 <ul>
 <li>vnc undefined symbol: pixman_composite_trapezoids</li>
 </ul>
-<div class="highlight"><pre><span></span>yum update pixman pixman-devel
-</pre></div>
-
+<pre><code>yum update pixman pixman-devel
+</code></pre>
 
 <ul>
 <li>vnc could not open default font 'fixed'</li>
 </ul>
-<div class="highlight"><pre><span></span>yum install libXfont
-</pre></div>
+<pre><code>yum install libXfont
+</code></pre>
             
             
             <hr/>

@@ -70,19 +70,18 @@
 
             
             <h4>Use <code>related_name</code>:</h4>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Test</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-    <span class="n">example1</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Example</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;test1&#39;</span><span class="p">)</span>
-    <span class="n">example2</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Example</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;test2&#39;</span><span class="p">)</span>
-</pre></div>
-
+<pre><code class="python">class Test(models.Model):
+    example1 = models.ForeignKey(Example, related_name='test1')
+    example2 = models.ForeignKey(Example, related_name='test2')
+</code></pre>
 
 <p>See <a href="http://stackoverflow.com/questions/543377/how-can-i-have-two-foreign-keys-to-the-same-model-in-django">stackoverflow question</a> and <a href="http://docs.djangoproject.com/en/dev/ref/models/fields/#foreignkey">django doc</a></p>
 <h4>Why <code>related_name</code>:</h4>
 <p>The <code>related_name</code> attributes specifies the name of reverse relation from <code>Example</code> model<br />
 to your model.</p>
-<p>If no <code>related_name</code> is specified, Django creates one using the name of your model with suffix <code>_set</code>,
+<p>If no <code>related_name</code> is specified, Django creates one using the name of your model with suffix <code>_set</code>,<br />
 for instance <code>example.test_set.all()</code></p>
-<p>In this case, as there are two foreign keys to <code>Example</code>, if <code>related_name</code> is not specified, Django
+<p>In this case, as there are two foreign keys to <code>Example</code>, if <code>related_name</code> is not specified, Django<br />
 doesn't know how to build up the reverse relation.</p>
 <p>See <a href="http://docs.djangoproject.com/en/dev/topics/db/queries/#backwards-related-objects">django doc</a></p>
             
@@ -101,7 +100,7 @@ doesn't know how to build up the reverse relation.</p>
                     <span>5</span>
 </a></li>
                 <li><a href="http://blog.hehan.net/tags.html#python-ref">python
-                    <span>7</span>
+                    <span>10</span>
 </a></li>
             </ul>
 <h4>Contact</h4>

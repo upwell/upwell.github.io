@@ -85,22 +85,21 @@ target.</p>
 <h2>Surround</h2>
 <p>With plugin <a href="https://github.com/tpope/vim-surround">Surround</a>, you can easily handle surround with words.</p>
 <h3>Add surroundings</h3>
-<p><code>ys</code> takes an <strong>valid Vim motion</strong> or text object as the first object and wraps it using the second
+<p><code>ys</code> takes an <strong>valid Vim motion</strong> or text object as the first object and wraps it using the second<br />
 argument.</p>
-<div class="highlight"><pre><span></span>  Old text                  Command     New text
+<pre><code>  Old text                  Command     New text
   Hello w*orld!             ysiw)       Hello (world)!
-</pre></div>
+</code></pre>
 
-
-<p>Under <strong>visual mode</strong>, select content and press <code>S</code> with the surrounding wound wrap the selected
+<p>Under <strong>visual mode</strong>, select content and press <code>S</code> with the surrounding wound wrap the selected<br />
 content.</p>
 <h3>Delete surroundings</h3>
 <p>Delete surroundings is <code>ds</code> .</p>
-<div class="highlight"><pre><span></span>  Old text                  Command     New text ~
+<pre><code>  Old text                  Command     New text ~
   &quot;Hello *world!&quot;           ds&quot;         Hello world!
   (123+4*56)/2              ds)         123+456/2
-  <span class="nt">&lt;div&gt;</span>Yo!*<span class="nt">&lt;/div&gt;</span>           dst         Yo!
-</pre></div>
+  &lt;div&gt;Yo!*&lt;/div&gt;           dst         Yo!
+</code></pre>
             
             
             <hr/>

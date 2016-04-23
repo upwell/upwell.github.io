@@ -70,14 +70,14 @@
 
             
             <h3>Object Literals</h3>
-<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">empty_object</span> <span class="o">=</span> <span class="p">{};</span>
+<pre><code class="js">var empty_object = {};
 
-<span class="kd">var</span> <span class="nx">stooge</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;first-name&quot;</span><span class="o">:</span> <span class="s2">&quot;Jerome&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;last-name&quot;</span><span class="o">:</span> <span class="s2">&quot;Howard&quot;</span>
-<span class="p">};</span>
-</pre></div>
+var stooge = {
+    &quot;first-name&quot;: &quot;Jerome&quot;,
+    &quot;last-name&quot;: &quot;Howard&quot;
+};
 
+</code></pre>
 
 <h4>Property Name</h4>
 <ul>
@@ -85,22 +85,21 @@
 <li><strong>the quote around the name is optional</strong>, if the name is a legal Javascript<br />
   name (not a reserved word);</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">flight</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">airline</span><span class="o">:</span> <span class="s2">&quot;Ocreanic&quot;</span><span class="p">,</span>
-    <span class="nx">number</span><span class="o">:</span> <span class="mi">815</span><span class="p">,</span>
-    <span class="nx">departure</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">IATA</span><span class="o">:</span> <span class="s2">&quot;SYD&quot;</span><span class="p">,</span>
-        <span class="nx">time</span><span class="o">:</span> <span class="s2">&quot;2012-10-12 12:11&quot;</span><span class="p">,</span>
-        <span class="nx">city</span><span class="o">:</span> <span class="s2">&quot;Sydney&quot;</span>
-    <span class="p">},</span>
-    <span class="nx">arrival</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">IATA</span><span class="o">:</span> <span class="s2">&quot;LAX&quot;</span><span class="p">,</span>
-        <span class="nx">time</span><span class="o">:</span> <span class="s2">&quot;2012-10-13 12:10&quot;</span><span class="p">,</span>
-        <span class="nx">city</span><span class="o">:</span> <span class="s2">&quot;Los Angeles&quot;</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-</pre></div>
-
+<pre><code class="js">var flight = {
+    airline: &quot;Ocreanic&quot;,
+    number: 815,
+    departure: {
+        IATA: &quot;SYD&quot;,
+        time: &quot;2012-10-12 12:11&quot;,
+        city: &quot;Sydney&quot;
+    },
+    arrival: {
+        IATA: &quot;LAX&quot;,
+        time: &quot;2012-10-13 12:10&quot;,
+        city: &quot;Los Angeles&quot;
+    }
+};
+</code></pre>
 
 <h3>Retrieval</h3>
 <ul>
@@ -112,32 +111,29 @@
   member:</li>
 <li>Attempting to retrieve values from undefined will throw a TypeError exception;</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="nx">stoog</span><span class="p">[</span><span class="s2">&quot;first-name&quot;</span><span class="p">]</span>         <span class="c1">// &quot;Jerome&quot;</span>
-<span class="nx">flight</span><span class="p">.</span><span class="nx">departure</span><span class="p">.</span><span class="nx">city</span>       <span class="c1">// &quot;Sydney&quot;</span>
+<pre><code class="js">stoog[&quot;first-name&quot;]         // &quot;Jerome&quot;
+flight.departure.city       // &quot;Sydney&quot;
 
-<span class="nx">flight</span><span class="p">.</span><span class="nx">status</span>               <span class="c1">// undefined</span>
+flight.status               // undefined
 
-<span class="nx">flight</span><span class="p">.</span><span class="nx">equipment</span><span class="p">.</span><span class="nx">model</span>      <span class="c1">// throw &quot;TypeError&quot;</span>
-<span class="nx">flight</span><span class="p">.</span><span class="nx">equipment</span> <span class="o">&amp;&amp;</span> <span class="nx">flight</span><span class="p">.</span><span class="nx">equipment</span><span class="p">.</span><span class="nx">model</span> <span class="c1">// undefined</span>
-</pre></div>
-
+flight.equipment.model      // throw &quot;TypeError&quot;
+flight.equipment &amp;&amp; flight.equipment.model // undefined
+</code></pre>
 
 <h3>Update</h3>
-<div class="highlight"><pre><span></span><span class="nx">stoog</span><span class="p">[</span><span class="s2">&quot;first-name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Jack&quot;</span><span class="p">;</span><span class="c1">// if the property name already exist, update the value;</span>
+<pre><code class="js">stoog[&quot;first-name&quot;] = &quot;Jack&quot;;// if the property name already exist, update the value;
 
-<span class="nx">stoog</span><span class="p">.</span><span class="nx">sex</span> <span class="o">=</span> <span class="s2">&quot;Male&quot;</span><span class="p">;</span>          <span class="c1">// if the property name not exist, the object is augmented;</span>
-</pre></div>
-
+stoog.sex = &quot;Male&quot;;          // if the property name not exist, the object is augmented;
+</code></pre>
 
 <h3>Reference</h3>
 <p>Object is passed <strong>BY REFERENCE</strong>, never by copied.</p>
-<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">{},</span> <span class="nx">b</span> <span class="o">=</span> <span class="p">{},</span> <span class="nx">c</span> <span class="o">=</span> <span class="p">{};</span>
-    <span class="c1">// refer to different empty objects</span>
+<pre><code class="js">var a = {}, b = {}, c = {};
+    // refer to different empty objects
 
-<span class="nx">a</span> <span class="o">=</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">c</span> <span class="o">=</span> <span class="p">{};</span>
-    <span class="c1">// refer to the same empty object</span>
-</pre></div>
-
+a = b = c = {};
+    // refer to the same empty object
+</code></pre>
 
 <h3>Prototype</h3>
 <p>Every object is linked to a <strong>prototype object</strong>. All objects created from object literal <code>{}</code><br />
@@ -146,59 +142,53 @@ are linked to <code>Object.prototype</code>.</p>
 prototype is not touched.</p>
 <p>The prototype relationship is a dynamic relationship. If we add a new property to a prototype,<br />
 that property will immediately be visible in all the objects that are based on that prototype.</p>
-<div class="highlight"><pre><span></span><span class="nx">stooge</span><span class="p">.</span><span class="nx">profession</span> <span class="o">=</span> <span class="s1">&#39;actor&#39;</span><span class="p">;</span>
-<span class="nx">another_stooge</span><span class="p">.</span><span class="nx">profession</span> <span class="c1">// &#39;actor&#39;</span>
-</pre></div>
-
+<pre><code class="js">stooge.profession = 'actor';
+another_stooge.profession // 'actor'
+</code></pre>
 
 <h3>Reflection</h3>
 <p>Check if the object has a property:</p>
 <p>Use <code>typeof</code> operator.</p>
-<div class="highlight"><pre><span></span><span class="k">typeof</span> <span class="nx">flight</span><span class="p">.</span><span class="nx">number</span>        <span class="c1">// &#39;number&#39;</span>
-<span class="k">typeof</span> <span class="nx">flight</span><span class="p">.</span><span class="nx">status</span>        <span class="c1">// &#39;string&#39;</span>
-<span class="k">typeof</span> <span class="nx">flight</span><span class="p">.</span><span class="nx">manifest</span>      <span class="c1">// &#39;undefined&#39;</span>
-</pre></div>
-
+<pre><code class="js">typeof flight.number        // 'number'
+typeof flight.status        // 'string'
+typeof flight.manifest      // 'undefined'
+</code></pre>
 
 <p>Any property on the prototype chain can produce a value:</p>
-<div class="highlight"><pre><span></span><span class="k">typeof</span> <span class="nx">flight</span><span class="p">.</span><span class="nx">toString</span>      <span class="c1">// &#39;function&#39;</span>
-</pre></div>
-
+<pre><code class="js">typeof flight.toString      // 'function'
+</code></pre>
 
 <p>Use <code>hasOwnProperty</code> method. This method does <strong>NOT</strong> check the prototype chain.</p>
-<div class="highlight"><pre><span></span><span class="nx">flight</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;number&#39;</span><span class="p">)</span>     <span class="c1">// true</span>
-<span class="nx">flight</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;toString&#39;</span><span class="p">)</span>   <span class="c1">// false</span>
-</pre></div>
-
+<pre><code class="js">flight.hasOwnProperty('number')     // true
+flight.hasOwnProperty('toString')   // false
+</code></pre>
 
 <h3>Enumeration</h3>
 <p>Loop over all the property names in an object.</p>
 <p><code>for in</code> statement. The enumeration will include all of the properties (functions and<br />
 properties in the prototype chain.)</p>
-<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">name</span><span class="p">;</span>
-<span class="k">for</span><span class="p">(</span><span class="nx">name</span> <span class="k">in</span> <span class="nx">another_stooge</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">another_stooge</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">!==</span> <span class="s1">&#39;function) {</span>
-<span class="s1">        document.writeln(name + &#39;</span><span class="o">:</span> <span class="err">&#39;</span> <span class="o">+</span> <span class="nx">another_stooge</span><span class="p">[</span><span class="nx">name</span><span class="p">]);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-
+<pre><code class="js">var name;
+for(name in another_stooge) {
+    if(typeof another_stooge[name] !== 'function) {
+        document.writeln(name + ': ' + another_stooge[name]);
+    }
+}
+</code></pre>
 
 <p>But there is <strong>NO</strong> gurantee on the order of the names.</p>
 <p>The better way is to created a property array and loop the array with the right order.</p>
-<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">i</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">properties</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;first-name&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;last-name&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;profession&#39;</span>
-<span class="p">];</span>
+<pre><code class="js">var i;
+var properties = [
+    'first-name',
+    'last-name',
+    'profession'
+];
 
-<span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">properties</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">writeln</span><span class="p">(</span><span class="nx">properties</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;: &#39;</span> <span class="o">+</span>
-        <span class="nx">another_stooge</span><span class="p">[</span><span class="nx">properties</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
-<span class="p">}</span>
-</pre></div>
-
+for(i = 0; i &lt; properties.length; i += 1) {
+    document.writeln(properties[i] + ': ' +
+        another_stooge[properties[i]);
+}
+</code></pre>
 
 <h3>Delete</h3>
 <p>The <code>delete</code> operator can be used to remove a property from a object. It does <strong>NOT</strong> touch<br />

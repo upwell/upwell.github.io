@@ -74,27 +74,25 @@
 the permissions, apache still failed to access the <code>HOME</code> directory.</p>
 <h3>Solution</h3>
 <p>After a little dig, occationally I found the <code>HOME</code> directory has a special permission symbol.</p>
-<div class="highlight"><pre><span></span>drwxr-xr-x+ 93 han      han      4.0K 6月  23 11:30 han
-</pre></div>
-
+<pre><code>drwxr-xr-x+ 93 han      han      4.0K 6月  23 11:30 han
+</code></pre>
 
 <p>There is a <code>+</code> at the end of permission field. What does this means?</p>
 <p><a href="http://serverfault.com/questions/227852/what-does-a-mean-at-the-end-of-the-permissions-from-ls-l">This</a> gives an explanation of this special <code>+</code> sign.</p>
 <p>The <code>HOME</code> directory has extended permissions. The output of <code>getfacl</code>:</p>
-<div class="highlight"><pre><span></span><span class="c1"># file: han</span>
-<span class="c1"># owner: han</span>
-<span class="c1"># group: han</span>
-<span class="nn">user</span><span class="p">:</span><span class="s s-Atom">:rwx</span>
-<span class="nn">user</span><span class="p">:</span><span class="nn">qemu</span><span class="p">:</span><span class="s s-Atom">--x</span>
-<span class="nn">group</span><span class="p">::-</span><span class="s s-Atom">--</span>
-<span class="nn">mask</span><span class="p">:</span><span class="s s-Atom">:r</span><span class="o">-</span><span class="s s-Atom">x</span>
-<span class="nn">other</span><span class="p">:</span><span class="s s-Atom">:r</span><span class="o">-</span><span class="s s-Atom">x</span>
-</pre></div>
-
+<pre><code># file: han
+# owner: han
+# group: han
+user::rwx
+user:qemu:--x
+group::---
+mask::r-x
+other::r-x
+</code></pre>
 
 <p>The following command grants the group <code>r+x</code> permissions.</p>
-<div class="highlight"><pre><span></span># setfacl -m &#39;g:han:rx&#39; han
-</pre></div>
+<pre><code># setfacl -m 'g:han:rx' han
+</code></pre>
             
             
             <hr/>

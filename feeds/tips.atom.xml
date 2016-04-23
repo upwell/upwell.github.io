@@ -6,26 +6,23 @@
 &lt;/blockquote&gt;
 &lt;h2&gt;运行&lt;/h2&gt;
 &lt;p&gt;启动 &lt;code&gt;Docker Quickstart Terminal&lt;/code&gt; 后，默认会创建好一台 linux 虚拟机，可以通过下面的命令查看：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;➜  ~ docker-machine ls
+&lt;pre&gt;&lt;code class="bash"&gt;➜  ~ docker-machine ls
 NAME      ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER    ERRORS
 default   *        virtualbox   Running   tcp://192.168.99.100:2376           v1.10.3  
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;这里可以看到已经通过 virtualbox 创建好了一台 linux 虚拟机，基于 docker 的操作都在该台虚拟机中完成。同时在 mac 中打开 VirtualBox 应用，也能打开相应的虚拟机在运行中。&lt;/p&gt;
 &lt;p&gt;执行&lt;code&gt;docker run hello-world&lt;/code&gt;可以验证 docker 是否安装好了，由于 docker 服务在国外，速度慢，可以配置使用代理服务器来下载，执行下面的命令让&lt;code&gt;docker run&lt;/code&gt;使用代理服务器。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;export http_proxy=http://localhost:8118
+&lt;pre&gt;&lt;code&gt;export http_proxy=http://localhost:8118
 export https_proxy=http://localhost:8118
 export no_proxy=&amp;quot;192.168.99.100&amp;quot;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;注意最后的&lt;code&gt;export no_proxy&lt;/code&gt;是必须的，否则&lt;code&gt;docker&lt;/code&gt;在连接虚拟机时也会走代理服务器，连接当然会出错了。&lt;/p&gt;
 &lt;h2&gt;使用 docker&lt;/h2&gt;
 &lt;p&gt;使用 docker 部署 &lt;a href="https://github.com/Thibaut/devdocs/"&gt;devdocs&lt;/a&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker build -t thibaut/devdocs .
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;pre&gt;&lt;code&gt;docker build -t thibaut/devdocs .
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;这个时候，container 中会更新服务，这个时候有两个需要注意的：&lt;/p&gt;
 &lt;ol&gt;
@@ -33,14 +30,13 @@ export no_proxy=&amp;quot;192.168.99.100&amp;quot;
 &lt;li&gt;内部系统更新时，网络较慢时，需要使用代理，可以在 Dockerfile 中配置 &lt;code&gt;ENV http(s)_proxy=&lt;/code&gt;。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;初始化启动服务：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker run --name devdocs -d -p 9292:9292 thibaut/devdocs
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;pre&gt;&lt;code&gt;docker run --name devdocs -d -p 9292:9292 thibaut/devdocs
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;服务跑起来后，并不是在&lt;code&gt;localhost:9292&lt;/code&gt;，而是&lt;code&gt;192.168.99.100:9292&lt;/code&gt;。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;重新启动&lt;code&gt;devdocs&lt;/code&gt;：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker start devdocs
+&lt;pre&gt;&lt;code&gt;docker start devdocs
 docker restart devdocs
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="docker"></category><category term="osx"></category></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;</summary><category term="docker"></category><category term="osx"></category></entry></feed>

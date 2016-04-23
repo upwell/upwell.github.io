@@ -71,12 +71,11 @@
             
             <h2>Issue</h2>
 <p>When execute:</p>
-<div class="highlight"><pre><span></span># rpm -ivh ~/Downloads/jdk-7u45-linux-i586.rpm
-</pre></div>
-
+<pre><code># rpm -ivh ~/Downloads/jdk-7u45-linux-i586.rpm
+</code></pre>
 
 <p>There comes error messages:</p>
-<div class="highlight"><pre><span></span>Unpacking JAR files...
+<pre><code>Unpacking JAR files...
     rt.jar...
 Error: Could not open input file: /usr/java/jdk1.7.0_45/jre/lib/rt.pack
 Error: unpack could not create JAR file:
@@ -90,13 +89,12 @@ Error: Could not open input file: /usr/java/jdk1.7.0_45/jre/lib/jsse.pack
 Error: unpack could not create JAR file:
 
     /usr/java/jdk1.7.0_45/jre/lib/jsse.jar
-</pre></div>
-
+</code></pre>
 
 <h2>Solution</h2>
 <p>Install the 32bit libraries:</p>
-<div class="highlight"><pre><span></span># rpm -ivh glibc.i686 glibc-devel.i686
-</pre></div>
+<pre><code># rpm -ivh glibc.i686 glibc-devel.i686
+</code></pre>
             
             
             <hr/>

@@ -87,20 +87,19 @@
 <li>同时在 <code>default manager</code> 中加入 <code>use_for_related_fields=True</code>；</li>
 </ul>
 <h2>reverse query 时使用的 manager</h2>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<pre><code class="python">from django.db import models
 
-<span class="k">class</span> <span class="nc">Entry</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-    <span class="c1">#...</span>
-    <span class="n">objects</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Manager</span><span class="p">()</span>  <span class="c1"># Default Manager</span>
-    <span class="n">entries</span> <span class="o">=</span> <span class="n">EntryManager</span><span class="p">()</span>    <span class="c1"># Custom Manager</span>
+class Entry(models.Model):
+    #...
+    objects = models.Manager()  # Default Manager
+    entries = EntryManager()    # Custom Manager
 
-<span class="n">b</span> <span class="o">=</span> <span class="n">Blog</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">b</span><span class="o">.</span><span class="n">entry_set</span><span class="p">(</span><span class="n">manager</span><span class="o">=</span><span class="s1">&#39;entries&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
-</pre></div>
+b = Blog.objects.get(id=1)
+b.entry_set(manager='entries').all()
+</code></pre>
 
-
-<p>默认情况下，<code>RelatedManager</code> 会使用对应 model 的 <strong>default manager</strong> 的子类作为查询时的 manager，你也可以通过传入 <code>manager</code> 参数来使用指定的 manager。<br />
-<code>ManyToMany</code> 的查询也采用了上面的逻辑。</p>
+<p>默认情况下，<code>RelatedManager</code> 会使用对应 model 的 <strong>default manager</strong> 的子类作为查询时的 manager，你也可以通过传入 <code>manager</code> 参数来使用指定的 manager。  </p>
+<p><code>ManyToMany</code> 的查询也采用了上面的逻辑。</p>
 <h2>References</h2>
 <p><a href="https://docs.djangoproject.com/en/1.9/topics/db/managers/#controlling-automatic-manager-types">django automatic manager </a></p>
 <p><a href="https://docs.djangoproject.com/en/1.9/topics/db/queries/#using-a-custom-reverse-manager">using a custom reverse manager</a></p>
@@ -120,7 +119,7 @@
                     <span>5</span>
 </a></li>
                 <li><a href="http://blog.hehan.net/tags.html#python-ref">python
-                    <span>7</span>
+                    <span>10</span>
 </a></li>
             </ul>
 <h4>Contact</h4>
