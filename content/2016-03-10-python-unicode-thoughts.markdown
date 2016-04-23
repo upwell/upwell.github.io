@@ -36,6 +36,7 @@ u'\u7f8e\u7684'
 >>> s.decode('utf-8')
 u'\u7f8e\u7684'
 ```
+
 上面的输出中，第一个s的类型是 str，打印出来的内容是 utf-8 编码过的内容。第二个s的类型是 unicode，打印出来的两个双字节的数字分别表示了两个汉字『美的』。
 
 > `encode`和`decode`提供 str 和 unicode 这两种的类型的互相转化。
@@ -70,7 +71,6 @@ print repr(s.encode('GBK'))
 ```
 
 试着用vim打开该文件时，『中文』两个字就会显示成乱码，应为vim默认的文件编码方式被设置成UTF-8了。
-
 ```python
 #!/usr/bin/env python
 # -*- coding: GBK -*-
@@ -85,13 +85,16 @@ s2 = '中文'
 print repr(s2)
 print repr(s2.decode('GBK'))
 ```
+
 输出结果：
+
 ```
 u'\u4e2d\u6587'
 '\xd6\xd0\xce\xc4'
 '\xd6\xd0\xce\xc4'
 u'\u4e2d\u6587'
 ```
+
 从这里可以看出来， s2中存放的是byte格式的从文件中读到的GBK编码的内容。
 
 再看下面的这段代码，程序文件`utf8_enc.py`，保存成UTF-8编码的。

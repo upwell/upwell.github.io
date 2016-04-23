@@ -49,3 +49,8 @@ EXTRA_PATH_METADATA = {
 }
 
 RECENT_ARTICLES_COUNT = 20
+
+MD_EXTENSIONS = [
+    'markdown.extensions.nl2br',
+    'markdown.extensions.fenced_code',
+]
