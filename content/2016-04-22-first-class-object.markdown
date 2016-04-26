@@ -1,10 +1,11 @@
 Title: first class objects
-Date: 2016-04-18 13:36
+Date: 2016-04-22 13:36
 Tags: python
 Category: tech
 
 我们经常听到说，python 中一切皆对象，还有就是`function is first class object`，到底 first class object 是什么意思？
-[维基百科][1]里面是这样定义 `first class` 的：
+
+[维基百科][1]里面是这样定义`first class`的：
 
 > In programming language design, a first-class citizen (also type, object, entity, or value) in a given programming language is an entity which supports all the operations generally available to other entities. These operations typically include being passed as an argument, returned from a function, and assigned to a variable.
 

@@ -15,7 +15,8 @@ TIMEZONE = 'Asia/Shanghai'
 DEFAULT_LANG = u'en'
 
 home_dir = expanduser('~')
-THEME = '{}/pelican-themes/elegant'.format(home_dir)
+# THEME = '{}/pelican-themes/elegant'.format(home_dir)
+THEME = 'themes/elegant'
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
