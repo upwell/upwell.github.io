@@ -21,3 +21,12 @@ In `Finder`, after right click the file, hold `Alt`, `copy as path option` will 
 
 ### Go to file/path in file selector
 Click `Command + Shift + G` will trigger the `Go to` dialog.
+
+### Screen capture
+`cmd+shift+3`: Full screen
+
+`cmd+shift+4`: Selected area
+
+[参考链接][1]
+
+[1]: https://www.zhihu.com/question/19550327

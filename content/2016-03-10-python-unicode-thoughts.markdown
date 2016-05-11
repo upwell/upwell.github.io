@@ -70,7 +70,7 @@ print repr(s.encode('GBK'))
  SyntaxError: Non-ASCII character '\xd6' in file enc.py on line 4, but no encoding declared;
 ```
 
-试着用vim打开该文件时，『中文』两个字就会显示成乱码，应为vim默认的文件编码方式被设置成UTF-8了。
+试着用vim打开该文件时，『中文』两个字就会显示成乱码，因为vim默认的文件编码方式被设置成UTF-8了。
 ```python
 #!/usr/bin/env python
 # -*- coding: GBK -*-
