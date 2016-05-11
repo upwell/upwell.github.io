@@ -1,5 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Note Everything</title><link href="http://blog.hehan.net/" rel="alternate"></link><link href="http://blog.hehan.net/feeds/tech.atom.xml" rel="self"></link><id>http://blog.hehan.net/</id><updated>2016-04-22T13:36:00+08:00</updated><entry><title>first class objects</title><link href="http://blog.hehan.net/first-class-objects.html" rel="alternate"></link><updated>2016-04-22T13:36:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-04-22:first-class-objects.html</id><summary type="html">&lt;p&gt;我们经常听到说，python 中一切皆对象，还有就是&lt;code&gt;function is first class object&lt;/code&gt;，到底 first class object 是什么意思？&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Note Everything</title><link href="http://blog.hehan.net/" rel="alternate"></link><link href="http://blog.hehan.net/feeds/tech.atom.xml" rel="self"></link><id>http://blog.hehan.net/</id><updated>2016-04-28T13:36:00+08:00</updated><entry><title>repr vs. str vs. unicode</title><link href="http://blog.hehan.net/repr-vs-str-vs-unicode.html" rel="alternate"></link><updated>2016-04-28T13:36:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-04-28:repr-vs-str-vs-unicode.html</id><summary type="html">&lt;h3&gt;&lt;code&gt;__repr__&lt;/code&gt;和&lt;code&gt;__str__&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;两者都是把对象转化成字符串：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;__repr__&lt;/code&gt;主要是要 &lt;strong&gt;&lt;em&gt;明确&lt;/em&gt;&lt;/strong&gt; 表示对象&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;__str__&lt;/code&gt;主要是要为了 &lt;strong&gt;&lt;em&gt;可读&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;下面的示例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;In [42]: d = Decimal('100.00')
+In [43]: str(d)
+Out[43]: '100.00'
+In [44]: repr(d)
+Out[44]: &amp;quot;Decimal('100.00')&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可以看到&lt;code&gt;repr&lt;/code&gt;的输出更明确，而&lt;code&gt;str&lt;/code&gt;的输出更明确。&lt;/p&gt;
+&lt;p&gt;这里有一点要注意的：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果&lt;code&gt;__str__&lt;/code&gt;没有定义，而&lt;code&gt;__repr__&lt;/code&gt;定义了，调用对象的&lt;code&gt;__str__&lt;/code&gt;实际上就是使用&lt;code&gt;__repr__&lt;/code&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;那么，使用&lt;code&gt;print&lt;/code&gt;打印一个对象时候到底使用的哪个函数呢？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;print一个对象时，调用的是&lt;strong&gt;str&lt;/strong&gt;;&lt;/li&gt;
+&lt;li&gt;print list时，调用的是list的&lt;strong&gt;str&lt;/strong&gt;，但list的&lt;strong&gt;str&lt;/strong&gt;调用的是每个项的&lt;strong&gt;repr&lt;/strong&gt;;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;code&gt;__str__&lt;/code&gt;和&lt;code&gt;__unicode__&lt;/code&gt;&lt;/h3&gt;
+&lt;h4&gt;python2&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;str&lt;/code&gt;实际上是字节码，一个一个byte，而&lt;code&gt;unicode&lt;/code&gt;是一个个字符，&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;In [49]: s = u'汉字'
+In [50]: s
+Out[50]: u'\u6c49\u5b57'
+In [51]: s.encode('utf-8')
+Out[51]: '\xe6\xb1\x89\xe5\xad\x97'
+In [52]: type(s)
+Out[52]: unicode
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4&gt;python3&lt;/h4&gt;
+&lt;p&gt;所有的字符都是unicode字符格式的，没有&lt;code&gt;unicode&lt;/code&gt;这个函数只有&lt;code&gt;str&lt;/code&gt;，python3中的&lt;code&gt;str&lt;/code&gt;实际上跟python2中的&lt;code&gt;unicode&lt;/code&gt;是一样的。python3中如果要获得byte格式的话，可以用&lt;code&gt;bytes&lt;/code&gt;函数。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; s = '汉字'
+&amp;gt;&amp;gt;&amp;gt; s
+'汉字'
+&amp;gt;&amp;gt;&amp;gt; str(s)
+'汉字'
+&amp;gt;&amp;gt;&amp;gt; s.encode('utf-8')
+b'\xe6\xb1\x89\xe5\xad\x97'
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href="http://stackoverflow.com/questions/1436703/difference-between-str-and-repr-in-python"&gt;http://stackoverflow.com/questions/1436703/difference-between-str-and-repr-in-python&lt;/a&gt;&lt;/p&gt;</summary><category term="python"></category></entry><entry><title>first class objects</title><link href="http://blog.hehan.net/first-class-objects.html" rel="alternate"></link><updated>2016-04-22T13:36:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-04-22:first-class-objects.html</id><summary type="html">&lt;p&gt;我们经常听到说，python 中一切皆对象，还有就是&lt;code&gt;function is first class object&lt;/code&gt;，到底 first class object 是什么意思？&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/First-class_citizen"&gt;维基百科&lt;/a&gt;里面是这样定义&lt;code&gt;first class&lt;/code&gt;的：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;In programming language design, a first-class citizen (also type, object, entity, or value) in a given programming language is an entity which supports all the operations generally available to other entities. These operations typically include being passed as an argument, returned from a function, and assigned to a variable.&lt;/p&gt;
@@ -111,7 +158,7 @@ print repr(s.encode('GBK'))
  SyntaxError: Non-ASCII character '\xd6' in file enc.py on line 4, but no encoding declared;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;试着用vim打开该文件时，『中文』两个字就会显示成乱码，应为vim默认的文件编码方式被设置成UTF-8了。&lt;/p&gt;
+&lt;p&gt;试着用vim打开该文件时，『中文』两个字就会显示成乱码，因为vim默认的文件编码方式被设置成UTF-8了。&lt;/p&gt;
 &lt;pre&gt;&lt;code class="python"&gt;#!/usr/bin/env python
 # -*- coding: GBK -*-
 
@@ -229,7 +276,11 @@ b.entry_set(manager='entries').all()
 &lt;h3&gt;Copy file path to clipboard&lt;/h3&gt;
 &lt;p&gt;In &lt;code&gt;Finder&lt;/code&gt;, after right click the file, hold &lt;code&gt;Alt&lt;/code&gt;, &lt;code&gt;copy as path option&lt;/code&gt; will appear.&lt;/p&gt;
 &lt;h3&gt;Go to file/path in file selector&lt;/h3&gt;
-&lt;p&gt;Click &lt;code&gt;Command + Shift + G&lt;/code&gt; will trigger the &lt;code&gt;Go to&lt;/code&gt; dialog.&lt;/p&gt;</summary><category term="osx"></category></entry><entry><title>p4 command line tips</title><link href="http://blog.hehan.net/p4-command-line-tips.html" rel="alternate"></link><updated>2015-12-01T19:50:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2015-12-01:p4-command-line-tips.html</id><summary type="html">&lt;h4&gt;Remove files from changelist without removing the edits&lt;/h4&gt;
+&lt;p&gt;Click &lt;code&gt;Command + Shift + G&lt;/code&gt; will trigger the &lt;code&gt;Go to&lt;/code&gt; dialog.&lt;/p&gt;
+&lt;h3&gt;Screen capture&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;cmd+shift+3&lt;/code&gt;: Full screen&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;cmd+shift+4&lt;/code&gt;: Selected area&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.zhihu.com/question/19550327"&gt;参考链接&lt;/a&gt;&lt;/p&gt;</summary><category term="osx"></category></entry><entry><title>p4 command line tips</title><link href="http://blog.hehan.net/p4-command-line-tips.html" rel="alternate"></link><updated>2015-12-01T19:50:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2015-12-01:p4-command-line-tips.html</id><summary type="html">&lt;h4&gt;Remove files from changelist without removing the edits&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;# p4 revert -k -c changelist path_to_file
 &lt;/code&gt;&lt;/pre&gt;
 

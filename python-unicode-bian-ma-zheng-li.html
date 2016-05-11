@@ -130,7 +130,7 @@ print repr(s.encode('GBK'))
  SyntaxError: Non-ASCII character '\xd6' in file enc.py on line 4, but no encoding declared;
 </code></pre>
 
-<p>试着用vim打开该文件时，『中文』两个字就会显示成乱码，应为vim默认的文件编码方式被设置成UTF-8了。</p>
+<p>试着用vim打开该文件时，『中文』两个字就会显示成乱码，因为vim默认的文件编码方式被设置成UTF-8了。</p>
 <pre><code class="python">#!/usr/bin/env python
 # -*- coding: GBK -*-
 
@@ -197,7 +197,7 @@ UnicodeDecodeError: 'gbk' codec can't decode bytes in position 2-3: illegal mult
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="http://blog.hehan.net/tags.html#python-ref">python
-                    <span>10</span>
+                    <span>11</span>
 </a></li>
                 <li><a href="http://blog.hehan.net/tags.html#unicode-ref">unicode
                     <span>1</span>
