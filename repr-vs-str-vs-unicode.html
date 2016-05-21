@@ -14,12 +14,12 @@
 
 <meta property="og:title" content="repr vs. str vs. unicode "/>
 <meta property="og:url" content="http://blog.hehan.net/repr-vs-str-vs-unicode.html" />
-<meta property="og:description" content="__repr__和__str__ 两者都是把对象转化成字符串： __repr__主要是要 明确 表示对象 __str__主要是要为了 可读 下面的示例： In [42]: d = Decimal(&#39;100.00&#39;) In [43]: str(d) Out[43]: &#39;100.00&#39; In [44]: repr(d) Out[44]: &#34;Decimal(&#39;100.00&#39;)&#34; 可以看到repr的输出更明确，而str的输出更明确。 这里有一点要注意的： 如果__str__没有定义，而__repr__定义了，调用对象的__str__ ..." />
+<meta property="og:description" content="__repr__和__str__ 两者都是把对象转化成字符串： __repr__主要是要 明确 表示对象 __str__主要是要为了 可读 下面的示例： In [42]: d = Decimal(&#39;100.00&#39;) In [43]: str(d) Out[43]: &#39;100.00&#39; In [44]: repr(d) Out[44]: &#34;Decimal(&#39;100.00&#39;)&#34; 可以看到repr的输出更明确，而str的输出更可读。 这里有一点要注意的： 如果__str__没有定义，而__repr__定义了，调用对象的__str__ ..." />
 <meta property="og:site_name" content="Note Everything" />
 <meta property="og:article:author" content="Han" />
 <meta property="og:article:published_time" content="2016-04-28T13:36:00+08:00" />
 <meta name="twitter:title" content="repr vs. str vs. unicode ">
-<meta name="twitter:description" content="__repr__和__str__ 两者都是把对象转化成字符串： __repr__主要是要 明确 表示对象 __str__主要是要为了 可读 下面的示例： In [42]: d = Decimal(&#39;100.00&#39;) In [43]: str(d) Out[43]: &#39;100.00&#39; In [44]: repr(d) Out[44]: &#34;Decimal(&#39;100.00&#39;)&#34; 可以看到repr的输出更明确，而str的输出更明确。 这里有一点要注意的： 如果__str__没有定义，而__repr__定义了，调用对象的__str__ ...">
+<meta name="twitter:description" content="__repr__和__str__ 两者都是把对象转化成字符串： __repr__主要是要 明确 表示对象 __str__主要是要为了 可读 下面的示例： In [42]: d = Decimal(&#39;100.00&#39;) In [43]: str(d) Out[43]: &#39;100.00&#39; In [44]: repr(d) Out[44]: &#34;Decimal(&#39;100.00&#39;)&#34; 可以看到repr的输出更明确，而str的输出更可读。 这里有一点要注意的： 如果__str__没有定义，而__repr__定义了，调用对象的__str__ ...">
 
         <title>repr vs. str vs. unicode  · Note Everything
 </title>
@@ -83,7 +83,7 @@ In [44]: repr(d)
 Out[44]: &quot;Decimal('100.00')&quot;
 </code></pre>
 
-<p>可以看到<code>repr</code>的输出更明确，而<code>str</code>的输出更明确。</p>
+<p>可以看到<code>repr</code>的输出更明确，而<code>str</code>的输出更可读。</p>
 <p>这里有一点要注意的：</p>
 <blockquote>
 <p>如果<code>__str__</code>没有定义，而<code>__repr__</code>定义了，调用对象的<code>__str__</code>实际上就是使用<code>__repr__</code>。</p>

@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Note Everything</title><link href="http://blog.hehan.net/" rel="alternate"></link><link href="http://blog.hehan.net/feeds/all.atom.xml" rel="self"></link><id>http://blog.hehan.net/</id><updated>2016-04-28T13:36:00+08:00</updated><entry><title>repr vs. str vs. unicode</title><link href="http://blog.hehan.net/repr-vs-str-vs-unicode.html" rel="alternate"></link><updated>2016-04-28T13:36:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-04-28:repr-vs-str-vs-unicode.html</id><summary type="html">&lt;h3&gt;&lt;code&gt;__repr__&lt;/code&gt;和&lt;code&gt;__str__&lt;/code&gt;&lt;/h3&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Note Everything</title><link href="http://blog.hehan.net/" rel="alternate"></link><link href="http://blog.hehan.net/feeds/all.atom.xml" rel="self"></link><id>http://blog.hehan.net/</id><updated>2016-05-21T14:06:00+08:00</updated><entry><title>kdatacenter vps 推荐</title><link href="http://blog.hehan.net/kdatacenter-vps-tui-jian.html" rel="alternate"></link><updated>2016-05-21T14:06:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-05-21:kdatacenter-vps-tui-jian.html</id><summary type="html">&lt;h2&gt;简介&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;kdatacener&lt;/code&gt;是一家成立于12年的韩国主机商,提供VPS和独立服务器，所有服务器都基于SSD，而且支持windows，并且提供DDOS保护。韩国的网络是最发达的，到全球特别是亚洲地区速度飞快，到中国速度堪比国内双线!&lt;/p&gt;
+&lt;p&gt;在如今&lt;code&gt;Linode&lt;/code&gt;和&lt;code&gt;DO&lt;/code&gt;被干扰如此严重的情况下，&lt;code&gt;kdatacenter&lt;/code&gt;确实是国外VPS的不二之选，虽然价格高了一点，但不用烦心，省心才是王道。&lt;/p&gt;
+&lt;h2&gt;速度测试&lt;/h2&gt;
+&lt;p&gt;速度测试: &lt;a href="http://downloadtest.kdatacenter.com/10MB"&gt;http://downloadtest.kdatacenter.com/10MB&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;江苏本地测试，移动和电信都能达到&lt;code&gt;2MB+/s&lt;/code&gt;的速度，绝对一级棒。&lt;/p&gt;
+&lt;h2&gt;价格&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="aimg" src="/images/kdatacenter_price.png" /&gt;&lt;/p&gt;
+&lt;h2&gt;配置选择&lt;/h2&gt;
+&lt;p&gt;如果对性能没有太高的要求，低配的&lt;code&gt;100L SSD&lt;/code&gt;就够用了，未来要升级也有更高配置可以选择。&lt;/p&gt;
+&lt;p&gt;有兴趣的可以通过我的推荐链接来购买：&lt;br /&gt;
+&lt;a href="http://www.kdatacenter.com/myportal/?affid=94"&gt;http://www.kdatacenter.com/myportal/?affid=94&lt;/a&gt;&lt;/p&gt;</summary><category term="vps"></category></entry><entry><title>android tips</title><link href="http://blog.hehan.net/android-tips.html" rel="alternate"></link><updated>2016-05-20T11:16:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-05-20:android-tips.html</id><summary type="html">&lt;h2&gt;Build with command line&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;./gradle assembleDebug
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这个命令，偶尔会触发下载&lt;code&gt;gradle.ver.zip&lt;/code&gt;，而下载又很慢，可以把该文件自行下载下来，拷贝到&lt;code&gt;$HOME/.gradle&lt;/code&gt;底下指定的目录去。&lt;/p&gt;
+&lt;h2&gt;package binary to apk&lt;/h2&gt;
+&lt;p&gt;可以把&lt;code&gt;binary&lt;/code&gt;文件放到&lt;code&gt;assets&lt;/code&gt;目录里面，如果目录不存在，则在&lt;code&gt;app/src/main&lt;/code&gt;带下创建该目录。&lt;/p&gt;
+&lt;p&gt;安装后，由于&lt;code&gt;assets&lt;/code&gt;中的文件是只读的，需要在程序中使用&lt;code&gt;AssetManage&lt;/code&gt;把&lt;code&gt;binary&lt;/code&gt;拷贝到用户目录。&lt;/p&gt;</summary><category term="android"></category></entry><entry><title>repr vs. str vs. unicode</title><link href="http://blog.hehan.net/repr-vs-str-vs-unicode.html" rel="alternate"></link><updated>2016-04-28T13:36:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-04-28:repr-vs-str-vs-unicode.html</id><summary type="html">&lt;h3&gt;&lt;code&gt;__repr__&lt;/code&gt;和&lt;code&gt;__str__&lt;/code&gt;&lt;/h3&gt;
 &lt;p&gt;两者都是把对象转化成字符串：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;__repr__&lt;/code&gt;主要是要 &lt;strong&gt;&lt;em&gt;明确&lt;/em&gt;&lt;/strong&gt; 表示对象&lt;/li&gt;
@@ -13,7 +31,7 @@ In [44]: repr(d)
 Out[44]: &amp;quot;Decimal('100.00')&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;可以看到&lt;code&gt;repr&lt;/code&gt;的输出更明确，而&lt;code&gt;str&lt;/code&gt;的输出更明确。&lt;/p&gt;
+&lt;p&gt;可以看到&lt;code&gt;repr&lt;/code&gt;的输出更明确，而&lt;code&gt;str&lt;/code&gt;的输出更可读。&lt;/p&gt;
 &lt;p&gt;这里有一点要注意的：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;如果&lt;code&gt;__str__&lt;/code&gt;没有定义，而&lt;code&gt;__repr__&lt;/code&gt;定义了，调用对象的&lt;code&gt;__str__&lt;/code&gt;实际上就是使用&lt;code&gt;__repr__&lt;/code&gt;。&lt;/p&gt;
