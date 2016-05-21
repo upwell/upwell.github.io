@@ -41,6 +41,7 @@ DEFAULT_PAGINATION = 10
 # RELATIVE_URLS = True
 
 STATIC_PATHS = [
+    'images',
     'extra/CNAME',
     'extra/.gitignore',
 ]
