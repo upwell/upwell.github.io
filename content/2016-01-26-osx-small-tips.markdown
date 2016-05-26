@@ -29,4 +29,16 @@ Click `Command + Shift + G` will trigger the `Go to` dialog.
 
 [参考链接][1]
 
+### Mount NTFS manually
+编辑 `/etc/fstab`, 可以用 Label 或者 UUID。UUID 可以通过 `diskutil info /Volumes/Data` 来得到。
+```
+LABEL=Data none ntfs rw,auto,nobrowse
+UUID=731EE82C-92D2-4A83-A44F-29120B67C7B1 none ntfs rw,auto,nobrowse
+```
+保存后，弹出USB，然后重新插拔。注意，这时 Finder 里面不会再看到这些分区，需要从 Terminal 中打开。
+```
+cd /Volumes
+open -a Finder ./
+```
+
 [1]: https://www.zhihu.com/question/19550327
