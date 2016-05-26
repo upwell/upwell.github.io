@@ -10,18 +10,18 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="osx, tech, " />
+<meta name="keywords" content="django, tech, " />
 
-<meta property="og:title" content="osx small tips "/>
-<meta property="og:url" content="http://blog.hehan.net/osx-small-tips.html" />
-<meta property="og:description" content="Encrypt / Decrypt file # brew install gpg # gpg -c file.txt // encrypt # gpg file.txt.gpg // decrypt Reset the DNS cache sudo killall -HUP mDNSResponder Copy file path to clipboard In Finder, after right click the file, hold Alt, copy as path option will appear. Go to file/path in file ..." />
+<meta property="og:title" content="django tuning tips "/>
+<meta property="og:url" content="http://blog.hehan.net/django-tuning-tips.html" />
+<meta property="og:description" content="数据库查询优化 使用select_related和prefetch_related来减少查询次数，详见 django 文档。 对象处理优化 避免过多的model对象实例化 数据从数据库取出后，对象实例化的开销也很大，不仅仅是每个对象的初始化，还有各个field的初始化，下面是一个实际的例子： 6069 0.155 0.000 0.220 0.000 site-packages/django/db/models/base.py:388(__init__) 22 0.036 0.002 0.036 0.002 {method &#39;query&#39; of &#39;_mysql ..." />
 <meta property="og:site_name" content="Note Everything" />
 <meta property="og:article:author" content="Han" />
-<meta property="og:article:published_time" content="2016-01-26T18:03:00+08:00" />
-<meta name="twitter:title" content="osx small tips ">
-<meta name="twitter:description" content="Encrypt / Decrypt file # brew install gpg # gpg -c file.txt // encrypt # gpg file.txt.gpg // decrypt Reset the DNS cache sudo killall -HUP mDNSResponder Copy file path to clipboard In Finder, after right click the file, hold Alt, copy as path option will appear. Go to file/path in file ...">
+<meta property="og:article:published_time" content="2016-05-23T13:58:00+08:00" />
+<meta name="twitter:title" content="django tuning tips ">
+<meta name="twitter:description" content="数据库查询优化 使用select_related和prefetch_related来减少查询次数，详见 django 文档。 对象处理优化 避免过多的model对象实例化 数据从数据库取出后，对象实例化的开销也很大，不仅仅是每个对象的初始化，还有各个field的初始化，下面是一个实际的例子： 6069 0.155 0.000 0.220 0.000 site-packages/django/db/models/base.py:388(__init__) 22 0.036 0.002 0.036 0.002 {method &#39;query&#39; of &#39;_mysql ...">
 
-        <title>osx small tips  · Note Everything
+        <title>django tuning tips  · Note Everything
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
@@ -61,7 +61,7 @@
 <article>
 <div class="row-fluid">
     <header class="page-header span10 offset2">
-    <h1><a href="http://blog.hehan.net/osx-small-tips.html"> osx small tips  </a></h1>
+    <h1><a href="http://blog.hehan.net/django-tuning-tips.html"> django tuning tips  </a></h1>
     </header>
 </div>
 
@@ -69,34 +69,25 @@
         <div class="span8 offset2 article-content">
 
             
-            <h3>Encrypt / Decrypt file</h3>
-<pre><code># brew install gpg
-# gpg -c file.txt          // encrypt
-# gpg file.txt.gpg         // decrypt
+            <h1>数据库查询优化</h1>
+<p>使用<code>select_related</code>和<code>prefetch_related</code>来减少查询次数，详见 <a href="https://docs.djangoproject.com/en/dev/topics/db/optimization/">django 文档</a>。</p>
+<h1>对象处理优化</h1>
+<h2>避免过多的<code>model</code>对象实例化</h2>
+<p>数据从数据库取出后，对象实例化的开销也很大，不仅仅是每个对象的初始化，还有各个<code>field</code>的初始化，下面是一个实际的例子：</p>
+<pre><code>6069    0.155   0.000   0.220   0.000   site-packages/django/db/models/base.py:388(__init__)
+22      0.036   0.002   0.036   0.002   {method 'query' of      '_mysql.connection'     objects}
+61251   0.036   0.000   0.036   0.000   {hasattr}
+6069    0.030   0.000   0.250   0.000   site-packages/django/db/models/base.py:484(from_db)
+107794  0.030   0.000   0.043   0.000   {isinstance}
 </code></pre>
 
-<h3>Reset the DNS cache</h3>
-<pre><code>sudo killall -HUP mDNSResponder
-</code></pre>
-
-<h3>Copy file path to clipboard</h3>
-<p>In <code>Finder</code>, after right click the file, hold <code>Alt</code>, <code>copy as path option</code> will appear.</p>
-<h3>Go to file/path in file selector</h3>
-<p>Click <code>Command + Shift + G</code> will trigger the <code>Go to</code> dialog.</p>
-<h3>Screen capture</h3>
-<p><code>cmd+shift+3</code>: Full screen</p>
-<p><code>cmd+shift+4</code>: Selected area</p>
-<p><a href="https://www.zhihu.com/question/19550327">参考链接</a></p>
-<h3>Mount NTFS manually</h3>
-<p>编辑 <code>/etc/fstab</code>, 可以用 Label 或者 UUID。UUID 可以通过 <code>diskutil info /Volumes/Data</code> 来得到。</p>
-<pre><code>LABEL=Data none ntfs rw,auto,nobrowse
-UUID=731EE82C-92D2-4A83-A44F-29120B67C7B1 none ntfs rw,auto,nobrowse
-</code></pre>
-
-<p>保存后，弹出USB，然后重新插拔。注意，这时 Finder 里面不会再看到这些分区，需要从 Terminal 中打开。</p>
-<pre><code>cd /Volumes
-open -a Finder ./
-</code></pre>
+<p>可以看到<code>__init__</code>的次数非常多，耗时也比较长。</p>
+<p>需要注意：</p>
+<blockquote>
+<p>对于不希望实例化的<code>ForeignKey</code>或者<code>ManyToManyField</code>，不要使用<code>select_related</code>或<code>prefetch_related</code>，<br />
+不然会被自动实例化。</p>
+</blockquote>
+<h2>使用<code>values</code>来获取需要的数据</h2>
             
             
             <hr/>
@@ -104,13 +95,13 @@ open -a Finder ./
         <section>
         <div class="span2" style="float:right;font-size:0.9em;">
             <h4>Published</h4>
-            <time pubdate="pubdate" datetime="2016-01-26T18:03:00+08:00">2016-01-26</time>
+            <time pubdate="pubdate" datetime="2016-05-23T13:58:00+08:00">2016-05-23</time>
             <h4>Category</h4>
             <a class="category-link" href="http://blog.hehan.net/categories.html#tech-ref">tech</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="http://blog.hehan.net/tags.html#osx-ref">osx
-                    <span>2</span>
+                <li><a href="http://blog.hehan.net/tags.html#django-ref">django
+                    <span>6</span>
 </a></li>
             </ul>
 <h4>Contact</h4>

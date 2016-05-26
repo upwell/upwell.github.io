@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Note Everything</title><link href="http://blog.hehan.net/" rel="alternate"></link><link href="http://blog.hehan.net/feeds/tech.atom.xml" rel="self"></link><id>http://blog.hehan.net/</id><updated>2016-05-21T14:06:00+08:00</updated><entry><title>kdatacenter vps 推荐</title><link href="http://blog.hehan.net/kdatacenter-vps-tui-jian.html" rel="alternate"></link><updated>2016-05-21T14:06:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-05-21:kdatacenter-vps-tui-jian.html</id><summary type="html">&lt;h2&gt;简介&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Note Everything</title><link href="http://blog.hehan.net/" rel="alternate"></link><link href="http://blog.hehan.net/feeds/tech.atom.xml" rel="self"></link><id>http://blog.hehan.net/</id><updated>2016-05-23T13:58:00+08:00</updated><entry><title>django tuning tips</title><link href="http://blog.hehan.net/django-tuning-tips.html" rel="alternate"></link><updated>2016-05-23T13:58:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-05-23:django-tuning-tips.html</id><summary type="html">&lt;h1&gt;数据库查询优化&lt;/h1&gt;
+&lt;p&gt;使用&lt;code&gt;select_related&lt;/code&gt;和&lt;code&gt;prefetch_related&lt;/code&gt;来减少查询次数，详见 &lt;a href="https://docs.djangoproject.com/en/dev/topics/db/optimization/"&gt;django 文档&lt;/a&gt;。&lt;/p&gt;
+&lt;h1&gt;对象处理优化&lt;/h1&gt;
+&lt;h2&gt;避免过多的&lt;code&gt;model&lt;/code&gt;对象实例化&lt;/h2&gt;
+&lt;p&gt;数据从数据库取出后，对象实例化的开销也很大，不仅仅是每个对象的初始化，还有各个&lt;code&gt;field&lt;/code&gt;的初始化，下面是一个实际的例子：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;6069    0.155   0.000   0.220   0.000   site-packages/django/db/models/base.py:388(__init__)
+22      0.036   0.002   0.036   0.002   {method 'query' of      '_mysql.connection'     objects}
+61251   0.036   0.000   0.036   0.000   {hasattr}
+6069    0.030   0.000   0.250   0.000   site-packages/django/db/models/base.py:484(from_db)
+107794  0.030   0.000   0.043   0.000   {isinstance}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可以看到&lt;code&gt;__init__&lt;/code&gt;的次数非常多，耗时也比较长。&lt;/p&gt;
+&lt;p&gt;需要注意：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;对于不希望实例化的&lt;code&gt;ForeignKey&lt;/code&gt;或者&lt;code&gt;ManyToManyField&lt;/code&gt;，不要使用&lt;code&gt;select_related&lt;/code&gt;或&lt;code&gt;prefetch_related&lt;/code&gt;，&lt;br /&gt;
+不然会被自动实例化。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;使用&lt;code&gt;values&lt;/code&gt;来获取需要的数据&lt;/h2&gt;</summary><category term="django"></category></entry><entry><title>kdatacenter vps 推荐</title><link href="http://blog.hehan.net/kdatacenter-vps-tui-jian.html" rel="alternate"></link><updated>2016-05-21T14:06:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-05-21:kdatacenter-vps-tui-jian.html</id><summary type="html">&lt;h2&gt;简介&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;kdatacener&lt;/code&gt;是一家成立于12年的韩国主机商,提供VPS和独立服务器，所有服务器都基于SSD，而且支持windows，并且提供DDOS保护。韩国的网络是最发达的，到全球特别是亚洲地区速度飞快，到中国速度堪比国内双线!&lt;/p&gt;
 &lt;p&gt;在如今&lt;code&gt;Linode&lt;/code&gt;和&lt;code&gt;DO&lt;/code&gt;被干扰如此严重的情况下，&lt;code&gt;kdatacenter&lt;/code&gt;确实是国外VPS的不二之选，虽然价格高了一点，但不用烦心，省心才是王道。&lt;/p&gt;
 &lt;h2&gt;速度测试&lt;/h2&gt;
@@ -298,7 +316,17 @@ b.entry_set(manager='entries').all()
 &lt;h3&gt;Screen capture&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;cmd+shift+3&lt;/code&gt;: Full screen&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;cmd+shift+4&lt;/code&gt;: Selected area&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://www.zhihu.com/question/19550327"&gt;参考链接&lt;/a&gt;&lt;/p&gt;</summary><category term="osx"></category></entry><entry><title>p4 command line tips</title><link href="http://blog.hehan.net/p4-command-line-tips.html" rel="alternate"></link><updated>2015-12-01T19:50:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2015-12-01:p4-command-line-tips.html</id><summary type="html">&lt;h4&gt;Remove files from changelist without removing the edits&lt;/h4&gt;
+&lt;p&gt;&lt;a href="https://www.zhihu.com/question/19550327"&gt;参考链接&lt;/a&gt;&lt;/p&gt;
+&lt;h3&gt;Mount NTFS manually&lt;/h3&gt;
+&lt;p&gt;编辑 &lt;code&gt;/etc/fstab&lt;/code&gt;, 可以用 Label 或者 UUID。UUID 可以通过 &lt;code&gt;diskutil info /Volumes/Data&lt;/code&gt; 来得到。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;LABEL=Data none ntfs rw,auto,nobrowse
+UUID=731EE82C-92D2-4A83-A44F-29120B67C7B1 none ntfs rw,auto,nobrowse
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;保存后，弹出USB，然后重新插拔。注意，这时 Finder 里面不会再看到这些分区，需要从 Terminal 中打开。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cd /Volumes
+open -a Finder ./
+&lt;/code&gt;&lt;/pre&gt;</summary><category term="osx"></category></entry><entry><title>p4 command line tips</title><link href="http://blog.hehan.net/p4-command-line-tips.html" rel="alternate"></link><updated>2015-12-01T19:50:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2015-12-01:p4-command-line-tips.html</id><summary type="html">&lt;h4&gt;Remove files from changelist without removing the edits&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;# p4 revert -k -c changelist path_to_file
 &lt;/code&gt;&lt;/pre&gt;
 
