@@ -88,6 +88,12 @@
 不然会被自动实例化。</p>
 </blockquote>
 <h2>使用<code>values</code>来获取需要的数据</h2>
+<p>正常我们使用<code>get</code>, <code>filter</code>获取到结果后，如果遍历或使用时，<code>django</code>会帮我们把<code>model</code>实例化，而在上面已经提到了，实例化的开销是比较大，尤其在<code>model</code>比较复杂的的时候。<br />
+这里我们可以使用<code>values</code>方法，把需要的字段取出来，然后再自行构造需要的数据，通常是组织成<code>dict</code>，供前端或者模板渲染使用。</p>
+<p>从这点可以看出，<code>ORM</code>虽然很方便，但当数据量很大的时候，效率就会出现问题。处理问题还是要灵活，当然如果<code>django</code>能够提供一套机制来组织需要的数据而不用实例化对象就更好了。</p>
+<h1>参考资料</h1>
+<p><a href="http://www.servercobra.com/django-performance-tuning/">Django Performance Tuning</a><br />
+<a href="http://scottlobdell.me/2015/01/sql-database-best-practices-django-orm/">SQL Database Best Practises with Django</a></p>
             
             
             <hr/>

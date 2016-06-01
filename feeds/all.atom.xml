@@ -17,7 +17,13 @@
 &lt;p&gt;对于不希望实例化的&lt;code&gt;ForeignKey&lt;/code&gt;或者&lt;code&gt;ManyToManyField&lt;/code&gt;，不要使用&lt;code&gt;select_related&lt;/code&gt;或&lt;code&gt;prefetch_related&lt;/code&gt;，&lt;br /&gt;
 不然会被自动实例化。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2&gt;使用&lt;code&gt;values&lt;/code&gt;来获取需要的数据&lt;/h2&gt;</summary><category term="django"></category></entry><entry><title>kdatacenter vps 推荐</title><link href="http://blog.hehan.net/kdatacenter-vps-tui-jian.html" rel="alternate"></link><updated>2016-05-21T14:06:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-05-21:kdatacenter-vps-tui-jian.html</id><summary type="html">&lt;h2&gt;简介&lt;/h2&gt;
+&lt;h2&gt;使用&lt;code&gt;values&lt;/code&gt;来获取需要的数据&lt;/h2&gt;
+&lt;p&gt;正常我们使用&lt;code&gt;get&lt;/code&gt;, &lt;code&gt;filter&lt;/code&gt;获取到结果后，如果遍历或使用时，&lt;code&gt;django&lt;/code&gt;会帮我们把&lt;code&gt;model&lt;/code&gt;实例化，而在上面已经提到了，实例化的开销是比较大，尤其在&lt;code&gt;model&lt;/code&gt;比较复杂的的时候。&lt;br /&gt;
+这里我们可以使用&lt;code&gt;values&lt;/code&gt;方法，把需要的字段取出来，然后再自行构造需要的数据，通常是组织成&lt;code&gt;dict&lt;/code&gt;，供前端或者模板渲染使用。&lt;/p&gt;
+&lt;p&gt;从这点可以看出，&lt;code&gt;ORM&lt;/code&gt;虽然很方便，但当数据量很大的时候，效率就会出现问题。处理问题还是要灵活，当然如果&lt;code&gt;django&lt;/code&gt;能够提供一套机制来组织需要的数据而不用实例化对象就更好了。&lt;/p&gt;
+&lt;h1&gt;参考资料&lt;/h1&gt;
+&lt;p&gt;&lt;a href="http://www.servercobra.com/django-performance-tuning/"&gt;Django Performance Tuning&lt;/a&gt;&lt;br /&gt;
+&lt;a href="http://scottlobdell.me/2015/01/sql-database-best-practices-django-orm/"&gt;SQL Database Best Practises with Django&lt;/a&gt;&lt;/p&gt;</summary><category term="django"></category></entry><entry><title>kdatacenter vps 推荐</title><link href="http://blog.hehan.net/kdatacenter-vps-tui-jian.html" rel="alternate"></link><updated>2016-05-21T14:06:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-05-21:kdatacenter-vps-tui-jian.html</id><summary type="html">&lt;h2&gt;简介&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;kdatacener&lt;/code&gt;是一家成立于12年的韩国主机商,提供VPS和独立服务器，所有服务器都基于SSD，而且支持windows，并且提供DDOS保护。韩国的网络是最发达的，到全球特别是亚洲地区速度飞快，到中国速度堪比国内双线!&lt;/p&gt;
 &lt;p&gt;在如今&lt;code&gt;Linode&lt;/code&gt;和&lt;code&gt;DO&lt;/code&gt;被干扰如此严重的情况下，&lt;code&gt;kdatacenter&lt;/code&gt;确实是国外VPS的不二之选，虽然价格高了一点，但不用烦心，省心才是王道。&lt;/p&gt;
 &lt;h2&gt;速度测试&lt;/h2&gt;
