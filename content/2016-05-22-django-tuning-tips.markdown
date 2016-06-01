@@ -25,7 +25,16 @@ Category: tech
 > 不然会被自动实例化。
 
 ## 使用`values`来获取需要的数据
+正常我们使用`get`, `filter`获取到结果后，如果遍历或使用时，`django`会帮我们把`model`实例化，而在上面已经提到了，实例化的开销是比较大，尤其在`model`比较复杂的的时候。
+这里我们可以使用`values`方法，把需要的字段取出来，然后再自行构造需要的数据，通常是组织成`dict`，供前端或者模板渲染使用。
 
+从这点可以看出，`ORM`虽然很方便，但当数据量很大的时候，效率就会出现问题。处理问题还是要灵活，当然如果`django`能够提供一套机制来组织需要的数据而不用实例化对象就更好了。
+
+# 参考资料
+[Django Performance Tuning][2]
+[SQL Database Best Practises with Django][3]
 
 
 [1]: https://docs.djangoproject.com/en/dev/topics/db/optimization/
+[2]: http://www.servercobra.com/django-performance-tuning/
+[3]: http://scottlobdell.me/2015/01/sql-database-best-practices-django-orm/
