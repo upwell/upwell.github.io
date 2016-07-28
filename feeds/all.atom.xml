@@ -1,5 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Note Everything</title><link href="http://blog.hehan.net/" rel="alternate"></link><link href="http://blog.hehan.net/feeds/all.atom.xml" rel="self"></link><id>http://blog.hehan.net/</id><updated>2016-05-23T13:58:00+08:00</updated><entry><title>django tuning tips</title><link href="http://blog.hehan.net/django-tuning-tips.html" rel="alternate"></link><updated>2016-05-23T13:58:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-05-23:django-tuning-tips.html</id><summary type="html">&lt;h1&gt;数据库查询优化&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Note Everything</title><link href="http://blog.hehan.net/" rel="alternate"></link><link href="http://blog.hehan.net/feeds/all.atom.xml" rel="self"></link><id>http://blog.hehan.net/</id><updated>2016-07-28T17:10:00+08:00</updated><entry><title>gitlab docker 部署问题</title><link href="http://blog.hehan.net/gitlab-docker-bu-shu-wen-ti.html" rel="alternate"></link><updated>2016-07-28T17:10:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-07-28:gitlab-docker-bu-shu-wen-ti.html</id><summary type="html">&lt;h1&gt;部署步骤&lt;/h1&gt;
+&lt;p&gt;参考 &lt;a href="http://docs.gitlab.com/omnibus/docker/"&gt;docker 文档&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;注意，先要&lt;code&gt;pull image&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker pull gitlab/gitlab-ce:latest
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1&gt;问题&lt;/h1&gt;
+&lt;h2&gt;docker pull 使用代理服务器&lt;/h2&gt;
+&lt;p&gt;直接export http_proxy https_proxy不生效，按照 &lt;a href="https://docs.docker.com/engine/admin/systemd/#http-proxy"&gt;docker文档&lt;/a&gt; 配置。&lt;/p&gt;
+&lt;h2&gt;docker run 的配置&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;sudo docker run --detach \
+    --hostname gitlab.example.com \
+    --publish 443:443 --publish 80:80 --publish 22:22 \
+    --name gitlab \
+    --restart always \
+    --volume /srv/gitlab/config:/etc/gitlab \
+    --volume /srv/gitlab/logs:/var/log/gitlab \
+    --volume /srv/gitlab/data:/var/opt/gitlab \
+    gitlab/gitlab-ce:latest
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;hostname&lt;/code&gt;需要设置成实际的地址，比如：192.168.1.100&lt;/li&gt;
+&lt;li&gt;对外的端口 22 会与 主机 sshd 的端口冲突，可以把主机 sshd 的端口改成非22，比如2222&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;docker run 之后，同名的不能再运行，如果没有配置，可以先删除了，再重新run。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker stop gitlab
+docker rm gitlab
+docker run ....
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;配置防火墙&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;firewall-cmd --permanent --add-port=2222/tcp
+firewall-cmd --reload
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;连接到container&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;docker exec -it gitlab /bin/bash
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;改变绑定的端口&lt;/h2&gt;
+&lt;p&gt;对于已经&lt;code&gt;run&lt;/code&gt;过的container，没办法直接修改，两种方式：&lt;br /&gt;
+- 通过 iptables 再做端口转发&lt;br /&gt;
+- 重新创建 container，步骤见 &lt;a href="http://stackoverflow.com/questions/19335444/how-to-assign-a-port-mapping-to-an-existing-docker-container"&gt;stackoverflow的问题&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;配置 smtp&lt;/h2&gt;
+&lt;p&gt;连到到container里面，修改&lt;code&gt;/etc/gitlab/gitlab.rb&lt;/code&gt;，添加下面的列：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;gitlab_rails['smtp_enable'] = true
+gitlab_rails['smtp_address'] = &amp;quot;smtp.exmail.qq.com&amp;quot;
+gitlab_rails['smtp_port'] = 465
+gitlab_rails['smtp_user_name'] = &amp;quot;gitlab@yourdomain.com&amp;quot;
+gitlab_rails['smtp_password'] = &amp;quot;yourpassword&amp;quot;
+gitlab_rails['smtp_domain'] = &amp;quot;smtp.qq.com&amp;quot;
+gitlab_rails['smtp_authentication'] = &amp;quot;login&amp;quot;
+gitlab_rails['smtp_enable_starttls_auto'] = true
+gitlab_rails['smtp_tls'] = true
+gitlab_rails['gitlab_email_from'] = &amp;quot;gitlab@yourdomain.com&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;重新配置：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;gitlab-ctl reconfigure
+&lt;/code&gt;&lt;/pre&gt;</summary><category term="gitlab"></category><category term="docker"></category></entry><entry><title>django tuning tips</title><link href="http://blog.hehan.net/django-tuning-tips.html" rel="alternate"></link><updated>2016-05-23T13:58:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-05-23:django-tuning-tips.html</id><summary type="html">&lt;h1&gt;数据库查询优化&lt;/h1&gt;
 &lt;p&gt;使用&lt;code&gt;select_related&lt;/code&gt;和&lt;code&gt;prefetch_related&lt;/code&gt;来减少查询次数，详见 &lt;a href="https://docs.djangoproject.com/en/dev/topics/db/optimization/"&gt;django 文档&lt;/a&gt;。&lt;/p&gt;
 &lt;h1&gt;对象处理优化&lt;/h1&gt;
 &lt;h2&gt;避免过多的&lt;code&gt;model&lt;/code&gt;对象实例化&lt;/h2&gt;
