@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Note Everything</title><link href="http://blog.hehan.net/" rel="alternate"></link><link href="http://blog.hehan.net/feeds/tech.atom.xml" rel="self"></link><id>http://blog.hehan.net/</id><updated>2016-07-28T17:10:00+08:00</updated><entry><title>gitlab docker 部署问题</title><link href="http://blog.hehan.net/gitlab-docker-bu-shu-wen-ti.html" rel="alternate"></link><updated>2016-07-28T17:10:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-07-28:gitlab-docker-bu-shu-wen-ti.html</id><summary type="html">&lt;h1&gt;部署步骤&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Note Everything</title><link href="http://blog.hehan.net/" rel="alternate"></link><link href="http://blog.hehan.net/feeds/tech.atom.xml" rel="self"></link><id>http://blog.hehan.net/</id><updated>2016-09-01T16:17:00+08:00</updated><entry><title>python 自定义 exception 的原则</title><link href="http://blog.hehan.net/python-zi-ding-yi-exception-de-yuan-ze.html" rel="alternate"></link><updated>2016-09-01T16:17:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-09-01:python-zi-ding-yi-exception-de-yuan-ze.html</id><summary type="html">&lt;h1&gt;自定义 exception 的困扰&lt;/h1&gt;
+&lt;p&gt;在 Web 编程的时候，经常会遇到一种场景，内部接口实现的时候会出现各种错误的情况，对于一些错误又不能直接在接口中处理，大部分时候可能需要告知调用者错误发生了，然后由调用者 (view) 来处理并返回相应的信息给 UI。&lt;/p&gt;
+&lt;p&gt;这种时候，我们通常想的是，为每种错误自定义一个 exception，然后 raise 出去，有调用者 except 后再进行相应的处理，这样会导致大量的自定义 exception，毕竟错误（异常）场景还是很多的。&lt;/p&gt;
+&lt;h1&gt;参考&lt;/h1&gt;
+&lt;p&gt;&lt;a href="http://stackoverflow.com/questions/1319615/proper-way-to-declare-custom-exceptions-in-modern-python"&gt;Proper way to define customer exception&lt;/a&gt;&lt;br /&gt;
+&lt;a href="https://jeffknupp.com/blog/2013/02/06/write-cleaner-python-use-exceptions/"&gt;Write cleaner python user exceptions&lt;/a&gt;&lt;br /&gt;
+&lt;a href="http://eli.thegreenplace.net/2008/08/21/robust-exception-handling"&gt;Robust exception handling&lt;/a&gt;&lt;br /&gt;
+&lt;a href="https://www.reddit.com/r/Python/comments/51ksht/modules_should_never_raise_core_python_exceptions/"&gt;modules should never raise core python exceptions&lt;/a&gt;&lt;/p&gt;</summary><category term="python"></category><category term="exception"></category></entry><entry><title>gitlab docker 部署问题</title><link href="http://blog.hehan.net/gitlab-docker-bu-shu-wen-ti.html" rel="alternate"></link><updated>2016-07-28T17:10:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-07-28:gitlab-docker-bu-shu-wen-ti.html</id><summary type="html">&lt;h1&gt;部署步骤&lt;/h1&gt;
 &lt;p&gt;参考 &lt;a href="http://docs.gitlab.com/omnibus/docker/"&gt;docker 文档&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;注意，先要&lt;code&gt;pull image&lt;/code&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;docker pull gitlab/gitlab-ce:latest
@@ -235,8 +242,8 @@ u'\u7f8e\u7684'
 &lt;p&gt;&lt;code&gt;encode&lt;/code&gt;和&lt;code&gt;decode&lt;/code&gt;提供 str 和 unicode 这两种的类型的互相转化。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;ul&gt;
-&lt;li&gt;encode 把 str(byte string) 转化成 unicode&lt;/li&gt;
-&lt;li&gt;decode 把 unicode 转化成 str(byte string)&lt;/li&gt;
+&lt;li&gt;encode 把 unicode 转化成 str(byte string)&lt;/li&gt;
+&lt;li&gt;decode 把 str(byte string) 转化成 unicode&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;本质上，str是存放的字节序，有可能是 ascii, gbk, utf-8 等等中的任意一种，通过调用 decode 可以把他们转化成 unicode ，默认的 decode 编码是 ascii 。str中到底是用的哪一种编码，取决于它所在的场景，跟 locale ，文件编码等等都有关系。&lt;/p&gt;
 &lt;h3&gt;文本文件、编辑器的处理&lt;/h3&gt;
@@ -453,14 +460,14 @@ When you changed your module, just click &lt;code&gt;Kernel &amp;gt; Restart&lt;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Done! Happy pip with socks5 proxy.&lt;/p&gt;</summary><category term="pip"></category></entry><entry><title>python small tips</title><link href="http://blog.hehan.net/python-small-tips.html" rel="alternate"></link><updated>2015-02-28T10:09:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2015-02-28:python-small-tips.html</id><summary type="html">&lt;h3&gt;Join two lists&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;a = [1, 2, 3]
+&lt;pre&gt;&lt;code class="python"&gt;a = [1, 2, 3]
 b = [3, 4, 5]
 c = a + b
 [1, 2, 3, 3, 4, 5]
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3&gt;Extend a list&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;a = [1, 2, 3]
+&lt;pre&gt;&lt;code class="python"&gt;a = [1, 2, 3]
 b = [3, 4, 5]
 a.extend(b)
 [1, 2, 3, 3, 4, 5]
@@ -474,7 +481,7 @@ d1.update(d2)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3&gt;Check if a list/dictionary/tuple is empty&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;l = []      # same for {} and ()
+&lt;pre&gt;&lt;code class="python"&gt;l = []      # same for {} and ()
 if l:
     print 'list is not empty'
 else:
@@ -482,18 +489,18 @@ else:
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3&gt;Iterate over dictionary&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;d = {'a': 1, 'b': 2}
+&lt;pre&gt;&lt;code class="python"&gt;d = {'a': 1, 'b': 2}
 for key in d:
     print key, d[key]
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code&gt;d = {'a': 1, 'b': 2}
+&lt;pre&gt;&lt;code class="python"&gt;d = {'a': 1, 'b': 2}
 for key, value in d.iteritems():
     print key, value
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3&gt;Access the index while looping a list&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;l = ['a', 'b', 'c', 'd']
+&lt;pre&gt;&lt;code class="python"&gt;l = ['a', 'b', 'c', 'd']
 for idx, value in enumerate(l):
     print idx, value
 &lt;/code&gt;&lt;/pre&gt;
@@ -523,6 +530,12 @@ set4 = set1.intersection(set2, set3)
 &lt;pre&gt;&lt;code class="python"&gt;c = '1,2,3,4'
 c.split(',')                # ['1','2','3','4']
 map(int, c.split(','))      # [1,2,3,4]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;Create a dict with default value for non-exist keys&lt;/h3&gt;
+&lt;pre&gt;&lt;code class="python"&gt;from collections import defaultdict
+d = defaultdict(lambda: [], {})
+d['a']  # =&amp;gt; []
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3&gt;Mutable and immutable&lt;/h3&gt;
@@ -571,7 +584,14 @@ setup the environment variables in &lt;code&gt;~/.profile&lt;/code&gt;.&lt;/p&gt
 &lt;pre&gt;&lt;code&gt;export STUDIO_JDK=/usr/java/jdk1.8.0_20
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;After that, logout and relogin, start android studio again, it works now.&lt;/p&gt;</summary><category term="android"></category></entry><entry><title>django - use silk for profiling</title><link href="http://blog.hehan.net/django-use-silk-for-profiling.html" rel="alternate"></link><updated>2014-08-13T17:41:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2014-08-13:django-use-silk-for-profiling.html</id><summary type="html">&lt;p&gt;&lt;a href="https://github.com/django-debug-toolbar/django-debug-toolbar"&gt;django-debug-toolbar&lt;/a&gt; does not work for ajax requests. Here comes &lt;a href="https://github.com/mtford90/silk"&gt;silk&lt;/a&gt; which works perfect for the ajax condition.&lt;/p&gt;
+&lt;p&gt;After that, logout and relogin, start android studio again, it works now.&lt;/p&gt;
+&lt;h2&gt;gradlew behind proxy&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;./gradlew -Dhttp.proxyHost=127.0.0.1 -Dhttp.proxyPort=8118 -Dhttps.proxyHost=127.0.0.1 -Dhttps.proxyPort=8118 --stop
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;stop running tasks&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;./gradlew --stop
+&lt;/code&gt;&lt;/pre&gt;</summary><category term="android"></category></entry><entry><title>django - use silk for profiling</title><link href="http://blog.hehan.net/django-use-silk-for-profiling.html" rel="alternate"></link><updated>2014-08-13T17:41:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2014-08-13:django-use-silk-for-profiling.html</id><summary type="html">&lt;p&gt;&lt;a href="https://github.com/django-debug-toolbar/django-debug-toolbar"&gt;django-debug-toolbar&lt;/a&gt; does not work for ajax requests. Here comes &lt;a href="https://github.com/mtford90/silk"&gt;silk&lt;/a&gt; which works perfect for the ajax condition.&lt;/p&gt;
 &lt;h3&gt;Installation&lt;/h3&gt;
 &lt;p&gt;Following the &lt;a href="https://github.com/mtford90/silk"&gt;instructions&lt;/a&gt; to install and configure for your own projects.&lt;/p&gt;
 &lt;h3&gt;Tips&lt;/h3&gt;
@@ -643,7 +663,23 @@ to your model.&lt;/p&gt;
 for instance &lt;code&gt;example.test_set.all()&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;In this case, as there are two foreign keys to &lt;code&gt;Example&lt;/code&gt;, if &lt;code&gt;related_name&lt;/code&gt; is not specified, Django&lt;br /&gt;
 doesn't know how to build up the reverse relation.&lt;/p&gt;
-&lt;p&gt;See &lt;a href="http://docs.djangoproject.com/en/dev/topics/db/queries/#backwards-related-objects"&gt;django doc&lt;/a&gt;&lt;/p&gt;</summary><category term="django"></category><category term="python"></category></entry><entry><title>configure vim for python dev</title><link href="http://blog.hehan.net/configure-vim-for-python-dev.html" rel="alternate"></link><updated>2013-11-23T08:42:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2013-11-23:configure-vim-for-python-dev.html</id><summary type="html">&lt;h2&gt;Flake8&lt;/h2&gt;
+&lt;p&gt;See &lt;a href="http://docs.djangoproject.com/en/dev/topics/db/queries/#backwards-related-objects"&gt;django doc&lt;/a&gt;&lt;/p&gt;</summary><category term="django"></category><category term="python"></category></entry><entry><title>python long line wrap</title><link href="http://blog.hehan.net/python-long-line-wrap.html" rel="alternate"></link><updated>2013-12-12T16:12:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2013-12-12:python-long-line-wrap.html</id><summary type="html">&lt;h2&gt;Long line with chained methods&lt;/h2&gt;
+&lt;p&gt;Use additional &lt;strong&gt;parenthesis&lt;/strong&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="python"&gt;subkeyword = (
+        Session.query(Subkeyword.subkeyword_id, Subkeyword.subkeyword_word)
+        .filter_by(subkeyword_company_id=self.e_company_id)
+        .filter_by(subkeyword_word=subkeyword_word)
+        .filter_by(subkeyword_active=True)
+        .one()
+    )
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;Long string&lt;/h2&gt;
+&lt;p&gt;Python concatenates string literals which appear adjacent to each other.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="python"&gt;def fun():
+    print '{0} Here is a really long ' \
+          'sentence with {1}'.format(3, 5)
+&lt;/code&gt;&lt;/pre&gt;</summary><category term="python"></category></entry><entry><title>configure vim for python dev</title><link href="http://blog.hehan.net/configure-vim-for-python-dev.html" rel="alternate"></link><updated>2013-11-23T08:42:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2013-11-23:configure-vim-for-python-dev.html</id><summary type="html">&lt;h2&gt;Flake8&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://pypi.python.org/pypi/flake8/"&gt;flake8&lt;/a&gt; :  wrapper for python checkers:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;PyFlakes&lt;/li&gt;

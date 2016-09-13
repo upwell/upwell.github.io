@@ -83,6 +83,13 @@ setup the environment variables in <code>~/.profile</code>.</p>
 </code></pre>
 
 <p>After that, logout and relogin, start android studio again, it works now.</p>
+<h2>gradlew behind proxy</h2>
+<pre><code>./gradlew -Dhttp.proxyHost=127.0.0.1 -Dhttp.proxyPort=8118 -Dhttps.proxyHost=127.0.0.1 -Dhttps.proxyPort=8118 --stop
+</code></pre>
+
+<h2>stop running tasks</h2>
+<pre><code>./gradlew --stop
+</code></pre>
             
             
             <hr/>

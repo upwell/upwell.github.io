@@ -70,14 +70,14 @@
 
             
             <h3>Join two lists</h3>
-<pre><code>a = [1, 2, 3]
+<pre><code class="python">a = [1, 2, 3]
 b = [3, 4, 5]
 c = a + b
 [1, 2, 3, 3, 4, 5]
 </code></pre>
 
 <h3>Extend a list</h3>
-<pre><code>a = [1, 2, 3]
+<pre><code class="python">a = [1, 2, 3]
 b = [3, 4, 5]
 a.extend(b)
 [1, 2, 3, 3, 4, 5]
@@ -91,7 +91,7 @@ d1.update(d2)
 </code></pre>
 
 <h3>Check if a list/dictionary/tuple is empty</h3>
-<pre><code>l = []      # same for {} and ()
+<pre><code class="python">l = []      # same for {} and ()
 if l:
     print 'list is not empty'
 else:
@@ -99,18 +99,18 @@ else:
 </code></pre>
 
 <h3>Iterate over dictionary</h3>
-<pre><code>d = {'a': 1, 'b': 2}
+<pre><code class="python">d = {'a': 1, 'b': 2}
 for key in d:
     print key, d[key]
 </code></pre>
 
-<pre><code>d = {'a': 1, 'b': 2}
+<pre><code class="python">d = {'a': 1, 'b': 2}
 for key, value in d.iteritems():
     print key, value
 </code></pre>
 
 <h3>Access the index while looping a list</h3>
-<pre><code>l = ['a', 'b', 'c', 'd']
+<pre><code class="python">l = ['a', 'b', 'c', 'd']
 for idx, value in enumerate(l):
     print idx, value
 </code></pre>
@@ -140,6 +140,12 @@ set4 = set1.intersection(set2, set3)
 <pre><code class="python">c = '1,2,3,4'
 c.split(',')                # ['1','2','3','4']
 map(int, c.split(','))      # [1,2,3,4]
+</code></pre>
+
+<h3>Create a dict with default value for non-exist keys</h3>
+<pre><code class="python">from collections import defaultdict
+d = defaultdict(lambda: [], {})
+d['a']  # =&gt; []
 </code></pre>
 
 <h3>Mutable and immutable</h3>
@@ -189,7 +195,7 @@ def is_pirate(message):
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="http://blog.hehan.net/tags.html#python-ref">python
-                    <span>11</span>
+                    <span>13</span>
 </a></li>
             </ul>
 <h4>Contact</h4>

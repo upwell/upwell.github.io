@@ -105,8 +105,8 @@ u'\u7f8e\u7684'
 <p><code>encode</code>和<code>decode</code>提供 str 和 unicode 这两种的类型的互相转化。</p>
 </blockquote>
 <ul>
-<li>encode 把 str(byte string) 转化成 unicode</li>
-<li>decode 把 unicode 转化成 str(byte string)</li>
+<li>encode 把 unicode 转化成 str(byte string)</li>
+<li>decode 把 str(byte string) 转化成 unicode</li>
 </ul>
 <p>本质上，str是存放的字节序，有可能是 ascii, gbk, utf-8 等等中的任意一种，通过调用 decode 可以把他们转化成 unicode ，默认的 decode 编码是 ascii 。str中到底是用的哪一种编码，取决于它所在的场景，跟 locale ，文件编码等等都有关系。</p>
 <h3>文本文件、编辑器的处理</h3>
@@ -197,7 +197,7 @@ UnicodeDecodeError: 'gbk' codec can't decode bytes in position 2-3: illegal mult
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="http://blog.hehan.net/tags.html#python-ref">python
-                    <span>11</span>
+                    <span>13</span>
 </a></li>
                 <li><a href="http://blog.hehan.net/tags.html#unicode-ref">unicode
                     <span>1</span>

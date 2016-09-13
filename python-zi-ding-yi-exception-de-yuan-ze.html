@@ -10,18 +10,18 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="django, python, tech, " />
+<meta name="keywords" content="python, exception, tech, " />
 
-<meta property="og:title" content="Reload module when using Django shell "/>
-<meta property="og:url" content="http://blog.hehan.net/reload-module-when-using-django-shell.html" />
-<meta property="og:description" content="Issue The annoying part of using django shell is that: Once you changed the source code, you need restart the shell and enter the code again. Solution Use django-extensions in the project and with shell_plus, there is a better expirence using django shell, although it&#39;s not the best, anyway ..." />
+<meta property="og:title" content="python 自定义 exception 的原则 "/>
+<meta property="og:url" content="http://blog.hehan.net/python-zi-ding-yi-exception-de-yuan-ze.html" />
+<meta property="og:description" content="自定义 exception 的困扰 在 Web 编程的时候，经常会遇到一种场景，内部接口实现的时候会出现各种错误的情况，对于一些错误又不能直接在接口中处理，大部分时候可能需要告知调用者错误发生了，然后由调用者 (view) 来处理并返回相应的信息给 UI。 这种时候，我们通常想的是，为每种错误自定义一个 exception，然后 raise 出去，有调用者 except 后再进行相应的处理，这样会导致大量的自定义 exception，毕竟错误（异常）场景还是很多的。 参考 Proper way to define customer exception Write cleaner python user exceptions Robust exception handling modules should never raise core python ..." />
 <meta property="og:site_name" content="Note Everything" />
 <meta property="og:article:author" content="Han" />
-<meta property="og:article:published_time" content="2015-06-05T10:57:00+08:00" />
-<meta name="twitter:title" content="Reload module when using Django shell ">
-<meta name="twitter:description" content="Issue The annoying part of using django shell is that: Once you changed the source code, you need restart the shell and enter the code again. Solution Use django-extensions in the project and with shell_plus, there is a better expirence using django shell, although it&#39;s not the best, anyway ...">
+<meta property="og:article:published_time" content="2016-09-01T16:17:00+08:00" />
+<meta name="twitter:title" content="python 自定义 exception 的原则 ">
+<meta name="twitter:description" content="自定义 exception 的困扰 在 Web 编程的时候，经常会遇到一种场景，内部接口实现的时候会出现各种错误的情况，对于一些错误又不能直接在接口中处理，大部分时候可能需要告知调用者错误发生了，然后由调用者 (view) 来处理并返回相应的信息给 UI。 这种时候，我们通常想的是，为每种错误自定义一个 exception，然后 raise 出去，有调用者 except 后再进行相应的处理，这样会导致大量的自定义 exception，毕竟错误（异常）场景还是很多的。 参考 Proper way to define customer exception Write cleaner python user exceptions Robust exception handling modules should never raise core python ...">
 
-        <title>Reload module when using Django shell  · Note Everything
+        <title>python 自定义 exception 的原则  · Note Everything
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
@@ -61,7 +61,7 @@
 <article>
 <div class="row-fluid">
     <header class="page-header span10 offset2">
-    <h1><a href="http://blog.hehan.net/reload-module-when-using-django-shell.html"> Reload module when using Django shell  </a></h1>
+    <h1><a href="http://blog.hehan.net/python-zi-ding-yi-exception-de-yuan-ze.html"> python 自定义 exception 的原则  </a></h1>
     </header>
 </div>
 
@@ -69,20 +69,14 @@
         <div class="span8 offset2 article-content">
 
             
-            <h3>Issue</h3>
-<p>The annoying part of using django shell is that:</p>
-<blockquote>
-<p>Once you changed the source code, you need restart the shell and enter the code again.</p>
-</blockquote>
-<h3>Solution</h3>
-<p>Use <code>django-extensions</code> in the project and with <code>shell_plus</code>, there is a better expirence using django shell, although<br />
-it's not the best, anyway it's much better.</p>
-<pre><code># python manage.py shell_plus --notebook
-</code></pre>
-
-<p>The above command would open a notebook on your browser, write your code in a cell.<br />
-When you changed your module, just click <code>Kernel &gt; Restart</code>, and rerun the code.</p>
-<p>Done! Happy django.</p>
+            <h1>自定义 exception 的困扰</h1>
+<p>在 Web 编程的时候，经常会遇到一种场景，内部接口实现的时候会出现各种错误的情况，对于一些错误又不能直接在接口中处理，大部分时候可能需要告知调用者错误发生了，然后由调用者 (view) 来处理并返回相应的信息给 UI。</p>
+<p>这种时候，我们通常想的是，为每种错误自定义一个 exception，然后 raise 出去，有调用者 except 后再进行相应的处理，这样会导致大量的自定义 exception，毕竟错误（异常）场景还是很多的。</p>
+<h1>参考</h1>
+<p><a href="http://stackoverflow.com/questions/1319615/proper-way-to-declare-custom-exceptions-in-modern-python">Proper way to define customer exception</a><br />
+<a href="https://jeffknupp.com/blog/2013/02/06/write-cleaner-python-use-exceptions/">Write cleaner python user exceptions</a><br />
+<a href="http://eli.thegreenplace.net/2008/08/21/robust-exception-handling">Robust exception handling</a><br />
+<a href="https://www.reddit.com/r/Python/comments/51ksht/modules_should_never_raise_core_python_exceptions/">modules should never raise core python exceptions</a></p>
             
             
             <hr/>
@@ -90,13 +84,13 @@ When you changed your module, just click <code>Kernel &gt; Restart</code>, and r
         <section>
         <div class="span2" style="float:right;font-size:0.9em;">
             <h4>Published</h4>
-            <time pubdate="pubdate" datetime="2015-06-05T10:57:00+08:00">2015-06-05</time>
+            <time pubdate="pubdate" datetime="2016-09-01T16:17:00+08:00">2016-09-01</time>
             <h4>Category</h4>
             <a class="category-link" href="http://blog.hehan.net/categories.html#tech-ref">tech</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="http://blog.hehan.net/tags.html#django-ref">django
-                    <span>6</span>
+                <li><a href="http://blog.hehan.net/tags.html#exception-ref">exception
+                    <span>1</span>
 </a></li>
                 <li><a href="http://blog.hehan.net/tags.html#python-ref">python
                     <span>13</span>
