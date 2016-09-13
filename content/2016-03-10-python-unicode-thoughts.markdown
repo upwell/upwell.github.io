@@ -41,8 +41,8 @@ u'\u7f8e\u7684'
 
 > `encode`和`decode`提供 str 和 unicode 这两种的类型的互相转化。
 
-- encode 把 str(byte string) 转化成 unicode
-- decode 把 unicode 转化成 str(byte string)
+- encode 把 unicode 转化成 str(byte string)
+- decode 把 str(byte string) 转化成 unicode
 
 本质上，str是存放的字节序，有可能是 ascii, gbk, utf-8 等等中的任意一种，通过调用 decode 可以把他们转化成 unicode ，默认的 decode 编码是 ascii 。str中到底是用的哪一种编码，取决于它所在的场景，跟 locale ，文件编码等等都有关系。
 

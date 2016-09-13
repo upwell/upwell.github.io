@@ -6,7 +6,7 @@ Category: tech
 ---
 
 ### Join two lists
-```
+```python
 a = [1, 2, 3]
 b = [3, 4, 5]
 c = a + b
@@ -14,7 +14,7 @@ c = a + b
 ```
 
 ### Extend a list
-```
+```python
 a = [1, 2, 3]
 b = [3, 4, 5]
 a.extend(b)
@@ -30,7 +30,7 @@ d1.update(d2)
 ```
 
 ### Check if a list/dictionary/tuple is empty
-```
+```python
 l = []      # same for {} and ()
 if l:
     print 'list is not empty'
@@ -39,20 +39,20 @@ else:
 ```
 
 ### Iterate over dictionary
-```
+```python
 d = {'a': 1, 'b': 2}
 for key in d:
     print key, d[key]
 ```
 
-```
+```python
 d = {'a': 1, 'b': 2}
 for key, value in d.iteritems():
     print key, value
 ```
 
 ### Access the index while looping a list
-```
+```python
 l = ['a', 'b', 'c', 'd']
 for idx, value in enumerate(l):
     print idx, value
@@ -89,6 +89,13 @@ set4 = set1.intersection(set2, set3)
 c = '1,2,3,4'
 c.split(',')				# ['1','2','3','4']
 map(int, c.split(','))      # [1,2,3,4]
+```
+
+### Create a dict with default value for non-exist keys
+```python
+from collections import defaultdict
+d = defaultdict(lambda: [], {})
+d['a']  # => []
 ```
 
 ### Mutable and immutable

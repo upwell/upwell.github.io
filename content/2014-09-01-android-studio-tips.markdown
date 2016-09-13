@@ -27,4 +27,14 @@ export STUDIO_JDK=/usr/java/jdk1.8.0_20
 
 After that, logout and relogin, start android studio again, it works now.
 
+## gradlew behind proxy
 
+```
+./gradlew -Dhttp.proxyHost=127.0.0.1 -Dhttp.proxyPort=8118 -Dhttps.proxyHost=127.0.0.1 -Dhttps.proxyPort=8118 --stop
+```
+
+## stop running tasks
+
+```
+./gradlew --stop
+```

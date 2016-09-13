@@ -1,7 +1,8 @@
 ---
 Title: python long line wrap
 Date: 2013-12-12 16:12
-Category: python
+Tags: python
+Category: tech
 ---
 
 ## Long line with chained methods
@@ -27,4 +28,3 @@ def fun():
     print '{0} Here is a really long ' \
           'sentence with {1}'.format(3, 5)
 ```
-
