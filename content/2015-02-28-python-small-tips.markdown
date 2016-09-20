@@ -21,6 +21,15 @@ a.extend(b)
 [1, 2, 3, 3, 4, 5]
 ```
 
+### Shadow copy a list
+```python
+a = [1, 2, 3]
+a[:]          # fastest
+list(a)
+copy.copy(a)
+```
+[How to copy a list][1]
+
 ### Join two dicts
 ```python
 d1 = {1: 'a', 2: 'b'}
@@ -132,3 +141,6 @@ def is_pirate(message):
     """Return True if the given message sounds piratical."""
     return re.search(r"(?i)(arr|avast|yohoho)!", message) is not None
 ```
+
+
+[1]: http://stackoverflow.com/questions/2612802/how-to-clone-or-copy-a-list-in-python
