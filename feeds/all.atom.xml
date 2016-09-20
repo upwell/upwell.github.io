@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Note Everything</title><link href="http://blog.hehan.net/" rel="alternate"></link><link href="http://blog.hehan.net/feeds/all.atom.xml" rel="self"></link><id>http://blog.hehan.net/</id><updated>2016-09-01T16:17:00+08:00</updated><entry><title>python 自定义 exception 的原则</title><link href="http://blog.hehan.net/python-zi-ding-yi-exception-de-yuan-ze.html" rel="alternate"></link><updated>2016-09-01T16:17:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-09-01:python-zi-ding-yi-exception-de-yuan-ze.html</id><summary type="html">&lt;h1&gt;自定义 exception 的困扰&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Note Everything</title><link href="http://blog.hehan.net/" rel="alternate"></link><link href="http://blog.hehan.net/feeds/all.atom.xml" rel="self"></link><id>http://blog.hehan.net/</id><updated>2016-09-20T11:17:00+08:00</updated><entry><title>python eval 的问题</title><link href="http://blog.hehan.net/python-eval-de-wen-ti.html" rel="alternate"></link><updated>2016-09-20T11:17:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-09-20:python-eval-de-wen-ti.html</id><summary type="html">&lt;h1&gt;场景&lt;/h1&gt;
+&lt;p&gt;最近在代码会看到一些使用 &lt;code&gt;eval&lt;/code&gt; 的代码场景，比如动态获取变量的值：&lt;/p&gt;
+&lt;pre&gt;&lt;code class="python"&gt;NAME_H = 'h'
+NAME_X = 'x'
+
+name = eval('NAME_H')
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1&gt;问题&lt;/h1&gt;
+&lt;p&gt;其实 &lt;code&gt;eval&lt;/code&gt; 在各种语言中，都是比较特殊的函数，一般的场景下都不应该使用，主要的几个原因是：&lt;br /&gt;
+- There is almost always a better way to do it&lt;br /&gt;
+- Very dangerous and insecure compare to most other python functions&lt;br /&gt;
+- Makes debugging difficult&lt;br /&gt;
+- Slow&lt;/p&gt;
+&lt;h1&gt;结论&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;eval&lt;/code&gt; 的使用场景比较特殊，一般的情况下都不应该使用，非得使用它的时候也要谨慎考虑。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It seems simple to me: eval is a vector for code injection, and is dangerous in a way that most other Python functions are not. That doesn't mean you shouldn't use it at all, but I think you should use it judiciously.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1&gt;参考&lt;/h1&gt;
+&lt;p&gt;&lt;a href="http://stackoverflow.com/questions/1832940/is-using-eval-in-python-a-bad-practice"&gt;Is using eval in python a bad practice&lt;/a&gt;&lt;/p&gt;</summary><category term="python"></category></entry><entry><title>python 自定义 exception 的原则</title><link href="http://blog.hehan.net/python-zi-ding-yi-exception-de-yuan-ze.html" rel="alternate"></link><updated>2016-09-01T16:17:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-09-01:python-zi-ding-yi-exception-de-yuan-ze.html</id><summary type="html">&lt;h1&gt;自定义 exception 的困扰&lt;/h1&gt;
 &lt;p&gt;在 Web 编程的时候，经常会遇到一种场景，内部接口实现的时候会出现各种错误的情况，对于一些错误又不能直接在接口中处理，大部分时候可能需要告知调用者错误发生了，然后由调用者 (view) 来处理并返回相应的信息给 UI。&lt;/p&gt;
 &lt;p&gt;这种时候，我们通常想的是，为每种错误自定义一个 exception，然后 raise 出去，有调用者 except 后再进行相应的处理，这样会导致大量的自定义 exception，毕竟错误（异常）场景还是很多的。&lt;/p&gt;
 &lt;h1&gt;参考&lt;/h1&gt;
@@ -513,6 +533,14 @@ a.extend(b)
 [1, 2, 3, 3, 4, 5]
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;h3&gt;Shadow copy a list&lt;/h3&gt;
+&lt;pre&gt;&lt;code class="python"&gt;a = [1, 2, 3]
+a[:]          # fastest
+list(a)
+copy.copy(a)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href="http://stackoverflow.com/questions/2612802/how-to-clone-or-copy-a-list-in-python"&gt;How to copy a list&lt;/a&gt;&lt;/p&gt;
 &lt;h3&gt;Join two dicts&lt;/h3&gt;
 &lt;pre&gt;&lt;code class="python"&gt;d1 = {1: 'a', 2: 'b'}
 d2 = {3: 'c', 4: 'd'}

@@ -14,12 +14,12 @@
 
 <meta property="og:title" content="python small tips "/>
 <meta property="og:url" content="http://blog.hehan.net/python-small-tips.html" />
-<meta property="og:description" content="Join two lists a = [1, 2, 3] b = [3, 4, 5] c = a + b [1, 2, 3, 3, 4, 5] Extend a list a = [1, 2, 3] b = [3, 4, 5] a.extend(b) [1, 2, 3, 3, 4, 5] Join two dicts d1 = {1: &#39;a&#39;, 2: &#39;b&#39;} d2 = {3 ..." />
+<meta property="og:description" content="Join two lists a = [1, 2, 3] b = [3, 4, 5] c = a + b [1, 2, 3, 3, 4, 5] Extend a list a = [1, 2, 3] b = [3, 4, 5] a.extend(b) [1, 2, 3, 3, 4, 5] Shadow copy a list a = [1, 2, 3] a[:] # fastest ..." />
 <meta property="og:site_name" content="Note Everything" />
 <meta property="og:article:author" content="Han" />
 <meta property="og:article:published_time" content="2015-02-28T10:09:00+08:00" />
 <meta name="twitter:title" content="python small tips ">
-<meta name="twitter:description" content="Join two lists a = [1, 2, 3] b = [3, 4, 5] c = a + b [1, 2, 3, 3, 4, 5] Extend a list a = [1, 2, 3] b = [3, 4, 5] a.extend(b) [1, 2, 3, 3, 4, 5] Join two dicts d1 = {1: &#39;a&#39;, 2: &#39;b&#39;} d2 = {3 ...">
+<meta name="twitter:description" content="Join two lists a = [1, 2, 3] b = [3, 4, 5] c = a + b [1, 2, 3, 3, 4, 5] Extend a list a = [1, 2, 3] b = [3, 4, 5] a.extend(b) [1, 2, 3, 3, 4, 5] Shadow copy a list a = [1, 2, 3] a[:] # fastest ...">
 
         <title>python small tips  · Note Everything
 </title>
@@ -83,6 +83,14 @@ a.extend(b)
 [1, 2, 3, 3, 4, 5]
 </code></pre>
 
+<h3>Shadow copy a list</h3>
+<pre><code class="python">a = [1, 2, 3]
+a[:]          # fastest
+list(a)
+copy.copy(a)
+</code></pre>
+
+<p><a href="http://stackoverflow.com/questions/2612802/how-to-clone-or-copy-a-list-in-python">How to copy a list</a></p>
 <h3>Join two dicts</h3>
 <pre><code class="python">d1 = {1: 'a', 2: 'b'}
 d2 = {3: 'c', 4: 'd'}
@@ -195,7 +203,7 @@ def is_pirate(message):
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="http://blog.hehan.net/tags.html#python-ref">python
-                    <span>13</span>
+                    <span>14</span>
 </a></li>
             </ul>
 <h4>Contact</h4>
