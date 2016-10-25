@@ -1,5 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Note Everything</title><link href="http://blog.hehan.net/" rel="alternate"></link><link href="http://blog.hehan.net/feeds/all.atom.xml" rel="self"></link><id>http://blog.hehan.net/</id><updated>2016-09-20T11:17:00+08:00</updated><entry><title>python eval 的问题</title><link href="http://blog.hehan.net/python-eval-de-wen-ti.html" rel="alternate"></link><updated>2016-09-20T11:17:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-09-20:python-eval-de-wen-ti.html</id><summary type="html">&lt;h1&gt;场景&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Note Everything</title><link href="http://blog.hehan.net/" rel="alternate"></link><link href="http://blog.hehan.net/feeds/all.atom.xml" rel="self"></link><id>http://blog.hehan.net/</id><updated>2016-10-21T11:15:00+08:00</updated><entry><title>mongodb 初识</title><link href="http://blog.hehan.net/mongodb-chu-shi.html" rel="alternate"></link><updated>2016-10-21T11:15:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-10-21:mongodb-chu-shi.html</id><summary type="html">&lt;h1&gt;mongodb 基本概念&lt;/h1&gt;
+&lt;h2&gt;document&lt;/h2&gt;
+&lt;p&gt;关系数据库表的单条记录(&lt;code&gt;record&lt;/code&gt;)对应到&lt;code&gt;mongodb&lt;/code&gt;就是单个&lt;code&gt;document&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;document&lt;/code&gt;的结构类似&lt;code&gt;JSON&lt;/code&gt;的对象，里面是一个个&lt;code&gt;KEY/VALUE&lt;/code&gt;対。&lt;code&gt;Value&lt;/code&gt;可以是的&lt;code&gt;document, array, arrays of documents&lt;/code&gt;。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{
+   &amp;quot;_id&amp;quot; : ObjectId(&amp;quot;54c955492b7c8eb21818bd09&amp;quot;),
+   &amp;quot;address&amp;quot; : {
+      &amp;quot;street&amp;quot; : &amp;quot;2 Avenue&amp;quot;,
+      &amp;quot;zipcode&amp;quot; : &amp;quot;10075&amp;quot;,
+      &amp;quot;building&amp;quot; : &amp;quot;1480&amp;quot;,
+      &amp;quot;coord&amp;quot; : [ -73.9557413, 40.7720266 ]
+   }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;collection&lt;/h2&gt;
+&lt;p&gt;关系数据库表的表(&lt;code&gt;table&lt;/code&gt;)对应到&lt;code&gt;mongodb&lt;/code&gt;就是&lt;code&gt;collection&lt;/code&gt;。区别在于&lt;code&gt;collection&lt;/code&gt;不要求里面的&lt;code&gt;documents&lt;/code&gt;有相同的&lt;code&gt;schema&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;存储在&lt;code&gt;collection&lt;/code&gt;中的&lt;code&gt;documents&lt;/code&gt;必须要有一个唯一的&lt;code&gt;_id&lt;/code&gt;作为主键(&lt;code&gt;primary key&lt;/code&gt;)。&lt;/p&gt;</summary><category term="mongodb"></category></entry><entry><title>http post form 还是 json</title><link href="http://blog.hehan.net/http-post-form-huan-shi-json.html" rel="alternate"></link><updated>2016-10-14T11:17:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-10-14:http-post-form-huan-shi-json.html</id><summary type="html">&lt;h1&gt;问题&lt;/h1&gt;
+&lt;p&gt;我们在前后端交互的时候经常遇到往服务器发送数据时使用&lt;strong&gt;什么格式&lt;/strong&gt;的问题，对于&lt;code&gt;POST&lt;/code&gt;请求，最常见的两种格式是&lt;code&gt;form&lt;/code&gt;和&lt;code&gt;json&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;以最常见的登录接口为例，&lt;code&gt;form&lt;/code&gt;格式是浏览器默认的提交格式：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;username=test&amp;amp;password=666666
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;json&lt;/code&gt;格式的数据是：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{&amp;quot;username&amp;quot;: &amp;quot;test&amp;quot;, &amp;quot;password&amp;quot;: &amp;quot;666666&amp;quot;}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;也并不存在大家有的误区，比如&lt;code&gt;ajax&lt;/code&gt;就应该传&lt;code&gt;json&lt;/code&gt;格式的数据。其实两种格式都可以，到底应该用哪种呢？&lt;/p&gt;
+&lt;h1&gt;分析&lt;/h1&gt;
+&lt;p&gt;来看看两种格式的优缺点：&lt;/p&gt;
+&lt;h3&gt;优点&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;form&lt;/code&gt;是默认的提交方式(更常见)，所有的浏览器和服务器都原生支持，不需要额外的&lt;code&gt;scripts&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;json&lt;/code&gt;支持结构化的数据，比如数组，多层级数据&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;缺点&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;form&lt;/code&gt;结构化支持不好，遇到复杂的数据结构时，处理困难&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;json&lt;/code&gt;构造数据需要额外的&lt;code&gt;scripts&lt;/code&gt;，一些特殊场景（上传文件）处理困难&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;结论&lt;/h1&gt;
+&lt;p&gt;其实抛开具体的场景，很难比较说哪种方式更好更适用，里面会涉及项目使用的前端技术、后端服务器、应用场景。&lt;/p&gt;
+&lt;p&gt;这里通过几个因素来判断：&lt;/p&gt;
+&lt;h3&gt;前端使用的框架&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;django form 默认提交的是 form 格式的数据，但也可以使用 jquery 转成 json 格式再提交&lt;/li&gt;
+&lt;li&gt;jquery 默认发送 form 格式&lt;/li&gt;
+&lt;li&gt;目前流行的前端框架而言，&lt;code&gt;angular&lt;/code&gt;、&lt;code&gt;vuejs&lt;/code&gt;、&lt;code&gt;reactjs&lt;/code&gt;，还有一些android和ios的库比如&lt;code&gt;okhttp&lt;/code&gt;，默认发送的都是json格式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;后端使用的框架&lt;/h3&gt;
+&lt;p&gt;目前我最常用的 django，自带的 Form 都是使用 form 格式提交的，但在实际的使用中，我们的接口大部分都是自己写的，并没有使用 &lt;code&gt;Form&lt;/code&gt;，对于客户端发过来的数据是 json 和 form 格式的并不敏感，都能容易的支持。&lt;/p&gt;
+&lt;h3&gt;一致性&lt;/h3&gt;
+&lt;p&gt;数据接口的一致性，在同一个的项目中尽量使用同一种数据格式&lt;/p&gt;
+&lt;h1&gt;建议&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;接口是前后端约定的，尽量保证两边默认就有很好的支持&lt;/li&gt;
+&lt;li&gt;就目前流行的前端框架而言，使用&lt;code&gt;json&lt;/code&gt;格式的数据更好&lt;/li&gt;
+&lt;li&gt;对于上传文件的场景，使用&lt;code&gt;form&lt;/code&gt;格式&lt;/li&gt;
+&lt;li&gt;同一个的项目中尽量使用同一种数据格式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;参考&lt;/h1&gt;
+&lt;p&gt;&lt;a href="http://stackoverflow.com/questions/12042476/normal-form-submission-vs-json"&gt;http://stackoverflow.com/questions/12042476/normal-form-submission-vs-json&lt;/a&gt;&lt;br /&gt;
+&lt;a href="http://stackoverflow.com/questions/13541542/posting-json-vs-traditional-form-encoded-data-as-the-data-format-for-submitting"&gt;http://stackoverflow.com/questions/13541542/posting-json-vs-traditional-form-encoded-data-as-the-data-format-for-submitting&lt;/a&gt;&lt;br /&gt;
+&lt;a href="http://john-sheehan.com/blog/dont-build-the-best-rest-api-build-the-best-http-api"&gt;http://john-sheehan.com/blog/dont-build-the-best-rest-api-build-the-best-http-api&lt;/a&gt;&lt;br /&gt;
+&lt;a href="http://homakov.blogspot.kr/2012/06/x-www-form-urlencoded-vs-json-pros-and.html"&gt;http://homakov.blogspot.kr/2012/06/x-www-form-urlencoded-vs-json-pros-and.html&lt;/a&gt;&lt;/p&gt;</summary><category term="api"></category></entry><entry><title>python eval 的问题</title><link href="http://blog.hehan.net/python-eval-de-wen-ti.html" rel="alternate"></link><updated>2016-09-20T11:17:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-09-20:python-eval-de-wen-ti.html</id><summary type="html">&lt;h1&gt;场景&lt;/h1&gt;
 &lt;p&gt;最近在代码会看到一些使用 &lt;code&gt;eval&lt;/code&gt; 的代码场景，比如动态获取变量的值：&lt;/p&gt;
 &lt;pre&gt;&lt;code class="python"&gt;NAME_H = 'h'
 NAME_X = 'x'
