@@ -56,3 +56,6 @@ MD_EXTENSIONS = [
     'markdown.extensions.nl2br',
     'markdown.extensions.fenced_code',
 ]
+
+PLUGIN_PATHS = ['plugins']
+PLUGINS = ['cjk-auto-spacing']
