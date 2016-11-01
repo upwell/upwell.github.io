@@ -1,0 +1,3 @@
+[submodule "plugins/cjk-auto-spacing"]
+	path = plugins/cjk-auto-spacing
+	url = https://github.com/yuex/cjk-auto-spacing
