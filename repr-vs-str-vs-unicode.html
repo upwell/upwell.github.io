@@ -14,12 +14,12 @@
 
 <meta property="og:title" content="repr vs. str vs. unicode "/>
 <meta property="og:url" content="http://blog.hehan.net/repr-vs-str-vs-unicode.html" />
-<meta property="og:description" content="__repr__和__str__ 两者都是把对象转化成字符串： __repr__主要是要 明确 表示对象 __str__主要是要为了 可读 下面的示例： In [42]: d = Decimal(&#39;100.00&#39;) In [43]: str(d) Out[43]: &#39;100.00&#39; In [44]: repr(d) Out[44]: &#34;Decimal(&#39;100.00&#39;)&#34; 可以看到repr的输出更明确，而str的输出更可读。 这里有一点要注意的： 如果__str__没有定义，而__repr__定义了，调用对象的__str__ ..." />
+<meta property="og:description" content="__repr__ 和 __str__ 两者都是把对象转化成字符串： __repr__ 主要是要 明确 表示对象 __str__ 主要是要为了 可读 下面的示例： In [42]: d = Decimal(&#39;100.00&#39;) In [43]: str(d) Out[43]: &#39;100.00&#39; In [44]: repr(d) Out[44]: &#34;Decimal(&#39;100.00&#39;)&#34; 可以看到 repr 的输出更明确，而 str 的输出更可读。 这里有一点要注意的： 如果 __str__ 没有定义，而 __repr__ 定义了，调用对象的 __str__ ..." />
 <meta property="og:site_name" content="Note Everything" />
 <meta property="og:article:author" content="Han" />
 <meta property="og:article:published_time" content="2016-04-28T13:36:00+08:00" />
 <meta name="twitter:title" content="repr vs. str vs. unicode ">
-<meta name="twitter:description" content="__repr__和__str__ 两者都是把对象转化成字符串： __repr__主要是要 明确 表示对象 __str__主要是要为了 可读 下面的示例： In [42]: d = Decimal(&#39;100.00&#39;) In [43]: str(d) Out[43]: &#39;100.00&#39; In [44]: repr(d) Out[44]: &#34;Decimal(&#39;100.00&#39;)&#34; 可以看到repr的输出更明确，而str的输出更可读。 这里有一点要注意的： 如果__str__没有定义，而__repr__定义了，调用对象的__str__ ...">
+<meta name="twitter:description" content="__repr__ 和 __str__ 两者都是把对象转化成字符串： __repr__ 主要是要 明确 表示对象 __str__ 主要是要为了 可读 下面的示例： In [42]: d = Decimal(&#39;100.00&#39;) In [43]: str(d) Out[43]: &#39;100.00&#39; In [44]: repr(d) Out[44]: &#34;Decimal(&#39;100.00&#39;)&#34; 可以看到 repr 的输出更明确，而 str 的输出更可读。 这里有一点要注意的： 如果 __str__ 没有定义，而 __repr__ 定义了，调用对象的 __str__ ...">
 
         <title>repr vs. str vs. unicode  · Note Everything
 </title>
@@ -77,13 +77,13 @@
         <div class="span8 offset2 article-content">
 
             
-            <h3><code>__repr__</code>和<code>__str__</code></h3>
-<p>两者都是把对象转化成字符串：</p>
+            <h3><code>__repr__</code> 和 <code>__str__</code></h3>
+<p> 两者都是把对象转化成字符串：</p>
 <ul>
-<li><code>__repr__</code>主要是要 <strong><em>明确</em></strong> 表示对象</li>
-<li><code>__str__</code>主要是要为了 <strong><em>可读</em></strong></li>
+<li><code>__repr__</code> 主要是要 <strong><em> 明确 </em></strong> 表示对象 </li>
+<li><code>__str__</code> 主要是要为了 <strong><em> 可读 </em></strong></li>
 </ul>
-<p>下面的示例：</p>
+<p> 下面的示例：</p>
 <pre><code>In [42]: d = Decimal('100.00')
 In [43]: str(d)
 Out[43]: '100.00'
@@ -91,20 +91,20 @@ In [44]: repr(d)
 Out[44]: &quot;Decimal('100.00')&quot;
 </code></pre>
 
-<p>可以看到<code>repr</code>的输出更明确，而<code>str</code>的输出更可读。</p>
-<p>这里有一点要注意的：</p>
+<p> 可以看到 <code>repr</code> 的输出更明确，而 <code>str</code> 的输出更可读。</p>
+<p> 这里有一点要注意的：</p>
 <blockquote>
-<p>如果<code>__str__</code>没有定义，而<code>__repr__</code>定义了，调用对象的<code>__str__</code>实际上就是使用<code>__repr__</code>。</p>
+<p> 如果 <code>__str__</code> 没有定义，而 <code>__repr__</code> 定义了，调用对象的 <code>__str__</code> 实际上就是使用 <code>__repr__</code>。</p>
 </blockquote>
-<p>那么，使用<code>print</code>打印一个对象时候到底使用的哪个函数呢？</p>
+<p> 那么，使用 <code>print</code> 打印一个对象时候到底使用的哪个函数呢？</p>
 <ul>
-<li>print一个对象时，调用的是<strong>str</strong>;</li>
-<li>print list时，调用的是list的<strong>str</strong>，但list的<strong>str</strong>调用的是每个项的<strong>repr</strong>;</li>
+<li>print 一个对象时，调用的是 <strong>str</strong>;</li>
+<li>print list 时，调用的是 list 的 <strong>str</strong>，但 list 的 <strong>str</strong> 调用的是每个项的 <strong>repr</strong>;</li>
 </ul>
-<h3><code>__str__</code>和<code>__unicode__</code></h3>
+<h3><code>__str__</code> 和 <code>__unicode__</code></h3>
 <h4>python2</h4>
-<p><code>str</code>实际上是字节码，一个一个byte，而<code>unicode</code>是一个个字符，</p>
-<pre><code>In [49]: s = u'汉字'
+<p><code>str</code> 实际上是字节码，一个一个 byte，而 <code>unicode</code> 是一个个字符，</p>
+<pre><code>In [49]: s = u' 汉字 '
 In [50]: s
 Out[50]: u'\u6c49\u5b57'
 In [51]: s.encode('utf-8')
@@ -114,12 +114,12 @@ Out[52]: unicode
 </code></pre>
 
 <h4>python3</h4>
-<p>所有的字符都是unicode字符格式的，没有<code>unicode</code>这个函数只有<code>str</code>，python3中的<code>str</code>实际上跟python2中的<code>unicode</code>是一样的。python3中如果要获得byte格式的话，可以用<code>bytes</code>函数。</p>
-<pre><code>&gt;&gt;&gt; s = '汉字'
+<p> 所有的字符都是 unicode 字符格式的，没有 <code>unicode</code> 这个函数只有 <code>str</code>，python3 中的 <code>str</code> 实际上跟 python2 中的 <code>unicode</code> 是一样的。python3 中如果要获得 byte 格式的话，可以用 <code>bytes</code> 函数。</p>
+<pre><code>&gt;&gt;&gt; s = ' 汉字 '
 &gt;&gt;&gt; s
-'汉字'
+' 汉字 '
 &gt;&gt;&gt; str(s)
-'汉字'
+' 汉字 '
 &gt;&gt;&gt; s.encode('utf-8')
 b'\xe6\xb1\x89\xe5\xad\x97'
 </code></pre>
@@ -138,7 +138,7 @@ b'\xe6\xb1\x89\xe5\xad\x97'
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="http://blog.hehan.net/tags.html#python-ref">python
-                    <span>14</span>
+                    <span>15</span>
 </a></li>
             </ul>
 <h4>Contact</h4>

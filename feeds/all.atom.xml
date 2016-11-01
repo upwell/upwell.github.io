@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Note Everything</title><link href="http://blog.hehan.net/" rel="alternate"></link><link href="http://blog.hehan.net/feeds/all.atom.xml" rel="self"></link><id>http://blog.hehan.net/</id><updated>2016-10-21T11:15:00+08:00</updated><entry><title>mongodb 初识</title><link href="http://blog.hehan.net/mongodb-chu-shi.html" rel="alternate"></link><updated>2016-10-21T11:15:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-10-21:mongodb-chu-shi.html</id><summary type="html">&lt;h1&gt;mongodb 基本概念&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Note Everything</title><link href="http://blog.hehan.net/" rel="alternate"></link><link href="http://blog.hehan.net/feeds/all.atom.xml" rel="self"></link><id>http://blog.hehan.net/</id><updated>2016-10-31T11:15:00+08:00</updated><entry><title>WSGI 研究</title><link href="http://blog.hehan.net/wsgi-yan-jiu.html" rel="alternate"></link><updated>2016-10-31T11:15:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-10-31:wsgi-yan-jiu.html</id><summary type="html">&lt;h2&gt; 现象 &lt;/h2&gt;
+&lt;p&gt; 之前一直以为 Django/Flask 是实现了完整的 http 协议的，最近遇到协议不支持才发现原来并非如此。&lt;/p&gt;
+&lt;p&gt; 实际遇到的问题是 App 上传图片到服务器时，如果 django 挂在 nginx 下，图片可以上传成功，但如果直接用 runserver 跑起来的话，上传失败。通过抓包分析，发现 App 上传图片时，http header 里面 Transfer-Encoding 的值是 Chunked。&lt;/p&gt;
+&lt;p&gt;Google 之后，发现并没有很多关于这方面的讨论，一致的说法是这并不是 Django 的问题，其实是 WSGI spec 中不支 Content-Length 为空的情况。单步调试 django 的代码也发现确实如此，遇到 Content-Length 为空或 0 时，就直接不再解析 body 了。django 的代码中也没法任何处理 Chunked 的逻辑。&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://stackoverflow.com/questions/12091067/handling-http-chunked-encoding-with-django"&gt; 参考一 &lt;/a&gt;  &lt;a href="https://github.com/pallets/flask/issues/367"&gt; 参考二 &lt;/a&gt;  &lt;a href="https://www.reddit.com/r/django/comments/4j6sx5/transferencoding_chunked/"&gt; 参考三 &lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt; 疑问 &lt;/h2&gt;
+&lt;h3&gt;WSGI 是什么呢？&lt;/h3&gt;
+&lt;p&gt;&lt;a href="http://www.wsgi.org/"&gt;WSGI&lt;/a&gt; 全称 Web Server Gateway Interface，其实它是一个规范 (Specification)，定义了 web server 和 web application 之间的通信机制，它是 Python 特有的，由 &lt;a href="https://www.python.org/dev/peps/pep-3333/"&gt;PEP 3333&lt;/a&gt; 完整描述了该 Spec。&lt;/p&gt;
+&lt;p&gt; 其实 WSGI、CGI、FastCGI 都是一样的作用定义了 web server 和 web application 如何通信，与之类似的还有 Java 中的 Servlet，也是同样的作用。&lt;/p&gt;
+&lt;h3&gt; 为什么需要 CGI，FastCGI，WSGI？&lt;/h3&gt;
+&lt;p&gt; 回归到网站的本质，当用户在浏览器上输入网址后，一个请求就发到 web server（比如 apache 或 nginx），server 会去找到文件（比如 html，css，js），然后发送给浏览器。如果只是静态文件的网站，真的只需要有个 web server 就完全搞定了。&lt;/p&gt;
+&lt;p&gt; 但现实中大部分网站并非如此，网站内容是动态生成的，并不是文件系统中的某个文件，比如论坛的帖子，电子邮件，最新的新闻或者只是当前的时间，这些都是动态生成出来，然后再发送给浏览器的。具体去生成这些内容的程序区别于 web server，我们可以称之为 web application。这些程序可以是任意的编程语言实现的，可以是 php，python，ruby，Java 等等。&lt;/p&gt;
+&lt;p&gt; 通常情况下 web server 或者说 http server 处理 http 协议的解析部分，实现了完整的 http 协议，大多数的 web server 都是 C 或者 C++ 实现的，比如 apache, nginx, lighttpd。它们并不能直接执行 php,python 的代码，又或者说把这些代码嵌 (embed) 在 web server 中效率很差，所以它们之间需要一个桥梁或者说接口 (interfaces)。这些接口定义了它们之间通信的机制。实际上在 web 出现的这些年来，已经有非常多的尝试去定义这样一个好用的 interface，但值得提起却只有几个。&lt;/p&gt;
+&lt;p&gt; 大部分的 web server 默认只支持一些很老的 interface（比如 CGI），但他们都提供了扩展的方式，可以通过第三方的 module 来支持新的 interfaces。&lt;/p&gt;
+&lt;p&gt;Python 官方有一篇 &lt;a href="https://docs.python.org/3/howto/webservers.html"&gt; 很好的文章 &lt;/a&gt; 描述了这段历史。&lt;/p&gt;
+&lt;h3&gt;WSGI 是如何工作的？&lt;/h3&gt;
+&lt;p&gt; 这里有一篇 &lt;a href="http://wsgi.tutorial.codepoint.net/"&gt;Tutor&lt;/a&gt; 用例子简单介绍 WSGI 的工作机制。详细的细节请看 &lt;a href="https://www.python.org/dev/peps/pep-3333/"&gt;PEP 3333&lt;/a&gt;。&lt;/p&gt;
+&lt;h3&gt;Django 中的 WSGI&lt;/h3&gt;
+&lt;p&gt; 正式由于 WSGI 规范的产生，基于 Python 的 web framework，只需要了按照 WSGI 的规范来实现就能够在所有支持 WSGi 的 web server 上部署了。&lt;/p&gt;
+&lt;p&gt;Django 的主要部署方式也是 WSGI，详细的部署可以看 &lt;a href="https://docs.djangoproject.com/en/dev/howto/deployment/wsgi/"&gt;Django 的官方文档 &lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;Django 自带的 server，也就是 &lt;code&gt;runserver&lt;/code&gt; 命令，本质上是继承自 Python 库中的 &lt;code&gt;WSGIServer&lt;/code&gt; 的服务端，同时把 Django 中的 WSGI application 作为参数传递进去。区别于通过 nginx+uwsgi 的部署，最终工作的都是 WSGI application。&lt;/p&gt;</summary><category term="wsgi"></category><category term="python"></category></entry><entry><title>mongodb 初识</title><link href="http://blog.hehan.net/mongodb-chu-shi.html" rel="alternate"></link><updated>2016-10-21T11:15:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-10-21:mongodb-chu-shi.html</id><summary type="html">&lt;h1&gt;mongodb 基本概念 &lt;/h1&gt;
 &lt;h2&gt;document&lt;/h2&gt;
-&lt;p&gt;关系数据库表的单条记录(&lt;code&gt;record&lt;/code&gt;)对应到&lt;code&gt;mongodb&lt;/code&gt;就是单个&lt;code&gt;document&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;document&lt;/code&gt;的结构类似&lt;code&gt;JSON&lt;/code&gt;的对象，里面是一个个&lt;code&gt;KEY/VALUE&lt;/code&gt;対。&lt;code&gt;Value&lt;/code&gt;可以是的&lt;code&gt;document, array, arrays of documents&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt; 关系数据库表的单条记录 (&lt;code&gt;record&lt;/code&gt;) 对应到 &lt;code&gt;mongodb&lt;/code&gt; 就是单个 &lt;code&gt;document&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;document&lt;/code&gt; 的结构类似 &lt;code&gt;JSON&lt;/code&gt; 的对象，里面是一个个 &lt;code&gt;KEY/VALUE&lt;/code&gt; 対。&lt;code&gt;Value&lt;/code&gt; 可以是的 &lt;code&gt;document, array, arrays of documents&lt;/code&gt;。&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;{
    &amp;quot;_id&amp;quot; : ObjectId(&amp;quot;54c955492b7c8eb21818bd09&amp;quot;),
    &amp;quot;address&amp;quot; : {
@@ -15,91 +35,91 @@
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2&gt;collection&lt;/h2&gt;
-&lt;p&gt;关系数据库表的表(&lt;code&gt;table&lt;/code&gt;)对应到&lt;code&gt;mongodb&lt;/code&gt;就是&lt;code&gt;collection&lt;/code&gt;。区别在于&lt;code&gt;collection&lt;/code&gt;不要求里面的&lt;code&gt;documents&lt;/code&gt;有相同的&lt;code&gt;schema&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;存储在&lt;code&gt;collection&lt;/code&gt;中的&lt;code&gt;documents&lt;/code&gt;必须要有一个唯一的&lt;code&gt;_id&lt;/code&gt;作为主键(&lt;code&gt;primary key&lt;/code&gt;)。&lt;/p&gt;</summary><category term="mongodb"></category></entry><entry><title>http post form 还是 json</title><link href="http://blog.hehan.net/http-post-form-huan-shi-json.html" rel="alternate"></link><updated>2016-10-14T11:17:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-10-14:http-post-form-huan-shi-json.html</id><summary type="html">&lt;h1&gt;问题&lt;/h1&gt;
-&lt;p&gt;我们在前后端交互的时候经常遇到往服务器发送数据时使用&lt;strong&gt;什么格式&lt;/strong&gt;的问题，对于&lt;code&gt;POST&lt;/code&gt;请求，最常见的两种格式是&lt;code&gt;form&lt;/code&gt;和&lt;code&gt;json&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;以最常见的登录接口为例，&lt;code&gt;form&lt;/code&gt;格式是浏览器默认的提交格式：&lt;/p&gt;
+&lt;p&gt; 关系数据库表的表 (&lt;code&gt;table&lt;/code&gt;) 对应到 &lt;code&gt;mongodb&lt;/code&gt; 就是 &lt;code&gt;collection&lt;/code&gt;。区别在于 &lt;code&gt;collection&lt;/code&gt; 不要求里面的 &lt;code&gt;documents&lt;/code&gt; 有相同的 &lt;code&gt;schema&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt; 存储在 &lt;code&gt;collection&lt;/code&gt; 中的 &lt;code&gt;documents&lt;/code&gt; 必须要有一个唯一的 &lt;code&gt;_id&lt;/code&gt; 作为主键 (&lt;code&gt;primary key&lt;/code&gt;)。&lt;/p&gt;</summary><category term="mongodb"></category></entry><entry><title>http post form 还是 json</title><link href="http://blog.hehan.net/http-post-form-huan-shi-json.html" rel="alternate"></link><updated>2016-10-14T11:17:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-10-14:http-post-form-huan-shi-json.html</id><summary type="html">&lt;h1&gt; 问题 &lt;/h1&gt;
+&lt;p&gt; 我们在前后端交互的时候经常遇到往服务器发送数据时使用 &lt;strong&gt; 什么格式 &lt;/strong&gt; 的问题，对于 &lt;code&gt;POST&lt;/code&gt; 请求，最常见的两种格式是 &lt;code&gt;form&lt;/code&gt; 和 &lt;code&gt;json&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt; 以最常见的登录接口为例，&lt;code&gt;form&lt;/code&gt; 格式是浏览器默认的提交格式：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;username=test&amp;amp;password=666666
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;code&gt;json&lt;/code&gt;格式的数据是：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;json&lt;/code&gt; 格式的数据是：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;{&amp;quot;username&amp;quot;: &amp;quot;test&amp;quot;, &amp;quot;password&amp;quot;: &amp;quot;666666&amp;quot;}
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;也并不存在大家有的误区，比如&lt;code&gt;ajax&lt;/code&gt;就应该传&lt;code&gt;json&lt;/code&gt;格式的数据。其实两种格式都可以，到底应该用哪种呢？&lt;/p&gt;
-&lt;h1&gt;分析&lt;/h1&gt;
-&lt;p&gt;来看看两种格式的优缺点：&lt;/p&gt;
-&lt;h3&gt;优点&lt;/h3&gt;
+&lt;p&gt; 也并不存在大家有的误区，比如 &lt;code&gt;ajax&lt;/code&gt; 就应该传 &lt;code&gt;json&lt;/code&gt; 格式的数据。其实两种格式都可以，到底应该用哪种呢？&lt;/p&gt;
+&lt;h1&gt; 分析 &lt;/h1&gt;
+&lt;p&gt; 来看看两种格式的优缺点：&lt;/p&gt;
+&lt;h3&gt; 优点 &lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;form&lt;/code&gt;是默认的提交方式(更常见)，所有的浏览器和服务器都原生支持，不需要额外的&lt;code&gt;scripts&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;json&lt;/code&gt;支持结构化的数据，比如数组，多层级数据&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;form&lt;/code&gt; 是默认的提交方式 ( 更常见 )，所有的浏览器和服务器都原生支持，不需要额外的 &lt;code&gt;scripts&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;json&lt;/code&gt; 支持结构化的数据，比如数组，多层级数据 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3&gt;缺点&lt;/h3&gt;
+&lt;h3&gt; 缺点 &lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;form&lt;/code&gt;结构化支持不好，遇到复杂的数据结构时，处理困难&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;json&lt;/code&gt;构造数据需要额外的&lt;code&gt;scripts&lt;/code&gt;，一些特殊场景（上传文件）处理困难&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;form&lt;/code&gt; 结构化支持不好，遇到复杂的数据结构时，处理困难 &lt;/li&gt;
+&lt;li&gt;&lt;code&gt;json&lt;/code&gt; 构造数据需要额外的 &lt;code&gt;scripts&lt;/code&gt;，一些特殊场景（上传文件）处理困难 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1&gt;结论&lt;/h1&gt;
-&lt;p&gt;其实抛开具体的场景，很难比较说哪种方式更好更适用，里面会涉及项目使用的前端技术、后端服务器、应用场景。&lt;/p&gt;
-&lt;p&gt;这里通过几个因素来判断：&lt;/p&gt;
-&lt;h3&gt;前端使用的框架&lt;/h3&gt;
+&lt;h1&gt; 结论 &lt;/h1&gt;
+&lt;p&gt; 其实抛开具体的场景，很难比较说哪种方式更好更适用，里面会涉及项目使用的前端技术、后端服务器、应用场景。&lt;/p&gt;
+&lt;p&gt; 这里通过几个因素来判断：&lt;/p&gt;
+&lt;h3&gt; 前端使用的框架 &lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;django form 默认提交的是 form 格式的数据，但也可以使用 jquery 转成 json 格式再提交&lt;/li&gt;
-&lt;li&gt;jquery 默认发送 form 格式&lt;/li&gt;
-&lt;li&gt;目前流行的前端框架而言，&lt;code&gt;angular&lt;/code&gt;、&lt;code&gt;vuejs&lt;/code&gt;、&lt;code&gt;reactjs&lt;/code&gt;，还有一些android和ios的库比如&lt;code&gt;okhttp&lt;/code&gt;，默认发送的都是json格式&lt;/li&gt;
+&lt;li&gt;django form 默认提交的是 form 格式的数据，但也可以使用 jquery 转成 json 格式再提交 &lt;/li&gt;
+&lt;li&gt;jquery 默认发送 form 格式 &lt;/li&gt;
+&lt;li&gt; 目前流行的前端框架而言，&lt;code&gt;angular&lt;/code&gt;、&lt;code&gt;vuejs&lt;/code&gt;、&lt;code&gt;reactjs&lt;/code&gt;，还有一些 android 和 ios 的库比如 &lt;code&gt;okhttp&lt;/code&gt;，默认发送的都是 json 格式 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3&gt;后端使用的框架&lt;/h3&gt;
-&lt;p&gt;目前我最常用的 django，自带的 Form 都是使用 form 格式提交的，但在实际的使用中，我们的接口大部分都是自己写的，并没有使用 &lt;code&gt;Form&lt;/code&gt;，对于客户端发过来的数据是 json 和 form 格式的并不敏感，都能容易的支持。&lt;/p&gt;
-&lt;h3&gt;一致性&lt;/h3&gt;
-&lt;p&gt;数据接口的一致性，在同一个的项目中尽量使用同一种数据格式&lt;/p&gt;
-&lt;h1&gt;建议&lt;/h1&gt;
+&lt;h3&gt; 后端使用的框架 &lt;/h3&gt;
+&lt;p&gt; 目前我最常用的 django，自带的 Form 都是使用 form 格式提交的，但在实际的使用中，我们的接口大部分都是自己写的，并没有使用 &lt;code&gt;Form&lt;/code&gt;，对于客户端发过来的数据是 json 和 form 格式的并不敏感，都能容易的支持。&lt;/p&gt;
+&lt;h3&gt; 一致性 &lt;/h3&gt;
+&lt;p&gt; 数据接口的一致性，在同一个的项目中尽量使用同一种数据格式 &lt;/p&gt;
+&lt;h1&gt; 建议 &lt;/h1&gt;
 &lt;ul&gt;
-&lt;li&gt;接口是前后端约定的，尽量保证两边默认就有很好的支持&lt;/li&gt;
-&lt;li&gt;就目前流行的前端框架而言，使用&lt;code&gt;json&lt;/code&gt;格式的数据更好&lt;/li&gt;
-&lt;li&gt;对于上传文件的场景，使用&lt;code&gt;form&lt;/code&gt;格式&lt;/li&gt;
-&lt;li&gt;同一个的项目中尽量使用同一种数据格式&lt;/li&gt;
+&lt;li&gt; 接口是前后端约定的，尽量保证两边默认就有很好的支持 &lt;/li&gt;
+&lt;li&gt; 就目前流行的前端框架而言，使用 &lt;code&gt;json&lt;/code&gt; 格式的数据更好 &lt;/li&gt;
+&lt;li&gt; 对于上传文件的场景，使用 &lt;code&gt;form&lt;/code&gt; 格式 &lt;/li&gt;
+&lt;li&gt; 同一个的项目中尽量使用同一种数据格式 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1&gt;参考&lt;/h1&gt;
+&lt;h1&gt; 参考 &lt;/h1&gt;
 &lt;p&gt;&lt;a href="http://stackoverflow.com/questions/12042476/normal-form-submission-vs-json"&gt;http://stackoverflow.com/questions/12042476/normal-form-submission-vs-json&lt;/a&gt;&lt;br /&gt;
 &lt;a href="http://stackoverflow.com/questions/13541542/posting-json-vs-traditional-form-encoded-data-as-the-data-format-for-submitting"&gt;http://stackoverflow.com/questions/13541542/posting-json-vs-traditional-form-encoded-data-as-the-data-format-for-submitting&lt;/a&gt;&lt;br /&gt;
 &lt;a href="http://john-sheehan.com/blog/dont-build-the-best-rest-api-build-the-best-http-api"&gt;http://john-sheehan.com/blog/dont-build-the-best-rest-api-build-the-best-http-api&lt;/a&gt;&lt;br /&gt;
-&lt;a href="http://homakov.blogspot.kr/2012/06/x-www-form-urlencoded-vs-json-pros-and.html"&gt;http://homakov.blogspot.kr/2012/06/x-www-form-urlencoded-vs-json-pros-and.html&lt;/a&gt;&lt;/p&gt;</summary><category term="api"></category></entry><entry><title>python eval 的问题</title><link href="http://blog.hehan.net/python-eval-de-wen-ti.html" rel="alternate"></link><updated>2016-09-20T11:17:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-09-20:python-eval-de-wen-ti.html</id><summary type="html">&lt;h1&gt;场景&lt;/h1&gt;
-&lt;p&gt;最近在代码会看到一些使用 &lt;code&gt;eval&lt;/code&gt; 的代码场景，比如动态获取变量的值：&lt;/p&gt;
+&lt;a href="http://homakov.blogspot.kr/2012/06/x-www-form-urlencoded-vs-json-pros-and.html"&gt;http://homakov.blogspot.kr/2012/06/x-www-form-urlencoded-vs-json-pros-and.html&lt;/a&gt;&lt;/p&gt;</summary><category term="api"></category></entry><entry><title>python eval 的问题</title><link href="http://blog.hehan.net/python-eval-de-wen-ti.html" rel="alternate"></link><updated>2016-09-20T11:17:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-09-20:python-eval-de-wen-ti.html</id><summary type="html">&lt;h1&gt; 场景 &lt;/h1&gt;
+&lt;p&gt; 最近在代码会看到一些使用 &lt;code&gt;eval&lt;/code&gt; 的代码场景，比如动态获取变量的值：&lt;/p&gt;
 &lt;pre&gt;&lt;code class="python"&gt;NAME_H = 'h'
 NAME_X = 'x'
 
 name = eval('NAME_H')
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1&gt;问题&lt;/h1&gt;
-&lt;p&gt;其实 &lt;code&gt;eval&lt;/code&gt; 在各种语言中，都是比较特殊的函数，一般的场景下都不应该使用，主要的几个原因是：&lt;br /&gt;
+&lt;h1&gt; 问题 &lt;/h1&gt;
+&lt;p&gt; 其实 &lt;code&gt;eval&lt;/code&gt; 在各种语言中，都是比较特殊的函数，一般的场景下都不应该使用，主要的几个原因是：&lt;br /&gt;
 - There is almost always a better way to do it&lt;br /&gt;
 - Very dangerous and insecure compare to most other python functions&lt;br /&gt;
 - Makes debugging difficult&lt;br /&gt;
 - Slow&lt;/p&gt;
-&lt;h1&gt;结论&lt;/h1&gt;
+&lt;h1&gt; 结论 &lt;/h1&gt;
 &lt;p&gt;&lt;code&gt;eval&lt;/code&gt; 的使用场景比较特殊，一般的情况下都不应该使用，非得使用它的时候也要谨慎考虑。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;It seems simple to me: eval is a vector for code injection, and is dangerous in a way that most other Python functions are not. That doesn't mean you shouldn't use it at all, but I think you should use it judiciously.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1&gt;参考&lt;/h1&gt;
-&lt;p&gt;&lt;a href="http://stackoverflow.com/questions/1832940/is-using-eval-in-python-a-bad-practice"&gt;Is using eval in python a bad practice&lt;/a&gt;&lt;/p&gt;</summary><category term="python"></category></entry><entry><title>python 自定义 exception 的原则</title><link href="http://blog.hehan.net/python-zi-ding-yi-exception-de-yuan-ze.html" rel="alternate"></link><updated>2016-09-01T16:17:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-09-01:python-zi-ding-yi-exception-de-yuan-ze.html</id><summary type="html">&lt;h1&gt;自定义 exception 的困扰&lt;/h1&gt;
-&lt;p&gt;在 Web 编程的时候，经常会遇到一种场景，内部接口实现的时候会出现各种错误的情况，对于一些错误又不能直接在接口中处理，大部分时候可能需要告知调用者错误发生了，然后由调用者 (view) 来处理并返回相应的信息给 UI。&lt;/p&gt;
-&lt;p&gt;这种时候，我们通常想的是，为每种错误自定义一个 exception，然后 raise 出去，有调用者 except 后再进行相应的处理，这样会导致大量的自定义 exception，毕竟错误（异常）场景还是很多的。&lt;/p&gt;
-&lt;h1&gt;参考&lt;/h1&gt;
+&lt;h1&gt; 参考 &lt;/h1&gt;
+&lt;p&gt;&lt;a href="http://stackoverflow.com/questions/1832940/is-using-eval-in-python-a-bad-practice"&gt;Is using eval in python a bad practice&lt;/a&gt;&lt;/p&gt;</summary><category term="python"></category></entry><entry><title>python 自定义 exception 的原则</title><link href="http://blog.hehan.net/python-zi-ding-yi-exception-de-yuan-ze.html" rel="alternate"></link><updated>2016-09-01T16:17:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-09-01:python-zi-ding-yi-exception-de-yuan-ze.html</id><summary type="html">&lt;h1&gt; 自定义 exception 的困扰 &lt;/h1&gt;
+&lt;p&gt; 在 Web 编程的时候，经常会遇到一种场景，内部接口实现的时候会出现各种错误的情况，对于一些错误又不能直接在接口中处理，大部分时候可能需要告知调用者错误发生了，然后由调用者 (view) 来处理并返回相应的信息给 UI。&lt;/p&gt;
+&lt;p&gt; 这种时候，我们通常想的是，为每种错误自定义一个 exception，然后 raise 出去，有调用者 except 后再进行相应的处理，这样会导致大量的自定义 exception，毕竟错误（异常）场景还是很多的。&lt;/p&gt;
+&lt;h1&gt; 参考 &lt;/h1&gt;
 &lt;p&gt;&lt;a href="http://stackoverflow.com/questions/1319615/proper-way-to-declare-custom-exceptions-in-modern-python"&gt;Proper way to define customer exception&lt;/a&gt;&lt;br /&gt;
 &lt;a href="https://jeffknupp.com/blog/2013/02/06/write-cleaner-python-use-exceptions/"&gt;Write cleaner python user exceptions&lt;/a&gt;&lt;br /&gt;
 &lt;a href="http://eli.thegreenplace.net/2008/08/21/robust-exception-handling"&gt;Robust exception handling&lt;/a&gt;&lt;br /&gt;
-&lt;a href="https://www.reddit.com/r/Python/comments/51ksht/modules_should_never_raise_core_python_exceptions/"&gt;modules should never raise core python exceptions&lt;/a&gt;&lt;/p&gt;</summary><category term="python"></category><category term="exception"></category></entry><entry><title>gitlab docker 部署问题</title><link href="http://blog.hehan.net/gitlab-docker-bu-shu-wen-ti.html" rel="alternate"></link><updated>2016-07-28T17:10:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-07-28:gitlab-docker-bu-shu-wen-ti.html</id><summary type="html">&lt;h1&gt;部署步骤&lt;/h1&gt;
-&lt;p&gt;参考 &lt;a href="http://docs.gitlab.com/omnibus/docker/"&gt;docker 文档&lt;/a&gt;。&lt;/p&gt;
-&lt;p&gt;注意，先要&lt;code&gt;pull image&lt;/code&gt;&lt;/p&gt;
+&lt;a href="https://www.reddit.com/r/Python/comments/51ksht/modules_should_never_raise_core_python_exceptions/"&gt;modules should never raise core python exceptions&lt;/a&gt;&lt;/p&gt;</summary><category term="python"></category><category term="exception"></category></entry><entry><title>gitlab docker 部署问题</title><link href="http://blog.hehan.net/gitlab-docker-bu-shu-wen-ti.html" rel="alternate"></link><updated>2016-07-28T17:10:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-07-28:gitlab-docker-bu-shu-wen-ti.html</id><summary type="html">&lt;h1&gt; 部署步骤 &lt;/h1&gt;
+&lt;p&gt; 参考 &lt;a href="http://docs.gitlab.com/omnibus/docker/"&gt;docker 文档 &lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt; 注意，先要 &lt;code&gt;pull image&lt;/code&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;docker pull gitlab/gitlab-ce:latest
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1&gt;问题&lt;/h1&gt;
-&lt;h2&gt;docker pull 使用代理服务器&lt;/h2&gt;
-&lt;p&gt;直接export http_proxy https_proxy不生效，按照 &lt;a href="https://docs.docker.com/engine/admin/systemd/#http-proxy"&gt;docker文档&lt;/a&gt; 配置。&lt;/p&gt;
-&lt;h2&gt;docker run 的配置&lt;/h2&gt;
+&lt;h1&gt; 问题 &lt;/h1&gt;
+&lt;h2&gt;docker pull 使用代理服务器 &lt;/h2&gt;
+&lt;p&gt; 直接 export http_proxy https_proxy 不生效，按照 &lt;a href="https://docs.docker.com/engine/admin/systemd/#http-proxy"&gt;docker 文档 &lt;/a&gt; 配置。&lt;/p&gt;
+&lt;h2&gt;docker run 的配置 &lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;sudo docker run --detach \
     --hostname gitlab.example.com \
     --publish 443:443 --publish 80:80 --publish 22:22 \
@@ -112,30 +132,30 @@ name = eval('NAME_H')
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;hostname&lt;/code&gt;需要设置成实际的地址，比如：192.168.1.100&lt;/li&gt;
-&lt;li&gt;对外的端口 22 会与 主机 sshd 的端口冲突，可以把主机 sshd 的端口改成非22，比如2222&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;hostname&lt;/code&gt; 需要设置成实际的地址，比如：192.168.1.100&lt;/li&gt;
+&lt;li&gt; 对外的端口 22 会与 主机 sshd 的端口冲突，可以把主机 sshd 的端口改成非 22，比如 2222&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;docker run 之后，同名的不能再运行，如果没有配置，可以先删除了，再重新run。&lt;/p&gt;
+&lt;p&gt;docker run 之后，同名的不能再运行，如果没有配置，可以先删除了，再重新 run。&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;docker stop gitlab
 docker rm gitlab
 docker run ....
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2&gt;配置防火墙&lt;/h2&gt;
+&lt;h2&gt; 配置防火墙 &lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;firewall-cmd --permanent --add-port=2222/tcp
 firewall-cmd --reload
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2&gt;连接到container&lt;/h2&gt;
+&lt;h2&gt; 连接到 container&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;docker exec -it gitlab /bin/bash
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2&gt;改变绑定的端口&lt;/h2&gt;
-&lt;p&gt;对于已经&lt;code&gt;run&lt;/code&gt;过的container，没办法直接修改，两种方式：&lt;br /&gt;
-- 通过 iptables 再做端口转发&lt;br /&gt;
-- 重新创建 container，步骤见 &lt;a href="http://stackoverflow.com/questions/19335444/how-to-assign-a-port-mapping-to-an-existing-docker-container"&gt;stackoverflow的问题&lt;/a&gt;&lt;/p&gt;
-&lt;h2&gt;配置 smtp&lt;/h2&gt;
-&lt;p&gt;连到到container里面，修改&lt;code&gt;/etc/gitlab/gitlab.rb&lt;/code&gt;，添加下面的列：&lt;/p&gt;
+&lt;h2&gt; 改变绑定的端口 &lt;/h2&gt;
+&lt;p&gt; 对于已经 &lt;code&gt;run&lt;/code&gt; 过的 container，没办法直接修改，两种方式：&lt;br /&gt;
+- 通过 iptables 再做端口转发 &lt;br /&gt;
+- 重新创建 container，步骤见 &lt;a href="http://stackoverflow.com/questions/19335444/how-to-assign-a-port-mapping-to-an-existing-docker-container"&gt;stackoverflow 的问题 &lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt; 配置 smtp&lt;/h2&gt;
+&lt;p&gt; 连到到 container 里面，修改 &lt;code&gt;/etc/gitlab/gitlab.rb&lt;/code&gt;，添加下面的列：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;gitlab_rails['smtp_enable'] = true
 gitlab_rails['smtp_address'] = &amp;quot;smtp.exmail.qq.com&amp;quot;
 gitlab_rails['smtp_port'] = 465
@@ -148,13 +168,13 @@ gitlab_rails['smtp_tls'] = true
 gitlab_rails['gitlab_email_from'] = &amp;quot;gitlab@yourdomain.com&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;重新配置：&lt;/p&gt;
+&lt;p&gt; 重新配置：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;gitlab-ctl reconfigure
-&lt;/code&gt;&lt;/pre&gt;</summary><category term="gitlab"></category><category term="docker"></category></entry><entry><title>django tuning tips</title><link href="http://blog.hehan.net/django-tuning-tips.html" rel="alternate"></link><updated>2016-05-23T13:58:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-05-23:django-tuning-tips.html</id><summary type="html">&lt;h1&gt;数据库查询优化&lt;/h1&gt;
-&lt;p&gt;使用&lt;code&gt;select_related&lt;/code&gt;和&lt;code&gt;prefetch_related&lt;/code&gt;来减少查询次数，详见 &lt;a href="https://docs.djangoproject.com/en/dev/topics/db/optimization/"&gt;django 文档&lt;/a&gt;。&lt;/p&gt;
-&lt;h1&gt;对象处理优化&lt;/h1&gt;
-&lt;h2&gt;避免过多的&lt;code&gt;model&lt;/code&gt;对象实例化&lt;/h2&gt;
-&lt;p&gt;数据从数据库取出后，对象实例化的开销也很大，不仅仅是每个对象的初始化，还有各个&lt;code&gt;field&lt;/code&gt;的初始化，下面是一个实际的例子：&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;</summary><category term="gitlab"></category><category term="docker"></category></entry><entry><title>django tuning tips</title><link href="http://blog.hehan.net/django-tuning-tips.html" rel="alternate"></link><updated>2016-05-23T13:58:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-05-23:django-tuning-tips.html</id><summary type="html">&lt;h1&gt; 数据库查询优化 &lt;/h1&gt;
+&lt;p&gt; 使用 &lt;code&gt;select_related&lt;/code&gt; 和 &lt;code&gt;prefetch_related&lt;/code&gt; 来减少查询次数，详见 &lt;a href="https://docs.djangoproject.com/en/dev/topics/db/optimization/"&gt;django 文档 &lt;/a&gt;。&lt;/p&gt;
+&lt;h1&gt; 对象处理优化 &lt;/h1&gt;
+&lt;h2&gt; 避免过多的 &lt;code&gt;model&lt;/code&gt; 对象实例化 &lt;/h2&gt;
+&lt;p&gt; 数据从数据库取出后，对象实例化的开销也很大，不仅仅是每个对象的初始化，还有各个 &lt;code&gt;field&lt;/code&gt; 的初始化，下面是一个实际的例子：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;6069    0.155   0.000   0.220   0.000   site-packages/django/db/models/base.py:388(__init__)
 22      0.036   0.002   0.036   0.002   {method 'query' of      '_mysql.connection'     objects}
 61251   0.036   0.000   0.036   0.000   {hasattr}
@@ -162,43 +182,43 @@ gitlab_rails['gitlab_email_from'] = &amp;quot;gitlab@yourdomain.com&amp;quot;
 107794  0.030   0.000   0.043   0.000   {isinstance}
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;可以看到&lt;code&gt;__init__&lt;/code&gt;的次数非常多，耗时也比较长。&lt;/p&gt;
-&lt;p&gt;需要注意：&lt;/p&gt;
+&lt;p&gt; 可以看到 &lt;code&gt;__init__&lt;/code&gt; 的次数非常多，耗时也比较长。&lt;/p&gt;
+&lt;p&gt; 需要注意：&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;对于不希望实例化的&lt;code&gt;ForeignKey&lt;/code&gt;或者&lt;code&gt;ManyToManyField&lt;/code&gt;，不要使用&lt;code&gt;select_related&lt;/code&gt;或&lt;code&gt;prefetch_related&lt;/code&gt;，&lt;br /&gt;
+&lt;p&gt; 对于不希望实例化的 &lt;code&gt;ForeignKey&lt;/code&gt; 或者 &lt;code&gt;ManyToManyField&lt;/code&gt;，不要使用 &lt;code&gt;select_related&lt;/code&gt; 或 &lt;code&gt;prefetch_related&lt;/code&gt;，&lt;br /&gt;
 不然会被自动实例化。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2&gt;使用&lt;code&gt;values&lt;/code&gt;来获取需要的数据&lt;/h2&gt;
-&lt;p&gt;正常我们使用&lt;code&gt;get&lt;/code&gt;, &lt;code&gt;filter&lt;/code&gt;获取到结果后，如果遍历或使用时，&lt;code&gt;django&lt;/code&gt;会帮我们把&lt;code&gt;model&lt;/code&gt;实例化，而在上面已经提到了，实例化的开销是比较大，尤其在&lt;code&gt;model&lt;/code&gt;比较复杂的的时候。&lt;br /&gt;
-这里我们可以使用&lt;code&gt;values&lt;/code&gt;方法，把需要的字段取出来，然后再自行构造需要的数据，通常是组织成&lt;code&gt;dict&lt;/code&gt;，供前端或者模板渲染使用。&lt;/p&gt;
-&lt;p&gt;从这点可以看出，&lt;code&gt;ORM&lt;/code&gt;虽然很方便，但当数据量很大的时候，效率就会出现问题。处理问题还是要灵活，当然如果&lt;code&gt;django&lt;/code&gt;能够提供一套机制来组织需要的数据而不用实例化对象就更好了。&lt;/p&gt;
-&lt;h1&gt;参考资料&lt;/h1&gt;
+&lt;h2&gt; 使用 &lt;code&gt;values&lt;/code&gt; 来获取需要的数据 &lt;/h2&gt;
+&lt;p&gt; 正常我们使用 &lt;code&gt;get&lt;/code&gt;, &lt;code&gt;filter&lt;/code&gt; 获取到结果后，如果遍历或使用时，&lt;code&gt;django&lt;/code&gt; 会帮我们把 &lt;code&gt;model&lt;/code&gt; 实例化，而在上面已经提到了，实例化的开销是比较大，尤其在 &lt;code&gt;model&lt;/code&gt; 比较复杂的的时候。&lt;br /&gt;
+这里我们可以使用 &lt;code&gt;values&lt;/code&gt; 方法，把需要的字段取出来，然后再自行构造需要的数据，通常是组织成 &lt;code&gt;dict&lt;/code&gt;，供前端或者模板渲染使用。&lt;/p&gt;
+&lt;p&gt; 从这点可以看出，&lt;code&gt;ORM&lt;/code&gt; 虽然很方便，但当数据量很大的时候，效率就会出现问题。处理问题还是要灵活，当然如果 &lt;code&gt;django&lt;/code&gt; 能够提供一套机制来组织需要的数据而不用实例化对象就更好了。&lt;/p&gt;
+&lt;h1&gt; 参考资料 &lt;/h1&gt;
 &lt;p&gt;&lt;a href="http://www.servercobra.com/django-performance-tuning/"&gt;Django Performance Tuning&lt;/a&gt;&lt;br /&gt;
-&lt;a href="http://scottlobdell.me/2015/01/sql-database-best-practices-django-orm/"&gt;SQL Database Best Practises with Django&lt;/a&gt;&lt;/p&gt;</summary><category term="django"></category></entry><entry><title>kdatacenter vps 推荐</title><link href="http://blog.hehan.net/kdatacenter-vps-tui-jian.html" rel="alternate"></link><updated>2016-05-21T14:06:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-05-21:kdatacenter-vps-tui-jian.html</id><summary type="html">&lt;h2&gt;简介&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;kdatacener&lt;/code&gt;是一家成立于12年的韩国主机商,提供VPS和独立服务器，所有服务器都基于SSD，而且支持windows，并且提供DDOS保护。韩国的网络是最发达的，到全球特别是亚洲地区速度飞快，到中国速度堪比国内双线!&lt;/p&gt;
-&lt;p&gt;在如今&lt;code&gt;Linode&lt;/code&gt;和&lt;code&gt;DO&lt;/code&gt;被干扰如此严重的情况下，&lt;code&gt;kdatacenter&lt;/code&gt;确实是国外VPS的不二之选，虽然价格高了一点，但不用烦心，省心才是王道。&lt;/p&gt;
-&lt;h2&gt;速度测试&lt;/h2&gt;
-&lt;p&gt;速度测试: &lt;a href="http://downloadtest.kdatacenter.com/10MB"&gt;http://downloadtest.kdatacenter.com/10MB&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;江苏本地测试，移动和电信都能达到&lt;code&gt;2MB+/s&lt;/code&gt;的速度，绝对一级棒。&lt;/p&gt;
-&lt;h2&gt;价格&lt;/h2&gt;
+&lt;a href="http://scottlobdell.me/2015/01/sql-database-best-practices-django-orm/"&gt;SQL Database Best Practises with Django&lt;/a&gt;&lt;/p&gt;</summary><category term="django"></category></entry><entry><title>kdatacenter vps 推荐</title><link href="http://blog.hehan.net/kdatacenter-vps-tui-jian.html" rel="alternate"></link><updated>2016-05-21T14:06:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-05-21:kdatacenter-vps-tui-jian.html</id><summary type="html">&lt;h2&gt; 简介 &lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;kdatacener&lt;/code&gt; 是一家成立于 12 年的韩国主机商 , 提供 VPS 和独立服务器，所有服务器都基于 SSD，而且支持 windows，并且提供 DDOS 保护。韩国的网络是最发达的，到全球特别是亚洲地区速度飞快，到中国速度堪比国内双线 !&lt;/p&gt;
+&lt;p&gt; 在如今 &lt;code&gt;Linode&lt;/code&gt; 和 &lt;code&gt;DO&lt;/code&gt; 被干扰如此严重的情况下，&lt;code&gt;kdatacenter&lt;/code&gt; 确实是国外 VPS 的不二之选，虽然价格高了一点，但不用烦心，省心才是王道。&lt;/p&gt;
+&lt;h2&gt; 速度测试 &lt;/h2&gt;
+&lt;p&gt; 速度测试 : &lt;a href="http://downloadtest.kdatacenter.com/10MB"&gt;http://downloadtest.kdatacenter.com/10MB&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt; 江苏本地测试，移动和电信都能达到 &lt;code&gt;2MB+/s&lt;/code&gt; 的速度，绝对一级棒。&lt;/p&gt;
+&lt;h2&gt; 价格 &lt;/h2&gt;
 &lt;p&gt;&lt;img alt="aimg" src="/images/kdatacenter_price.png" /&gt;&lt;/p&gt;
-&lt;h2&gt;配置选择&lt;/h2&gt;
-&lt;p&gt;如果对性能没有太高的要求，低配的&lt;code&gt;100L SSD&lt;/code&gt;就够用了，未来要升级也有更高配置可以选择。&lt;/p&gt;
-&lt;p&gt;有兴趣的可以通过我的推荐链接来购买：&lt;br /&gt;
+&lt;h2&gt; 配置选择 &lt;/h2&gt;
+&lt;p&gt; 如果对性能没有太高的要求，低配的 &lt;code&gt;100L SSD&lt;/code&gt; 就够用了，未来要升级也有更高配置可以选择。&lt;/p&gt;
+&lt;p&gt; 有兴趣的可以通过我的推荐链接来购买：&lt;br /&gt;
 &lt;a href="http://www.kdatacenter.com/myportal/?affid=94"&gt;http://www.kdatacenter.com/myportal/?affid=94&lt;/a&gt;&lt;/p&gt;</summary><category term="vps"></category></entry><entry><title>android tips</title><link href="http://blog.hehan.net/android-tips.html" rel="alternate"></link><updated>2016-05-20T11:16:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-05-20:android-tips.html</id><summary type="html">&lt;h2&gt;Build with command line&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;./gradle assembleDebug
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;这个命令，偶尔会触发下载&lt;code&gt;gradle.ver.zip&lt;/code&gt;，而下载又很慢，可以把该文件自行下载下来，拷贝到&lt;code&gt;$HOME/.gradle&lt;/code&gt;底下指定的目录去。&lt;/p&gt;
+&lt;p&gt; 这个命令，偶尔会触发下载 &lt;code&gt;gradle.ver.zip&lt;/code&gt;，而下载又很慢，可以把该文件自行下载下来，拷贝到 &lt;code&gt;$HOME/.gradle&lt;/code&gt; 底下指定的目录去。&lt;/p&gt;
 &lt;h2&gt;package binary to apk&lt;/h2&gt;
-&lt;p&gt;可以把&lt;code&gt;binary&lt;/code&gt;文件放到&lt;code&gt;assets&lt;/code&gt;目录里面，如果目录不存在，则在&lt;code&gt;app/src/main&lt;/code&gt;带下创建该目录。&lt;/p&gt;
-&lt;p&gt;安装后，由于&lt;code&gt;assets&lt;/code&gt;中的文件是只读的，需要在程序中使用&lt;code&gt;AssetManage&lt;/code&gt;把&lt;code&gt;binary&lt;/code&gt;拷贝到用户目录。&lt;/p&gt;</summary><category term="android"></category></entry><entry><title>repr vs. str vs. unicode</title><link href="http://blog.hehan.net/repr-vs-str-vs-unicode.html" rel="alternate"></link><updated>2016-04-28T13:36:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-04-28:repr-vs-str-vs-unicode.html</id><summary type="html">&lt;h3&gt;&lt;code&gt;__repr__&lt;/code&gt;和&lt;code&gt;__str__&lt;/code&gt;&lt;/h3&gt;
-&lt;p&gt;两者都是把对象转化成字符串：&lt;/p&gt;
+&lt;p&gt; 可以把 &lt;code&gt;binary&lt;/code&gt; 文件放到 &lt;code&gt;assets&lt;/code&gt; 目录里面，如果目录不存在，则在 &lt;code&gt;app/src/main&lt;/code&gt; 带下创建该目录。&lt;/p&gt;
+&lt;p&gt; 安装后，由于 &lt;code&gt;assets&lt;/code&gt; 中的文件是只读的，需要在程序中使用 &lt;code&gt;AssetManage&lt;/code&gt; 把 &lt;code&gt;binary&lt;/code&gt; 拷贝到用户目录。&lt;/p&gt;</summary><category term="android"></category></entry><entry><title>repr vs. str vs. unicode</title><link href="http://blog.hehan.net/repr-vs-str-vs-unicode.html" rel="alternate"></link><updated>2016-04-28T13:36:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-04-28:repr-vs-str-vs-unicode.html</id><summary type="html">&lt;h3&gt;&lt;code&gt;__repr__&lt;/code&gt; 和 &lt;code&gt;__str__&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt; 两者都是把对象转化成字符串：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;__repr__&lt;/code&gt;主要是要 &lt;strong&gt;&lt;em&gt;明确&lt;/em&gt;&lt;/strong&gt; 表示对象&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;__str__&lt;/code&gt;主要是要为了 &lt;strong&gt;&lt;em&gt;可读&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;__repr__&lt;/code&gt; 主要是要 &lt;strong&gt;&lt;em&gt; 明确 &lt;/em&gt;&lt;/strong&gt; 表示对象 &lt;/li&gt;
+&lt;li&gt;&lt;code&gt;__str__&lt;/code&gt; 主要是要为了 &lt;strong&gt;&lt;em&gt; 可读 &lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;下面的示例：&lt;/p&gt;
+&lt;p&gt; 下面的示例：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;In [42]: d = Decimal('100.00')
 In [43]: str(d)
 Out[43]: '100.00'
@@ -206,20 +226,20 @@ In [44]: repr(d)
 Out[44]: &amp;quot;Decimal('100.00')&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;可以看到&lt;code&gt;repr&lt;/code&gt;的输出更明确，而&lt;code&gt;str&lt;/code&gt;的输出更可读。&lt;/p&gt;
-&lt;p&gt;这里有一点要注意的：&lt;/p&gt;
+&lt;p&gt; 可以看到 &lt;code&gt;repr&lt;/code&gt; 的输出更明确，而 &lt;code&gt;str&lt;/code&gt; 的输出更可读。&lt;/p&gt;
+&lt;p&gt; 这里有一点要注意的：&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;如果&lt;code&gt;__str__&lt;/code&gt;没有定义，而&lt;code&gt;__repr__&lt;/code&gt;定义了，调用对象的&lt;code&gt;__str__&lt;/code&gt;实际上就是使用&lt;code&gt;__repr__&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt; 如果 &lt;code&gt;__str__&lt;/code&gt; 没有定义，而 &lt;code&gt;__repr__&lt;/code&gt; 定义了，调用对象的 &lt;code&gt;__str__&lt;/code&gt; 实际上就是使用 &lt;code&gt;__repr__&lt;/code&gt;。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;那么，使用&lt;code&gt;print&lt;/code&gt;打印一个对象时候到底使用的哪个函数呢？&lt;/p&gt;
+&lt;p&gt; 那么，使用 &lt;code&gt;print&lt;/code&gt; 打印一个对象时候到底使用的哪个函数呢？&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;print一个对象时，调用的是&lt;strong&gt;str&lt;/strong&gt;;&lt;/li&gt;
-&lt;li&gt;print list时，调用的是list的&lt;strong&gt;str&lt;/strong&gt;，但list的&lt;strong&gt;str&lt;/strong&gt;调用的是每个项的&lt;strong&gt;repr&lt;/strong&gt;;&lt;/li&gt;
+&lt;li&gt;print 一个对象时，调用的是 &lt;strong&gt;str&lt;/strong&gt;;&lt;/li&gt;
+&lt;li&gt;print list 时，调用的是 list 的 &lt;strong&gt;str&lt;/strong&gt;，但 list 的 &lt;strong&gt;str&lt;/strong&gt; 调用的是每个项的 &lt;strong&gt;repr&lt;/strong&gt;;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3&gt;&lt;code&gt;__str__&lt;/code&gt;和&lt;code&gt;__unicode__&lt;/code&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;code&gt;__str__&lt;/code&gt; 和 &lt;code&gt;__unicode__&lt;/code&gt;&lt;/h3&gt;
 &lt;h4&gt;python2&lt;/h4&gt;
-&lt;p&gt;&lt;code&gt;str&lt;/code&gt;实际上是字节码，一个一个byte，而&lt;code&gt;unicode&lt;/code&gt;是一个个字符，&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;In [49]: s = u'汉字'
+&lt;p&gt;&lt;code&gt;str&lt;/code&gt; 实际上是字节码，一个一个 byte，而 &lt;code&gt;unicode&lt;/code&gt; 是一个个字符，&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;In [49]: s = u' 汉字 '
 In [50]: s
 Out[50]: u'\u6c49\u5b57'
 In [51]: s.encode('utf-8')
@@ -229,207 +249,207 @@ Out[52]: unicode
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h4&gt;python3&lt;/h4&gt;
-&lt;p&gt;所有的字符都是unicode字符格式的，没有&lt;code&gt;unicode&lt;/code&gt;这个函数只有&lt;code&gt;str&lt;/code&gt;，python3中的&lt;code&gt;str&lt;/code&gt;实际上跟python2中的&lt;code&gt;unicode&lt;/code&gt;是一样的。python3中如果要获得byte格式的话，可以用&lt;code&gt;bytes&lt;/code&gt;函数。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; s = '汉字'
+&lt;p&gt; 所有的字符都是 unicode 字符格式的，没有 &lt;code&gt;unicode&lt;/code&gt; 这个函数只有 &lt;code&gt;str&lt;/code&gt;，python3 中的 &lt;code&gt;str&lt;/code&gt; 实际上跟 python2 中的 &lt;code&gt;unicode&lt;/code&gt; 是一样的。python3 中如果要获得 byte 格式的话，可以用 &lt;code&gt;bytes&lt;/code&gt; 函数。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; s = ' 汉字 '
 &amp;gt;&amp;gt;&amp;gt; s
-'汉字'
+' 汉字 '
 &amp;gt;&amp;gt;&amp;gt; str(s)
-'汉字'
+' 汉字 '
 &amp;gt;&amp;gt;&amp;gt; s.encode('utf-8')
 b'\xe6\xb1\x89\xe5\xad\x97'
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;a href="http://stackoverflow.com/questions/1436703/difference-between-str-and-repr-in-python"&gt;http://stackoverflow.com/questions/1436703/difference-between-str-and-repr-in-python&lt;/a&gt;&lt;/p&gt;</summary><category term="python"></category></entry><entry><title>first class objects</title><link href="http://blog.hehan.net/first-class-objects.html" rel="alternate"></link><updated>2016-04-22T13:36:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-04-22:first-class-objects.html</id><summary type="html">&lt;p&gt;我们经常听到说，python 中一切皆对象，还有就是&lt;code&gt;function is first class object&lt;/code&gt;，到底 first class object 是什么意思？&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/First-class_citizen"&gt;维基百科&lt;/a&gt;里面是这样定义&lt;code&gt;first class&lt;/code&gt;的：&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://stackoverflow.com/questions/1436703/difference-between-str-and-repr-in-python"&gt;http://stackoverflow.com/questions/1436703/difference-between-str-and-repr-in-python&lt;/a&gt;&lt;/p&gt;</summary><category term="python"></category></entry><entry><title>first class objects</title><link href="http://blog.hehan.net/first-class-objects.html" rel="alternate"></link><updated>2016-04-22T13:36:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-04-22:first-class-objects.html</id><summary type="html">&lt;p&gt; 我们经常听到说，python 中一切皆对象，还有就是 &lt;code&gt;function is first class object&lt;/code&gt;，到底 first class object 是什么意思？&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/First-class_citizen"&gt; 维基百科 &lt;/a&gt; 里面是这样定义 &lt;code&gt;first class&lt;/code&gt; 的：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;In programming language design, a first-class citizen (also type, object, entity, or value) in a given programming language is an entity which supports all the operations generally available to other entities. These operations typically include being passed as an argument, returned from a function, and assigned to a variable.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;对应到 python 中，也就是说函数跟普通的变量一样，可以被创建，传递，赋值，返回。&lt;/p&gt;
-&lt;p&gt;实际上，python 的&lt;a href="http://python-history.blogspot.jp/2009/02/first-class-everything.html"&gt;设计目标&lt;/a&gt;是 &lt;code&gt;Everything is a object and first class everything&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt; 对应到 python 中，也就是说函数跟普通的变量一样，可以被创建，传递，赋值，返回。&lt;/p&gt;
+&lt;p&gt; 实际上，python 的 &lt;a href="http://python-history.blogspot.jp/2009/02/first-class-everything.html"&gt; 设计目标 &lt;/a&gt; 是 &lt;code&gt;Everything is a object and first class everything&lt;/code&gt;.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;By this, I meant that I wanted all objects that could be named in the language (e.g., integers, strings, functions, classes, modules, methods, etc.) to have equal status. That is, they can be assigned to variables, placed in lists, stored in dictionaries, passed as arguments, and so forth.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;a href="http://stackoverflow.com/questions/245192/what-are-first-class-objects"&gt;http://stackoverflow.com/questions/245192/what-are-first-class-objects&lt;/a&gt;&lt;/p&gt;</summary><category term="python"></category></entry><entry><title>python GIL 整理</title><link href="http://blog.hehan.net/python-gil-zheng-li.html" rel="alternate"></link><updated>2016-04-18T13:36:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-04-18:python-gil-zheng-li.html</id><summary type="html">&lt;h2&gt;GIL 是什么&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://stackoverflow.com/questions/245192/what-are-first-class-objects"&gt;http://stackoverflow.com/questions/245192/what-are-first-class-objects&lt;/a&gt;&lt;/p&gt;</summary><category term="python"></category></entry><entry><title>python GIL 整理</title><link href="http://blog.hehan.net/python-gil-zheng-li.html" rel="alternate"></link><updated>2016-04-18T13:36:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-04-18:python-gil-zheng-li.html</id><summary type="html">&lt;h2&gt;GIL 是什么 &lt;/h2&gt;
 &lt;p&gt;GIL 是 Global Interpreter Lock 的缩写，全局解释器锁。在 CPython 中，GIL 被用来防止多个原生线程同时执行。&lt;/p&gt;
-&lt;p&gt;其实并不是所有的 Python 实现都使用 GIL，Python 实现中，包含 GIL 的有：&lt;/p&gt;
+&lt;p&gt; 其实并不是所有的 Python 实现都使用 GIL，Python 实现中，包含 GIL 的有：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;CPython (我们通常说到 Python 时指的就是这个实现)&lt;/li&gt;
+&lt;li&gt;CPython ( 我们通常说到 Python 时指的就是这个实现 )&lt;/li&gt;
 &lt;li&gt;PyPy&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;没有 GIL 机制的实现：&lt;/p&gt;
+&lt;p&gt; 没有 GIL 机制的实现：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Jython (Java)&lt;/li&gt;
 &lt;li&gt;IronPython (.NET)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;为什么 CPython 中使用 GIL&lt;/h2&gt;
-&lt;p&gt;主要是因为 CPython 的内存管理不是线程安全的。线程安全，主要是要保护共享数据，通常有两种做法：&lt;/p&gt;
+&lt;h2&gt; 为什么 CPython 中使用 GIL&lt;/h2&gt;
+&lt;p&gt; 主要是因为 CPython 的内存管理不是线程安全的。线程安全，主要是要保护共享数据，通常有两种做法：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;对每个共享数据进行操作时采用独立的细粒度锁进行保护&lt;/li&gt;
-&lt;li&gt;使用一个全局粗粒度锁保护所有的共享数据 （GIL）&lt;/li&gt;
+&lt;li&gt; 对每个共享数据进行操作时采用独立的细粒度锁进行保护 &lt;/li&gt;
+&lt;li&gt; 使用一个全局粗粒度锁保护所有的共享数据 （GIL）&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;这两种做法各有优缺点：&lt;/p&gt;
+&lt;p&gt; 这两种做法各有优缺点：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;细粒度锁可以利用多CPU，多个线程可以同时执行，发挥并发的优势，但锁是有开销的，而且程序复杂度也较高；&lt;/li&gt;
-&lt;li&gt;全局锁正好相反，两个线程不能同时执行，但是单线程执行时效率会更高；&lt;/li&gt;
+&lt;li&gt; 细粒度锁可以利用多 CPU，多个线程可以同时执行，发挥并发的优势，但锁是有开销的，而且程序复杂度也较高；&lt;/li&gt;
+&lt;li&gt; 全局锁正好相反，两个线程不能同时执行，但是单线程执行时效率会更高；&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;采用 GIL 而不是细粒度锁的好处：&lt;/p&gt;
+&lt;p&gt; 采用 GIL 而不是细粒度锁的好处：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;单线程程序会更快&lt;/li&gt;
-&lt;li&gt;编写基于C的扩展程序时更容易&lt;/li&gt;
-&lt;li&gt;使用C库时更容易，不用考虑C库是否线程安全&lt;/li&gt;
+&lt;li&gt; 单线程程序会更快 &lt;/li&gt;
+&lt;li&gt; 编写基于 C 的扩展程序时更容易 &lt;/li&gt;
+&lt;li&gt; 使用 C 库时更容易，不用考虑 C 库是否线程安全 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;减小 GIL 影响的做法：&lt;/p&gt;
+&lt;p&gt; 减小 GIL 影响的做法：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;提供了释放 GIL 的机制，实际上标准库中，在每个 blocking i/o 的调用时候，GIL 都会被释放掉，所以对于IO型的程序，GIL 并不会导致性能下降;&lt;/li&gt;
-&lt;li&gt;对于像 NumPy 这样的计算型库，在调用C或者Fortran时，总是尽可能的先释放掉 GIL，保证其它的线程可以继续执行;&lt;/li&gt;
+&lt;li&gt; 提供了释放 GIL 的机制，实际上标准库中，在每个 blocking i/o 的调用时候，GIL 都会被释放掉，所以对于 IO 型的程序，GIL 并不会导致性能下降 ;&lt;/li&gt;
+&lt;li&gt; 对于像 NumPy 这样的计算型库，在调用 C 或者 Fortran 时，总是尽可能的先释放掉 GIL，保证其它的线程可以继续执行 ;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;实际上移除 GIL 的讨论一直都存在，但是到目前为止都还没有一个很好的实现，&lt;a href="http://www.artima.com/weblogs/viewpost.jsp?thread=214235"&gt;Guido 也承认移除 GIL 是很困难的&lt;/a&gt;。之前的 Patch 会使单线程的性能下降很多，但对多线程程序的性能提升又有限，所以被弃用。&lt;/p&gt;
+&lt;p&gt; 实际上移除 GIL 的讨论一直都存在，但是到目前为止都还没有一个很好的实现，&lt;a href="http://www.artima.com/weblogs/viewpost.jsp?thread=214235"&gt;Guido 也承认移除 GIL 是很困难的 &lt;/a&gt;。之前的 Patch 会使单线程的性能下降很多，但对多线程程序的性能提升又有限，所以被弃用。&lt;/p&gt;
 &lt;h2&gt;References&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://wiki.python.org/moin/GlobalInterpreterLock"&gt;https://wiki.python.org/moin/GlobalInterpreterLock&lt;/a&gt;&lt;br /&gt;
 &lt;a href="http://programmers.stackexchange.com/questions/186889/why-was-python-written-with-the-gil"&gt;http://programmers.stackexchange.com/questions/186889/why-was-python-written-with-the-gil&lt;/a&gt;&lt;br /&gt;
 &lt;a href="http://stackoverflow.com/questions/265687/why-the-global-interpreter-lock"&gt;http://stackoverflow.com/questions/265687/why-the-global-interpreter-lock&lt;/a&gt;&lt;br /&gt;
 &lt;a href="https://docs.python.org/2/faq/library.html#can-t-we-get-rid-of-the-global-interpreter-lock"&gt;https://docs.python.org/2/faq/library.html#can-t-we-get-rid-of-the-global-interpreter-lock&lt;/a&gt;&lt;br /&gt;
 &lt;a href="http://www.dabeaz.com/GIL/"&gt;http://www.dabeaz.com/GIL/&lt;/a&gt;&lt;br /&gt;
-&lt;a href="http://python-notes.curiousefficiency.org/en/latest/python3/multicore_python.html"&gt;http://python-notes.curiousefficiency.org/en/latest/python3/multicore_python.html&lt;/a&gt;  &lt;/p&gt;</summary><category term="python"></category></entry><entry><title>osx 上使用 docker</title><link href="http://blog.hehan.net/osx-shang-shi-yong-docker.html" rel="alternate"></link><updated>2016-03-10T13:36:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-03-10:osx-shang-shi-yong-docker.html</id><summary type="html">&lt;h2&gt;安装&lt;/h2&gt;
-&lt;p&gt;根据&lt;a href="https://docs.docker.com/mac/"&gt;官方文档&lt;/a&gt;的步骤进行安装，由于 mac 原生没有 container 的机制，需要在 mac 上安装一个 linux 的虚拟机，然后再在虚拟机上跑 docker engine，安装好之后点击运行 &lt;code&gt;Docker Quickstart Terminal&lt;/code&gt;。&lt;/p&gt;
+&lt;a href="http://python-notes.curiousefficiency.org/en/latest/python3/multicore_python.html"&gt;http://python-notes.curiousefficiency.org/en/latest/python3/multicore_python.html&lt;/a&gt;  &lt;/p&gt;</summary><category term="python"></category></entry><entry><title>osx 上使用 docker</title><link href="http://blog.hehan.net/osx-shang-shi-yong-docker.html" rel="alternate"></link><updated>2016-03-10T13:36:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-03-10:osx-shang-shi-yong-docker.html</id><summary type="html">&lt;h2&gt; 安装 &lt;/h2&gt;
+&lt;p&gt; 根据 &lt;a href="https://docs.docker.com/mac/"&gt; 官方文档 &lt;/a&gt; 的步骤进行安装，由于 mac 原生没有 container 的机制，需要在 mac 上安装一个 linux 的虚拟机，然后再在虚拟机上跑 docker engine，安装好之后点击运行 &lt;code&gt;Docker Quickstart Terminal&lt;/code&gt;。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;注意: 这里如果选择使用 iTerm 打开的话会有问题，建议使用 Terminal 打开。&lt;/p&gt;
+&lt;p&gt; 注意 : 这里如果选择使用 iTerm 打开的话会有问题，建议使用 Terminal 打开。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2&gt;运行&lt;/h2&gt;
-&lt;p&gt;启动 &lt;code&gt;Docker Quickstart Terminal&lt;/code&gt; 后，默认会创建好一台 linux 虚拟机，可以通过下面的命令查看：&lt;/p&gt;
+&lt;h2&gt; 运行 &lt;/h2&gt;
+&lt;p&gt; 启动 &lt;code&gt;Docker Quickstart Terminal&lt;/code&gt; 后，默认会创建好一台 linux 虚拟机，可以通过下面的命令查看：&lt;/p&gt;
 &lt;pre&gt;&lt;code class="bash"&gt;➜  ~ docker-machine ls
 NAME      ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER    ERRORS
 default   *        virtualbox   Running   tcp://192.168.99.100:2376           v1.10.3  
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;这里可以看到已经通过 virtualbox 创建好了一台 linux 虚拟机，基于 docker 的操作都在该台虚拟机中完成。同时在 mac 中打开 VirtualBox 应用，也能打开相应的虚拟机在运行中。&lt;/p&gt;
-&lt;p&gt;执行&lt;code&gt;docker run hello-world&lt;/code&gt;可以验证 docker 是否安装好了，由于 docker 服务在国外，速度慢，可以配置使用代理服务器来下载，执行下面的命令让&lt;code&gt;docker run&lt;/code&gt;使用代理服务器。&lt;/p&gt;
+&lt;p&gt; 这里可以看到已经通过 virtualbox 创建好了一台 linux 虚拟机，基于 docker 的操作都在该台虚拟机中完成。同时在 mac 中打开 VirtualBox 应用，也能打开相应的虚拟机在运行中。&lt;/p&gt;
+&lt;p&gt; 执行 &lt;code&gt;docker run hello-world&lt;/code&gt; 可以验证 docker 是否安装好了，由于 docker 服务在国外，速度慢，可以配置使用代理服务器来下载，执行下面的命令让 &lt;code&gt;docker run&lt;/code&gt; 使用代理服务器。&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;export http_proxy=http://localhost:8118
 export https_proxy=http://localhost:8118
 export no_proxy=&amp;quot;192.168.99.100&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;注意最后的&lt;code&gt;export no_proxy&lt;/code&gt;是必须的，否则&lt;code&gt;docker&lt;/code&gt;在连接虚拟机时也会走代理服务器，连接当然会出错了。&lt;/p&gt;
-&lt;h2&gt;使用 docker&lt;/h2&gt;
-&lt;p&gt;使用 docker 部署 &lt;a href="https://github.com/Thibaut/devdocs/"&gt;devdocs&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt; 注意最后的 &lt;code&gt;export no_proxy&lt;/code&gt; 是必须的，否则 &lt;code&gt;docker&lt;/code&gt; 在连接虚拟机时也会走代理服务器，连接当然会出错了。&lt;/p&gt;
+&lt;h2&gt; 使用 docker&lt;/h2&gt;
+&lt;p&gt; 使用 docker 部署 &lt;a href="https://github.com/Thibaut/devdocs/"&gt;devdocs&lt;/a&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;docker build -t thibaut/devdocs .
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;这个时候，container 中会更新服务，这个时候有两个需要注意的：&lt;/p&gt;
+&lt;p&gt; 这个时候，container 中会更新服务，这个时候有两个需要注意的：&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;内部系统更新时，网络会使用 ipv6，但本地网络并不具备 ipv6 的环境，这时需要在&lt;code&gt;docker-machine&lt;/code&gt;的 linux 虚拟机中禁用 ipv6，禁用后需要重启。&lt;/li&gt;
-&lt;li&gt;内部系统更新时，网络较慢时，需要使用代理，可以在 Dockerfile 中配置 &lt;code&gt;ENV http(s)_proxy=&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt; 内部系统更新时，网络会使用 ipv6，但本地网络并不具备 ipv6 的环境，这时需要在 &lt;code&gt;docker-machine&lt;/code&gt; 的 linux 虚拟机中禁用 ipv6，禁用后需要重启。&lt;/li&gt;
+&lt;li&gt; 内部系统更新时，网络较慢时，需要使用代理，可以在 Dockerfile 中配置 &lt;code&gt;ENV http(s)_proxy=&lt;/code&gt;。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;初始化启动服务：&lt;/p&gt;
+&lt;p&gt; 初始化启动服务：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;docker run --name devdocs -d -p 9292:9292 thibaut/devdocs
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;服务跑起来后，并不是在&lt;code&gt;localhost:9292&lt;/code&gt;，而是&lt;code&gt;192.168.99.100:9292&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt; 服务跑起来后，并不是在 &lt;code&gt;localhost:9292&lt;/code&gt;，而是 &lt;code&gt;192.168.99.100:9292&lt;/code&gt;。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;重新启动&lt;code&gt;devdocs&lt;/code&gt;：&lt;/p&gt;
+&lt;p&gt; 重新启动 &lt;code&gt;devdocs&lt;/code&gt;：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;docker start devdocs
 docker restart devdocs
-&lt;/code&gt;&lt;/pre&gt;</summary><category term="docker"></category><category term="osx"></category></entry><entry><title>python unicode 编码整理</title><link href="http://blog.hehan.net/python-unicode-bian-ma-zheng-li.html" rel="alternate"></link><updated>2016-03-10T13:36:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-03-10:python-unicode-bian-ma-zheng-li.html</id><summary type="html">&lt;h2&gt;unicode 与 utf-8 的关系&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;</summary><category term="docker"></category><category term="osx"></category></entry><entry><title>python unicode 编码整理</title><link href="http://blog.hehan.net/python-unicode-bian-ma-zheng-li.html" rel="alternate"></link><updated>2016-03-10T13:36:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-03-10:python-unicode-bian-ma-zheng-li.html</id><summary type="html">&lt;h2&gt;unicode 与 utf-8 的关系 &lt;/h2&gt;
 &lt;h3&gt;unicode 是 character set&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;character set 是把每个字符&lt;strong&gt;对应&lt;/strong&gt;成数字的集合，比如unicode中 A对应0041，汉字『我』对应 '6211'&lt;/li&gt;
-&lt;li&gt;unicode 是个很大的集合，几乎覆盖世界上所有的字符，现在的规模已经可以容纳100万个字符。&lt;/li&gt;
+&lt;li&gt;character set 是把每个字符 &lt;strong&gt; 对应 &lt;/strong&gt; 成数字的集合，比如 unicode 中 A 对应 0041，汉字『我』对应 '6211'&lt;/li&gt;
+&lt;li&gt;unicode 是个很大的集合，几乎覆盖世界上所有的字符，现在的规模已经可以容纳 100 万个字符。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3&gt;utf-8 是对 unicode 存储的实现方式&lt;/h3&gt;
-&lt;p&gt;unicode 只定义字符对应的数字，但没有规定这些数字如何存储起来，比如像中文的『我』字存储时需要两个字节来表示，而英文字母A却只需要一个字节，有些其他的字符可能需要3-4个字节。&lt;/p&gt;
+&lt;h3&gt;utf-8 是对 unicode 存储的实现方式 &lt;/h3&gt;
+&lt;p&gt;unicode 只定义字符对应的数字，但没有规定这些数字如何存储起来，比如像中文的『我』字存储时需要两个字节来表示，而英文字母 A 却只需要一个字节，有些其他的字符可能需要 3-4 个字节。&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;如果统一规定每个字符用3个或者4个字节来存储，那么每个英文字符都必然需要额外2到3个0，这对存储是很大的浪费。&lt;/li&gt;
-&lt;li&gt;如果每个字符按照实际需要的字节数来存储，计算机就分不清三个字节是表示三个字符还是一个字符。&lt;/li&gt;
+&lt;li&gt; 如果统一规定每个字符用 3 个或者 4 个字节来存储，那么每个英文字符都必然需要额外 2 到 3 个 0，这对存储是很大的浪费。&lt;/li&gt;
+&lt;li&gt; 如果每个字符按照实际需要的字节数来存储，计算机就分不清三个字节是表示三个字符还是一个字符。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;utf-8 是对 unicode 编码存储的一种实现方式，同样的还有 utf-16, utf-32。&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;utf-8 是使用最广泛的编码方式，采用变长的编码方式，可以使用1-4个字节来表示一个字符； utf-16 用2个或4个字节，utf-32 用4个字节表示。编码规则如下：&lt;/p&gt;
+&lt;p&gt;utf-8 是使用最广泛的编码方式，采用变长的编码方式，可以使用 1-4 个字节来表示一个字符； utf-16 用 2 个或 4 个字节，utf-32 用 4 个字节表示。编码规则如下：&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;对于单字节的符号，字节的第一位设为0，后面7位为这个符号的unicode码。因此对于英语字母， UTF-8编码和ASCII码是相同的。&lt;/li&gt;
-&lt;li&gt;对于n字节的符号（n&amp;gt;1），第一个字节的前n位都设为1，第n+1位设为0，后面字节的前两位一律设为10。剩下的没有提及的二进制位，全部为这个符号的unicode码。&lt;/li&gt;
+&lt;li&gt; 对于单字节的符号，字节的第一位设为 0，后面 7 位为这个符号的 unicode 码。因此对于英语字母， UTF-8 编码和 ASCII 码是相同的。&lt;/li&gt;
+&lt;li&gt; 对于 n 字节的符号（n&amp;gt;1），第一个字节的前 n 位都设为 1，第 n+1 位设为 0，后面字节的前两位一律设为 10。剩下的没有提及的二进制位，全部为这个符号的 unicode 码。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2&gt;python2 中的 str 和 unicode&lt;/h2&gt;
-&lt;p&gt;python2 中有字符串类型有两种：&lt;code&gt;byte string (str)&lt;/code&gt;和 &lt;code&gt;unicode string (unicode)&lt;/code&gt;。&lt;/p&gt;
-&lt;pre&gt;&lt;code class="python"&gt;&amp;gt;&amp;gt;&amp;gt; s = '美的'
+&lt;p&gt;python2 中有字符串类型有两种：&lt;code&gt;byte string (str)&lt;/code&gt; 和 &lt;code&gt;unicode string (unicode)&lt;/code&gt;。&lt;/p&gt;
+&lt;pre&gt;&lt;code class="python"&gt;&amp;gt;&amp;gt;&amp;gt; s = ' 美的 '
 &amp;gt;&amp;gt;&amp;gt; s
 '\xe7\xbe\x8e\xe7\x9a\x84'
-&amp;gt;&amp;gt;&amp;gt; s = u'美的'
+&amp;gt;&amp;gt;&amp;gt; s = u' 美的 '
 &amp;gt;&amp;gt;&amp;gt; s
 u'\u7f8e\u7684'
-&amp;gt;&amp;gt;&amp;gt; s = '美的'
+&amp;gt;&amp;gt;&amp;gt; s = ' 美的 '
 &amp;gt;&amp;gt;&amp;gt; s.decode('utf-8')
 u'\u7f8e\u7684'
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;上面的输出中，第一个s的类型是 str，打印出来的内容是 utf-8 编码过的内容。第二个s的类型是 unicode，打印出来的两个双字节的数字分别表示了两个汉字『美的』。&lt;/p&gt;
+&lt;p&gt; 上面的输出中，第一个 s 的类型是 str，打印出来的内容是 utf-8 编码过的内容。第二个 s 的类型是 unicode，打印出来的两个双字节的数字分别表示了两个汉字『美的』。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;encode&lt;/code&gt;和&lt;code&gt;decode&lt;/code&gt;提供 str 和 unicode 这两种的类型的互相转化。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;encode&lt;/code&gt; 和 &lt;code&gt;decode&lt;/code&gt; 提供 str 和 unicode 这两种的类型的互相转化。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;encode 把 unicode 转化成 str(byte string)&lt;/li&gt;
 &lt;li&gt;decode 把 str(byte string) 转化成 unicode&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;本质上，str是存放的字节序，有可能是 ascii, gbk, utf-8 等等中的任意一种，通过调用 decode 可以把他们转化成 unicode ，默认的 decode 编码是 ascii 。str中到底是用的哪一种编码，取决于它所在的场景，跟 locale ，文件编码等等都有关系。&lt;/p&gt;
-&lt;h3&gt;文本文件、编辑器的处理&lt;/h3&gt;
+&lt;p&gt; 本质上，str 是存放的字节序，有可能是 ascii, gbk, utf-8 等等中的任意一种，通过调用 decode 可以把他们转化成 unicode ，默认的 decode 编码是 ascii 。str 中到底是用的哪一种编码，取决于它所在的场景，跟 locale ，文件编码等等都有关系。&lt;/p&gt;
+&lt;h3&gt; 文本文件、编辑器的处理 &lt;/h3&gt;
 &lt;pre&gt;&lt;code class="python"&gt;#!/usr/bin/env python
 # -*- coding: GBK -*-
 
-s = u'中文'
+s = u' 中文 '
 print repr(s)
 print repr(s.encode('GBK'))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;比如上面的文件&lt;code&gt;enc.py&lt;/code&gt;，保存的时候选择&lt;code&gt;文件编码&lt;/code&gt;是GBK，程序文件本质上也是文件，当我们使用某个外部的应用  打开它时（编辑器或者python解释器等），外部应用是不知道该文件的编码格式的，  &lt;/p&gt;
-&lt;p&gt;这个时候有三种情况：&lt;/p&gt;
+&lt;p&gt; 比如上面的文件 &lt;code&gt;enc.py&lt;/code&gt;，保存的时候选择 &lt;code&gt; 文件编码 &lt;/code&gt; 是 GBK，程序文件本质上也是文件，当我们使用某个外部的应用  打开它时（编辑器或者 python 解释器等），外部应用是不知道该文件的编码格式的，  &lt;/p&gt;
+&lt;p&gt; 这个时候有三种情况：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;应用使用其默认的编码方式去解析，比如UTF-8或者ASCII；python解释器默认是ASCII，编辑器可以自己设置；&lt;/li&gt;
-&lt;li&gt;应用根据文件中的字节内容，自动检测编码方式；&lt;/li&gt;
-&lt;li&gt;文本文件告诉应用使用什么编码方式去解码；比如&lt;code&gt;# -*- coding: GBK -*-&lt;/code&gt;告知解释器使用GBK来解码；&lt;/li&gt;
+&lt;li&gt; 应用使用其默认的编码方式去解析，比如 UTF-8 或者 ASCII；python 解释器默认是 ASCII，编辑器可以自己设置；&lt;/li&gt;
+&lt;li&gt; 应用根据文件中的字节内容，自动检测编码方式；&lt;/li&gt;
+&lt;li&gt; 文本文件告诉应用使用什么编码方式去解码；比如 &lt;code&gt;# -*- coding: GBK -*-&lt;/code&gt; 告知解释器使用 GBK 来解码；&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;试验一下，把&lt;code&gt;# -*- coding: GBK -*-&lt;/code&gt;删除后，执行&lt;code&gt;python enc.py&lt;/code&gt;，输出：  &lt;/p&gt;
+&lt;p&gt; 试验一下，把 &lt;code&gt;# -*- coding: GBK -*-&lt;/code&gt; 删除后，执行 &lt;code&gt;python enc.py&lt;/code&gt;，输出：  &lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;   File &amp;quot;enc.py&amp;quot;, line 4
  SyntaxError: Non-ASCII character '\xd6' in file enc.py on line 4, but no encoding declared;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;试着用vim打开该文件时，『中文』两个字就会显示成乱码，因为vim默认的文件编码方式被设置成UTF-8了。&lt;/p&gt;
+&lt;p&gt; 试着用 vim 打开该文件时，『中文』两个字就会显示成乱码，因为 vim 默认的文件编码方式被设置成 UTF-8 了。&lt;/p&gt;
 &lt;pre&gt;&lt;code class="python"&gt;#!/usr/bin/env python
 # -*- coding: GBK -*-
 
-s1 = u'中文'
+s1 = u' 中文 '
 
 print repr(s1)
 print repr(s1.encode('GBK'))
 
-s2 = '中文'
+s2 = ' 中文 '
 
 print repr(s2)
 print repr(s2.decode('GBK'))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;输出结果：&lt;/p&gt;
+&lt;p&gt; 输出结果：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;u'\u4e2d\u6587'
 '\xd6\xd0\xce\xc4'
 '\xd6\xd0\xce\xc4'
 u'\u4e2d\u6587'
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;从这里可以看出来， s2中存放的是byte格式的从文件中读到的GBK编码的内容。&lt;/p&gt;
-&lt;p&gt;再看下面的这段代码，程序文件&lt;code&gt;utf8_enc.py&lt;/code&gt;，保存成UTF-8编码的。&lt;/p&gt;
+&lt;p&gt; 从这里可以看出来， s2 中存放的是 byte 格式的从文件中读到的 GBK 编码的内容。&lt;/p&gt;
+&lt;p&gt; 再看下面的这段代码，程序文件 &lt;code&gt;utf8_enc.py&lt;/code&gt;，保存成 UTF-8 编码的。&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-s1 = u'中文'
+s1 = u' 中文 '
 
 print repr(s1)
 print repr(s1.encode('GBK'))
 
-s2 = '中文'
+s2 = ' 中文 '
 
 print repr(s2)
 print repr(s2.decode('GBK'))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;输出：&lt;/p&gt;
+&lt;p&gt; 输出：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;u'\u4e2d\u6587'
 '\xd6\xd0\xce\xc4'
 '\xe4\xb8\xad\xe6\x96\x87'
@@ -439,27 +459,27 @@ Traceback (most recent call last):
 UnicodeDecodeError: 'gbk' codec can't decode bytes in position 2-3: illegal multibyte sequence
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;这里同样可以知道，s2中存放的是文件保存的编码UTF-8的byte码。&lt;/p&gt;
+&lt;p&gt; 这里同样可以知道，s2 中存放的是文件保存的编码 UTF-8 的 byte 码。&lt;/p&gt;
 &lt;h2&gt;References&lt;/h2&gt;
 &lt;p&gt;&lt;a href="http://www.rrn.dk/the-difference-between-utf-8-and-unicode/"&gt;http://www.rrn.dk/the-difference-between-utf-8-and-unicode/&lt;/a&gt;&lt;br /&gt;
 &lt;a href="http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html"&gt;http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html&lt;/a&gt;&lt;br /&gt;
 &lt;a href="https://docs.python.org/2/howto/unicode.html"&gt;https://docs.python.org/2/howto/unicode.html&lt;/a&gt;&lt;br /&gt;
 &lt;a href="http://yergler.net/2012/bytes-chars/"&gt;http://yergler.net/2012/bytes-chars/&lt;/a&gt;&lt;/p&gt;</summary><category term="python"></category><category term="unicode"></category></entry><entry><title>django query 使用的 manager</title><link href="http://blog.hehan.net/django-query-shi-yong-de-manager.html" rel="alternate"></link><updated>2016-03-09T18:03:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-03-09:django-query-shi-yong-de-manager.html</id><summary type="html">&lt;h2&gt;default manager&lt;/h2&gt;
-&lt;p&gt;如果 model 中定义了多个 manager 时，Django 会选取第一个（排在最前面的）作为 default manager，Django 中会选用 default manager 去执行一些操作 (dumpdata)，因此在 override &lt;code&gt;get_queryset&lt;/code&gt; 的时候要小心，有可能会导致 &lt;strong&gt;获取对象的时候取不到值&lt;/strong&gt; 的情况。&lt;/p&gt;
-&lt;h2&gt;访问 related object 时使用的 manager&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;默认&lt;/strong&gt; Django 会选用 "plain" manager (&lt;code&gt;models.Manager&lt;/code&gt;) 实例作为访问 related object 时的 manager，这样访问 model 中的 Foreign Key 时，使用 "plain" manager 能够保证总是能取到值。&lt;/p&gt;
-&lt;p&gt;也可以通过在 &lt;code&gt;default manager&lt;/code&gt; 中加入设置 &lt;code&gt;use_for_related_fields = True&lt;/code&gt; 来让访问 related object 时使用该 manager，而不是 "plain" manager。详细解释见下一条说明。&lt;/p&gt;
+&lt;p&gt; 如果 model 中定义了多个 manager 时，Django 会选取第一个（排在最前面的）作为 default manager，Django 中会选用 default manager 去执行一些操作 (dumpdata)，因此在 override &lt;code&gt;get_queryset&lt;/code&gt; 的时候要小心，有可能会导致 &lt;strong&gt; 获取对象的时候取不到值 &lt;/strong&gt; 的情况。&lt;/p&gt;
+&lt;h2&gt; 访问 related object 时使用的 manager&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt; 默认 &lt;/strong&gt; Django 会选用 "plain" manager (&lt;code&gt;models.Manager&lt;/code&gt;) 实例作为访问 related object 时的 manager，这样访问 model 中的 Foreign Key 时，使用 "plain" manager 能够保证总是能取到值。&lt;/p&gt;
+&lt;p&gt; 也可以通过在 &lt;code&gt;default manager&lt;/code&gt; 中加入设置 &lt;code&gt;use_for_related_fields = True&lt;/code&gt; 来让访问 related object 时使用该 manager，而不是 "plain" manager。详细解释见下一条说明。&lt;/p&gt;
 &lt;h2&gt;use_for_related_fields 的更多场景 automatic manager&lt;/h2&gt;
 &lt;p&gt;Django 在有些场景下需要创建临时的 &lt;code&gt;automatic manager&lt;/code&gt; 来执行一些操作，比如：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;为没有定义 manager 的 model 生成 &lt;code&gt;default manager&lt;/code&gt;；&lt;/li&gt;
-&lt;li&gt;访问 related object 时的临时 manager；&lt;/li&gt;
+&lt;li&gt; 为没有定义 manager 的 model 生成 &lt;code&gt;default manager&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt; 访问 related object 时的临时 manager；&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;通常情况下，Django 使用 &lt;code&gt;models.Manager&lt;/code&gt; 来生成 manager 实例。&lt;/p&gt;
+&lt;p&gt; 通常情况下，Django 使用 &lt;code&gt;models.Manager&lt;/code&gt; 来生成 manager 实例。&lt;/p&gt;
 &lt;p&gt;Django 也提供了机制来使用自定义的 manager 而不是 &lt;code&gt;models.Manager&lt;/code&gt; 来生成 &lt;code&gt;automatic manager&lt;/code&gt; 的实例：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;自定义的 manager 必须是 &lt;code&gt;default manager&lt;/code&gt;；&lt;/li&gt;
-&lt;li&gt;同时在 &lt;code&gt;default manager&lt;/code&gt; 中加入 &lt;code&gt;use_for_related_fields=True&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt; 自定义的 manager 必须是 &lt;code&gt;default manager&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt; 同时在 &lt;code&gt;default manager&lt;/code&gt; 中加入 &lt;code&gt;use_for_related_fields=True&lt;/code&gt;；&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;reverse query 时使用的 manager&lt;/h2&gt;
 &lt;pre&gt;&lt;code class="python"&gt;from django.db import models
@@ -473,30 +493,30 @@ b = Blog.objects.get(id=1)
 b.entry_set(manager='entries').all()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;默认情况下，&lt;code&gt;RelatedManager&lt;/code&gt; 会使用对应 model 的 &lt;strong&gt;default manager&lt;/strong&gt; 的子类作为查询时的 manager，你也可以通过传入 &lt;code&gt;manager&lt;/code&gt; 参数来使用指定的 manager。  &lt;/p&gt;
+&lt;p&gt; 默认情况下，&lt;code&gt;RelatedManager&lt;/code&gt; 会使用对应 model 的 &lt;strong&gt;default manager&lt;/strong&gt; 的子类作为查询时的 manager，你也可以通过传入 &lt;code&gt;manager&lt;/code&gt; 参数来使用指定的 manager。  &lt;/p&gt;
 &lt;p&gt;&lt;code&gt;ManyToMany&lt;/code&gt; 的查询也采用了上面的逻辑。&lt;/p&gt;
 &lt;h2&gt;References&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://docs.djangoproject.com/en/1.9/topics/db/managers/#controlling-automatic-manager-types"&gt;django automatic manager &lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://docs.djangoproject.com/en/1.9/topics/db/queries/#using-a-custom-reverse-manager"&gt;using a custom reverse manager&lt;/a&gt;&lt;/p&gt;</summary><category term="django"></category><category term="python"></category></entry><entry><title>http api 设计中 GET 还是 POST</title><link href="http://blog.hehan.net/http-api-she-ji-zhong-get-huan-shi-post.html" rel="alternate"></link><updated>2016-01-26T18:03:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-01-26:http-api-she-ji-zhong-get-huan-shi-post.html</id><summary type="html">&lt;h3&gt;GET 用于安全的操作，POST 用于不安全的操作&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;GET&lt;/code&gt;有以下特性：&lt;br /&gt;
+&lt;p&gt;&lt;a href="https://docs.djangoproject.com/en/1.9/topics/db/queries/#using-a-custom-reverse-manager"&gt;using a custom reverse manager&lt;/a&gt;&lt;/p&gt;</summary><category term="django"></category><category term="python"></category></entry><entry><title>http api 设计中 GET 还是 POST</title><link href="http://blog.hehan.net/http-api-she-ji-zhong-get-huan-shi-post.html" rel="alternate"></link><updated>2016-01-26T18:03:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-01-26:http-api-she-ji-zhong-get-huan-shi-post.html</id><summary type="html">&lt;h3&gt;GET 用于安全的操作，POST 用于不安全的操作 &lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;GET&lt;/code&gt; 有以下特性：&lt;br /&gt;
 - GET requests can be cached&lt;br /&gt;
 - GET requests can remain in the browser history&lt;br /&gt;
 - GET requests can be bookmarked&lt;br /&gt;
 - GET requests can be distributed &amp;amp; shared&lt;br /&gt;
 - GET requests can be hacked (CSRF)&lt;/p&gt;
-&lt;p&gt;如果对于一个删除接口，例如：&lt;/p&gt;
+&lt;p&gt; 如果对于一个删除接口，例如：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;GET /address/delete/&amp;lt;id&amp;gt;/
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;这样的接口会存在安全隐患，在用户登录状态下，点击链接就会触发接口的调用，容易被用于攻击。&lt;/p&gt;
-&lt;p&gt;接口设计时应该有这样的设定：&lt;/p&gt;
+&lt;p&gt; 这样的接口会存在安全隐患，在用户登录状态下，点击链接就会触发接口的调用，容易被用于攻击。&lt;/p&gt;
+&lt;p&gt; 接口设计时应该有这样的设定：&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;凡是对服务端数据进行修改的接口，使用 &lt;code&gt;POST&lt;/code&gt;，而不是 &lt;code&gt;GET&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt; 凡是对服务端数据进行修改的接口，使用 &lt;code&gt;POST&lt;/code&gt;，而不是 &lt;code&gt;GET&lt;/code&gt;。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h3&gt;对于参数多导致URL过长的场景应该使用 POST&lt;/h3&gt;
-&lt;p&gt;虽然 RFC 没有 URL 长度的规定，但是老版 IE ，某些代理服务器，对 URL 的长度会有限制的，比如2048。&lt;/p&gt;
+&lt;h3&gt; 对于参数多导致 URL 过长的场景应该使用 POST&lt;/h3&gt;
+&lt;p&gt; 虽然 RFC 没有 URL 长度的规定，但是老版 IE ，某些代理服务器，对 URL 的长度会有限制的，比如 2048。&lt;/p&gt;
 &lt;h3&gt;ajax 请求数据时尽量使用 GET&lt;/h3&gt;
-&lt;p&gt;浏览器在处理 &lt;code&gt;XMLHttpRequest&lt;/code&gt; 的时候，会分两步进行发送，先发头部，再发送数据，使用 &lt;code&gt;GET&lt;/code&gt; 的话，可以更快的发送请求，获得响应。(待验证)&lt;/p&gt;</summary><category term="http"></category><category term="api"></category></entry><entry><title>osx small tips</title><link href="http://blog.hehan.net/osx-small-tips.html" rel="alternate"></link><updated>2016-01-26T18:03:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-01-26:osx-small-tips.html</id><summary type="html">&lt;h3&gt;Encrypt / Decrypt file&lt;/h3&gt;
+&lt;p&gt; 浏览器在处理 &lt;code&gt;XMLHttpRequest&lt;/code&gt; 的时候，会分两步进行发送，先发头部，再发送数据，使用 &lt;code&gt;GET&lt;/code&gt; 的话，可以更快的发送请求，获得响应。( 待验证 )&lt;/p&gt;</summary><category term="http"></category><category term="api"></category></entry><entry><title>osx small tips</title><link href="http://blog.hehan.net/osx-small-tips.html" rel="alternate"></link><updated>2016-01-26T18:03:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2016-01-26:osx-small-tips.html</id><summary type="html">&lt;h3&gt;Encrypt / Decrypt file&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;# brew install gpg
 # gpg -c file.txt          // encrypt
 # gpg file.txt.gpg         // decrypt
@@ -513,14 +533,14 @@ b.entry_set(manager='entries').all()
 &lt;h3&gt;Screen capture&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;cmd+shift+3&lt;/code&gt;: Full screen&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;cmd+shift+4&lt;/code&gt;: Selected area&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://www.zhihu.com/question/19550327"&gt;参考链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.zhihu.com/question/19550327"&gt; 参考链接 &lt;/a&gt;&lt;/p&gt;
 &lt;h3&gt;Mount NTFS manually&lt;/h3&gt;
-&lt;p&gt;编辑 &lt;code&gt;/etc/fstab&lt;/code&gt;, 可以用 Label 或者 UUID。UUID 可以通过 &lt;code&gt;diskutil info /Volumes/Data&lt;/code&gt; 来得到。&lt;/p&gt;
+&lt;p&gt; 编辑 &lt;code&gt;/etc/fstab&lt;/code&gt;, 可以用 Label 或者 UUID。UUID 可以通过 &lt;code&gt;diskutil info /Volumes/Data&lt;/code&gt; 来得到。&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;LABEL=Data none ntfs rw,auto,nobrowse
 UUID=731EE82C-92D2-4A83-A44F-29120B67C7B1 none ntfs rw,auto,nobrowse
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;保存后，弹出USB，然后重新插拔。注意，这时 Finder 里面不会再看到这些分区，需要从 Terminal 中打开。&lt;/p&gt;
+&lt;p&gt; 保存后，弹出 USB，然后重新插拔。注意，这时 Finder 里面不会再看到这些分区，需要从 Terminal 中打开。&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;cd /Volumes
 open -a Finder ./
 &lt;/code&gt;&lt;/pre&gt;</summary><category term="osx"></category></entry><entry><title>p4 command line tips</title><link href="http://blog.hehan.net/p4-command-line-tips.html" rel="alternate"></link><updated>2015-12-01T19:50:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2015-12-01:p4-command-line-tips.html</id><summary type="html">&lt;h4&gt;Remove files from changelist without removing the edits&lt;/h4&gt;
@@ -539,7 +559,7 @@ open -a Finder ./
 the permissions, apache still failed to access the &lt;code&gt;HOME&lt;/code&gt; directory.&lt;/p&gt;
 &lt;h3&gt;Solution&lt;/h3&gt;
 &lt;p&gt;After a little dig, occationally I found the &lt;code&gt;HOME&lt;/code&gt; directory has a special permission symbol.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;drwxr-xr-x+ 93 han      han      4.0K 6月  23 11:30 han
+&lt;pre&gt;&lt;code&gt;drwxr-xr-x+ 93 han      han      4.0K 6 月  23 11:30 han
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;There is a &lt;code&gt;+&lt;/code&gt; at the end of permission field. What does this means?&lt;/p&gt;
@@ -1082,18 +1102,18 @@ Error: unpack could not create JAR file:
 &lt;h2&gt;Solution&lt;/h2&gt;
 &lt;p&gt;Install the 32bit libraries:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;# rpm -ivh glibc.i686 glibc-devel.i686
-&lt;/code&gt;&lt;/pre&gt;</summary><category term="jdk"></category><category term="fedora"></category></entry><entry><title>C++头文件include的顺序问题</title><link href="http://blog.hehan.net/ctou-wen-jian-includede-shun-xu-wen-ti.html" rel="alternate"></link><updated>2013-10-16T16:48:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2013-10-16:ctou-wen-jian-includede-shun-xu-wen-ti.html</id><summary type="html">&lt;h2&gt;问题&lt;/h2&gt;
-&lt;p&gt;遇到一个很奇怪的问题，在工程中使用 stlport 的时候各种编译不过，即使仅仅是声明一个对象都会编译不过。&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;</summary><category term="jdk"></category><category term="fedora"></category></entry><entry><title>C++头文件include的顺序问题</title><link href="http://blog.hehan.net/ctou-wen-jian-includede-shun-xu-wen-ti.html" rel="alternate"></link><updated>2013-10-16T16:48:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2013-10-16:ctou-wen-jian-includede-shun-xu-wen-ti.html</id><summary type="html">&lt;h2&gt; 问题 &lt;/h2&gt;
+&lt;p&gt; 遇到一个很奇怪的问题，在工程中使用 stlport 的时候各种编译不过，即使仅仅是声明一个对象都会编译不过。&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;std::sstream mystream;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;报的错误也很奇怪，是 stlport 内部的文件语法错误。&lt;/p&gt;
-&lt;h2&gt;分析过程&lt;/h2&gt;
+&lt;p&gt; 报的错误也很奇怪，是 stlport 内部的文件语法错误。&lt;/p&gt;
+&lt;h2&gt; 分析过程 &lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;在工程外部，编写小程序，使用工程中的 stlport 来编译，正常编译通过，运行正常；&lt;/li&gt;
-&lt;li&gt;怀疑工程中的 Makefile 对 stlport 编译时使用了特殊的选项，检查发现没有特殊的选项；&lt;/li&gt;
-&lt;li&gt;怀疑工程中使用的 stlport 有问题，重新编译了一份 stlport 还是不行；&lt;/li&gt;
-&lt;li&gt;检查stlport的源代码，出错的地方对 &lt;code&gt;#define XXX&lt;/code&gt; 有依赖，同时检查了工程中的代码，发现 &lt;code&gt;include&lt;/code&gt; std 头文件在所有 &lt;code&gt;include&lt;/code&gt; 的最后面。&lt;/li&gt;
+&lt;li&gt; 在工程外部，编写小程序，使用工程中的 stlport 来编译，正常编译通过，运行正常；&lt;/li&gt;
+&lt;li&gt; 怀疑工程中的 Makefile 对 stlport 编译时使用了特殊的选项，检查发现没有特殊的选项；&lt;/li&gt;
+&lt;li&gt; 怀疑工程中使用的 stlport 有问题，重新编译了一份 stlport 还是不行；&lt;/li&gt;
+&lt;li&gt; 检查 stlport 的源代码，出错的地方对 &lt;code&gt;#define XXX&lt;/code&gt; 有依赖，同时检查了工程中的代码，发现 &lt;code&gt;include&lt;/code&gt; std 头文件在所有 &lt;code&gt;include&lt;/code&gt; 的最后面。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;pre&gt;&lt;code&gt;    #include &amp;quot;a.h&amp;quot;
     #include &amp;quot;b.h&amp;quot;
@@ -1101,7 +1121,7 @@ Error: unpack could not create JAR file:
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;ol&gt;
-&lt;li&gt;猜测可能前面的头文件中的 &lt;code&gt;#define&lt;/code&gt; 影响了 sstream 中的设置，将 &lt;code&gt;#include &amp;lt;sstream&amp;gt;&lt;/code&gt; 放到文件的最前面，问题解决；&lt;/li&gt;
+&lt;li&gt; 猜测可能前面的头文件中的 &lt;code&gt;#define&lt;/code&gt; 影响了 sstream 中的设置，将 &lt;code&gt;#include &amp;lt;sstream&amp;gt;&lt;/code&gt; 放到文件的最前面，问题解决；&lt;/li&gt;
 &lt;/ol&gt;
 &lt;pre&gt;&lt;code&gt;    #include &amp;quot;a.h&amp;quot;
     #include &amp;quot;b.h&amp;quot;
@@ -1120,33 +1140,33 @@ it as the default config.&lt;/p&gt;
 
 &lt;p&gt;Then you only need to type:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;    ctags -R
-&lt;/code&gt;&lt;/pre&gt;</summary><category term="ctags"></category></entry><entry><title>abnormal packets in socket</title><link href="http://blog.hehan.net/abnormal-packets-in-socket.html" rel="alternate"></link><updated>2013-09-18T17:52:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2013-09-18:abnormal-packets-in-socket.html</id><summary type="html">&lt;p&gt;今天遇到一个奇怪的问题，从抓包中发现服务器收到客户端发来的HTTP请求后，&lt;br /&gt;
-会先回复一个乱七八糟的包，然后才会回正常的200 OK，自然的客户端就没办法&lt;br /&gt;
+&lt;/code&gt;&lt;/pre&gt;</summary><category term="ctags"></category></entry><entry><title>abnormal packets in socket</title><link href="http://blog.hehan.net/abnormal-packets-in-socket.html" rel="alternate"></link><updated>2013-09-18T17:52:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2013-09-18:abnormal-packets-in-socket.html</id><summary type="html">&lt;p&gt; 今天遇到一个奇怪的问题，从抓包中发现服务器收到客户端发来的 HTTP 请求后，&lt;br /&gt;
+会先回复一个乱七八糟的包，然后才会回正常的 200 OK，自然的客户端就没办法 &lt;br /&gt;
 正常工作了。&lt;/p&gt;
-&lt;p&gt;从代码分析，发现正常的逻辑下面，是不会出现这种情况的。&lt;/p&gt;
-&lt;p&gt;通过使用netstat观察，发现出问题的连接在建立好了以后，Recv-Q里面会有内容，&lt;br /&gt;
-应该是客户端发过来的数据，奇怪的是在Recv-Q里面有数据的同时，马上Send-Q里&lt;br /&gt;
-面也有数据了，也就是说当上层应用程序还没有调用recv或者read的时候，已经有&lt;br /&gt;
-数据被塞到Send-Q中了，但是按照上层应用程序处理的逻辑，只有当数据被recv了以后，&lt;br /&gt;
+&lt;p&gt; 从代码分析，发现正常的逻辑下面，是不会出现这种情况的。&lt;/p&gt;
+&lt;p&gt; 通过使用 netstat 观察，发现出问题的连接在建立好了以后，Recv-Q 里面会有内容，&lt;br /&gt;
+应该是客户端发过来的数据，奇怪的是在 Recv-Q 里面有数据的同时，马上 Send-Q 里 &lt;br /&gt;
+面也有数据了，也就是说当上层应用程序还没有调用 recv 或者 read 的时候，已经有 &lt;br /&gt;
+数据被塞到 Send-Q 中了，但是按照上层应用程序处理的逻辑，只有当数据被 recv 了以后，&lt;br /&gt;
 才会开始写。&lt;/p&gt;
-&lt;p&gt;因为程序中有重用的机制，于是怀疑是不是前面的连接没有处理完，导致遗留的数据&lt;br /&gt;
+&lt;p&gt; 因为程序中有重用的机制，于是怀疑是不是前面的连接没有处理完，导致遗留的数据 &lt;br /&gt;
 被写到新的连接里面。&lt;/p&gt;
-&lt;p&gt;仔细查看日志和代码后，发现了问题产生的根源。&lt;/p&gt;
+&lt;p&gt; 仔细查看日志和代码后，发现了问题产生的根源。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;ul&gt;
-&lt;li&gt;socket的fd会在被完全close之后被系统马上重用到新的连接上；&lt;/li&gt;
-&lt;li&gt;应用程序中，accept新连接(listen thread)和处理连接(working thread)是两个线程&lt;/li&gt;
-&lt;li&gt;问题在于当working thread把fd关闭以后，后面有一些清理工作还往该fd写了数据，于&lt;br /&gt;
-是乎在fd被关闭和写数据之间，有可能listen thread接受了一个新的连接重用了之前的那个fd，&lt;br /&gt;
+&lt;li&gt;socket 的 fd 会在被完全 close 之后被系统马上重用到新的连接上；&lt;/li&gt;
+&lt;li&gt; 应用程序中，accept 新连接 (listen thread) 和处理连接 (working thread) 是两个线程 &lt;/li&gt;
+&lt;li&gt; 问题在于当 working thread 把 fd 关闭以后，后面有一些清理工作还往该 fd 写了数据，于 &lt;br /&gt;
+是乎在 fd 被关闭和写数据之间，有可能 listen thread 接受了一个新的连接重用了之前的那个 fd，&lt;br /&gt;
 于是数据就会被写到这个新的连接中。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;从这个问题可以学习到：&lt;/p&gt;
+&lt;p&gt; 从这个问题可以学习到：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;ul&gt;
-&lt;li&gt;管理socket的时候，一定要注意其生命周期，尤其注意在在socket被close以后，不要再有&lt;br /&gt;
-额外的操作，比如继续写数据（有些情况可以），重复close。&lt;/li&gt;
-&lt;li&gt;当程序中存在多个线程操作同一个fd时，尤其要注意这样的问题。&lt;/li&gt;
+&lt;li&gt; 管理 socket 的时候，一定要注意其生命周期，尤其注意在在 socket 被 close 以后，不要再有 &lt;br /&gt;
+额外的操作，比如继续写数据（有些情况可以），重复 close。&lt;/li&gt;
+&lt;li&gt; 当程序中存在多个线程操作同一个 fd 时，尤其要注意这样的问题。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;</summary><category term="network"></category><category term="socket"></category></entry><entry><title>octopress daily use</title><link href="http://blog.hehan.net/octopress-daily-use.html" rel="alternate"></link><updated>2013-09-18T17:00:00+08:00</updated><author><name>Han</name></author><id>tag:blog.hehan.net,2013-09-18:octopress-daily-use.html</id><summary type="html">&lt;h3&gt;Check ruby version&lt;/h3&gt;
 &lt;pre&gt;&lt;code class="bash"&gt;    ruby -v

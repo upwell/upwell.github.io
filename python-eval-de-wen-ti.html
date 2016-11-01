@@ -77,26 +77,26 @@
         <div class="span8 offset2 article-content">
 
             
-            <h1>场景</h1>
-<p>最近在代码会看到一些使用 <code>eval</code> 的代码场景，比如动态获取变量的值：</p>
+            <h1> 场景 </h1>
+<p> 最近在代码会看到一些使用 <code>eval</code> 的代码场景，比如动态获取变量的值：</p>
 <pre><code class="python">NAME_H = 'h'
 NAME_X = 'x'
 
 name = eval('NAME_H')
 </code></pre>
 
-<h1>问题</h1>
-<p>其实 <code>eval</code> 在各种语言中，都是比较特殊的函数，一般的场景下都不应该使用，主要的几个原因是：<br />
+<h1> 问题 </h1>
+<p> 其实 <code>eval</code> 在各种语言中，都是比较特殊的函数，一般的场景下都不应该使用，主要的几个原因是：<br />
 - There is almost always a better way to do it<br />
 - Very dangerous and insecure compare to most other python functions<br />
 - Makes debugging difficult<br />
 - Slow</p>
-<h1>结论</h1>
+<h1> 结论 </h1>
 <p><code>eval</code> 的使用场景比较特殊，一般的情况下都不应该使用，非得使用它的时候也要谨慎考虑。</p>
 <blockquote>
 <p>It seems simple to me: eval is a vector for code injection, and is dangerous in a way that most other Python functions are not. That doesn't mean you shouldn't use it at all, but I think you should use it judiciously.</p>
 </blockquote>
-<h1>参考</h1>
+<h1> 参考 </h1>
 <p><a href="http://stackoverflow.com/questions/1832940/is-using-eval-in-python-a-bad-practice">Is using eval in python a bad practice</a></p>
             
             
@@ -111,7 +111,7 @@ name = eval('NAME_H')
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="http://blog.hehan.net/tags.html#python-ref">python
-                    <span>14</span>
+                    <span>15</span>
 </a></li>
             </ul>
 <h4>Contact</h4>

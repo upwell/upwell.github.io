@@ -14,12 +14,12 @@
 
 <meta property="og:title" content="python GIL 整理 "/>
 <meta property="og:url" content="http://blog.hehan.net/python-gil-zheng-li.html" />
-<meta property="og:description" content="GIL 是什么 GIL 是 Global Interpreter Lock 的缩写，全局解释器锁。在 CPython 中，GIL 被用来防止多个原生线程同时执行。 其实并不是所有的 Python 实现都使用 GIL，Python 实现中，包含 GIL 的有： CPython (我们通常说到 Python 时指的就是这个实现) PyPy 没有 GIL 机制的实现： Jython (Java) IronPython (.NET) 为什么 CPython 中使用 GIL 主要是因为 CPython 的内存管理不是线程安全的。线程安全，主要是要保护共享数据，通常有两种做法： 对每个共享数据进行操作时采用独立的细粒度锁进行保护 使用一个全局粗粒度锁保护所有的共享数据 （GIL） 这两种做法各有优缺点： 细粒度锁可以利用多CPU ..." />
+<meta property="og:description" content="GIL 是什么 GIL 是 Global Interpreter Lock 的缩写，全局解释器锁。在 CPython 中，GIL 被用来防止多个原生线程同时执行。 其实并不是所有的 Python 实现都使用 GIL，Python 实现中，包含 GIL 的有： CPython ( 我们通常说到 Python 时指的就是这个实现 ) PyPy 没有 GIL 机制的实现： Jython (Java) IronPython (.NET) 为什么 CPython 中使用 GIL 主要是因为 CPython 的内存管理不是线程安全的。线程安全，主要是要保护共享数据，通常有两种做法： 对每个共享数据进行操作时采用独立的细粒度锁进行保护 使用一个全局粗粒度锁保护所有的共享数据 （GIL） 这两种做法各有优缺点： 细粒度锁可以利用多 ..." />
 <meta property="og:site_name" content="Note Everything" />
 <meta property="og:article:author" content="Han" />
 <meta property="og:article:published_time" content="2016-04-18T13:36:00+08:00" />
 <meta name="twitter:title" content="python GIL 整理 ">
-<meta name="twitter:description" content="GIL 是什么 GIL 是 Global Interpreter Lock 的缩写，全局解释器锁。在 CPython 中，GIL 被用来防止多个原生线程同时执行。 其实并不是所有的 Python 实现都使用 GIL，Python 实现中，包含 GIL 的有： CPython (我们通常说到 Python 时指的就是这个实现) PyPy 没有 GIL 机制的实现： Jython (Java) IronPython (.NET) 为什么 CPython 中使用 GIL 主要是因为 CPython 的内存管理不是线程安全的。线程安全，主要是要保护共享数据，通常有两种做法： 对每个共享数据进行操作时采用独立的细粒度锁进行保护 使用一个全局粗粒度锁保护所有的共享数据 （GIL） 这两种做法各有优缺点： 细粒度锁可以利用多CPU ...">
+<meta name="twitter:description" content="GIL 是什么 GIL 是 Global Interpreter Lock 的缩写，全局解释器锁。在 CPython 中，GIL 被用来防止多个原生线程同时执行。 其实并不是所有的 Python 实现都使用 GIL，Python 实现中，包含 GIL 的有： CPython ( 我们通常说到 Python 时指的就是这个实现 ) PyPy 没有 GIL 机制的实现： Jython (Java) IronPython (.NET) 为什么 CPython 中使用 GIL 主要是因为 CPython 的内存管理不是线程安全的。线程安全，主要是要保护共享数据，通常有两种做法： 对每个共享数据进行操作时采用独立的细粒度锁进行保护 使用一个全局粗粒度锁保护所有的共享数据 （GIL） 这两种做法各有优缺点： 细粒度锁可以利用多 ...">
 
         <title>python GIL 整理  · Note Everything
 </title>
@@ -77,41 +77,41 @@
         <div class="span8 offset2 article-content">
 
             
-            <h2>GIL 是什么</h2>
+            <h2>GIL 是什么 </h2>
 <p>GIL 是 Global Interpreter Lock 的缩写，全局解释器锁。在 CPython 中，GIL 被用来防止多个原生线程同时执行。</p>
-<p>其实并不是所有的 Python 实现都使用 GIL，Python 实现中，包含 GIL 的有：</p>
+<p> 其实并不是所有的 Python 实现都使用 GIL，Python 实现中，包含 GIL 的有：</p>
 <ul>
-<li>CPython (我们通常说到 Python 时指的就是这个实现)</li>
+<li>CPython ( 我们通常说到 Python 时指的就是这个实现 )</li>
 <li>PyPy</li>
 </ul>
-<p>没有 GIL 机制的实现：</p>
+<p> 没有 GIL 机制的实现：</p>
 <ul>
 <li>Jython (Java)</li>
 <li>IronPython (.NET)</li>
 </ul>
-<h2>为什么 CPython 中使用 GIL</h2>
-<p>主要是因为 CPython 的内存管理不是线程安全的。线程安全，主要是要保护共享数据，通常有两种做法：</p>
+<h2> 为什么 CPython 中使用 GIL</h2>
+<p> 主要是因为 CPython 的内存管理不是线程安全的。线程安全，主要是要保护共享数据，通常有两种做法：</p>
 <ul>
-<li>对每个共享数据进行操作时采用独立的细粒度锁进行保护</li>
-<li>使用一个全局粗粒度锁保护所有的共享数据 （GIL）</li>
+<li> 对每个共享数据进行操作时采用独立的细粒度锁进行保护 </li>
+<li> 使用一个全局粗粒度锁保护所有的共享数据 （GIL）</li>
 </ul>
-<p>这两种做法各有优缺点：</p>
+<p> 这两种做法各有优缺点：</p>
 <ul>
-<li>细粒度锁可以利用多CPU，多个线程可以同时执行，发挥并发的优势，但锁是有开销的，而且程序复杂度也较高；</li>
-<li>全局锁正好相反，两个线程不能同时执行，但是单线程执行时效率会更高；</li>
+<li> 细粒度锁可以利用多 CPU，多个线程可以同时执行，发挥并发的优势，但锁是有开销的，而且程序复杂度也较高；</li>
+<li> 全局锁正好相反，两个线程不能同时执行，但是单线程执行时效率会更高；</li>
 </ul>
-<p>采用 GIL 而不是细粒度锁的好处：</p>
+<p> 采用 GIL 而不是细粒度锁的好处：</p>
 <ul>
-<li>单线程程序会更快</li>
-<li>编写基于C的扩展程序时更容易</li>
-<li>使用C库时更容易，不用考虑C库是否线程安全</li>
+<li> 单线程程序会更快 </li>
+<li> 编写基于 C 的扩展程序时更容易 </li>
+<li> 使用 C 库时更容易，不用考虑 C 库是否线程安全 </li>
 </ul>
-<p>减小 GIL 影响的做法：</p>
+<p> 减小 GIL 影响的做法：</p>
 <ul>
-<li>提供了释放 GIL 的机制，实际上标准库中，在每个 blocking i/o 的调用时候，GIL 都会被释放掉，所以对于IO型的程序，GIL 并不会导致性能下降;</li>
-<li>对于像 NumPy 这样的计算型库，在调用C或者Fortran时，总是尽可能的先释放掉 GIL，保证其它的线程可以继续执行;</li>
+<li> 提供了释放 GIL 的机制，实际上标准库中，在每个 blocking i/o 的调用时候，GIL 都会被释放掉，所以对于 IO 型的程序，GIL 并不会导致性能下降 ;</li>
+<li> 对于像 NumPy 这样的计算型库，在调用 C 或者 Fortran 时，总是尽可能的先释放掉 GIL，保证其它的线程可以继续执行 ;</li>
 </ul>
-<p>实际上移除 GIL 的讨论一直都存在，但是到目前为止都还没有一个很好的实现，<a href="http://www.artima.com/weblogs/viewpost.jsp?thread=214235">Guido 也承认移除 GIL 是很困难的</a>。之前的 Patch 会使单线程的性能下降很多，但对多线程程序的性能提升又有限，所以被弃用。</p>
+<p> 实际上移除 GIL 的讨论一直都存在，但是到目前为止都还没有一个很好的实现，<a href="http://www.artima.com/weblogs/viewpost.jsp?thread=214235">Guido 也承认移除 GIL 是很困难的 </a>。之前的 Patch 会使单线程的性能下降很多，但对多线程程序的性能提升又有限，所以被弃用。</p>
 <h2>References</h2>
 <p><a href="https://wiki.python.org/moin/GlobalInterpreterLock">https://wiki.python.org/moin/GlobalInterpreterLock</a><br />
 <a href="http://programmers.stackexchange.com/questions/186889/why-was-python-written-with-the-gil">http://programmers.stackexchange.com/questions/186889/why-was-python-written-with-the-gil</a><br />
@@ -132,7 +132,7 @@
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="http://blog.hehan.net/tags.html#python-ref">python
-                    <span>14</span>
+                    <span>15</span>
 </a></li>
             </ul>
 <h4>Contact</h4>

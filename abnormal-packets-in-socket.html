@@ -14,12 +14,12 @@
 
 <meta property="og:title" content="abnormal packets in socket "/>
 <meta property="og:url" content="http://blog.hehan.net/abnormal-packets-in-socket.html" />
-<meta property="og:description" content="今天遇到一个奇怪的问题，从抓包中发现服务器收到客户端发来的HTTP请求后， 会先回复一个乱七八糟的包，然后才会回正常的200 OK，自然的客户端就没办法 正常工作了。 从代码分析，发现正常的逻辑下面，是不会出现这种情况的。 通过使用netstat观察，发现出问题的连接在建立好了以后，Recv-Q里面会有内容， 应该是客户端发过来的数据，奇怪的是在Recv-Q里面有数据的同时，马上Send-Q里 面也有数据了，也就是说当上层应用程序还没有调用recv或者read的时候，已经有 数据被塞到Send-Q中了，但是按照上层应用程序处理的逻辑，只有当数据被recv了以后， 才会开始写。 因为程序中有重用的机制，于是怀疑是不是前面的连接没有处理完，导致遗留的数据 被写到新的连接里面。 仔细查看日志和代码后，发现了问题产生的根源。 socket的fd会在被完全close之后被系统马上重用到新的连接上； 应用程序中，accept新连接(listen thread)和处理连接(working thread)是两个线程 问题在于当working thread把fd关闭以后，后面有一些清理工作还往该fd写了数据，于 是乎在fd被关闭和写数据之间，有可能listen thread接受了一个新的连接重用了之前的那个fd， 于是数据就会被写到这个新的连接中。 从这个问题可以学习到： 管理socket的时候，一定要注意其生命周期，尤其注意在在socket被close以后 ..." />
+<meta property="og:description" content="今天遇到一个奇怪的问题，从抓包中发现服务器收到客户端发来的 HTTP 请求后， 会先回复一个乱七八糟的包，然后才会回正常的 200 OK，自然的客户端就没办法 正常工作了。 从代码分析，发现正常的逻辑下面，是不会出现这种情况的。 通过使用 netstat 观察，发现出问题的连接在建立好了以后，Recv-Q 里面会有内容， 应该是客户端发过来的数据，奇怪的是在 Recv-Q 里面有数据的同时，马上 Send-Q 里 面也有数据了，也就是说当上层应用程序还没有调用 recv 或者 read 的时候，已经有 数据被塞到 Send-Q 中了，但是按照上层应用程序处理的逻辑，只有当数据被 recv 了以后， 才会开始写。 因为程序中有重用的机制，于是怀疑是不是前面的连接没有处理完，导致遗留的数据 被写到新的连接里面。 仔细查看日志和代码后，发现了问题产生的根源。 socket 的 fd ..." />
 <meta property="og:site_name" content="Note Everything" />
 <meta property="og:article:author" content="Han" />
 <meta property="og:article:published_time" content="2013-09-18T17:52:00+08:00" />
 <meta name="twitter:title" content="abnormal packets in socket ">
-<meta name="twitter:description" content="今天遇到一个奇怪的问题，从抓包中发现服务器收到客户端发来的HTTP请求后， 会先回复一个乱七八糟的包，然后才会回正常的200 OK，自然的客户端就没办法 正常工作了。 从代码分析，发现正常的逻辑下面，是不会出现这种情况的。 通过使用netstat观察，发现出问题的连接在建立好了以后，Recv-Q里面会有内容， 应该是客户端发过来的数据，奇怪的是在Recv-Q里面有数据的同时，马上Send-Q里 面也有数据了，也就是说当上层应用程序还没有调用recv或者read的时候，已经有 数据被塞到Send-Q中了，但是按照上层应用程序处理的逻辑，只有当数据被recv了以后， 才会开始写。 因为程序中有重用的机制，于是怀疑是不是前面的连接没有处理完，导致遗留的数据 被写到新的连接里面。 仔细查看日志和代码后，发现了问题产生的根源。 socket的fd会在被完全close之后被系统马上重用到新的连接上； 应用程序中，accept新连接(listen thread)和处理连接(working thread)是两个线程 问题在于当working thread把fd关闭以后，后面有一些清理工作还往该fd写了数据，于 是乎在fd被关闭和写数据之间，有可能listen thread接受了一个新的连接重用了之前的那个fd， 于是数据就会被写到这个新的连接中。 从这个问题可以学习到： 管理socket的时候，一定要注意其生命周期，尤其注意在在socket被close以后 ...">
+<meta name="twitter:description" content="今天遇到一个奇怪的问题，从抓包中发现服务器收到客户端发来的 HTTP 请求后， 会先回复一个乱七八糟的包，然后才会回正常的 200 OK，自然的客户端就没办法 正常工作了。 从代码分析，发现正常的逻辑下面，是不会出现这种情况的。 通过使用 netstat 观察，发现出问题的连接在建立好了以后，Recv-Q 里面会有内容， 应该是客户端发过来的数据，奇怪的是在 Recv-Q 里面有数据的同时，马上 Send-Q 里 面也有数据了，也就是说当上层应用程序还没有调用 recv 或者 read 的时候，已经有 数据被塞到 Send-Q 中了，但是按照上层应用程序处理的逻辑，只有当数据被 recv 了以后， 才会开始写。 因为程序中有重用的机制，于是怀疑是不是前面的连接没有处理完，导致遗留的数据 被写到新的连接里面。 仔细查看日志和代码后，发现了问题产生的根源。 socket 的 fd ...">
 
         <title>abnormal packets in socket  · Note Everything
 </title>
@@ -77,33 +77,33 @@
         <div class="span8 offset2 article-content">
 
             
-            <p>今天遇到一个奇怪的问题，从抓包中发现服务器收到客户端发来的HTTP请求后，<br />
-会先回复一个乱七八糟的包，然后才会回正常的200 OK，自然的客户端就没办法<br />
+            <p> 今天遇到一个奇怪的问题，从抓包中发现服务器收到客户端发来的 HTTP 请求后，<br />
+会先回复一个乱七八糟的包，然后才会回正常的 200 OK，自然的客户端就没办法 <br />
 正常工作了。</p>
-<p>从代码分析，发现正常的逻辑下面，是不会出现这种情况的。</p>
-<p>通过使用netstat观察，发现出问题的连接在建立好了以后，Recv-Q里面会有内容，<br />
-应该是客户端发过来的数据，奇怪的是在Recv-Q里面有数据的同时，马上Send-Q里<br />
-面也有数据了，也就是说当上层应用程序还没有调用recv或者read的时候，已经有<br />
-数据被塞到Send-Q中了，但是按照上层应用程序处理的逻辑，只有当数据被recv了以后，<br />
+<p> 从代码分析，发现正常的逻辑下面，是不会出现这种情况的。</p>
+<p> 通过使用 netstat 观察，发现出问题的连接在建立好了以后，Recv-Q 里面会有内容，<br />
+应该是客户端发过来的数据，奇怪的是在 Recv-Q 里面有数据的同时，马上 Send-Q 里 <br />
+面也有数据了，也就是说当上层应用程序还没有调用 recv 或者 read 的时候，已经有 <br />
+数据被塞到 Send-Q 中了，但是按照上层应用程序处理的逻辑，只有当数据被 recv 了以后，<br />
 才会开始写。</p>
-<p>因为程序中有重用的机制，于是怀疑是不是前面的连接没有处理完，导致遗留的数据<br />
+<p> 因为程序中有重用的机制，于是怀疑是不是前面的连接没有处理完，导致遗留的数据 <br />
 被写到新的连接里面。</p>
-<p>仔细查看日志和代码后，发现了问题产生的根源。</p>
+<p> 仔细查看日志和代码后，发现了问题产生的根源。</p>
 <blockquote>
 <ul>
-<li>socket的fd会在被完全close之后被系统马上重用到新的连接上；</li>
-<li>应用程序中，accept新连接(listen thread)和处理连接(working thread)是两个线程</li>
-<li>问题在于当working thread把fd关闭以后，后面有一些清理工作还往该fd写了数据，于<br />
-是乎在fd被关闭和写数据之间，有可能listen thread接受了一个新的连接重用了之前的那个fd，<br />
+<li>socket 的 fd 会在被完全 close 之后被系统马上重用到新的连接上；</li>
+<li> 应用程序中，accept 新连接 (listen thread) 和处理连接 (working thread) 是两个线程 </li>
+<li> 问题在于当 working thread 把 fd 关闭以后，后面有一些清理工作还往该 fd 写了数据，于 <br />
+是乎在 fd 被关闭和写数据之间，有可能 listen thread 接受了一个新的连接重用了之前的那个 fd，<br />
 于是数据就会被写到这个新的连接中。</li>
 </ul>
 </blockquote>
-<p>从这个问题可以学习到：</p>
+<p> 从这个问题可以学习到：</p>
 <blockquote>
 <ul>
-<li>管理socket的时候，一定要注意其生命周期，尤其注意在在socket被close以后，不要再有<br />
-额外的操作，比如继续写数据（有些情况可以），重复close。</li>
-<li>当程序中存在多个线程操作同一个fd时，尤其要注意这样的问题。</li>
+<li> 管理 socket 的时候，一定要注意其生命周期，尤其注意在在 socket 被 close 以后，不要再有 <br />
+额外的操作，比如继续写数据（有些情况可以），重复 close。</li>
+<li> 当程序中存在多个线程操作同一个 fd 时，尤其要注意这样的问题。</li>
 </ul>
 </blockquote>
             

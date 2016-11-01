@@ -78,21 +78,21 @@
 
             
             <h2>default manager</h2>
-<p>如果 model 中定义了多个 manager 时，Django 会选取第一个（排在最前面的）作为 default manager，Django 中会选用 default manager 去执行一些操作 (dumpdata)，因此在 override <code>get_queryset</code> 的时候要小心，有可能会导致 <strong>获取对象的时候取不到值</strong> 的情况。</p>
-<h2>访问 related object 时使用的 manager</h2>
-<p><strong>默认</strong> Django 会选用 "plain" manager (<code>models.Manager</code>) 实例作为访问 related object 时的 manager，这样访问 model 中的 Foreign Key 时，使用 "plain" manager 能够保证总是能取到值。</p>
-<p>也可以通过在 <code>default manager</code> 中加入设置 <code>use_for_related_fields = True</code> 来让访问 related object 时使用该 manager，而不是 "plain" manager。详细解释见下一条说明。</p>
+<p> 如果 model 中定义了多个 manager 时，Django 会选取第一个（排在最前面的）作为 default manager，Django 中会选用 default manager 去执行一些操作 (dumpdata)，因此在 override <code>get_queryset</code> 的时候要小心，有可能会导致 <strong> 获取对象的时候取不到值 </strong> 的情况。</p>
+<h2> 访问 related object 时使用的 manager</h2>
+<p><strong> 默认 </strong> Django 会选用 "plain" manager (<code>models.Manager</code>) 实例作为访问 related object 时的 manager，这样访问 model 中的 Foreign Key 时，使用 "plain" manager 能够保证总是能取到值。</p>
+<p> 也可以通过在 <code>default manager</code> 中加入设置 <code>use_for_related_fields = True</code> 来让访问 related object 时使用该 manager，而不是 "plain" manager。详细解释见下一条说明。</p>
 <h2>use_for_related_fields 的更多场景 automatic manager</h2>
 <p>Django 在有些场景下需要创建临时的 <code>automatic manager</code> 来执行一些操作，比如：</p>
 <ul>
-<li>为没有定义 manager 的 model 生成 <code>default manager</code>；</li>
-<li>访问 related object 时的临时 manager；</li>
+<li> 为没有定义 manager 的 model 生成 <code>default manager</code>；</li>
+<li> 访问 related object 时的临时 manager；</li>
 </ul>
-<p>通常情况下，Django 使用 <code>models.Manager</code> 来生成 manager 实例。</p>
+<p> 通常情况下，Django 使用 <code>models.Manager</code> 来生成 manager 实例。</p>
 <p>Django 也提供了机制来使用自定义的 manager 而不是 <code>models.Manager</code> 来生成 <code>automatic manager</code> 的实例：</p>
 <ul>
-<li>自定义的 manager 必须是 <code>default manager</code>；</li>
-<li>同时在 <code>default manager</code> 中加入 <code>use_for_related_fields=True</code>；</li>
+<li> 自定义的 manager 必须是 <code>default manager</code>；</li>
+<li> 同时在 <code>default manager</code> 中加入 <code>use_for_related_fields=True</code>；</li>
 </ul>
 <h2>reverse query 时使用的 manager</h2>
 <pre><code class="python">from django.db import models
@@ -106,7 +106,7 @@ b = Blog.objects.get(id=1)
 b.entry_set(manager='entries').all()
 </code></pre>
 
-<p>默认情况下，<code>RelatedManager</code> 会使用对应 model 的 <strong>default manager</strong> 的子类作为查询时的 manager，你也可以通过传入 <code>manager</code> 参数来使用指定的 manager。  </p>
+<p> 默认情况下，<code>RelatedManager</code> 会使用对应 model 的 <strong>default manager</strong> 的子类作为查询时的 manager，你也可以通过传入 <code>manager</code> 参数来使用指定的 manager。  </p>
 <p><code>ManyToMany</code> 的查询也采用了上面的逻辑。</p>
 <h2>References</h2>
 <p><a href="https://docs.djangoproject.com/en/1.9/topics/db/managers/#controlling-automatic-manager-types">django automatic manager </a></p>
@@ -127,7 +127,7 @@ b.entry_set(manager='entries').all()
                     <span>6</span>
 </a></li>
                 <li><a href="http://blog.hehan.net/tags.html#python-ref">python
-                    <span>14</span>
+                    <span>15</span>
 </a></li>
             </ul>
 <h4>Contact</h4>

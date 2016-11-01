@@ -94,14 +94,14 @@
 <h3>Screen capture</h3>
 <p><code>cmd+shift+3</code>: Full screen</p>
 <p><code>cmd+shift+4</code>: Selected area</p>
-<p><a href="https://www.zhihu.com/question/19550327">参考链接</a></p>
+<p><a href="https://www.zhihu.com/question/19550327"> 参考链接 </a></p>
 <h3>Mount NTFS manually</h3>
-<p>编辑 <code>/etc/fstab</code>, 可以用 Label 或者 UUID。UUID 可以通过 <code>diskutil info /Volumes/Data</code> 来得到。</p>
+<p> 编辑 <code>/etc/fstab</code>, 可以用 Label 或者 UUID。UUID 可以通过 <code>diskutil info /Volumes/Data</code> 来得到。</p>
 <pre><code>LABEL=Data none ntfs rw,auto,nobrowse
 UUID=731EE82C-92D2-4A83-A44F-29120B67C7B1 none ntfs rw,auto,nobrowse
 </code></pre>
 
-<p>保存后，弹出USB，然后重新插拔。注意，这时 Finder 里面不会再看到这些分区，需要从 Terminal 中打开。</p>
+<p> 保存后，弹出 USB，然后重新插拔。注意，这时 Finder 里面不会再看到这些分区，需要从 Terminal 中打开。</p>
 <pre><code>cd /Volumes
 open -a Finder ./
 </code></pre>

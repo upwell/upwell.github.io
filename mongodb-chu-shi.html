@@ -14,12 +14,12 @@
 
 <meta property="og:title" content="mongodb 初识 "/>
 <meta property="og:url" content="http://blog.hehan.net/mongodb-chu-shi.html" />
-<meta property="og:description" content="mongodb 基本概念 document 关系数据库表的单条记录(record)对应到mongodb就是单个document。 document的结构类似JSON的对象，里面是一个个KEY/VALUE対。Value可以是的document, array, arrays of documents。 { &#34;_id&#34; : ObjectId(&#34;54c955492b7c8eb21818bd09&#34;), &#34;address&#34; : { &#34;street&#34; : &#34;2 Avenue&#34;, &#34;zipcode&#34; : &#34;10075&#34;, &#34;building&#34; : &#34;1480&#34;, &#34;coord&#34; : [ -73.9557413, 40.7720266 ] } } collection 关系数据库表的表(table)对应到mongodb就是collection。区别在于collection不要求里面的 ..." />
+<meta property="og:description" content="mongodb 基本概念 document 关系数据库表的单条记录 (record) 对应到 mongodb 就是单个 document。 document 的结构类似 JSON 的对象，里面是一个个 KEY/VALUE 対。Value 可以是的 document, array, arrays of documents。 { &#34;_id&#34; : ObjectId(&#34;54c955492b7c8eb21818bd09&#34;), &#34;address&#34; : { &#34;street&#34; : &#34;2 Avenue&#34;, &#34;zipcode&#34; : &#34;10075&#34;, &#34;building&#34; : &#34;1480&#34;, &#34;coord&#34; : [ -73.9557413, 40.7720266 ] } } collection 关系数据库表的表 (table) 对应到 mongodb 就是 collection。区别在于 collection 不要求里面的 ..." />
 <meta property="og:site_name" content="Note Everything" />
 <meta property="og:article:author" content="Han" />
 <meta property="og:article:published_time" content="2016-10-21T11:15:00+08:00" />
 <meta name="twitter:title" content="mongodb 初识 ">
-<meta name="twitter:description" content="mongodb 基本概念 document 关系数据库表的单条记录(record)对应到mongodb就是单个document。 document的结构类似JSON的对象，里面是一个个KEY/VALUE対。Value可以是的document, array, arrays of documents。 { &#34;_id&#34; : ObjectId(&#34;54c955492b7c8eb21818bd09&#34;), &#34;address&#34; : { &#34;street&#34; : &#34;2 Avenue&#34;, &#34;zipcode&#34; : &#34;10075&#34;, &#34;building&#34; : &#34;1480&#34;, &#34;coord&#34; : [ -73.9557413, 40.7720266 ] } } collection 关系数据库表的表(table)对应到mongodb就是collection。区别在于collection不要求里面的 ...">
+<meta name="twitter:description" content="mongodb 基本概念 document 关系数据库表的单条记录 (record) 对应到 mongodb 就是单个 document。 document 的结构类似 JSON 的对象，里面是一个个 KEY/VALUE 対。Value 可以是的 document, array, arrays of documents。 { &#34;_id&#34; : ObjectId(&#34;54c955492b7c8eb21818bd09&#34;), &#34;address&#34; : { &#34;street&#34; : &#34;2 Avenue&#34;, &#34;zipcode&#34; : &#34;10075&#34;, &#34;building&#34; : &#34;1480&#34;, &#34;coord&#34; : [ -73.9557413, 40.7720266 ] } } collection 关系数据库表的表 (table) 对应到 mongodb 就是 collection。区别在于 collection 不要求里面的 ...">
 
         <title>mongodb 初识  · Note Everything
 </title>
@@ -77,10 +77,10 @@
         <div class="span8 offset2 article-content">
 
             
-            <h1>mongodb 基本概念</h1>
+            <h1>mongodb 基本概念 </h1>
 <h2>document</h2>
-<p>关系数据库表的单条记录(<code>record</code>)对应到<code>mongodb</code>就是单个<code>document</code>。</p>
-<p><code>document</code>的结构类似<code>JSON</code>的对象，里面是一个个<code>KEY/VALUE</code>対。<code>Value</code>可以是的<code>document, array, arrays of documents</code>。</p>
+<p> 关系数据库表的单条记录 (<code>record</code>) 对应到 <code>mongodb</code> 就是单个 <code>document</code>。</p>
+<p><code>document</code> 的结构类似 <code>JSON</code> 的对象，里面是一个个 <code>KEY/VALUE</code> 対。<code>Value</code> 可以是的 <code>document, array, arrays of documents</code>。</p>
 <pre><code>{
    &quot;_id&quot; : ObjectId(&quot;54c955492b7c8eb21818bd09&quot;),
    &quot;address&quot; : {
@@ -93,8 +93,8 @@
 </code></pre>
 
 <h2>collection</h2>
-<p>关系数据库表的表(<code>table</code>)对应到<code>mongodb</code>就是<code>collection</code>。区别在于<code>collection</code>不要求里面的<code>documents</code>有相同的<code>schema</code>。</p>
-<p>存储在<code>collection</code>中的<code>documents</code>必须要有一个唯一的<code>_id</code>作为主键(<code>primary key</code>)。</p>
+<p> 关系数据库表的表 (<code>table</code>) 对应到 <code>mongodb</code> 就是 <code>collection</code>。区别在于 <code>collection</code> 不要求里面的 <code>documents</code> 有相同的 <code>schema</code>。</p>
+<p> 存储在 <code>collection</code> 中的 <code>documents</code> 必须要有一个唯一的 <code>_id</code> 作为主键 (<code>primary key</code>)。</p>
             
             
             <hr/>

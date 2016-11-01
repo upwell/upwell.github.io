@@ -14,12 +14,12 @@
 
 <meta property="og:title" content="gitlab docker 部署问题 "/>
 <meta property="og:url" content="http://blog.hehan.net/gitlab-docker-bu-shu-wen-ti.html" />
-<meta property="og:description" content="部署步骤 参考 docker 文档。 注意，先要pull image docker pull gitlab/gitlab-ce:latest 问题 docker pull 使用代理服务器 直接export http_proxy https_proxy不生效，按照 docker文档 配置。 docker run 的配置 sudo docker run --detach \ --hostname gitlab.example.com \ --publish 443:443 --publish 80:80 --publish 22:22 \ --name gitlab \ --restart always \ --volume /srv/gitlab ..." />
+<meta property="og:description" content="部署步骤 参考 docker 文档 。 注意，先要 pull image docker pull gitlab/gitlab-ce:latest 问题 docker pull 使用代理服务器 直接 export http_proxy https_proxy 不生效，按照 docker 文档 配置。 docker run 的配置 sudo docker run --detach \ --hostname gitlab.example.com \ --publish 443:443 --publish 80:80 --publish 22:22 \ --name gitlab \ --restart always ..." />
 <meta property="og:site_name" content="Note Everything" />
 <meta property="og:article:author" content="Han" />
 <meta property="og:article:published_time" content="2016-07-28T17:10:00+08:00" />
 <meta name="twitter:title" content="gitlab docker 部署问题 ">
-<meta name="twitter:description" content="部署步骤 参考 docker 文档。 注意，先要pull image docker pull gitlab/gitlab-ce:latest 问题 docker pull 使用代理服务器 直接export http_proxy https_proxy不生效，按照 docker文档 配置。 docker run 的配置 sudo docker run --detach \ --hostname gitlab.example.com \ --publish 443:443 --publish 80:80 --publish 22:22 \ --name gitlab \ --restart always \ --volume /srv/gitlab ...">
+<meta name="twitter:description" content="部署步骤 参考 docker 文档 。 注意，先要 pull image docker pull gitlab/gitlab-ce:latest 问题 docker pull 使用代理服务器 直接 export http_proxy https_proxy 不生效，按照 docker 文档 配置。 docker run 的配置 sudo docker run --detach \ --hostname gitlab.example.com \ --publish 443:443 --publish 80:80 --publish 22:22 \ --name gitlab \ --restart always ...">
 
         <title>gitlab docker 部署问题  · Note Everything
 </title>
@@ -77,16 +77,16 @@
         <div class="span8 offset2 article-content">
 
             
-            <h1>部署步骤</h1>
-<p>参考 <a href="http://docs.gitlab.com/omnibus/docker/">docker 文档</a>。</p>
-<p>注意，先要<code>pull image</code></p>
+            <h1> 部署步骤 </h1>
+<p> 参考 <a href="http://docs.gitlab.com/omnibus/docker/">docker 文档 </a>。</p>
+<p> 注意，先要 <code>pull image</code></p>
 <pre><code>docker pull gitlab/gitlab-ce:latest
 </code></pre>
 
-<h1>问题</h1>
-<h2>docker pull 使用代理服务器</h2>
-<p>直接export http_proxy https_proxy不生效，按照 <a href="https://docs.docker.com/engine/admin/systemd/#http-proxy">docker文档</a> 配置。</p>
-<h2>docker run 的配置</h2>
+<h1> 问题 </h1>
+<h2>docker pull 使用代理服务器 </h2>
+<p> 直接 export http_proxy https_proxy 不生效，按照 <a href="https://docs.docker.com/engine/admin/systemd/#http-proxy">docker 文档 </a> 配置。</p>
+<h2>docker run 的配置 </h2>
 <pre><code>sudo docker run --detach \
     --hostname gitlab.example.com \
     --publish 443:443 --publish 80:80 --publish 22:22 \
@@ -99,30 +99,30 @@
 </code></pre>
 
 <ul>
-<li><code>hostname</code>需要设置成实际的地址，比如：192.168.1.100</li>
-<li>对外的端口 22 会与 主机 sshd 的端口冲突，可以把主机 sshd 的端口改成非22，比如2222</li>
+<li><code>hostname</code> 需要设置成实际的地址，比如：192.168.1.100</li>
+<li> 对外的端口 22 会与 主机 sshd 的端口冲突，可以把主机 sshd 的端口改成非 22，比如 2222</li>
 </ul>
-<p>docker run 之后，同名的不能再运行，如果没有配置，可以先删除了，再重新run。</p>
+<p>docker run 之后，同名的不能再运行，如果没有配置，可以先删除了，再重新 run。</p>
 <pre><code>docker stop gitlab
 docker rm gitlab
 docker run ....
 </code></pre>
 
-<h2>配置防火墙</h2>
+<h2> 配置防火墙 </h2>
 <pre><code>firewall-cmd --permanent --add-port=2222/tcp
 firewall-cmd --reload
 </code></pre>
 
-<h2>连接到container</h2>
+<h2> 连接到 container</h2>
 <pre><code>docker exec -it gitlab /bin/bash
 </code></pre>
 
-<h2>改变绑定的端口</h2>
-<p>对于已经<code>run</code>过的container，没办法直接修改，两种方式：<br />
-- 通过 iptables 再做端口转发<br />
-- 重新创建 container，步骤见 <a href="http://stackoverflow.com/questions/19335444/how-to-assign-a-port-mapping-to-an-existing-docker-container">stackoverflow的问题</a></p>
-<h2>配置 smtp</h2>
-<p>连到到container里面，修改<code>/etc/gitlab/gitlab.rb</code>，添加下面的列：</p>
+<h2> 改变绑定的端口 </h2>
+<p> 对于已经 <code>run</code> 过的 container，没办法直接修改，两种方式：<br />
+- 通过 iptables 再做端口转发 <br />
+- 重新创建 container，步骤见 <a href="http://stackoverflow.com/questions/19335444/how-to-assign-a-port-mapping-to-an-existing-docker-container">stackoverflow 的问题 </a></p>
+<h2> 配置 smtp</h2>
+<p> 连到到 container 里面，修改 <code>/etc/gitlab/gitlab.rb</code>，添加下面的列：</p>
 <pre><code>gitlab_rails['smtp_enable'] = true
 gitlab_rails['smtp_address'] = &quot;smtp.exmail.qq.com&quot;
 gitlab_rails['smtp_port'] = 465
@@ -135,7 +135,7 @@ gitlab_rails['smtp_tls'] = true
 gitlab_rails['gitlab_email_from'] = &quot;gitlab@yourdomain.com&quot;
 </code></pre>
 
-<p>重新配置：</p>
+<p> 重新配置：</p>
 <pre><code>gitlab-ctl reconfigure
 </code></pre>
             

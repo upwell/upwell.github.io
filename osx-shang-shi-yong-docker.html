@@ -14,12 +14,12 @@
 
 <meta property="og:title" content="osx 上使用 docker "/>
 <meta property="og:url" content="http://blog.hehan.net/osx-shang-shi-yong-docker.html" />
-<meta property="og:description" content="安装 根据官方文档的步骤进行安装，由于 mac 原生没有 container 的机制，需要在 mac 上安装一个 linux 的虚拟机，然后再在虚拟机上跑 docker engine，安装好之后点击运行 Docker Quickstart Terminal。 注意: 这里如果选择使用 iTerm 打开的话会有问题，建议使用 Terminal 打开。 运行 启动 Docker Quickstart Terminal 后，默认会创建好一台 linux 虚拟机，可以通过下面的命令查看： ➜ ~ docker-machine ls NAME ACTIVE DRIVER STATE URL SWARM DOCKER ERRORS default * virtualbox ..." />
+<meta property="og:description" content="安装 根据 官方文档 的步骤进行安装，由于 mac 原生没有 container 的机制，需要在 mac 上安装一个 linux 的虚拟机，然后再在虚拟机上跑 docker engine，安装好之后点击运行 Docker Quickstart Terminal。 注意 : 这里如果选择使用 iTerm 打开的话会有问题，建议使用 Terminal 打开。 运行 启动 Docker Quickstart Terminal 后，默认会创建好一台 linux 虚拟机，可以通过下面的命令查看： ➜ ~ docker-machine ls NAME ACTIVE DRIVER STATE URL SWARM DOCKER ERRORS default * virtualbox ..." />
 <meta property="og:site_name" content="Note Everything" />
 <meta property="og:article:author" content="Han" />
 <meta property="og:article:published_time" content="2016-03-10T13:36:00+08:00" />
 <meta name="twitter:title" content="osx 上使用 docker ">
-<meta name="twitter:description" content="安装 根据官方文档的步骤进行安装，由于 mac 原生没有 container 的机制，需要在 mac 上安装一个 linux 的虚拟机，然后再在虚拟机上跑 docker engine，安装好之后点击运行 Docker Quickstart Terminal。 注意: 这里如果选择使用 iTerm 打开的话会有问题，建议使用 Terminal 打开。 运行 启动 Docker Quickstart Terminal 后，默认会创建好一台 linux 虚拟机，可以通过下面的命令查看： ➜ ~ docker-machine ls NAME ACTIVE DRIVER STATE URL SWARM DOCKER ERRORS default * virtualbox ...">
+<meta name="twitter:description" content="安装 根据 官方文档 的步骤进行安装，由于 mac 原生没有 container 的机制，需要在 mac 上安装一个 linux 的虚拟机，然后再在虚拟机上跑 docker engine，安装好之后点击运行 Docker Quickstart Terminal。 注意 : 这里如果选择使用 iTerm 打开的话会有问题，建议使用 Terminal 打开。 运行 启动 Docker Quickstart Terminal 后，默认会创建好一台 linux 虚拟机，可以通过下面的命令查看： ➜ ~ docker-machine ls NAME ACTIVE DRIVER STATE URL SWARM DOCKER ERRORS default * virtualbox ...">
 
         <title>osx 上使用 docker  · Note Everything
 </title>
@@ -77,44 +77,44 @@
         <div class="span8 offset2 article-content">
 
             
-            <h2>安装</h2>
-<p>根据<a href="https://docs.docker.com/mac/">官方文档</a>的步骤进行安装，由于 mac 原生没有 container 的机制，需要在 mac 上安装一个 linux 的虚拟机，然后再在虚拟机上跑 docker engine，安装好之后点击运行 <code>Docker Quickstart Terminal</code>。</p>
+            <h2> 安装 </h2>
+<p> 根据 <a href="https://docs.docker.com/mac/"> 官方文档 </a> 的步骤进行安装，由于 mac 原生没有 container 的机制，需要在 mac 上安装一个 linux 的虚拟机，然后再在虚拟机上跑 docker engine，安装好之后点击运行 <code>Docker Quickstart Terminal</code>。</p>
 <blockquote>
-<p>注意: 这里如果选择使用 iTerm 打开的话会有问题，建议使用 Terminal 打开。</p>
+<p> 注意 : 这里如果选择使用 iTerm 打开的话会有问题，建议使用 Terminal 打开。</p>
 </blockquote>
-<h2>运行</h2>
-<p>启动 <code>Docker Quickstart Terminal</code> 后，默认会创建好一台 linux 虚拟机，可以通过下面的命令查看：</p>
+<h2> 运行 </h2>
+<p> 启动 <code>Docker Quickstart Terminal</code> 后，默认会创建好一台 linux 虚拟机，可以通过下面的命令查看：</p>
 <pre><code class="bash">➜  ~ docker-machine ls
 NAME      ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER    ERRORS
 default   *        virtualbox   Running   tcp://192.168.99.100:2376           v1.10.3  
 </code></pre>
 
-<p>这里可以看到已经通过 virtualbox 创建好了一台 linux 虚拟机，基于 docker 的操作都在该台虚拟机中完成。同时在 mac 中打开 VirtualBox 应用，也能打开相应的虚拟机在运行中。</p>
-<p>执行<code>docker run hello-world</code>可以验证 docker 是否安装好了，由于 docker 服务在国外，速度慢，可以配置使用代理服务器来下载，执行下面的命令让<code>docker run</code>使用代理服务器。</p>
+<p> 这里可以看到已经通过 virtualbox 创建好了一台 linux 虚拟机，基于 docker 的操作都在该台虚拟机中完成。同时在 mac 中打开 VirtualBox 应用，也能打开相应的虚拟机在运行中。</p>
+<p> 执行 <code>docker run hello-world</code> 可以验证 docker 是否安装好了，由于 docker 服务在国外，速度慢，可以配置使用代理服务器来下载，执行下面的命令让 <code>docker run</code> 使用代理服务器。</p>
 <pre><code>export http_proxy=http://localhost:8118
 export https_proxy=http://localhost:8118
 export no_proxy=&quot;192.168.99.100&quot;
 </code></pre>
 
-<p>注意最后的<code>export no_proxy</code>是必须的，否则<code>docker</code>在连接虚拟机时也会走代理服务器，连接当然会出错了。</p>
-<h2>使用 docker</h2>
-<p>使用 docker 部署 <a href="https://github.com/Thibaut/devdocs/">devdocs</a></p>
+<p> 注意最后的 <code>export no_proxy</code> 是必须的，否则 <code>docker</code> 在连接虚拟机时也会走代理服务器，连接当然会出错了。</p>
+<h2> 使用 docker</h2>
+<p> 使用 docker 部署 <a href="https://github.com/Thibaut/devdocs/">devdocs</a></p>
 <pre><code>docker build -t thibaut/devdocs .
 </code></pre>
 
-<p>这个时候，container 中会更新服务，这个时候有两个需要注意的：</p>
+<p> 这个时候，container 中会更新服务，这个时候有两个需要注意的：</p>
 <ol>
-<li>内部系统更新时，网络会使用 ipv6，但本地网络并不具备 ipv6 的环境，这时需要在<code>docker-machine</code>的 linux 虚拟机中禁用 ipv6，禁用后需要重启。</li>
-<li>内部系统更新时，网络较慢时，需要使用代理，可以在 Dockerfile 中配置 <code>ENV http(s)_proxy=</code>。</li>
+<li> 内部系统更新时，网络会使用 ipv6，但本地网络并不具备 ipv6 的环境，这时需要在 <code>docker-machine</code> 的 linux 虚拟机中禁用 ipv6，禁用后需要重启。</li>
+<li> 内部系统更新时，网络较慢时，需要使用代理，可以在 Dockerfile 中配置 <code>ENV http(s)_proxy=</code>。</li>
 </ol>
-<p>初始化启动服务：</p>
+<p> 初始化启动服务：</p>
 <pre><code>docker run --name devdocs -d -p 9292:9292 thibaut/devdocs
 </code></pre>
 
 <blockquote>
-<p>服务跑起来后，并不是在<code>localhost:9292</code>，而是<code>192.168.99.100:9292</code>。</p>
+<p> 服务跑起来后，并不是在 <code>localhost:9292</code>，而是 <code>192.168.99.100:9292</code>。</p>
 </blockquote>
-<p>重新启动<code>devdocs</code>：</p>
+<p> 重新启动 <code>devdocs</code>：</p>
 <pre><code>docker start devdocs
 docker restart devdocs
 </code></pre>
