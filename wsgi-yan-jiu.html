@@ -14,12 +14,12 @@
 
 <meta property="og:title" content="WSGI 研究 "/>
 <meta property="og:url" content="http://blog.hehan.net/wsgi-yan-jiu.html" />
-<meta property="og:description" content="现象 之前一直以为 Django/Flask 是实现了完整的 http 协议的，最近遇到协议不支持才发现原来并非如此。 实际遇到的问题是 App 上传图片到服务器时，如果 django 挂在 nginx 下，图片可以上传成功，但如果直接用 runserver 跑起来的话，上传失败。通过抓包分析，发现 App 上传图片时，http header 里面 Transfer-Encoding 的值是 Chunked。 Google 之后，发现并没有很多关于这方面的讨论，一致的说法是这并不是 Django 的问题，其实是 WSGI spec 中不支 Content-Length 为空的情况。单步调试 django 的代码也发现确实如此，遇到 Content-Length 为空或 0 ..." />
+<meta property="og:description" content="现象 之前一直以为 Django/Flask 是实现了完整的 http 协议的，最近遇到协议不支持才发现并非如此。 实际遇到的问题是 App 上传图片到服务器时，如果 Django 挂在 nginx 下，图片可以上传成功，但要是直接用 runserver 跑起来的话，上传会失败。通过抓包分析，发现 App 上传图片时，http header 里面 Transfer-Encoding 的值是 Chunked。 Google 之后，发现并没有很多关于这方面的讨论，一致的说法是这并不是 Django 的问题，其实是 WSGI spec 中不支持 Content-Length 为空的情况。单步调试 Django 的代码也发现确实如此，遇到 Content-Length 为空或 0 ..." />
 <meta property="og:site_name" content="Note Everything" />
 <meta property="og:article:author" content="Han" />
 <meta property="og:article:published_time" content="2016-10-31T11:15:00+08:00" />
 <meta name="twitter:title" content="WSGI 研究 ">
-<meta name="twitter:description" content="现象 之前一直以为 Django/Flask 是实现了完整的 http 协议的，最近遇到协议不支持才发现原来并非如此。 实际遇到的问题是 App 上传图片到服务器时，如果 django 挂在 nginx 下，图片可以上传成功，但如果直接用 runserver 跑起来的话，上传失败。通过抓包分析，发现 App 上传图片时，http header 里面 Transfer-Encoding 的值是 Chunked。 Google 之后，发现并没有很多关于这方面的讨论，一致的说法是这并不是 Django 的问题，其实是 WSGI spec 中不支 Content-Length 为空的情况。单步调试 django 的代码也发现确实如此，遇到 Content-Length 为空或 0 ...">
+<meta name="twitter:description" content="现象 之前一直以为 Django/Flask 是实现了完整的 http 协议的，最近遇到协议不支持才发现并非如此。 实际遇到的问题是 App 上传图片到服务器时，如果 Django 挂在 nginx 下，图片可以上传成功，但要是直接用 runserver 跑起来的话，上传会失败。通过抓包分析，发现 App 上传图片时，http header 里面 Transfer-Encoding 的值是 Chunked。 Google 之后，发现并没有很多关于这方面的讨论，一致的说法是这并不是 Django 的问题，其实是 WSGI spec 中不支持 Content-Length 为空的情况。单步调试 Django 的代码也发现确实如此，遇到 Content-Length 为空或 0 ...">
 
         <title>WSGI 研究  · Note Everything
 </title>
@@ -78,26 +78,32 @@
 
             
             <h2> 现象 </h2>
-<p> 之前一直以为 Django/Flask 是实现了完整的 http 协议的，最近遇到协议不支持才发现原来并非如此。</p>
-<p> 实际遇到的问题是 App 上传图片到服务器时，如果 django 挂在 nginx 下，图片可以上传成功，但如果直接用 runserver 跑起来的话，上传失败。通过抓包分析，发现 App 上传图片时，http header 里面 Transfer-Encoding 的值是 Chunked。</p>
-<p>Google 之后，发现并没有很多关于这方面的讨论，一致的说法是这并不是 Django 的问题，其实是 WSGI spec 中不支 Content-Length 为空的情况。单步调试 django 的代码也发现确实如此，遇到 Content-Length 为空或 0 时，就直接不再解析 body 了。django 的代码中也没法任何处理 Chunked 的逻辑。</p>
-<p><a href="http://stackoverflow.com/questions/12091067/handling-http-chunked-encoding-with-django"> 参考一 </a>  <a href="https://github.com/pallets/flask/issues/367"> 参考二 </a>  <a href="https://www.reddit.com/r/django/comments/4j6sx5/transferencoding_chunked/"> 参考三 </a></p>
+<p> 之前一直以为 Django/Flask 是实现了完整的 http 协议的，最近遇到协议不支持才发现并非如此。</p>
+<p> 实际遇到的问题是 App 上传图片到服务器时，如果 Django 挂在 nginx 下，图片可以上传成功，但要是直接用 runserver 跑起来的话，上传会失败。通过抓包分析，发现 App 上传图片时，http header 里面 Transfer-Encoding 的值是 Chunked。</p>
+<p>Google 之后，发现并没有很多关于这方面的讨论，一致的说法是这并不是 Django 的问题，其实是 WSGI spec 中不支持 Content-Length 为空的情况。单步调试 Django 的代码也发现确实如此，遇到 Content-Length 为空或 0 时，就直接不再解析 body 了。Django 的代码中也没有任何处理 Chunked 的逻辑。</p>
+<p><a href="http://stackoverflow.com/questions/12091067/handling-http-chunked-encoding-with-Django"> 参考一 </a>  <a href="https://github.com/pallets/flask/issues/367"> 参考二 </a>  <a href="https://www.reddit.com/r/Django/comments/4j6sx5/transferencoding_chunked/"> 参考三 </a></p>
 <h2> 疑问 </h2>
 <h3>WSGI 是什么呢？</h3>
-<p><a href="http://www.wsgi.org/">WSGI</a> 全称 Web Server Gateway Interface，其实它是一个规范 (Specification)，定义了 web server 和 web application 之间的通信机制，它是 Python 特有的，由 <a href="https://www.python.org/dev/peps/pep-3333/">PEP 3333</a> 完整描述了该 Spec。</p>
-<p> 其实 WSGI、CGI、FastCGI 都是一样的作用定义了 web server 和 web application 如何通信，与之类似的还有 Java 中的 Servlet，也是同样的作用。</p>
+<p><a href="http://www.wsgi.org/">WSGI</a> 全称 Web Server Gateway Interface，其实它是一个规范 (Specification)，定义了 web server 和 web application 之间的通信机制，它是 Python 特有的，<a href="https://www.python.org/dev/peps/pep-3333/">PEP 3333</a> 完整描述了该 Spec。</p>
+<p> 其实 WSGI、CGI、FastCGI 都是一样的作用，定义了 web server 和 web application 之间如何通信，与之类似的还有 Java 中的 Servlet。</p>
 <h3> 为什么需要 CGI，FastCGI，WSGI？</h3>
-<p> 回归到网站的本质，当用户在浏览器上输入网址后，一个请求就发到 web server（比如 apache 或 nginx），server 会去找到文件（比如 html，css，js），然后发送给浏览器。如果只是静态文件的网站，真的只需要有个 web server 就完全搞定了。</p>
-<p> 但现实中大部分网站并非如此，网站内容是动态生成的，并不是文件系统中的某个文件，比如论坛的帖子，电子邮件，最新的新闻或者只是当前的时间，这些都是动态生成出来，然后再发送给浏览器的。具体去生成这些内容的程序区别于 web server，我们可以称之为 web application。这些程序可以是任意的编程语言实现的，可以是 php，python，ruby，Java 等等。</p>
-<p> 通常情况下 web server 或者说 http server 处理 http 协议的解析部分，实现了完整的 http 协议，大多数的 web server 都是 C 或者 C++ 实现的，比如 apache, nginx, lighttpd。它们并不能直接执行 php,python 的代码，又或者说把这些代码嵌 (embed) 在 web server 中效率很差，所以它们之间需要一个桥梁或者说接口 (interfaces)。这些接口定义了它们之间通信的机制。实际上在 web 出现的这些年来，已经有非常多的尝试去定义这样一个好用的 interface，但值得提起却只有几个。</p>
-<p> 大部分的 web server 默认只支持一些很老的 interface（比如 CGI），但他们都提供了扩展的方式，可以通过第三方的 module 来支持新的 interfaces。</p>
-<p>Python 官方有一篇 <a href="https://docs.python.org/3/howto/webservers.html"> 很好的文章 </a> 描述了这段历史。</p>
+<p> 回归到网站的本质，当用户在浏览器上输入网址后，一个请求就发到 web server（比如 apache 或 nginx），server 会去找到文件（比如 html，css，js），然后发送给浏览器。如果只是静态网站，真的只需要有个 web server 就完全搞定了。</p>
+<p> 但现实中大部分网站并非如此，网站内容是动态生成的，并不是文件系统中的某个文件，比如论坛的帖子，电子邮件，最新的新闻或者只是当前的时间，这些都是动态生成出来，然后再发送给浏览器的。具体去生成这些内容的程序，区别于 web server 我们可以称之为 web application。这些程序可以是任意的编程语言实现的，可以是 php，python，ruby，Java 等等。</p>
+<p> 通常情况下 web server 或者说 http server 负责 http 协议的解析，实现了完整的 http 协议，大多数的 web server 都是 C 或者 C++ 实现的，比如 apache, nginx, lighttpd。它们并不能直接执行 php,python 的代码，又或者说把这些代码嵌 (embed) 在 web server 中效率很差，所以它们之间需要一个桥梁或者说接口 (interfaces)。这些接口定义了它们之间通信的机制。实际上在 web 出现的这些年来，已经有非常多的尝试去定义一个好用的 interface，但能被广泛使用只有少数几个。</p>
+<p> 大部分的 web server 默认只支持一些老的 interface（比如 CGI），但他们都提供了扩展机制，可以通过第三方的 module 来支持新的 interfaces。</p>
+<p>Python 官方有一篇 <a href="https://docs.python.org/3/howto/webservers.html"> 很好的文章 </a> 描述了这段历史。Python Guide 有 <a href="http://docs.python-guide.org/en/latest/scenarios/web/"> 一章内容 </a> 很简要的描述了 Python Web 的情况。</p>
 <h3>WSGI 是如何工作的？</h3>
 <p> 这里有一篇 <a href="http://wsgi.tutorial.codepoint.net/">Tutor</a> 用例子简单介绍 WSGI 的工作机制。详细的细节请看 <a href="https://www.python.org/dev/peps/pep-3333/">PEP 3333</a>。</p>
 <h3>Django 中的 WSGI</h3>
-<p> 正式由于 WSGI 规范的产生，基于 Python 的 web framework，只需要了按照 WSGI 的规范来实现就能够在所有支持 WSGi 的 web server 上部署了。</p>
-<p>Django 的主要部署方式也是 WSGI，详细的部署可以看 <a href="https://docs.djangoproject.com/en/dev/howto/deployment/wsgi/">Django 的官方文档 </a>。</p>
-<p>Django 自带的 server，也就是 <code>runserver</code> 命令，本质上是继承自 Python 库中的 <code>WSGIServer</code> 的服务端，同时把 Django 中的 WSGI application 作为参数传递进去。区别于通过 nginx+uwsgi 的部署，最终工作的都是 WSGI application。</p>
+<p> 正是由于 WSGI 规范的产生，基于 Python 的 web framework，只需要按照 WSGI 的规范来实现就能够在所有支持 WSGi 的 web server 上部署了。</p>
+<p>Django 的主要部署方式也是 WSGI，详细的部署可以看 <a href="https://docs.Djangoproject.com/en/dev/howto/deployment/wsgi/">Django 的官方文档 </a>。</p>
+<p>Django 自带的 server，也就是 <code>runserver</code> 命令，本质上是继承自 Python 库中的 <code>WSGIServer</code> 的服务端，同时把自身的 WSGI application 作为参数传递进去。区别于通过 nginx+uwsgi 的部署，但最终工作的都是 WSGI application。</p>
+<h3>WSGI 不支持 Chunked？</h3>
+<p> 其实讲不支持是不准确的，具体来讲应该：</p>
+<blockquote>
+<p>However, because WSGI servers and applications <strong>do not communicate via HTTP</strong>, what RFC 2616 calls "hop-by-hop" headers do not apply to WSGI internal communications. WSGI applications must not generate any "hop-by-hop" headers <a href="https://docs.python.org/3/howto/webservers.html">4</a> , attempt to use HTTP features that would require them to generate such headers, or rely on the content of any incoming "hop-by-hop" headers in the environ dictionary. <strong>WSGI servers must handle any supported inbound "hop-by-hop" headers on their own</strong>, such as by decoding any inbound Transfer-Encoding , including chunked encoding if applicable.</p>
+</blockquote>
+<p> 意思是说 WSGI server 要负责解析 Transfer-Encoding，把数据处理好，然后再发送给 WSGI application(Django)。大部分的 WSGI server 实现都能够处理好这个逻辑，比如 uwsgi，gunicon。</p>
             
             
             <hr/>
